@@ -16,6 +16,8 @@
                   fieldName="INSTANCE" language="Nim" extensions="nim"/>
         <lang.parserDefinition language="Nim"
                                implementationClass="com.tiepy.nimatron.NimParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="Nim"
+                                       implementationClass="com.tiepy.nimatron.NimSyntaxHighlighterFactory"/>
     </extensions>
 
     <actions>
