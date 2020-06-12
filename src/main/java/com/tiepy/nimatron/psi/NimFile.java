@@ -20,6 +20,6 @@ public class NimFile extends PsiFileBase {
 
     @Override
     public String toString() {
-        return "Simple File";
+        return "Nim File";
     }
 }
