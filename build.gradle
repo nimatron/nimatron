@@ -22,7 +22,6 @@ intellij {
 
 ext.tmpMarkdownInputDir = "${buildDir}/tmp/markdown-inputs".toString()
 ext.htmlOutputDir = "${buildDir}/gen-html".toString()
-ext.pluginVersion = '1.5'
 
 task prepareMarkdownInputs(type: Copy) {
     from("${projectDir}") {
@@ -48,7 +47,7 @@ def readChangeNotes() {
 
 patchPluginXml {
     dependsOn markdownToHtml
-    version pluginVersion
+    version version
     changeNotes { readChangeNotes() }
 }
 
