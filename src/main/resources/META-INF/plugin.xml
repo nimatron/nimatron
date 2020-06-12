@@ -18,6 +18,7 @@
                                implementationClass="com.tiepy.nimatron.NimParserDefinition"/>
         <lang.syntaxHighlighterFactory language="Nim"
                                        implementationClass="com.tiepy.nimatron.NimSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="com.tiepy.nimatron.NimColorSettingsPage"/>
     </extensions>
 
     <actions>
