@@ -12,7 +12,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <fileType name="Nim File" implementationClass="com.tiepy.nimatron.NimFileType"
+                  fieldName="INSTANCE" language="Nim" extensions="nim"/>
     </extensions>
 
     <actions>

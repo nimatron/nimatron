@@ -1,0 +1,13 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="BnfDuplicateRule" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfIdenticalChoiceBranches" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfLeftRecursion" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfResolve" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfSuspiciousToken" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfUnreachableChoiceBranch" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfUnusedAttribute" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BnfUnusedRule" enabled="true" level="WARNING" enabled_by_default="true" />
+  </profile>
+</component>
