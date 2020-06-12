@@ -1,0 +1,7 @@
+/**/*.swp
+/**/.gradle/
+/**/.idea/tasks.xml
+/**/.idea/workspace.xml
+/**/build/
+/**/classes/
+/**/gen/
