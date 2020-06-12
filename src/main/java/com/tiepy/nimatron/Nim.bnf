@@ -1,0 +1,22 @@
+{
+  parserClass="com.tiepy.nimatron.parser.SimpleParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Nim"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.tiepy.nimatron.psi"
+  psiImplPackage="com.tiepy.nimatron.psi.impl"
+
+  elementTypeHolderClass="com.tiepy.nimatron.psi.NimTypes"
+  elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
+  tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
+
+  psiImplUtilClass="com.tiepy.nimatron.psi.impl.NimPsiImplUtil"
+}
+
+nimFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
