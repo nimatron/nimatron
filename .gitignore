@@ -5,3 +5,5 @@
 /**/build/
 /**/classes/
 /**/gen/
+/**/idea-flex.skeleton
+/**/jflex-*.jar

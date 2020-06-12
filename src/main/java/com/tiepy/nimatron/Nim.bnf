@@ -1,5 +1,5 @@
 {
-  parserClass="com.tiepy.nimatron.parser.SimpleParser"
+  parserClass="com.tiepy.nimatron.parser.NimParser"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 

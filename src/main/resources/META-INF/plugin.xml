@@ -14,6 +14,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Nim File" implementationClass="com.tiepy.nimatron.NimFileType"
                   fieldName="INSTANCE" language="Nim" extensions="nim"/>
+        <lang.parserDefinition language="Nim"
+                               implementationClass="com.tiepy.nimatron.NimParserDefinition"/>
     </extensions>
 
     <actions>
