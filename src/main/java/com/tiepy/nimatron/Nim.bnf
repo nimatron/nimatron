@@ -15,5 +15,5 @@
   psiImplUtilClass="com.tiepy.nimatron.psi.impl.NimPsiImplUtil"
 }
 
-nimFile ::= property*
-property ::= KEYWORD | COMMENT
+nimFile ::= token*
+token ::= KEYWORD | COMMENT
