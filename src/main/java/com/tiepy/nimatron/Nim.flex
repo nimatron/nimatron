@@ -28,17 +28,10 @@ KEY_CHARACTER=[^:=\ \n\t\f\\] | "\\ "
 %%
 
 <YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return NimTypes.COMMENT; }
-
 <YYINITIAL> {KEY_CHARACTER}+                                { yybegin(YYINITIAL); return NimTypes.KEY; }
-
 <YYINITIAL> {SEPARATOR}                                     { yybegin(WAITING_VALUE); return NimTypes.SEPARATOR; }
-
 <WAITING_VALUE> {CRLF}({CRLF}|{WHITE_SPACE})+               { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
-
 <WAITING_VALUE> {WHITE_SPACE}+                              { yybegin(WAITING_VALUE); return TokenType.WHITE_SPACE; }
-
 <WAITING_VALUE> {FIRST_VALUE_CHARACTER}{VALUE_CHARACTER}*   { yybegin(YYINITIAL); return NimTypes.VALUE; }
-
 ({CRLF}|{WHITE_SPACE})+                                     { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
-
 [^]                                                         { return TokenType.BAD_CHARACTER; }
