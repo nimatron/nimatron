@@ -16,5 +16,5 @@
 }
 
 nimFile ::= item_*
-private item_ ::= (property|COMMENT|CRLF)
+private item_ ::= (property|COMMENT|CRLF|KEYWORD)
 property ::= (KEY? SEPARATOR VALUE?) | KEY
