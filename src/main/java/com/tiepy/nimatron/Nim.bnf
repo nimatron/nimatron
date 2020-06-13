@@ -15,6 +15,5 @@
   psiImplUtilClass="com.tiepy.nimatron.psi.impl.NimPsiImplUtil"
 }
 
-nimFile ::= item_*
-private item_ ::= (property|COMMENT|CRLF|KEYWORD)
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+nimFile ::= property*
+property ::= KEYWORD | COMMENT
