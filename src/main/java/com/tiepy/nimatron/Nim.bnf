@@ -16,4 +16,6 @@
 }
 
 nimFile ::= token*
-token ::= KEYWORD | COMMENT
+token ::= KEYWORD
+        | COMMENT
+        ;
