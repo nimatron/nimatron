@@ -30,7 +30,6 @@ KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|conver
 
 %{
 int level = 0; // Level counter for nested comment blocks.
-boolean letter = false; // True if letters were last thing read. False otherwise.
 %}
 
 %state YYINITIAL
@@ -42,15 +41,15 @@ boolean letter = false; // True if letters were last thing read. False otherwise
 %%
 
 <YYINITIAL> {
-    {CRLF}+                     { letter = false; return TokenType.WHITE_SPACE; }
-    {WHITE_SPACE}+              { letter = false; return TokenType.WHITE_SPACE; }
-    #                           { letter = false; yybegin(LINE_COMMENT); return NimTypes.COMMENT; }
-    {BLOCK_COMMENT}             { letter = false; level = 1; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
-    {BLOCK_DOC_COMMENT}         { letter = false; level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
-    {KEYWORD}{NOT_LETTER}       { yypushback(1); if (letter) return TokenType.WHITE_SPACE; else { letter = true; return NimTypes.KEYWORD; } }
-    \"                          { letter = false; yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
-    {LETTER}                    { letter = true; return TokenType.WHITE_SPACE; }
-    .                           { letter = false; return TokenType.WHITE_SPACE; }
+    {CRLF}+                     { return TokenType.WHITE_SPACE; }
+    {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
+    #                           { yybegin(LINE_COMMENT); return NimTypes.COMMENT; }
+    {BLOCK_COMMENT}             { level = 1; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
+    {BLOCK_DOC_COMMENT}         { level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
+    {KEYWORD}                   { return NimTypes.KEYWORD; }
+    \"                          { yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
+    {LETTER}+                   { return TokenType.WHITE_SPACE; }
+    .                           { return TokenType.WHITE_SPACE; }
 }
 
 <LINE_COMMENT> {
