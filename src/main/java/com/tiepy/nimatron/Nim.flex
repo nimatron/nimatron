@@ -22,7 +22,7 @@ BLOCK_DOC_COMMENT=##\[
 KEYWORD="echo"
 
 %{
-  int level = 0; // Level counter for nested blocks.
+int level = 0; // Level counter for nested blocks.
 %}
 
 %state YYINITIAL
@@ -41,7 +41,7 @@ KEYWORD="echo"
     {BLOCK_DOC_COMMENT}         { level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
     {KEYWORD}                   { return NimTypes.KEYWORD; }
     \"                          { yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
-    .                           { return NimTypes.IGNORED; }
+    .                           { return TokenType.WHITE_SPACE; }
 }
 
 <LINE_COMMENT> {
