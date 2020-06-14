@@ -54,6 +54,7 @@ public void yypopState() {
 %state RAW_STRING_LITERAL
 %state GENERALIZED_STRING_LITERAL
 %state GENERALIZED_TRIPLE_STRING_LITERAL
+%state CHARACTER_LITERAL
 %state STATEMENT
 
 %%
@@ -66,10 +67,11 @@ public void yypopState() {
     {BLOCK_DOC_COMMENT_BEGIN}   { yypushState(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
     {KEYWORD}                   { return NimTypes.KEYWORD; }
     r\"                         { yypushState(RAW_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
-    {IDENT}\"\"\"               { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
-    {IDENT}\"                   { yypushState(GENERALIZED_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     \"\"\"                      { yypushState(TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     \"                          { yypushState(STRING_LITERAL); return NimTypes.STRING_LITERAL; }
+    {IDENT}\"                   { yypushState(GENERALIZED_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
+    {IDENT}\"\"\"               { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
+    '                           { yypushState(CHARACTER_LITERAL); return NimTypes.STRING_LITERAL; }
     {ALPHA}+                    { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
 }
@@ -109,20 +111,26 @@ public void yypopState() {
 <RAW_STRING_LITERAL> {
     \"\"                        { return NimTypes.STRING_LITERAL; }
     \"                          { yypopState(); return NimTypes.STRING_LITERAL; }
-    {CRLF}                      { return NimTypes.STRING_LITERAL; }
+    {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimTypes.STRING_LITERAL; }
 }
 
 <GENERALIZED_STRING_LITERAL> {
     \"\"                        { return NimTypes.STRING_LITERAL; }
     \"                          { yypopState(); return NimTypes.STRING_LITERAL; }
-    {CRLF}                      { return NimTypes.STRING_LITERAL; }
+    {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimTypes.STRING_LITERAL; }
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
     \"\"\"                      { yypopState(); return NimTypes.STRING_LITERAL; }
     {CRLF}                      { return NimTypes.STRING_LITERAL; }
+    .                           { return NimTypes.STRING_LITERAL; }
+}
+
+<CHARACTER_LITERAL> {
+    '                           { yypopState(); return NimTypes.STRING_LITERAL; }
+    {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimTypes.STRING_LITERAL; }
 }
 
