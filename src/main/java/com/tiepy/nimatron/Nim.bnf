@@ -18,5 +18,5 @@
 nimFile ::= token*
 token ::= KEYWORD
         | COMMENT
-        | LITERAL_STRING
+        | STRING_LITERAL
         ;

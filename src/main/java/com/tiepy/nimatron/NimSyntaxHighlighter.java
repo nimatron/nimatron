@@ -37,7 +37,7 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             return KEYWORD_KEYS;
         } else if (tokenType.equals(NimTypes.COMMENT)) {
             return COMMENT_KEYS;
-        } else if (tokenType.equals(NimTypes.LITERAL_STRING)) {
+        } else if (tokenType.equals(NimTypes.STRING_LITERAL)) {
             return LITERAL_STRING_KEYS;
         } else {
             return EMPTY_KEYS;

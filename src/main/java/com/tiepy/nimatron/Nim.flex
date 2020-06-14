@@ -49,9 +49,9 @@ public void yypopState() {
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
-%state LITERAL_STRING
-%state LITERAL_STRING_TRIPLE
-%state LITERAL_STRING_RAW
+%state STRING_LITERAL
+%state TRIPLE_STRING_LITERAL
+%state RAW_STRING_LITERAL
 %state STATEMENT
 
 %%
@@ -63,9 +63,9 @@ public void yypopState() {
     {BLOCK_COMMENT_BEGIN}       { yypushState(BLOCK_COMMENT); return NimTypes.COMMENT; }
     {BLOCK_DOC_COMMENT_BEGIN}   { yypushState(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
     {KEYWORD}                   { return NimTypes.KEYWORD; }
-    \"\"\"                      { yypushState(LITERAL_STRING_TRIPLE); return NimTypes.LITERAL_STRING; }
-    r\"                         { yypushState(LITERAL_STRING_RAW); return NimTypes.LITERAL_STRING; }
-    \"                          { yypushState(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
+    \"\"\"                      { yypushState(TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
+    r\"                         { yypushState(RAW_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
+    \"                          { yypushState(STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     {ALPHA}+                    { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
 }
@@ -89,23 +89,23 @@ public void yypopState() {
     .                           { return NimTypes.COMMENT; }
 }
 
-<LITERAL_STRING> {
-    \\\"                        { return NimTypes.LITERAL_STRING; }
-    \"                          { yypopState(); return NimTypes.LITERAL_STRING; }
+<STRING_LITERAL> {
+    \\\"                        { return NimTypes.STRING_LITERAL; }
+    \"                          { yypopState(); return NimTypes.STRING_LITERAL; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
-    .                           { return NimTypes.LITERAL_STRING; }
+    .                           { return NimTypes.STRING_LITERAL; }
 }
 
-<LITERAL_STRING_TRIPLE> {
-    \"\"\"                      { yypopState(); return NimTypes.LITERAL_STRING; }
-    {CRLF}                      { return NimTypes.LITERAL_STRING; }
-    .                           { return NimTypes.LITERAL_STRING; }
+<TRIPLE_STRING_LITERAL> {
+    \"\"\"                      { yypopState(); return NimTypes.STRING_LITERAL; }
+    {CRLF}                      { return NimTypes.STRING_LITERAL; }
+    .                           { return NimTypes.STRING_LITERAL; }
 }
 
-<LITERAL_STRING_RAW> {
-    \"                          { yypopState(); return NimTypes.LITERAL_STRING; }
-    {CRLF}                      { return NimTypes.LITERAL_STRING; }
-    .                           { return NimTypes.LITERAL_STRING; }
+<RAW_STRING_LITERAL> {
+    \"                          { yypopState(); return NimTypes.STRING_LITERAL; }
+    {CRLF}                      { return NimTypes.STRING_LITERAL; }
+    .                           { return NimTypes.STRING_LITERAL; }
 }
 
 //<STATEMENT> {
