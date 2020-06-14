@@ -19,10 +19,20 @@ CRLF=\n|\r|\r\n
 WHITE_SPACE=[\ \t\f]
 BLOCK_COMMENT=#\[
 BLOCK_DOC_COMMENT=##\[
-KEYWORD="echo"
+//LETTER=[A-Za-z]|'x80'-'xff'
+//NOT_LETTER=[^(A-Za-z|'x80'-'xff')]
+//DIGIT='0'..'9'
+//IDENTIFIER={LETTER} (['_'] ({LETTER}|{DIGIT}))*
+LETTER=[A-Za-z]
+NOT_LETTER=[^A-Za-z]
+KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
+|else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
+|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
+|when|while|xor|yield
 
 %{
-int level = 0; // Level counter for nested blocks.
+int level = 0; // Level counter for nested comment blocks.
+boolean letter = false; // True if letters were last thing read. False otherwise.
 %}
 
 %state YYINITIAL
@@ -34,14 +44,15 @@ int level = 0; // Level counter for nested blocks.
 %%
 
 <YYINITIAL> {
-    {CRLF}+                     { return TokenType.WHITE_SPACE; }
-    {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
-    #                           { yybegin(LINE_COMMENT); return NimTypes.COMMENT; }
-    {BLOCK_COMMENT}             { level = 1; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
-    {BLOCK_DOC_COMMENT}         { level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
-    {KEYWORD}                   { return NimTypes.KEYWORD; }
-    \"                          { yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
-    .                           { return TokenType.WHITE_SPACE; }
+    {CRLF}+                     { letter = false; return TokenType.WHITE_SPACE; }
+    {WHITE_SPACE}+              { letter = false; return TokenType.WHITE_SPACE; }
+    #                           { letter = false; yybegin(LINE_COMMENT); return NimTypes.COMMENT; }
+    {BLOCK_COMMENT}             { letter = false; level = 1; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
+    {BLOCK_DOC_COMMENT}         { letter = false; level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
+    {KEYWORD}/{NOT_LETTER}      { if (letter) { letter = false; return TokenType.WHITE_SPACE; } else { letter = false; return NimTypes.KEYWORD; } }
+    \"                          { letter = false; yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
+    {LETTER}                    { letter = true; return TokenType.WHITE_SPACE; }
+    .                           { letter = false; return TokenType.WHITE_SPACE; }
 }
 
 <LINE_COMMENT> {
