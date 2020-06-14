@@ -55,7 +55,6 @@ public void yypopState() {
 %state GENERALIZED_STRING_LITERAL
 %state GENERALIZED_TRIPLE_STRING_LITERAL
 %state CHARACTER_LITERAL
-%state STATEMENT
 
 %%
 
@@ -133,7 +132,3 @@ public void yypopState() {
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimTypes.STRING_LITERAL; }
 }
-
-//<STATEMENT> {
-//
-//}
