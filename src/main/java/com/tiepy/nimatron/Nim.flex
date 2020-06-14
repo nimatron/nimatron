@@ -24,11 +24,18 @@ BLOCK_DOC_COMMENT_BEGIN=##\[
 BLOCK_DOC_COMMENT_END=\]##
 DIGIT=[0-9]
 ALPHA=[A-Za-z\u0080-\u00ff]
-IDENT={ALPHA}('_'|{ALPHA}|{DIGIT})*
+IDENT={ALPHA}(_|{ALPHA}|{DIGIT})*
 KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
 |mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
 |when|while|xor|yield
+HEX_DIGIT=[0-9A-Fa-f]
+OCT_DIGIT=[0-7]
+BIN_DIGIT=[01]
+HEX_LITERAL=0(x|X){HEX_DIGIT}(_|{HEX_DIGIT})*
+DEC_LITERAL={DIGIT}(_|{DIGIT})*
+OCT_LITERAL=0o{OCT_DIGIT}(_{OCT_DIGIT})*
+BIN_LITERAL=0(b|B){BIN_DIGIT}(_|{BIN_DIGIT})*
 
 %{
 

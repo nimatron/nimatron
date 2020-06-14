@@ -16,12 +16,15 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             "NIM_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey LINE_COMMENT = createTextAttributesKey(
             "NIM_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
-    public static final TextAttributesKey LITERAL_STRING = createTextAttributesKey(
-            "NIM_LITERAL_STRING", DefaultLanguageHighlighterColors.STRING);
+    public static final TextAttributesKey STRING_LITERAL = createTextAttributesKey(
+            "NIM_STRING_LITERAL", DefaultLanguageHighlighterColors.STRING);
+    public static final TextAttributesKey NUMERICAL_CONSTANT = createTextAttributesKey(
+            "NIM_NUMERICAL_CONSTANT", DefaultLanguageHighlighterColors.NUMBER);
 
     private static final TextAttributesKey[] KEYWORD_KEYS = new TextAttributesKey[]{KEYWORD};
     private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{LINE_COMMENT};
-    private static final TextAttributesKey[] LITERAL_STRING_KEYS = new TextAttributesKey[]{LITERAL_STRING};
+    private static final TextAttributesKey[] LITERAL_STRING_KEYS = new TextAttributesKey[]{STRING_LITERAL};
+    private static final TextAttributesKey[] NUMERICAL_CONSTANT_KEYS = new TextAttributesKey[]{NUMERICAL_CONSTANT};
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
     @NotNull
@@ -39,6 +42,8 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             return COMMENT_KEYS;
         } else if (tokenType.equals(NimTypes.STRING_LITERAL)) {
             return LITERAL_STRING_KEYS;
+        } else if (tokenType.equals(NimTypes.NUMERICAL_CONSTANT)) {
+            return NUMERICAL_CONSTANT_KEYS;
         } else {
             return EMPTY_KEYS;
         }

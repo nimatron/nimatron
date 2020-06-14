@@ -19,4 +19,5 @@ nimFile ::= token*
 token ::= KEYWORD
         | COMMENT
         | STRING_LITERAL
+        | NUMERICAL_CONSTANT
         ;
