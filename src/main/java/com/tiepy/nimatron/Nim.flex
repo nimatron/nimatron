@@ -36,35 +36,35 @@ KEYWORD="echo"
 <YYINITIAL> {
     {CRLF}+                     { return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
-    #                           { yybegin(LINE_COMMENT); }
-    {BLOCK_COMMENT}             { level = 1; yybegin(BLOCK_COMMENT); }
-    {BLOCK_DOC_COMMENT}         { level = 1; yybegin(BLOCK_DOC_COMMENT); }
+    #                           { yybegin(LINE_COMMENT); return NimTypes.COMMENT; }
+    {BLOCK_COMMENT}             { level = 1; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
+    {BLOCK_DOC_COMMENT}         { level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
     {KEYWORD}                   { return NimTypes.KEYWORD; }
-    \"                          { yybegin(LITERAL_STRING); }
+    \"                          { yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
     .                           { return NimTypes.IGNORED; }
 }
 
 <LINE_COMMENT> {
     {CRLF}+                     { yybegin(YYINITIAL); return NimTypes.COMMENT; }
-    .                           { }
+    .                           { return NimTypes.COMMENT; }
 }
 
 <BLOCK_COMMENT> {
-    {BLOCK_COMMENT}             { level++; yybegin(BLOCK_COMMENT); }
-    \]#                         { if (--level == 0) { yybegin(YYINITIAL); return NimTypes.COMMENT; } }
-    {CRLF}+                     { }
-    .                           { }
+    {BLOCK_COMMENT}             { level++; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
+    \]#                         { if (--level == 0) yybegin(YYINITIAL); return NimTypes.COMMENT; }
+    {CRLF}+                     { return NimTypes.COMMENT; }
+    .                           { return NimTypes.COMMENT; }
 }
 
 <BLOCK_DOC_COMMENT> {
-    {BLOCK_DOC_COMMENT}         { level++; yybegin(BLOCK_DOC_COMMENT); }
-    \]##                        { if (--level == 0) { yybegin(YYINITIAL); return NimTypes.COMMENT; } }
-    {CRLF}+                     { }
-    .                           { }
+    {BLOCK_DOC_COMMENT}         { level++; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
+    \]##                        { if (--level == 0) yybegin(YYINITIAL); return NimTypes.COMMENT; }
+    {CRLF}+                     { return NimTypes.COMMENT; }
+    .                           { return NimTypes.COMMENT; }
 }
 
 <LITERAL_STRING> {
-    \\\"                        { }
+    \\\"                        { return NimTypes.LITERAL_STRING; }
     \"                          { yybegin(YYINITIAL); return NimTypes.LITERAL_STRING; }
-    .                           { }
+    .                           { return NimTypes.LITERAL_STRING; }
 }
