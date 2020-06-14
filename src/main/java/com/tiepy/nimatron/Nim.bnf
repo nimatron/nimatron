@@ -18,4 +18,6 @@
 nimFile ::= token*
 token ::= KEYWORD
         | COMMENT
+        | LITERAL_STRING
+        | IGNORED
         ;
