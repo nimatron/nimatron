@@ -47,7 +47,7 @@ boolean letter = false; // True if letters were last thing read. False otherwise
     #                           { letter = false; yybegin(LINE_COMMENT); return NimTypes.COMMENT; }
     {BLOCK_COMMENT}             { letter = false; level = 1; yybegin(BLOCK_COMMENT); return NimTypes.COMMENT; }
     {BLOCK_DOC_COMMENT}         { letter = false; level = 1; yybegin(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
-    {KEYWORD}/{NOT_LETTER}      { if (letter) { letter = false; return TokenType.WHITE_SPACE; } else { letter = false; return NimTypes.KEYWORD; } }
+    {KEYWORD}{NOT_LETTER}       { yypushback(1); if (letter) return TokenType.WHITE_SPACE; else { letter = true; return NimTypes.KEYWORD; } }
     \"                          { letter = false; yybegin(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
     {LETTER}                    { letter = true; return TokenType.WHITE_SPACE; }
     .                           { letter = false; return TokenType.WHITE_SPACE; }
