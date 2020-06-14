@@ -66,5 +66,6 @@ KEYWORD="echo"
 <LITERAL_STRING> {
     \\\"                        { return NimTypes.LITERAL_STRING; }
     \"                          { yybegin(YYINITIAL); return NimTypes.LITERAL_STRING; }
+    {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimTypes.LITERAL_STRING; }
 }
