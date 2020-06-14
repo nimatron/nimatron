@@ -19,12 +19,10 @@ CRLF=\n|\r|\r\n
 WHITE_SPACE=[\ \t\f]
 BLOCK_COMMENT=#\[
 BLOCK_DOC_COMMENT=##\[
-//LETTER=[A-Za-z]|'x80'-'xff'
-//NOT_LETTER=[^(A-Za-z|'x80'-'xff')]
-//DIGIT='0'..'9'
+//DIGIT=[0-9]
+LETTER=[A-Za-z\u0080-\u00ff]
+NOT_LETTER=[^A-Za-z\u0080-\u00ff]
 //IDENTIFIER={LETTER} (['_'] ({LETTER}|{DIGIT}))*
-LETTER=[A-Za-z]
-NOT_LETTER=[^A-Za-z]
 KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
 |mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
