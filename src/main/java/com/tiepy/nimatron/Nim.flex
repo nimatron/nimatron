@@ -51,6 +51,8 @@ public void yypopState() {
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
 %state LITERAL_STRING
+%state LITERAL_STRING_TRIPLE
+%state STATEMENT
 
 %%
 
@@ -61,6 +63,7 @@ public void yypopState() {
     {BLOCK_COMMENT}             { level = 1; yypushState(BLOCK_COMMENT); return NimTypes.COMMENT; }
     {BLOCK_DOC_COMMENT}         { level = 1; yypushState(BLOCK_DOC_COMMENT); return NimTypes.COMMENT; }
     {KEYWORD}                   { return NimTypes.KEYWORD; }
+    \"\"\"                      { yypushState(LITERAL_STRING_TRIPLE); return NimTypes.LITERAL_STRING; }
     \"                          { yypushState(LITERAL_STRING); return NimTypes.LITERAL_STRING; }
     {LETTER}+                   { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
@@ -91,3 +94,13 @@ public void yypopState() {
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimTypes.LITERAL_STRING; }
 }
+
+<LITERAL_STRING_TRIPLE> {
+    \"\"\"                      { yypopState(); return NimTypes.LITERAL_STRING; }
+    {CRLF}                      { return NimTypes.LITERAL_STRING; }
+    .                           { return NimTypes.LITERAL_STRING; }
+}
+
+//<STATEMENT> {
+//
+//}
