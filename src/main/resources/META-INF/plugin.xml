@@ -4,7 +4,7 @@
     <vendor email="nimatron-support@tiepy.com" url="https://www.tiepy.com">TiePy</vendor>
 
     <description><![CDATA[
-    Currently provides syntax-highlighting for the Nim programming language. More to come.
+    Syntax-highlighting for the Nim programming language. More to come.
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
