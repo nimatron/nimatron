@@ -1,4 +1,8 @@
 /*
+ * This file is based on example provided by the IntelliJ Platform SDK DevGuide.
+ * Copyright 2000-2020 JetBrains s.r.o. and other contributors.
+ * Use of original example source code is governed by the Apache 2.0 license.
+ *
  * Copyright 2020 TiePy Ltd. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
