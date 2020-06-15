@@ -47,6 +47,7 @@ public class NimColorSettingsPage implements ColorSettingsPage {
             new AttributesDescriptor("Comma", NimSyntaxHighlighter.COMMA),
             new AttributesDescriptor("Built-in Type", NimSyntaxHighlighter.TYPES),
             new AttributesDescriptor("Procedure Name", NimSyntaxHighlighter.PROCS),
+            new AttributesDescriptor("Identifier", NimSyntaxHighlighter.IDENT),
     };
 
     @Nullable
