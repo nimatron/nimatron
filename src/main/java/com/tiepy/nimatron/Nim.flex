@@ -57,7 +57,7 @@ NUMERICAL_CONSTANT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
 |{INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
 |{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
 |{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
-OPR=[\=\+\-\*/<>@$~&%\|!\?\^\.:\\]+
+OPERATOR=[\=\+\-\*/<>@$~&%\|!\?\^\.:\\]+
 OTHER=[`\(\)\{\}\[\],;]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\(\.)|(\.\))|(\[:)
 
 %{
@@ -102,6 +102,7 @@ public void yypopState() {
     {IDENT}\"\"\"               { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     '                           { yypushState(CHARACTER_LITERAL); return NimTypes.STRING_LITERAL; }
     {NUMERICAL_CONSTANT}        { return NimTypes.NUMERICAL_CONSTANT; }
+    {OPERATOR}                  { return NimTypes.OPERATOR; }
     {ALPHA}+                    { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
 }

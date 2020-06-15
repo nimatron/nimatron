@@ -20,11 +20,14 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             "NIM_STRING_LITERAL", DefaultLanguageHighlighterColors.STRING);
     public static final TextAttributesKey NUMERICAL_CONSTANT = createTextAttributesKey(
             "NIM_NUMERICAL_CONSTANT", DefaultLanguageHighlighterColors.NUMBER);
+    public static final TextAttributesKey OPERATOR = createTextAttributesKey(
+            "NIM_OPERATOR", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
 
     private static final TextAttributesKey[] KEYWORD_KEYS = new TextAttributesKey[]{KEYWORD};
     private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{LINE_COMMENT};
     private static final TextAttributesKey[] LITERAL_STRING_KEYS = new TextAttributesKey[]{STRING_LITERAL};
     private static final TextAttributesKey[] NUMERICAL_CONSTANT_KEYS = new TextAttributesKey[]{NUMERICAL_CONSTANT};
+    private static final TextAttributesKey[] OPERATOR_KEYS = new TextAttributesKey[]{OPERATOR};
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
     @NotNull
@@ -44,6 +47,8 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             return LITERAL_STRING_KEYS;
         } else if (tokenType.equals(NimTypes.NUMERICAL_CONSTANT)) {
             return NUMERICAL_CONSTANT_KEYS;
+        } else if (tokenType.equals(NimTypes.OPERATOR)) {
+            return OPERATOR_KEYS;
         } else {
             return EMPTY_KEYS;
         }
