@@ -32,10 +32,33 @@ KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|conver
 HEX_DIGIT=[0-9A-Fa-f]
 OCT_DIGIT=[0-7]
 BIN_DIGIT=[01]
-HEX_LITERAL=0(x|X){HEX_DIGIT}(_|{HEX_DIGIT})*
-DEC_LITERAL={DIGIT}(_|{DIGIT})*
-OCT_LITERAL=0o{OCT_DIGIT}(_{OCT_DIGIT})*
-BIN_LITERAL=0(b|B){BIN_DIGIT}(_|{BIN_DIGIT})*
+HEX_LIT=0(x|X){HEX_DIGIT}(_|{HEX_DIGIT})*
+DEC_LIT={DIGIT}(_|{DIGIT})*
+OCT_LIT=0o{OCT_DIGIT}(_|{OCT_DIGIT})*
+BIN_LIT=0(b|B){BIN_DIGIT}(_|{BIN_DIGIT})*
+INT_LIT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
+INT8_LIT={INT_LIT}'?(i|I)8
+INT16_LIT={INT_LIT}'?(i|I)16
+INT32_LIT={INT_LIT}'?(i|I)32
+INT64_LIT={INT_LIT}'?(i|I)64
+UINT_LIT={INT_LIT}'?(u|U)
+UINT8_LIT={INT_LIT}'?(u|U)8
+UINT16_LIT={INT_LIT}'?(u|U)16
+UINT32_LIT={INT_LIT}'?(u|U)32
+UINT64_LIT={INT_LIT}'?(u|U)64
+DIGITS={DEC_LIT}
+EXPONENT=(e|E)(\+|\-)?{DIGITS}
+FLOAT_LIT={DIGITS}((\.{DIGITS}{EXPONENT}?)|{EXPONENT})
+FLOAT32_SUFFIX=(f|F)32
+FLOAT64_SUFFIX=(f|F)64
+FLOAT32_LIT=({HEX_LIT}'{FLOAT32_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT32_SUFFIX})
+FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT64_SUFFIX})
+NUMERICAL_CONSTANT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
+|{INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
+|{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
+|{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
+OPR=[\=\+\-\*/<>@$~&%\|!\?\^\.:\\]+
+OTHER=[`\(\)\{\}\[\],;]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\(\.)|(\.\))|(\[:)
 
 %{
 
@@ -78,6 +101,7 @@ public void yypopState() {
     {IDENT}\"                   { yypushState(GENERALIZED_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     {IDENT}\"\"\"               { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     '                           { yypushState(CHARACTER_LITERAL); return NimTypes.STRING_LITERAL; }
+    {NUMERICAL_CONSTANT}        { return NimTypes.NUMERICAL_CONSTANT; }
     {ALPHA}+                    { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
 }
