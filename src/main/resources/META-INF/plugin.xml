@@ -1,10 +1,10 @@
 <idea-plugin>
     <id>com.tiepy.nimatron</id>
     <name>Nimatron</name>
-    <vendor email="support@tiepy.com" url="https://www.tiepy.com">TiePy</vendor>
+    <vendor email="nimatron-support@tiepy.com" url="https://www.tiepy.com">TiePy</vendor>
 
     <description><![CDATA[
-    Syntax highlighting and more for the Nim programming language.
+    Currently provides syntax-highlighting for the Nim programming language. More to come.
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
