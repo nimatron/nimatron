@@ -19,6 +19,7 @@
         <lang.syntaxHighlighterFactory language="Nim"
                                        implementationClass="com.tiepy.nimatron.NimSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="com.tiepy.nimatron.NimColorSettingsPage"/>
+        <lang.commenter language="Nim" implementationClass="com.tiepy.nimatron.NimCommenter"/>
     </extensions>
 
     <actions>
