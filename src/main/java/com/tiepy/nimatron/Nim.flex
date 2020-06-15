@@ -126,12 +126,12 @@ BUILT_IN_PROCS=abs|add|addAndFetch|addEscapedChar|addFloat|addInt|addQuitProc|ad
 
 private Stack<Integer> stack = new Stack<Integer>();
 
-public void yypushState(int newState) {
+private void yypushState(int newState) {
     stack.push(yystate());
     yybegin(newState);
 }
 
-public void yypopState() {
+private void yypopState() {
     yybegin(stack.pop());
 }
 
