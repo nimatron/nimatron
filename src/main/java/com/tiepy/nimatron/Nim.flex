@@ -57,8 +57,40 @@ NUMERICAL_CONSTANT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
 |{INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
 |{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
 |{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
+BOOLEAN_CONSTANT=true|false
 OPERATOR=[\=\+\-\*/<>@$~&%\|!\?\^\.:\\]+
-OTHER=[`\(\)\{\}\[\],;]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\(\.)|(\.\))|(\[:)
+BRACKET=[\{\}\[\]]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)
+PARENTHESIS=[\(\)]|(\(\.)|(\.\))
+SEMICOLON=;
+COMMA=,
+OTHER=`
+BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|AssertionError|AtomType|auto|BackwardsIndex
+|BiggestFloat|BiggestInt|BiggestUInt|bool|byte|ByteAddress|CatchableError|cchar|cdouble|cfloat|char|cint|clong
+|clongdouble|clonglong|cschar|cshort|csize|csize_t|cstring|cstringArray|cuchar|cuint|culong|culonglong|cushort
+|DeadThreadError|Defect|DivByZeroError|Endianness|EOFError|Exception|ExecIOEffect|FieldError|FileSeekPos|float|float32
+|float64|FloatDivByZeroError|FloatInexactError|FloatingPointError|FloatInvalidOpError|FloatOverflowError
+|FloatUnderflowError|ForeignCell|ForLoopStmt|GC_Strategy|HSlice|IndexError|int|int16|int32|int64|int8|IOEffect|IOError
+|JsRoot|KeyError|lent|LibraryError|Natural|NilAccessError|NimNode|ObjectAssignmentError|ObjectConversionError|openArray
+|Ordinal|OSError|OutOfMemError|OverflowError|owned|PFloat32|PFloat64|PFrame|PInt32|PInt64|pointer|Positive|ptr|range
+|RangeError|ReadIOEffect|ref|ReraiseError|ResourceExhaustedError|RootEffect|RootObj|RootRef|seq|set|sink|Slice
+|SomeFloat|SomeInteger|SomeNumber|SomeOrdinal|SomeSignedInt|SomeUnsignedInt|StackOverflowError|StackTraceEntry|static
+|string|TaintedString|TFrame|TimeEffect|type|typed|typedesc|TypeOfMode|uint|uint16|uint32|uint64|uint8|UncheckedArray
+|untyped|ValueError|varargs|void|WriteIOEffect
+BUILT_IN_PROCS=abs|add|addAndFetch|addEscapedChar|addFloat|addInt|addQuitProc|addQuoted|addr|alignof|alloc0Impl
+|allocCStringArray|allocImpl|allocShared0Impl|allocSharedImpl|and|ashr|astToStr|atomicDec|atomicInc|card|cas|chr|clamp
+|cmp|compileOption|compiles|contains|copyMem|cpuRelax|create|createShared|createSharedU|createU|cstringArrayToSeq
+|deallocCStringArray|deallocHeap|deallocImpl|deallocShared|deallocSharedImpl|debugEcho|dec|declared|declaredInScope
+|deepCopy|default|defined|del|delete|dispose|div|echo|equalMem|excl|find|finished|freeShared|GC_collectZct|GC_disable
+|GC_disableMarkAndSweep|GC_enable|GC_enableMarkAndSweep|GC_fullCollect|GC_getStatistics|GC_ref|GC_unref|gcInvariant
+|getAllocStats|getCurrentException|getCurrentExceptionMsg|getFrame|getFrameState|getFreeMem|getGcFrame|getMaxMem
+|getOccupiedMem|getStackTrace|getStackTraceEntries|getTotalMem|getTypeInfo|gorge|gorgeEx|high|inc|incl|insert
+|instantiationInfo|internalNew|is|isNil|isNotForeign|iterToProc|len|locals|low|max|min|mod|move|moveMem|new|newSeq
+|newSeqOfCap|newSeqUninitialized|newString|newStringOfCap|nimGC_setStackBottom|not|of|or|ord|pop|popGcFrame|pred
+|procCall|protect|pushGcFrame|quit|rawEnv|rawProc|realloc0Impl|reallocImpl|reallocShared0Impl|reallocSharedImpl|repr
+|reset|resize|resizeShared|runnableExamples|setControlCHook|setCurrentException|setFrame|setFrameState|setGcFrame
+|setLen|setupForeignThreadGc|shallow|shallowCopy|shl|shr|sizeof|slurp|stackTraceAvailable|staticExec|staticRead|substr
+|succ|swap|tearDownForeignThreadGc|toBiggestFloat|toBiggestInt|toFloat|toInt|toOpenArray|toOpenArrayByte|toU16|toU32
+|toU8|typeof|unsafeAddr|unsafeNew|unsetControlCHook|wasMoved|writeStackTrace|xor|ze|ze64|zeroMem
 
 %{
 
@@ -102,7 +134,14 @@ public void yypopState() {
     {IDENT}\"\"\"               { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimTypes.STRING_LITERAL; }
     '                           { yypushState(CHARACTER_LITERAL); return NimTypes.STRING_LITERAL; }
     {NUMERICAL_CONSTANT}        { return NimTypes.NUMERICAL_CONSTANT; }
+    {BOOLEAN_CONSTANT}          { return NimTypes.NUMERICAL_CONSTANT; }
     {OPERATOR}                  { return NimTypes.OPERATOR; }
+    {BRACKET}                   { return NimTypes.BRACKET; }
+    {PARENTHESIS}               { return NimTypes.PARENTHESIS; }
+    {SEMICOLON}                 { return NimTypes.SEMICOLON; }
+    {COMMA}                     { return NimTypes.COMMA; }
+    {BUILT_IN_TYPES}            { return NimTypes.TYPES; }
+    {BUILT_IN_PROCS}            { return NimTypes.PROCS; }
     {ALPHA}+                    { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
 }

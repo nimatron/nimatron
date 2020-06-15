@@ -21,4 +21,10 @@ token ::= KEYWORD
         | STRING_LITERAL
         | NUMERICAL_CONSTANT
         | OPERATOR
+        | BRACKET
+        | PARENTHESIS
+        | SEMICOLON
+        | COMMA
+        | TYPES
+        | PROCS
         ;
