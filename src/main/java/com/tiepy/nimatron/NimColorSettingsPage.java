@@ -65,7 +65,49 @@ public class NimColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return "echo \"Hello, World!\"";
+        return "echo \"Hello, World!\" # This is a line comment\n" +
+                "\n" +
+                "#[\n" +
+                "This is a block comment.\n" +
+                "#[\n" +
+                "This is a nested block comment.\n" +
+                "]#\n" +
+                "]#\n" +
+                "\n" +
+                "proc p(arg: int): int =\n" +
+                "  s.add $arg\n" +
+                "  result = arg\n" +
+                "\n" +
+                "discard p(p(1) + p(2))\n" +
+                "\n" +
+                "var b = true\n" +
+                "doAssert b == true\n" +
+                "\n" +
+                "if true else false\n" +
+                "\n" +
+                "\"\"\"This is\n" +
+                "a multi-line string that can contain \"Other strings\".\"\"\"\n" +
+                "\n" +
+                "var path = r\"C:\\\"; echo path\n" +
+                "\n" +
+                "var s1 = abc\"string literal\\\"\n" +
+                "var s2 = ident\"\"\"string literal\"\"\"\n" +
+                "var c = 'c'\n" +
+                "\n" +
+                "var n1 = 123\n" +
+                "var n2 = 1.2\n" +
+                "var n3 = 1e23\n" +
+                "var n4 = 1.2e-23\n" +
+                "var test = true and false\n" +
+                "\n" +
+                "return json({'hello': 'world'})\n" +
+                "\n" +
+                "var\n" +
+                "  x, y: int\n" +
+                "  # a comment can occur here too\n" +
+                "  a, b, c: string\n" +
+                "\n" +
+                "var checkpoints* {.threadvar.}: seq[string]";
     }
 
     @Nullable
