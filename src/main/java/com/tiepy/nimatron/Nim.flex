@@ -168,6 +168,7 @@ public void yypopState() {
     {COMMA}                     { return NimTypes.COMMA; }
     {BUILT_IN_TYPES}            { return NimTypes.TYPES; }
     {BUILT_IN_PROCS}            { return NimTypes.PROCS; }
+    {IDENT}+                    { return NimTypes.IDENT; }
     {ALPHA}+                    { return TokenType.WHITE_SPACE; }
     .                           { return TokenType.WHITE_SPACE; }
 }

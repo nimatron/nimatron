@@ -60,6 +60,8 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             "NIM_TYPES", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey PROCS = createTextAttributesKey(
             "NIM_PROCS", DefaultLanguageHighlighterColors.KEYWORD);
+    public static final TextAttributesKey IDENT = createTextAttributesKey(
+            "NIM_IDENT", DefaultLanguageHighlighterColors.IDENTIFIER);
 
     private static final TextAttributesKey[] KEYWORD_KEYS = new TextAttributesKey[]{KEYWORD};
     private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{LINE_COMMENT};
@@ -72,6 +74,7 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] COMMA_KEYS = new TextAttributesKey[]{COMMA};
     private static final TextAttributesKey[] TYPES_KEYS = new TextAttributesKey[]{TYPES};
     private static final TextAttributesKey[] PROCS_KEYS = new TextAttributesKey[]{PROCS};
+    private static final TextAttributesKey[] IDENT_KEYS = new TextAttributesKey[]{IDENT};
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
     @NotNull
@@ -105,6 +108,8 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             return TYPES_KEYS;
         } else if (tokenType.equals(NimTypes.PROCS)) {
             return PROCS_KEYS;
+        } else if (tokenType.equals(NimTypes.IDENT)) {
+            return IDENT_KEYS;
         } else {
             return EMPTY_KEYS;
         }

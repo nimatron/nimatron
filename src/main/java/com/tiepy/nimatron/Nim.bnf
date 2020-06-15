@@ -53,4 +53,5 @@ token ::= KEYWORD
         | COMMA
         | TYPES
         | PROCS
+        | IDENT
         ;
