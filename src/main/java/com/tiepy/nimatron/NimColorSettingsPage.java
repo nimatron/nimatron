@@ -36,7 +36,17 @@ import java.util.Map;
 
 public class NimColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-
+            new AttributesDescriptor("Keyword", NimSyntaxHighlighter.KEYWORD),
+            new AttributesDescriptor("Line Comment", NimSyntaxHighlighter.LINE_COMMENT),
+            new AttributesDescriptor("String Literal", NimSyntaxHighlighter.STRING_LITERAL),
+            new AttributesDescriptor("Numerical Constant", NimSyntaxHighlighter.NUMERICAL_CONSTANT),
+            new AttributesDescriptor("Operator", NimSyntaxHighlighter.OPERATOR),
+            new AttributesDescriptor("Bracket", NimSyntaxHighlighter.BRACKET),
+            new AttributesDescriptor("Parenthesis", NimSyntaxHighlighter.PARENTHESIS),
+            new AttributesDescriptor("Semicolon", NimSyntaxHighlighter.SEMICOLON),
+            new AttributesDescriptor("Comma", NimSyntaxHighlighter.COMMA),
+            new AttributesDescriptor("Built-in Type", NimSyntaxHighlighter.TYPES),
+            new AttributesDescriptor("Procedure Name", NimSyntaxHighlighter.PROCS),
     };
 
     @Nullable
