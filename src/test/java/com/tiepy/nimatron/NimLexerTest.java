@@ -108,6 +108,6 @@ public class NimLexerTest {
                 "\n" +
                 "var checkpoints* {.threadvar.}: seq[string]\n");
 
-        Assert.assertEquals(215, tokenCount);
+        Assert.assertEquals(209, tokenCount);
     }
 }

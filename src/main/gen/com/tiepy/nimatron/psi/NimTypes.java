@@ -13,8 +13,12 @@ public interface NimTypes {
   IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType COMMA = new NimTokenType("COMMA");
   IElementType COMMENT = new NimTokenType("COMMENT");
+  IElementType FRAGMENT = new NimTokenType("FRAGMENT");
   IElementType GRAVE_ACCENT = new NimTokenType("GRAVE_ACCENT");
   IElementType IDENT = new NimTokenType("IDENT");
+  IElementType IND_EQ = new NimTokenType("IND_EQ");
+  IElementType IND_GT = new NimTokenType("IND_GT");
+  IElementType IND_LT = new NimTokenType("IND_LT");
   IElementType KEYWORD = new NimTokenType("KEYWORD");
   IElementType NUMERICAL_CONSTANT = new NimTokenType("NUMERICAL_CONSTANT");
   IElementType OPERATOR = new NimTokenType("OPERATOR");
