@@ -192,9 +192,9 @@ private void yynewline() {
 
 <INDENTER> {
     {CRLF}                      { indentSpaces = 0; }
-    [\ ]                        { indentSpaces++; }
+    \                           { indentSpaces++; }
     .                           {
-        yypushback(yytext().length());
+        yypushback(1);
         yypopState();
 
         if (indentSpaces == lastIndentSpaces) {

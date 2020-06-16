@@ -2658,7 +2658,7 @@ private void yynewline() {
             // fall through
           case 45: break;
           case 15: 
-            { yypushback(yytext().length());
+            { yypushback(1);
         yypopState();
 
         if (indentSpaces == lastIndentSpaces) {
