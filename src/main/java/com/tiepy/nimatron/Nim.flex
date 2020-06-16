@@ -163,7 +163,7 @@ private void handleIndent() {
 %%
 
 <YYINITIAL> {
-    {CRLF}                      { handleIndent(); }
+    {CRLF}                      { /* handleIndent(); */ return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
     #                           { pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
