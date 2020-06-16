@@ -61,10 +61,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   //         | TYPES
   //         | PROCS
   //         | IDENT
-  //         | FRAGMENT
-  //         | IND_GT
-  //         | IND_EQ
-  //         | IND_LT
   public static boolean token(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "token")) return false;
     boolean r;
@@ -82,10 +78,6 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, TYPES);
     if (!r) r = consumeToken(b, PROCS);
     if (!r) r = consumeToken(b, IDENT);
-    if (!r) r = consumeToken(b, FRAGMENT);
-    if (!r) r = consumeToken(b, IND_GT);
-    if (!r) r = consumeToken(b, IND_EQ);
-    if (!r) r = consumeToken(b, IND_LT);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

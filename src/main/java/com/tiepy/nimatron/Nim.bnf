@@ -59,8 +59,4 @@ token ::= KEYWORD
         | TYPES
         | PROCS
         | IDENT
-        | FRAGMENT
-        | IND_GT
-        | IND_EQ
-        | IND_LT
         ;

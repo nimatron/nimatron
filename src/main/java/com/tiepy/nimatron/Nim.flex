@@ -137,19 +137,9 @@ private int yypopState() {
     return stateStack.size();
 }
 
-private int lastIndentSpaces = 0;
-private int indentSpaces = 0;
-
-private void yynewline() {
-    lastIndentSpaces = indentSpaces;
-    indentSpaces = 0;
-    yypushState(INDENTER);
-}
-
 %}
 
 %state YYINITIAL
-%state INDENTER
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
@@ -163,7 +153,7 @@ private void yynewline() {
 %%
 
 <YYINITIAL> {
-    {CRLF}                      { yynewline(); }
+    {CRLF}+                     { return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
     #                           { yypushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { yypushState(BLOCK_COMMENT); }
@@ -186,25 +176,8 @@ private void yynewline() {
     {BUILT_IN_TYPES}            { return NimTypes.TYPES; }
     {BUILT_IN_PROCS}            { return NimTypes.PROCS; }
     {IDENT}+                    { return NimTypes.IDENT; }
-    {ALPHA}+                    { return NimTypes.FRAGMENT; }
-    .                           { return NimTypes.FRAGMENT; }
-}
-
-<INDENTER> {
-    {CRLF}                      { indentSpaces = 0; }
-    [\ ]                        { indentSpaces++; }
-    .                           {
-        yypushback(yytext().length());
-        yypopState();
-
-        if (indentSpaces == lastIndentSpaces) {
-            return NimTypes.IND_EQ;
-        } else if (indentSpaces > lastIndentSpaces) {
-            return NimTypes.IND_GT;
-        } else {
-            return NimTypes.IND_LT;
-        }
-    }
+    {ALPHA}+                    { return TokenType.WHITE_SPACE; }
+    .                           { return TokenType.WHITE_SPACE; }
 }
 
 <LINE_COMMENT> {
