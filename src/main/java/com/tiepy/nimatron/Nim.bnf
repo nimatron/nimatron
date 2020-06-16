@@ -55,6 +55,7 @@ token ::= KEYWORD
         | PARENTHESIS
         | SEMICOLON
         | COMMA
+        | GRAVE_ACCENT
         | TYPES
         | PROCS
         | IDENT
