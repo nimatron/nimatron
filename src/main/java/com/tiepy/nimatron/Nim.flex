@@ -185,14 +185,14 @@ private int yypopState() {
 
 <BLOCK_COMMENT> {
     {BLOCK_COMMENT_BEGIN}       { yypushState(BLOCK_COMMENT); }
-    {BLOCK_COMMENT_END}         { if (yypopState() == 0); return NimTypes.COMMENT; }
+    {BLOCK_COMMENT_END}         { if (yypopState() == 0) return NimTypes.COMMENT; }
     {CRLF}                      { }
     .                           { }
 }
 
 <BLOCK_DOC_COMMENT> {
     {BLOCK_DOC_COMMENT_BEGIN}   { yypushState(BLOCK_DOC_COMMENT); }
-    {BLOCK_DOC_COMMENT_END}     { if (yypopState() == 0); return NimTypes.COMMENT; }
+    {BLOCK_DOC_COMMENT_END}     { if (yypopState() == 0) return NimTypes.COMMENT; }
     {CRLF}                      { }
     .                           { }
 }
