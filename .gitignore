@@ -7,3 +7,4 @@
 /**/gen/
 /**/idea-flex.skeleton
 /**/jflex-*.jar
+/src/test/testData/*.txt
