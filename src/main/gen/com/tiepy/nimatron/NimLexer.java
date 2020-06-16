@@ -2308,13 +2308,13 @@ class NimLexer implements FlexLexer {
 
 private Stack<Integer> stateStack = new Stack<Integer>();
 
-private int yypushState(int newState) {
+private int pushState(int newState) {
     stateStack.push(yystate());
     yybegin(newState);
     return stateStack.size();
 }
 
-private int yypopState() {
+private int popState() {
     yybegin(stateStack.pop());
     return stateStack.size();
 }
@@ -2322,10 +2322,10 @@ private int yypopState() {
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
 
-private void yynewline() {
+private void handleIndent() {
     lastIndentSpaces = indentSpaces;
     indentSpaces = 0;
-    yypushState(INDENTER);
+    pushState(INDENTER);
 }
 
 
@@ -2593,7 +2593,7 @@ private void yynewline() {
             // fall through
           case 32: break;
           case 2: 
-            { yynewline();
+            { handleIndent();
             } 
             // fall through
           case 33: break;
@@ -2603,7 +2603,7 @@ private void yynewline() {
             // fall through
           case 34: break;
           case 4: 
-            { yypushState(LINE_COMMENT);
+            { pushState(LINE_COMMENT);
             } 
             // fall through
           case 35: break;
@@ -2623,7 +2623,7 @@ private void yynewline() {
             // fall through
           case 38: break;
           case 8: 
-            { yypushState(CHARACTER_LITERAL);
+            { pushState(CHARACTER_LITERAL);
             } 
             // fall through
           case 39: break;
@@ -2653,13 +2653,13 @@ private void yynewline() {
             // fall through
           case 44: break;
           case 14: 
-            { yypushState(STRING_LITERAL);
+            { pushState(STRING_LITERAL);
             } 
             // fall through
           case 45: break;
           case 15: 
             { yypushback(1);
-        yypopState();
+        popState();
 
         if (indentSpaces == lastIndentSpaces) {
             return NimTypes.IND_EQ;
@@ -2682,7 +2682,7 @@ private void yynewline() {
             // fall through
           case 48: break;
           case 18: 
-            { yypopState(); return NimTypes.COMMENT;
+            { popState(); return NimTypes.COMMENT;
             } 
             // fall through
           case 49: break;
@@ -2697,17 +2697,17 @@ private void yynewline() {
             // fall through
           case 51: break;
           case 21: 
-            { yypopState(); return NimTypes.STRING_LITERAL;
+            { popState(); return NimTypes.STRING_LITERAL;
             } 
             // fall through
           case 52: break;
           case 22: 
-            { yypushState(BLOCK_COMMENT);
+            { pushState(BLOCK_COMMENT);
             } 
             // fall through
           case 53: break;
           case 23: 
-            { yypushState(GENERALIZED_STRING_LITERAL);
+            { pushState(GENERALIZED_STRING_LITERAL);
             } 
             // fall through
           case 54: break;
@@ -2717,7 +2717,7 @@ private void yynewline() {
             // fall through
           case 55: break;
           case 25: 
-            { yypushState(RAW_STRING_LITERAL);
+            { pushState(RAW_STRING_LITERAL);
             } 
             // fall through
           case 56: break;
@@ -2727,12 +2727,12 @@ private void yynewline() {
             // fall through
           case 57: break;
           case 27: 
-            { if (yypopState() == 0) return NimTypes.COMMENT;
+            { if (popState() == 0) return NimTypes.COMMENT;
             } 
             // fall through
           case 58: break;
           case 28: 
-            { yypushState(BLOCK_DOC_COMMENT);
+            { pushState(BLOCK_DOC_COMMENT);
             } 
             // fall through
           case 59: break;
@@ -2742,12 +2742,12 @@ private void yynewline() {
             // fall through
           case 60: break;
           case 30: 
-            { yypushState(TRIPLE_STRING_LITERAL);
+            { pushState(TRIPLE_STRING_LITERAL);
             } 
             // fall through
           case 61: break;
           case 31: 
-            { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL);
+            { pushState(GENERALIZED_TRIPLE_STRING_LITERAL);
             } 
             // fall through
           case 62: break;
