@@ -4,7 +4,6 @@
 /**/.idea/workspace.xml
 /**/build/
 /**/classes/
-/**/gen/
 /**/idea-flex.skeleton
 /**/jflex-*.jar
 /src/test/testData/*.txt
