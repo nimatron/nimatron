@@ -28,15 +28,28 @@
  * questions.
  */
 
-package com.tiepy.nimatron.psi;
+package com.tiepy.nimatron;
 
-import com.intellij.psi.tree.IElementType;
-import com.tiepy.nimatron.NimLanguage;
-import org.jetbrains.annotations.NonNls;
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
-public class NimElementType extends IElementType {
-    public NimElementType( @NotNull @NonNls String debugName) {
-        super(debugName, NimLanguage.INSTANCE);
+import com.tiepy.nimatron.*;
+
+public class NimFile extends PsiFileBase {
+    public NimFile(@NotNull FileViewProvider viewProvider) {
+        super(viewProvider, NimLanguage.INSTANCE);
+    }
+
+    @NotNull
+    @Override
+    public FileType getFileType() {
+        return NimFileType.INSTANCE;
+    }
+
+    @Override
+    public String toString() {
+        return "Nim File";
     }
 }

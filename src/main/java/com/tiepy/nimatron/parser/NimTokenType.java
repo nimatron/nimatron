@@ -28,7 +28,7 @@
  * questions.
  */
 
-package com.tiepy.nimatron.psi;
+package com.tiepy.nimatron.parser;
 
 import com.intellij.psi.tree.IElementType;
 import com.tiepy.nimatron.NimLanguage;

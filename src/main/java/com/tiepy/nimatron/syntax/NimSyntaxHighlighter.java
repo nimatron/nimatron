@@ -28,16 +28,16 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.syntax;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.tiepy.nimatron.parser.NimLexerAdapter;
 import org.jetbrains.annotations.NotNull;
-import com.tiepy.nimatron.psi.NimTypes;
+import com.tiepy.nimatron.parser.NimTypes;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 

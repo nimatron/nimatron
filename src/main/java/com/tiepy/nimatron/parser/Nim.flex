@@ -28,12 +28,12 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.parser;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
-import com.tiepy.nimatron.psi.NimTypes;
+import com.tiepy.nimatron.parser.NimTypes;
 import java.util.Stack;
 
 %%
