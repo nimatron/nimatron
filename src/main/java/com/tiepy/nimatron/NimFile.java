@@ -28,35 +28,28 @@
  * questions.
  */
 
-{
-  parserClass="com.tiepy.nimatron.parser.NimParser"
+package com.tiepy.nimatron;
 
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
+import org.jetbrains.annotations.NotNull;
 
-  psiClassPrefix="Nim"
-  psiImplClassSuffix="Impl"
-  psiPackage="com.tiepy.nimatron.psi"
-  psiImplPackage="com.tiepy.nimatron.psi.impl"
+import com.tiepy.nimatron.*;
 
-  elementTypeHolderClass="com.tiepy.nimatron.psi.NimTypes"
-  elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
-  tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
+public class NimFile extends PsiFileBase {
+    public NimFile(@NotNull FileViewProvider viewProvider) {
+        super(viewProvider, NimLanguage.INSTANCE);
+    }
 
-  psiImplUtilClass="com.tiepy.nimatron.psi.impl.NimPsiImplUtil"
+    @NotNull
+    @Override
+    public FileType getFileType() {
+        return NimFileType.INSTANCE;
+    }
+
+    @Override
+    public String toString() {
+        return "Nim File";
+    }
 }
-
-nimFile ::= token*
-token ::= KEYWORD
-        | COMMENT
-        | STRING_LITERAL
-        | NUMERICAL_CONSTANT
-        | OPERATOR
-        | BRACKET
-        | PARENTHESIS
-        | SEMICOLON
-        | COMMA
-        | GRAVE_ACCENT
-        | TYPES
-        | PROCS
-        | IDENT
-        ;

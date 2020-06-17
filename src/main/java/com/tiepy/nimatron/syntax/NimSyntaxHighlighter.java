@@ -28,16 +28,14 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.syntax;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import com.tiepy.nimatron.psi.NimTypes;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
@@ -84,35 +82,35 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public Lexer getHighlightingLexer() {
-        return new NimLexerAdapter();
+        return new NimSyntaxLexerAdapter();
     }
 
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(NimTypes.KEYWORD)) {
+        if (tokenType.equals(NimSyntaxTypes.KEYWORD)) {
             return KEYWORD_KEYS;
-        } else if (tokenType.equals(NimTypes.COMMENT)) {
+        } else if (tokenType.equals(NimSyntaxTypes.COMMENT)) {
             return COMMENT_KEYS;
-        } else if (tokenType.equals(NimTypes.STRING_LITERAL)) {
+        } else if (tokenType.equals(NimSyntaxTypes.STRING_LITERAL)) {
             return LITERAL_STRING_KEYS;
-        } else if (tokenType.equals(NimTypes.NUMERICAL_CONSTANT)) {
+        } else if (tokenType.equals(NimSyntaxTypes.NUMERICAL_CONSTANT)) {
             return NUMERICAL_CONSTANT_KEYS;
-        } else if (tokenType.equals(NimTypes.OPERATOR)) {
+        } else if (tokenType.equals(NimSyntaxTypes.OPERATOR)) {
             return OPERATOR_KEYS;
-        } else if (tokenType.equals(NimTypes.BRACKET)) {
+        } else if (tokenType.equals(NimSyntaxTypes.BRACKET)) {
             return BRACKET_KEYS;
-        } else if (tokenType.equals(NimTypes.PARENTHESIS)) {
+        } else if (tokenType.equals(NimSyntaxTypes.PARENTHESIS)) {
             return PARENTHESIS_KEYS;
-        } else if (tokenType.equals(NimTypes.SEMICOLON)) {
+        } else if (tokenType.equals(NimSyntaxTypes.SEMICOLON)) {
             return SEMICOLON_KEYS;
-        } else if (tokenType.equals(NimTypes.COMMA)) {
+        } else if (tokenType.equals(NimSyntaxTypes.COMMA)) {
             return COMMA_KEYS;
-        } else if (tokenType.equals(NimTypes.TYPES)) {
+        } else if (tokenType.equals(NimSyntaxTypes.TYPES)) {
             return TYPES_KEYS;
-        } else if (tokenType.equals(NimTypes.PROCS)) {
+        } else if (tokenType.equals(NimSyntaxTypes.PROCS)) {
             return PROCS_KEYS;
-        } else if (tokenType.equals(NimTypes.IDENT)) {
+        } else if (tokenType.equals(NimSyntaxTypes.IDENT)) {
             return IDENT_KEYS;
         } else {
             return EMPTY_KEYS;

@@ -28,28 +28,14 @@
  * questions.
  */
 
-package com.tiepy.nimatron.psi;
+package com.tiepy.nimatron.syntax;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.FlexAdapter;
 
-import com.tiepy.nimatron.*;
+import java.io.Reader;
 
-public class NimFile extends PsiFileBase {
-    public NimFile(@NotNull FileViewProvider viewProvider) {
-        super(viewProvider, NimLanguage.INSTANCE);
-    }
-
-    @NotNull
-    @Override
-    public FileType getFileType() {
-        return NimFileType.INSTANCE;
-    }
-
-    @Override
-    public String toString() {
-        return "Nim File";
+public class NimSyntaxLexerAdapter extends FlexAdapter {
+    public NimSyntaxLexerAdapter() {
+        super(new NimSyntaxLexer((Reader) null));
     }
 }

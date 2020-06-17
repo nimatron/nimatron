@@ -28,16 +28,16 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.parser;
 
 import com.intellij.lang.*;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.tree.*;
+import com.tiepy.nimatron.NimFile;
+import com.tiepy.nimatron.NimLanguage;
 import org.jetbrains.annotations.NotNull;
-import com.tiepy.nimatron.parser.NimParser;
-import com.tiepy.nimatron.psi.*;
 
 public class NimParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);

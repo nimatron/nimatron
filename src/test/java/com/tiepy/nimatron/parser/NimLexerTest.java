@@ -24,7 +24,7 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.parser;
 
 import com.intellij.psi.tree.IElementType;
 import org.junit.Assert;
@@ -108,6 +108,6 @@ public class NimLexerTest {
                 "\n" +
                 "var checkpoints* {.threadvar.}: seq[string]\n");
 
-        Assert.assertEquals(215, tokenCount);
+        Assert.assertEquals(209, tokenCount);
     }
 }
