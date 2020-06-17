@@ -28,19 +28,14 @@
  * questions.
  */
 
-package com.tiepy.nimatron.parser;
+package com.tiepy.nimatron.syntax;
 
-import com.intellij.psi.tree.IElementType;
-import com.tiepy.nimatron.NimLanguage;
-import org.jetbrains.annotations.*;
+import com.intellij.lexer.FlexAdapter;
 
-public class NimTokenType extends IElementType {
-    public NimTokenType(@NotNull @NonNls String debugName) {
-        super(debugName, NimLanguage.INSTANCE);
-    }
+import java.io.Reader;
 
-    @Override
-    public String toString() {
-        return "NimTokenType." + super.toString();
+public class NimSyntaxLexerAdapter extends FlexAdapter {
+    public NimSyntaxLexerAdapter() {
+        super(new NimSyntaxLexer((Reader) null));
     }
 }
