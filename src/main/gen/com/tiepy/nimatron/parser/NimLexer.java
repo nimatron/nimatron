@@ -2593,7 +2593,7 @@ private void handleIndent() {
             // fall through
           case 32: break;
           case 2: 
-            { /* handleIndent(); */ return TokenType.WHITE_SPACE;
+            { handleIndent();
             } 
             // fall through
           case 33: break;
