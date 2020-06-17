@@ -28,39 +28,36 @@
  * questions.
  */
 
-{
-  parserClass="com.tiepy.nimatron.parser.NimParser"
+package com.tiepy.nimatron.parser;
 
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+import com.intellij.testFramework.ParsingTestCase;
+import com.tiepy.nimatron.parser.NimParserDefinition;
 
-  psiClassPrefix="Nim"
-  psiImplClassSuffix="Impl"
-  psiPackage="com.tiepy.nimatron.parser"
-  psiImplPackage="com.tiepy.nimatron.parser.impl"
+public class NimParserTest extends ParsingTestCase {
+    public NimParserTest() {
+        super("", "nim", new NimParserDefinition());
+    }
 
-  elementTypeHolderClass="com.tiepy.nimatron.parser.NimTypes"
-  elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
-  tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
+    public void testParsingTestData() {
+        doTest(true);
+    }
 
-  psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
+    /**
+     *
+     * @return path to test data file directory relative to root of this module.
+     */
+    @Override
+    protected String getTestDataPath() {
+        return "src/test/testData";
+    }
+
+    @Override
+    protected boolean skipSpaces() {
+        return false;
+    }
+
+    @Override
+    protected boolean includeRanges() {
+        return true;
+    }
 }
-
-nimFile ::= token*
-token ::= KEYWORD
-        | COMMENT
-        | STRING_LITERAL
-        | NUMERICAL_CONSTANT
-        | OPERATOR
-        | BRACKET
-        | PARENTHESIS
-        | SEMICOLON
-        | COMMA
-        | GRAVE_ACCENT
-        | TYPES
-        | PROCS
-        | IDENT
-        | FRAGMENT
-        | IND_GT
-        | IND_EQ
-        | IND_LT
-        ;
