@@ -154,10 +154,10 @@ exprList ::= expr (comma expr)*
 exprColonEqExprList2 ::= exprColonEqExpr (comma exprColonEqExpr)* (comma)?
 
 //dotExpr = expr '.' optInd (symbol | '[:' exprList ']')
-dotExpr ::= expr '.' optInd (symbol | '[:' exprList ']')
+//dotExpr ::= expr '.' optInd (symbol | '[:' exprList ']')
 
 //explicitGenericInstantiation = '[:' exprList ']' ( '(' exprColonEqExpr ')' )?
-explicitGenericInstantiation ::= '[:' exprList ']' ( '(' exprColonEqExpr ')' )?
+//explicitGenericInstantiation ::= '[:' exprList ']' ( '(' exprColonEqExpr ')' )?
 
 //qualifiedIdent = symbol ('.' optInd symbol)?
 qualifiedIdent ::= symbol ('.' optInd symbol)?
@@ -214,7 +214,7 @@ identOrLiteral ::= generalizedLit | symbol | literal
                  | castExpr
 
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
-tupleConstr ::= '(' optInd (exprColonEqExpr comma?)* optPar ')'
+//tupleConstr ::= '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
 //arrayConstr = '[' optInd (exprColonEqExpr comma?)* optPar ']'
 arrayConstr ::= '[' optInd (exprColonEqExpr comma?)* optPar ']'
@@ -270,16 +270,16 @@ identColonEquals ::= IDENT (comma IDENT)* comma?
 
 //inlTupleDecl = 'tuple'
 //    '[' optInd  (identColonEquals (comma/semicolon)?)*  optPar ']'
-inlTupleDecl ::= 'tuple'
-      '[' optInd  (identColonEquals (comma|semicolon)?)*  optPar ']'
+//inlTupleDecl ::= 'tuple'
+//      '[' optInd  (identColonEquals (comma|semicolon)?)*  optPar ']'
 
 //extTupleDecl = 'tuple'
 //    COMMENT? (IND{>} identColonEquals (IND{=} identColonEquals)*)?
-extTupleDecl ::= 'tuple'
-      COMMENT? (IND_GT identColonEquals (IND_EQ identColonEquals)*)?
+//extTupleDecl ::= 'tuple'
+//      COMMENT? (IND_GT identColonEquals (IND_EQ identColonEquals)*)?
 
-//tupleClass = 'tuple'
-tupleClass ::= 'tuple'
+////tupleClass = 'tuple'
+//tupleClass ::= 'tuple'
 
 //paramList = '(' declColonEquals ^* (comma/semicolon) ')'
 paramList ::= '(' (declColonEquals ((comma|semicolon) declColonEquals)*)? ')'
@@ -294,10 +294,10 @@ paramListColon ::= paramList? (':' optInd typeDesc)?
 doBlock ::= 'do' paramListArrow pragma? colcom stmt
 
 //procExpr = 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
-procExpr ::= 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
+//procExpr ::= 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
 
 //distinct = 'distinct' optInd typeDesc
-distinct ::= 'distinct' optInd typeDesc
+//distinct ::= 'distinct' optInd typeDesc
 
 //forStmt = 'for' (identWithPragma ^+ comma) 'in' expr colcom stmt
 forStmt ::= 'for' (identWithPragma (comma identWithPragma)*) 'in' expr colcom stmt
@@ -448,7 +448,7 @@ tryExpr ::= 'try' colcom stmt (optInd 'except'|'finally')
              (optInd 'finally' colcom stmt)?
 
 //exceptBlock = 'except' colcom stmt
-exceptBlock ::= 'except' colcom stmt
+//exceptBlock ::= 'except' colcom stmt
 
 //blockStmt = 'block' symbol? colcom stmt
 blockStmt ::= 'block' symbol? colcom stmt
@@ -491,7 +491,7 @@ commentStmt ::= COMMENT
 private meta section ::= COMMENT? <<RULE>> | (IND_GT (<<RULE>> | COMMENT) (IND_EQ (<<RULE>> | COMMENT))* IND_LT)
 
 //enum = 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
-enum ::= 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
+//enum ::= 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -523,7 +523,7 @@ objectPart ::= IND_GT objectPart (IND_EQ objectPart)* DED
              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
-object ::= 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
+//object ::= 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
 
 //typeClassParam = ('var' | 'out')? symbol
 typeClassParam ::= ('var' | 'out')? symbol
