@@ -37,6 +37,14 @@ public class NimParserTest extends ParsingTestCase {
         super("", "nim", new NimParserDefinition());
     }
 
+    public void testBlockCommentCommand() {
+        doTest(true, true);
+    }
+
+    public void testEchoFoo() {
+        doTest(true, true);
+    }
+
     public void testHello() {
         doTest(true, true);
     }
@@ -45,7 +53,11 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
-    public void testEchoFoo() {
+    public void testWhatsYourName() {
+        doTest(true, true);
+    }
+
+    public void testWhatsYourNameV2() {
         doTest(true, true);
     }
 
