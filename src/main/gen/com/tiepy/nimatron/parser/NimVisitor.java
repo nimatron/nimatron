@@ -111,31 +111,11 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitDistinct(@NotNull NimDistinct o) {
-    visitPsiElement(o);
-  }
-
   public void visitDoBlock(@NotNull NimDoBlock o) {
     visitPsiElement(o);
   }
 
   public void visitDollarExpr(@NotNull NimDollarExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitDotExpr(@NotNull NimDotExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitEnum(@NotNull NimEnum o) {
-    visitPsiElement(o);
-  }
-
-  public void visitExceptBlock(@NotNull NimExceptBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitExplicitGenericInstantiation(@NotNull NimExplicitGenericInstantiation o) {
     visitPsiElement(o);
   }
 
@@ -160,10 +140,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitExprStmt(@NotNull NimExprStmt o) {
-    visitPsiElement(o);
-  }
-
-  public void visitExtTupleDecl(@NotNull NimExtTupleDecl o) {
     visitPsiElement(o);
   }
 
@@ -235,10 +211,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitInlTupleDecl(@NotNull NimInlTupleDecl o) {
-    visitPsiElement(o);
-  }
-
   public void visitLiteral(@NotNull NimLiteral o) {
     visitPsiElement(o);
   }
@@ -248,30 +220,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitMulExpr(@NotNull NimMulExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObject(@NotNull NimObject o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjectBranch(@NotNull NimObjectBranch o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjectBranches(@NotNull NimObjectBranches o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjectCase(@NotNull NimObjectCase o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjectPart(@NotNull NimObjectPart o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjectWhen(@NotNull NimObjectWhen o) {
     visitPsiElement(o);
   }
 
@@ -351,10 +299,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitProcExpr(@NotNull NimProcExpr o) {
-    visitPsiElement(o);
-  }
-
   public void visitQualifiedIdent(@NotNull NimQualifiedIdent o) {
     visitPsiElement(o);
   }
@@ -408,14 +352,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitTryStmt(@NotNull NimTryStmt o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTupleClass(@NotNull NimTupleClass o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTupleConstr(@NotNull NimTupleConstr o) {
     visitPsiElement(o);
   }
 

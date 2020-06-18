@@ -36,20 +36,14 @@ public interface NimTypes {
   IElementType DECL_COLON_EQUALS = new NimElementType("DECL_COLON_EQUALS");
   IElementType DEFER_STMT = new NimElementType("DEFER_STMT");
   IElementType DISCARD_STMT = new NimElementType("DISCARD_STMT");
-  IElementType DISTINCT = new NimElementType("DISTINCT");
   IElementType DOLLAR_EXPR = new NimElementType("DOLLAR_EXPR");
-  IElementType DOT_EXPR = new NimElementType("DOT_EXPR");
   IElementType DO_BLOCK = new NimElementType("DO_BLOCK");
-  IElementType ENUM = new NimElementType("ENUM");
-  IElementType EXCEPT_BLOCK = new NimElementType("EXCEPT_BLOCK");
-  IElementType EXPLICIT_GENERIC_INSTANTIATION = new NimElementType("EXPLICIT_GENERIC_INSTANTIATION");
   IElementType EXPORT_STMT = new NimElementType("EXPORT_STMT");
   IElementType EXPR = new NimElementType("EXPR");
   IElementType EXPR_COLON_EQ_EXPR = new NimElementType("EXPR_COLON_EQ_EXPR");
   IElementType EXPR_COLON_EQ_EXPR_LIST_2 = new NimElementType("EXPR_COLON_EQ_EXPR_LIST_2");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
-  IElementType EXT_TUPLE_DECL = new NimElementType("EXT_TUPLE_DECL");
   IElementType FOR_EXPR = new NimElementType("FOR_EXPR");
   IElementType FOR_STMT = new NimElementType("FOR_STMT");
   IElementType FROM_STMT = new NimElementType("FROM_STMT");
@@ -67,16 +61,9 @@ public interface NimTypes {
   IElementType IMPORT_STMT = new NimElementType("IMPORT_STMT");
   IElementType INCLUDE_STMT = new NimElementType("INCLUDE_STMT");
   IElementType IND_AND_COMMENT = new NimElementType("IND_AND_COMMENT");
-  IElementType INL_TUPLE_DECL = new NimElementType("INL_TUPLE_DECL");
   IElementType LITERAL = new NimElementType("LITERAL");
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
   IElementType MUL_EXPR = new NimElementType("MUL_EXPR");
-  IElementType OBJECT = new NimElementType("OBJECT");
-  IElementType OBJECT_BRANCH = new NimElementType("OBJECT_BRANCH");
-  IElementType OBJECT_BRANCHES = new NimElementType("OBJECT_BRANCHES");
-  IElementType OBJECT_CASE = new NimElementType("OBJECT_CASE");
-  IElementType OBJECT_PART = new NimElementType("OBJECT_PART");
-  IElementType OBJECT_WHEN = new NimElementType("OBJECT_WHEN");
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
@@ -96,7 +83,6 @@ public interface NimTypes {
   IElementType PREFIX_OPERATOR = new NimElementType("PREFIX_OPERATOR");
   IElementType PRIMARY = new NimElementType("PRIMARY");
   IElementType PRIMARY_SUFFIX = new NimElementType("PRIMARY_SUFFIX");
-  IElementType PROC_EXPR = new NimElementType("PROC_EXPR");
   IElementType QUALIFIED_IDENT = new NimElementType("QUALIFIED_IDENT");
   IElementType RAISE_STMT = new NimElementType("RAISE_STMT");
   IElementType RETURN_STMT = new NimElementType("RETURN_STMT");
@@ -111,8 +97,6 @@ public interface NimTypes {
   IElementType SYMBOL = new NimElementType("SYMBOL");
   IElementType TRY_EXPR = new NimElementType("TRY_EXPR");
   IElementType TRY_STMT = new NimElementType("TRY_STMT");
-  IElementType TUPLE_CLASS = new NimElementType("TUPLE_CLASS");
-  IElementType TUPLE_CONSTR = new NimElementType("TUPLE_CONSTR");
   IElementType TYPE_CLASS = new NimElementType("TYPE_CLASS");
   IElementType TYPE_CLASS_PARAM = new NimElementType("TYPE_CLASS_PARAM");
   IElementType TYPE_DEF = new NimElementType("TYPE_DEF");
@@ -255,26 +239,11 @@ public interface NimTypes {
       else if (type == DISCARD_STMT) {
         return new NimDiscardStmtImpl(node);
       }
-      else if (type == DISTINCT) {
-        return new NimDistinctImpl(node);
-      }
       else if (type == DOLLAR_EXPR) {
         return new NimDollarExprImpl(node);
       }
-      else if (type == DOT_EXPR) {
-        return new NimDotExprImpl(node);
-      }
       else if (type == DO_BLOCK) {
         return new NimDoBlockImpl(node);
-      }
-      else if (type == ENUM) {
-        return new NimEnumImpl(node);
-      }
-      else if (type == EXCEPT_BLOCK) {
-        return new NimExceptBlockImpl(node);
-      }
-      else if (type == EXPLICIT_GENERIC_INSTANTIATION) {
-        return new NimExplicitGenericInstantiationImpl(node);
       }
       else if (type == EXPORT_STMT) {
         return new NimExportStmtImpl(node);
@@ -293,9 +262,6 @@ public interface NimTypes {
       }
       else if (type == EXPR_STMT) {
         return new NimExprStmtImpl(node);
-      }
-      else if (type == EXT_TUPLE_DECL) {
-        return new NimExtTupleDeclImpl(node);
       }
       else if (type == FOR_EXPR) {
         return new NimForExprImpl(node);
@@ -348,9 +314,6 @@ public interface NimTypes {
       else if (type == IND_AND_COMMENT) {
         return new NimIndAndCommentImpl(node);
       }
-      else if (type == INL_TUPLE_DECL) {
-        return new NimInlTupleDeclImpl(node);
-      }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);
       }
@@ -359,24 +322,6 @@ public interface NimTypes {
       }
       else if (type == MUL_EXPR) {
         return new NimMulExprImpl(node);
-      }
-      else if (type == OBJECT) {
-        return new NimObjectImpl(node);
-      }
-      else if (type == OBJECT_BRANCH) {
-        return new NimObjectBranchImpl(node);
-      }
-      else if (type == OBJECT_BRANCHES) {
-        return new NimObjectBranchesImpl(node);
-      }
-      else if (type == OBJECT_CASE) {
-        return new NimObjectCaseImpl(node);
-      }
-      else if (type == OBJECT_PART) {
-        return new NimObjectPartImpl(node);
-      }
-      else if (type == OBJECT_WHEN) {
-        return new NimObjectWhenImpl(node);
       }
       else if (type == OF_BRANCH) {
         return new NimOfBranchImpl(node);
@@ -435,9 +380,6 @@ public interface NimTypes {
       else if (type == PRIMARY_SUFFIX) {
         return new NimPrimarySuffixImpl(node);
       }
-      else if (type == PROC_EXPR) {
-        return new NimProcExprImpl(node);
-      }
       else if (type == QUALIFIED_IDENT) {
         return new NimQualifiedIdentImpl(node);
       }
@@ -479,12 +421,6 @@ public interface NimTypes {
       }
       else if (type == TRY_STMT) {
         return new NimTryStmtImpl(node);
-      }
-      else if (type == TUPLE_CLASS) {
-        return new NimTupleClassImpl(node);
-      }
-      else if (type == TUPLE_CONSTR) {
-        return new NimTupleConstrImpl(node);
       }
       else if (type == TYPE_CLASS) {
         return new NimTypeClassImpl(node);

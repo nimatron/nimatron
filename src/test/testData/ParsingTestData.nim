@@ -1,2 +1,1 @@
-echo(); echo()
-echo()
+echo() # Comment
