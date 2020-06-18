@@ -23,9 +23,6 @@ public interface NimPrimarySuffix extends PsiElement {
   NimGeneralizedLit getGeneralizedLit();
 
   @Nullable
-  NimLiteral getLiteral();
-
-  @Nullable
   NimOptInd getOptInd();
 
   @Nullable

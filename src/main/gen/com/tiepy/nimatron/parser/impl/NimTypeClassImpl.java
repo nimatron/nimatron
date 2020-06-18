@@ -34,12 +34,6 @@ public class NimTypeClassImpl extends ASTWrapperPsiElement implements NimTypeCla
 
   @Override
   @NotNull
-  public NimStmt getStmt() {
-    return findNotNullChildByClass(NimStmt.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimTypeClassParam> getTypeClassParamList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTypeClassParam.class);
   }

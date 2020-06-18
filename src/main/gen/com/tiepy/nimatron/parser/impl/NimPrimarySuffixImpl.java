@@ -58,12 +58,6 @@ public class NimPrimarySuffixImpl extends ASTWrapperPsiElement implements NimPri
 
   @Override
   @Nullable
-  public NimLiteral getLiteral() {
-    return findChildByClass(NimLiteral.class);
-  }
-
-  @Override
-  @Nullable
   public NimOptInd getOptInd() {
     return findChildByClass(NimOptInd.class);
   }

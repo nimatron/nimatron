@@ -81,7 +81,7 @@ qualifiedIdent ::= symbol ('.' optInd symbol)?
 setOrTableConstr ::= '{' ((exprColonEqExpr comma)+|':' ) '}'
 castExpr ::= 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
 parKeyw ::= 'discard'|'include'|'if'|'while'|'case'|'try'|'finally'|'except'|'for'|'block'|'const'|'let'|'when'|'var'|'mixin'
-par ::= '(' optInd ( parKeyw complexOrSimpleStmt (';' complexOrSimpleStmt)*
+par ::= '(' optInd ( /*&parKeyw*/ complexOrSimpleStmt (';' complexOrSimpleStmt)*
             | ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
             | pragmaStmt
             | simpleExpr ( ('=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)* )? )
@@ -99,7 +99,7 @@ primarySuffix ::= '(' (exprColonEqExpr comma?)* ')'
         | '.' optInd symbol generalizedLit?
         | '[' optInd exprColonEqExprList2 optPar ']'
         | '{' optInd exprColonEqExprList2 optPar '}'
-        | ('`'|IDENT|literal|'cast'|'addr'|'type') expr // command syntax
+        | /*&('`'|IDENT|literal|'cast'|'addr'|'type')*/ expr // command syntax
 condExpr ::= expr colcom expr optInd ('elif' expr colcom expr optInd)* 'else' colcom expr
 ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr
@@ -144,10 +144,10 @@ whileStmt ::= 'while' expr colcom stmt
 ofBranch ::= 'of' exprList colcom stmt
 ofBranches ::= ofBranch (IND_EQ ofBranch)* (IND_EQ 'elif' expr colcom stmt)* (IND_EQ 'else' colcom stmt)?
 caseStmt ::= 'case' expr ':'? COMMENT? (IND_GT ofBranches IND_LT|IND_EQ ofBranches)
-tryStmt ::= 'try' colcom stmt (IND_EQ? 'except'|'finally')
+tryStmt ::= 'try' colcom stmt /*&(IND_EQ? 'except'|'finally')*/
              (IND_EQ? 'except' exprList colcom stmt)*
              (IND_EQ? 'finally' colcom stmt)?
-tryExpr ::= 'try' colcom stmt (optInd 'except'|'finally')
+tryExpr ::= 'try' colcom stmt /*&(optInd 'except'|'finally')*/
              (optInd 'except' exprList colcom stmt)*
              (optInd 'finally' colcom stmt)?
 blockStmt ::= 'block' symbol? colcom stmt
@@ -163,7 +163,7 @@ routine ::= optInd identVis pattern? genericParamList? paramListColon pragma? ('
 commentStmt ::= COMMENT
 private meta section ::= COMMENT? <<RULE>>|(IND_GT (<<RULE>>|COMMENT) (IND_EQ (<<RULE>>|COMMENT))* IND_LT)
 typeClassParam ::= ('var'|'out')? symbol
-typeClass ::= (typeClassParam (',' typeClassParam)*)? (pragma)? ('of' (typeDesc (',' typeDesc)*)?)? IND_GT stmt
+typeClass ::= (typeClassParam (',' typeClassParam)*)? (pragma)? ('of' (typeDesc (',' typeDesc)*)?)? /*&IND_GT stmt*/
 typeDef ::= identWithPragmaDot genericParamList? '=' optInd typeDefAux
               indAndComment?|identVisDot genericParamList? pragma '=' optInd typeDefAux
               indAndComment?

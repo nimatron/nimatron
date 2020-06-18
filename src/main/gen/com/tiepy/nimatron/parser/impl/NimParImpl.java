@@ -58,12 +58,6 @@ public class NimParImpl extends ASTWrapperPsiElement implements NimPar {
 
   @Override
   @Nullable
-  public NimParKeyw getParKeyw() {
-    return findChildByClass(NimParKeyw.class);
-  }
-
-  @Override
-  @Nullable
   public NimPragmaStmt getPragmaStmt() {
     return findChildByClass(NimPragmaStmt.class);
   }

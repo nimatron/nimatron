@@ -23,9 +23,6 @@ public interface NimPar extends PsiElement {
   NimOptPar getOptPar();
 
   @Nullable
-  NimParKeyw getParKeyw();
-
-  @Nullable
   NimPragmaStmt getPragmaStmt();
 
   @Nullable

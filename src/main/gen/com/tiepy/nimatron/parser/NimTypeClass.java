@@ -11,9 +11,6 @@ public interface NimTypeClass extends PsiElement {
   NimPragma getPragma();
 
   @NotNull
-  NimStmt getStmt();
-
-  @NotNull
   List<NimTypeClassParam> getTypeClassParamList();
 
   @NotNull
