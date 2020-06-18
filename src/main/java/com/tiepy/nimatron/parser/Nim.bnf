@@ -59,8 +59,7 @@ comma ::= ',' COMMENT?
 semicolon ::= ';' COMMENT?
 colon ::= ':' COMMENT?
 colcom ::= ':' COMMENT?
-operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9
-           |'or'|'xor'|'and'|'is'|'isnot'|'in'|'notin'|'of'|'as'|'from'|'div'|'mod'|'shl'|'shr'|'not'|'static'|'..'
+operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
 prefixOperator ::= operator
 optInd ::= COMMENT? (IND_GT|IND_EQ)?
 optPar ::= (IND_GT|IND_EQ)?
