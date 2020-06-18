@@ -10,7 +10,7 @@ import com.tiepy.nimatron.parser.impl.*;
 
 public interface NimTypes {
 
-  IElementType TOKEN = new NimElementType("TOKEN");
+  IElementType STMT = new NimElementType("STMT");
 
   IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType COMMA = new NimTokenType("COMMA");
@@ -25,16 +25,15 @@ public interface NimTypes {
   IElementType NUMERICAL_CONSTANT = new NimTokenType("NUMERICAL_CONSTANT");
   IElementType OPERATOR = new NimTokenType("OPERATOR");
   IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
-  IElementType PROCS = new NimTokenType("PROCS");
   IElementType SEMICOLON = new NimTokenType("SEMICOLON");
   IElementType STRING_LITERAL = new NimTokenType("STRING_LITERAL");
-  IElementType TYPES = new NimTokenType("TYPES");
+  IElementType WHITE_SPACE = new NimTokenType("WHITE_SPACE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == TOKEN) {
-        return new NimTokenImpl(node);
+      if (type == STMT) {
+        return new NimStmtImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

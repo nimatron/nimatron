@@ -1,8 +1,2 @@
-echo "S"
-  echo "S"
-    echo "S"
-  echo "S"
-echo "S"
-echo "S"
-  echo "S"
-  echo "S"
+echo(); echo()
+echo()

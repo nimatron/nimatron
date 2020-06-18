@@ -42,25 +42,27 @@
   elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
+  tokens = [
+    KEYWORD="KEYWORD"
+    COMMENT="COMMENT"
+    STRING_LITERAL="STRING_LITERAL"
+    NUMERICAL_CONSTANT="NUMERICAL_CONSTANT"
+    OPERATOR="OPERATOR"
+    BRACKET="BRACKET"
+    PARENTHESIS="PARENTHESIS"
+    SEMICOLON="SEMICOLON"
+    COMMA="COMMA"
+    GRAVE_ACCENT="GRAVE_ACCENT"
+    IDENT="IDENT"
+    FRAGMENT="FRAGMENT"
+    IND_GT="IND_GT"
+    IND_EQ="IND_EQ"
+    IND_LT="IND_LT"
+    WHITE_SPACE="WHITE_SPACE"
+  ]
+
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
-nimFile ::= token*
-token ::= KEYWORD
-        | COMMENT
-        | STRING_LITERAL
-        | NUMERICAL_CONSTANT
-        | OPERATOR
-        | BRACKET
-        | PARENTHESIS
-        | SEMICOLON
-        | COMMA
-        | GRAVE_ACCENT
-        | TYPES
-        | PROCS
-        | IDENT
-        | FRAGMENT
-        | IND_GT
-        | IND_EQ
-        | IND_LT
-        ;
+module ::= (stmt ((';' | IND_EQ) stmt)*)?
+stmt ::= IDENT '()'

@@ -32,61 +32,69 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   static boolean parse_root_(IElementType t, PsiBuilder b, int l) {
-    return nimFile(b, l + 1);
+    return module(b, l + 1);
   }
 
   /* ********************************************************** */
-  // token*
-  static boolean nimFile(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nimFile")) return false;
+  // (stmt ((';' | IND_EQ) stmt)*)?
+  static boolean module(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module")) return false;
+    module_0(b, l + 1);
+    return true;
+  }
+
+  // stmt ((';' | IND_EQ) stmt)*
+  private static boolean module_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = stmt(b, l + 1);
+    r = r && module_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ((';' | IND_EQ) stmt)*
+  private static boolean module_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_0_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!token(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "nimFile", c)) break;
+      if (!module_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "module_0_1", c)) break;
     }
     return true;
   }
 
-  /* ********************************************************** */
-  // KEYWORD
-  //         | COMMENT
-  //         | STRING_LITERAL
-  //         | NUMERICAL_CONSTANT
-  //         | OPERATOR
-  //         | BRACKET
-  //         | PARENTHESIS
-  //         | SEMICOLON
-  //         | COMMA
-  //         | GRAVE_ACCENT
-  //         | TYPES
-  //         | PROCS
-  //         | IDENT
-  //         | FRAGMENT
-  //         | IND_GT
-  //         | IND_EQ
-  //         | IND_LT
-  public static boolean token(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "token")) return false;
+  // (';' | IND_EQ) stmt
+  private static boolean module_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_0_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TOKEN, "<token>");
-    r = consumeToken(b, KEYWORD);
-    if (!r) r = consumeToken(b, COMMENT);
-    if (!r) r = consumeToken(b, STRING_LITERAL);
-    if (!r) r = consumeToken(b, NUMERICAL_CONSTANT);
-    if (!r) r = consumeToken(b, OPERATOR);
-    if (!r) r = consumeToken(b, BRACKET);
-    if (!r) r = consumeToken(b, PARENTHESIS);
-    if (!r) r = consumeToken(b, SEMICOLON);
-    if (!r) r = consumeToken(b, COMMA);
-    if (!r) r = consumeToken(b, GRAVE_ACCENT);
-    if (!r) r = consumeToken(b, TYPES);
-    if (!r) r = consumeToken(b, PROCS);
-    if (!r) r = consumeToken(b, IDENT);
-    if (!r) r = consumeToken(b, FRAGMENT);
-    if (!r) r = consumeToken(b, IND_GT);
+    Marker m = enter_section_(b);
+    r = module_0_1_0_0(b, l + 1);
+    r = r && stmt(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ';' | IND_EQ
+  private static boolean module_0_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_0_1_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, ";");
     if (!r) r = consumeToken(b, IND_EQ);
-    if (!r) r = consumeToken(b, IND_LT);
-    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENT '()'
+  public static boolean stmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt")) return false;
+    if (!nextTokenIs(b, IDENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENT);
+    r = r && consumeToken(b, "()");
+    exit_section_(b, m, STMT, r);
     return r;
   }
 

@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public class NimVisitor extends PsiElementVisitor {
 
-  public void visitToken(@NotNull NimToken o) {
+  public void visitStmt(@NotNull NimStmt o) {
     visitPsiElement(o);
   }
 
