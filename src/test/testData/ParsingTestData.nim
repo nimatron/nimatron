@@ -1,1 +1,1 @@
-echo() # Comment
+echo("Hello") # Comment

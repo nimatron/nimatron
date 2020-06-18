@@ -225,39 +225,39 @@ private void handleIndent() {
 
 <STRING_LITERAL> {
     \\\"                        { }
-    \"                          { popState(); return NimTypes.STRING_LITERAL; }
+    \"                          { popState(); return NimTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }
 
 <TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimTypes.STRING_LITERAL; }
+    \"\"\"                      { popState(); return NimTypes.TRIPLESTR_LIT; }
     {CRLF}                      { }
     .                           { }
 }
 
 <RAW_STRING_LITERAL> {
     \"\"                        { }
-    \"                          { popState(); return NimTypes.STRING_LITERAL; }
+    \"                          { popState(); return NimTypes.RSTR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }
 
 <GENERALIZED_STRING_LITERAL> {
     \"\"                        { }
-    \"                          { popState(); return NimTypes.STRING_LITERAL; }
+    \"                          { popState(); return NimTypes.GENERALIZED_STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimTypes.STRING_LITERAL; }
+    \"\"\"                      { popState(); return NimTypes.GENERALIZED_TRIPLESTR_LIT; }
     {CRLF}                      { }
     .                           { }
 }
 
 <CHARACTER_LITERAL> {
-    '                           { popState(); return NimTypes.STRING_LITERAL; }
+    '                           { popState(); return NimTypes.CHAR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }
