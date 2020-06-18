@@ -77,16 +77,19 @@ HEX_LIT=0(x|X){HEX_DIGIT}(_|{HEX_DIGIT})*
 DEC_LIT={DIGIT}(_|{DIGIT})*
 OCT_LIT=0o{OCT_DIGIT}(_|{OCT_DIGIT})*
 BIN_LIT=0(b|B){BIN_DIGIT}(_|{BIN_DIGIT})*
+
 INT_LIT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
 INT8_LIT={INT_LIT}'?(i|I)8
 INT16_LIT={INT_LIT}'?(i|I)16
 INT32_LIT={INT_LIT}'?(i|I)32
 INT64_LIT={INT_LIT}'?(i|I)64
+
 UINT_LIT={INT_LIT}'?(u|U)
 UINT8_LIT={INT_LIT}'?(u|U)8
 UINT16_LIT={INT_LIT}'?(u|U)16
 UINT32_LIT={INT_LIT}'?(u|U)32
 UINT64_LIT={INT_LIT}'?(u|U)64
+
 DIGITS={DEC_LIT}
 EXPONENT=(e|E)(\+|\-)?{DIGITS}
 FLOAT_LIT={DIGITS}((\.{DIGITS}{EXPONENT}?)|{EXPONENT})
@@ -94,11 +97,10 @@ FLOAT32_SUFFIX=(f|F)32
 FLOAT64_SUFFIX=(f|F)64
 FLOAT32_LIT=({HEX_LIT}'{FLOAT32_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT32_SUFFIX})
 FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT64_SUFFIX})
-NUMERICAL_CONSTANT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
-|{INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
-|{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
-|{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
-BOOLEAN_CONSTANT=true|false
+
+//BOOLEAN_CONSTANT=true|false
+
+NIL=nil
 
 BRACKET=[\{\}\[\]]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)
 PARENTHESIS=[\(\)]|(\(\.)|(\.\))
@@ -109,7 +111,7 @@ C_GRAVE_ACCENT=`
 
 KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
-|mixin|mod|nil|object|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
+|mixin|mod|object|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
 |when|while|yield
 
 %{
@@ -165,8 +167,20 @@ private void handleIndent() {
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }
     {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     '                           { pushState(CHARACTER_LITERAL); }
-    {NUMERICAL_CONSTANT}        { return NimTypes.NUMERICAL_CONSTANT; }
-    {BOOLEAN_CONSTANT}          { return NimTypes.NUMERICAL_CONSTANT; }
+    {INT_LIT}                   { return NimTypes.INT_LIT; }
+    {INT8_LIT}                  { return NimTypes.INT8_LIT; }
+    {INT16_LIT}                 { return NimTypes.INT16_LIT; }
+    {INT32_LIT}                 { return NimTypes.INT32_LIT; }
+    {INT64_LIT}                 { return NimTypes.INT64_LIT; }
+    {UINT_LIT}                  { return NimTypes.UINT_LIT; }
+    {UINT8_LIT}                 { return NimTypes.UINT8_LIT; }
+    {UINT16_LIT}                { return NimTypes.UINT16_LIT; }
+    {UINT32_LIT}                { return NimTypes.UINT32_LIT; }
+    {UINT64_LIT}                { return NimTypes.UINT64_LIT; }
+    {FLOAT_LIT}                 { return NimTypes.FLOAT_LIT; }
+    {FLOAT32_LIT}               { return NimTypes.FLOAT32_LIT; }
+    {FLOAT64_LIT}               { return NimTypes.FLOAT64_LIT; }
+    {NIL}                       { return NimTypes.NIL; }
     {OP0}                       { return NimTypes.OP0; }
     {OP1}                       { return NimTypes.OP1; }
     {OP2}                       { return NimTypes.OP2; }

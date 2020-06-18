@@ -133,7 +133,6 @@ public interface NimTypes {
   IElementType INT_LIT = new NimTokenType("INT_LIT");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NIL = new NimTokenType("NIL");
-  IElementType NUMERICAL_CONSTANT = new NimTokenType("NUMERICAL_CONSTANT");
   IElementType OP0 = new NimTokenType("OP0");
   IElementType OP1 = new NimTokenType("OP1");
   IElementType OP10 = new NimTokenType("OP10");
