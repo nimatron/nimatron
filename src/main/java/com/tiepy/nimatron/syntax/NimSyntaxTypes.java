@@ -26,17 +26,10 @@
 
 package com.tiepy.nimatron.syntax;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.tiepy.nimatron.psi.NimElementType;
 import com.tiepy.nimatron.psi.NimTokenType;
-import com.tiepy.nimatron.parser.impl.NimTokenImpl;
 
 public interface NimSyntaxTypes {
-
-    IElementType TOKEN = new NimElementType("TOKEN");
-
     IElementType BRACKET = new NimTokenType("BRACKET");
     IElementType COMMA = new NimTokenType("COMMA");
     IElementType COMMENT = new NimTokenType("COMMENT");
@@ -49,14 +42,4 @@ public interface NimSyntaxTypes {
     IElementType SEMICOLON = new NimTokenType("SEMICOLON");
     IElementType STRING_LITERAL = new NimTokenType("STRING_LITERAL");
     IElementType TYPES = new NimTokenType("TYPES");
-
-    class Factory {
-        public static PsiElement createElement(ASTNode node) {
-            IElementType type = node.getElementType();
-            if (type == TOKEN) {
-                return new NimTokenImpl(node);
-            }
-            throw new AssertionError("Unknown element type: " + type);
-        }
-    }
 }
