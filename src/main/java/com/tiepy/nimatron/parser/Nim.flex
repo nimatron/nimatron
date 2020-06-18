@@ -46,19 +46,30 @@ import java.util.Stack;
 %eof{  return;
 %eof}
 
-CRLF=\n|\r|\r\n
-WHITE_SPACE=[\ \t\f]
+OP0=->|~>|=>
+OP1=\+=|\*=|-=|\/\*
+OP2=@|:|\?
+OP3=or|xor
+OP4=and
+OP5===|<=|<|>=|>|\!=|in|notin|is|isnot|not|of|as
+OP6=\.\.
+OP7=&
+OP8=\+|-
+OP9=\*|\/|div|mod|shl|shr|%
+OP10=\$|\^
+
+DIGIT=[0-9]
+ALPHA=[A-Za-z\u0080-\u00ff]
+IDENT={ALPHA}(_|{ALPHA}|{DIGIT})*
+
 BLOCK_COMMENT_BEGIN=#\[
 BLOCK_COMMENT_END=\]#
 BLOCK_DOC_COMMENT_BEGIN=##\[
 BLOCK_DOC_COMMENT_END=\]##
-DIGIT=[0-9]
-ALPHA=[A-Za-z\u0080-\u00ff]
-IDENT={ALPHA}(_|{ALPHA}|{DIGIT})*
-KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
-|else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
-|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
-|when|while|xor|yield
+
+CRLF=\n|\r|\r\n
+WHITE_SPACE=[\ \t\f]
+
 HEX_DIGIT=[0-9A-Fa-f]
 OCT_DIGIT=[0-7]
 BIN_DIGIT=[01]
@@ -88,12 +99,18 @@ NUMERICAL_CONSTANT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
 |{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
 |{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
 BOOLEAN_CONSTANT=true|false
-OPERATOR=[\=\+\-\*/<>@$~&%\|!\?\^\.:\\]+
+
 BRACKET=[\{\}\[\]]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)
 PARENTHESIS=[\(\)]|(\(\.)|(\.\))
-SEMICOLON=;
-COMMA=,
-GRAVE_ACCENT=`
+
+C_SEMICOLON=;
+C_COMMA=,
+C_GRAVE_ACCENT=`
+
+KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
+|else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
+|mixin|mod|nil|object|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
+|when|while|yield
 
 %{
 
@@ -141,7 +158,7 @@ private void handleIndent() {
     #                           { pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
-    {KEYWORD}                   { return NimTypes.KEYWORD; }
+    {KEYW}                      { return NimTypes.KEYW; }
     r\"                         { pushState(RAW_STRING_LITERAL); }
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); }
     \"                          { pushState(STRING_LITERAL); }
@@ -150,12 +167,22 @@ private void handleIndent() {
     '                           { pushState(CHARACTER_LITERAL); }
     {NUMERICAL_CONSTANT}        { return NimTypes.NUMERICAL_CONSTANT; }
     {BOOLEAN_CONSTANT}          { return NimTypes.NUMERICAL_CONSTANT; }
-    {OPERATOR}                  { return NimTypes.OPERATOR; }
+    {OP0}                       { return NimTypes.OP0; }
+    {OP1}                       { return NimTypes.OP1; }
+    {OP2}                       { return NimTypes.OP2; }
+    {OP3}                       { return NimTypes.OP3; }
+    {OP4}                       { return NimTypes.OP4; }
+    {OP5}                       { return NimTypes.OP5; }
+    {OP6}                       { return NimTypes.OP6; }
+    {OP7}                       { return NimTypes.OP7; }
+    {OP8}                       { return NimTypes.OP8; }
+    {OP9}                       { return NimTypes.OP9; }
+    {OP10}                      { return NimTypes.OP10; }
     {BRACKET}                   { return NimTypes.BRACKET; }
     {PARENTHESIS}               { return NimTypes.PARENTHESIS; }
-    {SEMICOLON}                 { return NimTypes.SEMICOLON; }
-    {COMMA}                     { return NimTypes.COMMA; }
-    {GRAVE_ACCENT}              { return NimTypes.GRAVE_ACCENT; }
+    {C_SEMICOLON}               { return NimTypes.C_SEMICOLON; }
+    {C_COMMA}                   { return NimTypes.C_COMMA; }
+    {C_GRAVE_ACCENT}            { return NimTypes.C_GRAVE_ACCENT; }
     {IDENT}+                    { return NimTypes.IDENT; }
     {ALPHA}+                    { return NimTypes.FRAGMENT; }
     .                           { return NimTypes.FRAGMENT; }

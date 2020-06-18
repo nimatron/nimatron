@@ -7,4 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimStmt extends PsiElement {
 
+  @NotNull
+  List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
+
+  @NotNull
+  List<NimSimpleStmt> getSimpleStmtList();
+
 }
