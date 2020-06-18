@@ -58,6 +58,8 @@ OP8=\+|-
 OP9=\*|\/|div|mod|shl|shr|%
 OP10=\$|\^
 
+OPR=[\=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
+
 DIGIT=[0-9]
 ALPHA=[A-Za-z\u0080-\u00ff]
 IDENT={ALPHA}(_|{ALPHA}|{DIGIT})*
@@ -192,6 +194,7 @@ private void handleIndent() {
     {OP8}                       { return NimTypes.OP8; }
     {OP9}                       { return NimTypes.OP9; }
     {OP10}                      { return NimTypes.OP10; }
+    {OPR}                       { return NimTypes.OPR; }
     {BRACKET}                   { return NimTypes.BRACKET; }
     {PARENTHESIS}               { return NimTypes.PARENTHESIS; }
     {C_SEMICOLON}               { return NimTypes.C_SEMICOLON; }
