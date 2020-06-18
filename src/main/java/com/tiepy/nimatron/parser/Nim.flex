@@ -197,9 +197,8 @@ private void handleIndent() {
     {C_SEMICOLON}               { return NimTypes.C_SEMICOLON; }
     {C_COMMA}                   { return NimTypes.C_COMMA; }
     {C_GRAVE_ACCENT}            { return NimTypes.C_GRAVE_ACCENT; }
-    {IDENT}+                    { return NimTypes.IDENT; }
-    {ALPHA}+                    { return NimTypes.FRAGMENT; }
-    .                           { return NimTypes.FRAGMENT; }
+    {IDENT}                     { return NimTypes.IDENT; }
+    .                           { return TokenType.BAD_CHARACTER; }
 }
 
 <INDENTER> {

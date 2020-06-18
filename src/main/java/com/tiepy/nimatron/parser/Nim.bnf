@@ -43,7 +43,6 @@
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
   tokens = [
-    FRAGMENT="FRAGMENT"
     BRACKET="BRACKET"
     PARENTHESIS="PARENTHESIS"
     C_SEMICOLON="C_SEMICOLON"

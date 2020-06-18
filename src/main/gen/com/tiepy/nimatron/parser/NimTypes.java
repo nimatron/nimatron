@@ -119,7 +119,6 @@ public interface NimTypes {
   IElementType FLOAT32_LIT = new NimTokenType("FLOAT32_LIT");
   IElementType FLOAT64_LIT = new NimTokenType("FLOAT64_LIT");
   IElementType FLOAT_LIT = new NimTokenType("FLOAT_LIT");
-  IElementType FRAGMENT = new NimTokenType("FRAGMENT");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
   IElementType GENERALIZED_TRIPLESTR_LIT = new NimTokenType("GENERALIZED_TRIPLESTR_LIT");
   IElementType IDENT = new NimTokenType("IDENT");

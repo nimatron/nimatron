@@ -113,16 +113,16 @@ class NimLexer implements FlexLexer {
     "\1\7\4\6\1\1\1\10\4\6\1\4\1\11\1\12"+
     "\1\13\2\14\2\15\1\16\1\12\1\6\1\17\2\6"+
     "\1\14\2\20\1\21\1\22\1\23\4\6\1\24\1\0"+
-    "\1\25\2\26\1\27\1\30\6\31\2\32\1\33\2\31"+
-    "\1\34\1\35\1\31\1\36\1\3\1\37\2\7\1\40"+
-    "\1\7\2\6\1\41\2\6\1\42\3\6\1\7\2\6"+
-    "\1\43\2\6\1\7\1\6\1\7\13\6\1\44\4\6"+
-    "\4\0\1\45\2\0\1\46\3\0\14\6\1\0\1\46"+
-    "\1\47\4\0\1\6\1\0\2\6\1\50\1\7\1\51"+
-    "\21\6\1\0\1\52\4\0\1\53\1\0\1\54\3\0"+
-    "\1\53\1\55\3\12\11\6\1\56\1\55\1\57\1\60"+
-    "\1\6\1\61\16\6\1\62\1\63\1\64\1\65\1\66"+
-    "\1\0\1\67\1\70\1\71\24\6";
+    "\1\25\2\26\1\27\1\30\6\31\2\1\1\32\2\31"+
+    "\1\33\1\34\1\31\1\35\1\3\1\36\2\7\1\37"+
+    "\1\7\2\6\1\40\2\6\1\41\3\6\1\7\2\6"+
+    "\1\42\2\6\1\7\1\6\1\7\13\6\1\43\4\6"+
+    "\4\0\1\44\2\0\1\45\3\0\14\6\1\0\1\45"+
+    "\1\46\4\0\1\6\1\0\2\6\1\47\1\7\1\50"+
+    "\21\6\1\0\1\51\4\0\1\52\1\0\1\53\3\0"+
+    "\1\52\1\54\3\12\11\6\1\55\1\54\1\56\1\57"+
+    "\1\6\1\60\16\6\1\61\1\62\1\63\1\64\1\65"+
+    "\1\0\1\66\1\67\1\70\24\6";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[250];
@@ -993,105 +993,105 @@ private void handleIndent() {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return NimTypes.FRAGMENT;
+            { return TokenType.BAD_CHARACTER;
             } 
             // fall through
-          case 58: break;
+          case 57: break;
           case 2: 
             { return NimTypes.OP8;
             } 
             // fall through
-          case 59: break;
+          case 58: break;
           case 3: 
             { return NimTypes.OP0;
             } 
             // fall through
-          case 60: break;
+          case 59: break;
           case 4: 
             { return NimTypes.OP9;
             } 
             // fall through
-          case 61: break;
+          case 60: break;
           case 5: 
             { return NimTypes.OP2;
             } 
             // fall through
-          case 62: break;
+          case 61: break;
           case 6: 
             { return NimTypes.IDENT;
             } 
             // fall through
-          case 63: break;
+          case 62: break;
           case 7: 
             { return NimTypes.OP5;
             } 
             // fall through
-          case 64: break;
+          case 63: break;
           case 8: 
             { return NimTypes.OP7;
             } 
             // fall through
-          case 65: break;
+          case 64: break;
           case 9: 
             { return NimTypes.OP10;
             } 
             // fall through
-          case 66: break;
+          case 65: break;
           case 10: 
             { return NimTypes.INT_LIT;
             } 
             // fall through
-          case 67: break;
+          case 66: break;
           case 11: 
             { pushState(LINE_COMMENT);
             } 
             // fall through
-          case 68: break;
+          case 67: break;
           case 12: 
             { return NimTypes.BRACKET;
             } 
             // fall through
-          case 69: break;
+          case 68: break;
           case 13: 
             { handleIndent();
             } 
             // fall through
-          case 70: break;
+          case 69: break;
           case 14: 
             { return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 71: break;
+          case 70: break;
           case 15: 
             { pushState(CHARACTER_LITERAL);
             } 
             // fall through
-          case 72: break;
+          case 71: break;
           case 16: 
             { return NimTypes.PARENTHESIS;
             } 
             // fall through
-          case 73: break;
+          case 72: break;
           case 17: 
             { return NimTypes.C_SEMICOLON;
             } 
             // fall through
-          case 74: break;
+          case 73: break;
           case 18: 
             { return NimTypes.C_COMMA;
             } 
             // fall through
-          case 75: break;
+          case 74: break;
           case 19: 
             { return NimTypes.C_GRAVE_ACCENT;
             } 
             // fall through
-          case 76: break;
+          case 75: break;
           case 20: 
             { pushState(STRING_LITERAL);
             } 
             // fall through
-          case 77: break;
+          case 76: break;
           case 21: 
             { yypushback(1);
         popState();
@@ -1105,187 +1105,182 @@ private void handleIndent() {
         }
             } 
             // fall through
-          case 78: break;
+          case 77: break;
           case 22: 
             { indentSpaces = 0;
             } 
             // fall through
-          case 79: break;
+          case 78: break;
           case 23: 
             { indentSpaces++;
             } 
             // fall through
-          case 80: break;
+          case 79: break;
           case 24: 
             { popState(); return NimTypes.COMMENT;
             } 
             // fall through
-          case 81: break;
+          case 80: break;
           case 25: 
             { 
             } 
             // fall through
-          case 82: break;
+          case 81: break;
           case 26: 
-            { return TokenType.BAD_CHARACTER;
-            } 
-            // fall through
-          case 83: break;
-          case 27: 
             { popState(); return NimTypes.STR_LIT;
             } 
             // fall through
-          case 84: break;
-          case 28: 
+          case 82: break;
+          case 27: 
             { popState(); return NimTypes.RSTR_LIT;
             } 
             // fall through
-          case 85: break;
-          case 29: 
+          case 83: break;
+          case 28: 
             { popState(); return NimTypes.GENERALIZED_STR_LIT;
             } 
             // fall through
-          case 86: break;
-          case 30: 
+          case 84: break;
+          case 29: 
             { popState(); return NimTypes.CHAR_LIT;
             } 
             // fall through
-          case 87: break;
-          case 31: 
+          case 85: break;
+          case 30: 
             { return NimTypes.OP1;
             } 
             // fall through
-          case 88: break;
-          case 32: 
+          case 86: break;
+          case 31: 
             { return NimTypes.OP3;
             } 
             // fall through
-          case 89: break;
-          case 33: 
+          case 87: break;
+          case 32: 
             { pushState(GENERALIZED_STRING_LITERAL);
             } 
             // fall through
-          case 90: break;
-          case 34: 
+          case 88: break;
+          case 33: 
             { pushState(RAW_STRING_LITERAL);
             } 
             // fall through
-          case 91: break;
-          case 35: 
+          case 89: break;
+          case 34: 
             { return NimTypes.KEYW;
             } 
             // fall through
-          case 92: break;
-          case 36: 
+          case 90: break;
+          case 35: 
             { return NimTypes.OP6;
             } 
             // fall through
-          case 93: break;
-          case 37: 
+          case 91: break;
+          case 36: 
             { return NimTypes.UINT_LIT;
             } 
             // fall through
-          case 94: break;
-          case 38: 
+          case 92: break;
+          case 37: 
             { pushState(BLOCK_COMMENT);
             } 
             // fall through
-          case 95: break;
-          case 39: 
+          case 93: break;
+          case 38: 
             { if (popState() == 0) return NimTypes.COMMENT;
             } 
             // fall through
-          case 96: break;
-          case 40: 
+          case 94: break;
+          case 39: 
             { return NimTypes.OP4;
             } 
             // fall through
-          case 97: break;
-          case 41: 
+          case 95: break;
+          case 40: 
             { return NimTypes.NIL;
             } 
             // fall through
-          case 98: break;
-          case 42: 
+          case 96: break;
+          case 41: 
             { return NimTypes.INT8_LIT;
             } 
             // fall through
-          case 99: break;
-          case 43: 
+          case 97: break;
+          case 42: 
             { return NimTypes.FLOAT_LIT;
             } 
             // fall through
-          case 100: break;
-          case 44: 
+          case 98: break;
+          case 43: 
             { return NimTypes.UINT8_LIT;
             } 
             // fall through
-          case 101: break;
-          case 45: 
+          case 99: break;
+          case 44: 
             { pushState(BLOCK_DOC_COMMENT);
             } 
             // fall through
-          case 102: break;
-          case 46: 
+          case 100: break;
+          case 45: 
             { pushState(TRIPLE_STRING_LITERAL);
             } 
             // fall through
-          case 103: break;
-          case 47: 
+          case 101: break;
+          case 46: 
             { popState(); return NimTypes.TRIPLESTR_LIT;
             } 
             // fall through
-          case 104: break;
-          case 48: 
+          case 102: break;
+          case 47: 
             { popState(); return NimTypes.GENERALIZED_TRIPLESTR_LIT;
             } 
             // fall through
-          case 105: break;
-          case 49: 
+          case 103: break;
+          case 48: 
             { pushState(GENERALIZED_TRIPLE_STRING_LITERAL);
             } 
             // fall through
-          case 106: break;
-          case 50: 
+          case 104: break;
+          case 49: 
             { return NimTypes.INT16_LIT;
             } 
             // fall through
-          case 107: break;
-          case 51: 
+          case 105: break;
+          case 50: 
             { return NimTypes.INT64_LIT;
             } 
             // fall through
-          case 108: break;
-          case 52: 
+          case 106: break;
+          case 51: 
             { return NimTypes.INT32_LIT;
             } 
             // fall through
-          case 109: break;
-          case 53: 
+          case 107: break;
+          case 52: 
             { return NimTypes.FLOAT64_LIT;
             } 
             // fall through
-          case 110: break;
-          case 54: 
+          case 108: break;
+          case 53: 
             { return NimTypes.FLOAT32_LIT;
             } 
             // fall through
-          case 111: break;
-          case 55: 
+          case 109: break;
+          case 54: 
             { return NimTypes.UINT16_LIT;
             } 
             // fall through
-          case 112: break;
-          case 56: 
+          case 110: break;
+          case 55: 
             { return NimTypes.UINT64_LIT;
             } 
             // fall through
-          case 113: break;
-          case 57: 
+          case 111: break;
+          case 56: 
             { return NimTypes.UINT32_LIT;
             } 
             // fall through
-          case 114: break;
+          case 112: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

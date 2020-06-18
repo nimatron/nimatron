@@ -2286,8 +2286,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9
-  //            |'or'|'xor'|'and'|'is'|'isnot'|'in'|'notin'|'of'|'as'|'from'|'div'|'mod'|'shl'|'shr'|'not'|'static'|'..'
+  // OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
   public static boolean operator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operator")) return false;
     boolean r;
@@ -2302,21 +2301,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, OP7);
     if (!r) r = consumeToken(b, OP8);
     if (!r) r = consumeToken(b, OP9);
-    if (!r) r = consumeToken(b, "or");
-    if (!r) r = consumeToken(b, "xor");
-    if (!r) r = consumeToken(b, "and");
-    if (!r) r = consumeToken(b, "is");
-    if (!r) r = consumeToken(b, "isnot");
-    if (!r) r = consumeToken(b, "in");
-    if (!r) r = consumeToken(b, "notin");
-    if (!r) r = consumeToken(b, "of");
-    if (!r) r = consumeToken(b, "as");
     if (!r) r = consumeToken(b, "from");
-    if (!r) r = consumeToken(b, "div");
-    if (!r) r = consumeToken(b, "mod");
-    if (!r) r = consumeToken(b, "shl");
-    if (!r) r = consumeToken(b, "shr");
-    if (!r) r = consumeToken(b, "not");
     if (!r) r = consumeToken(b, "static");
     if (!r) r = consumeToken(b, "..");
     exit_section_(b, l, m, r, false, null);
