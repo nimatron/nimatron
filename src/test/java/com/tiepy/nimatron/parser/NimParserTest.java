@@ -31,19 +31,25 @@
 package com.tiepy.nimatron.parser;
 
 import com.intellij.testFramework.ParsingTestCase;
-import com.tiepy.nimatron.parser.NimParserDefinition;
 
 public class NimParserTest extends ParsingTestCase {
     public NimParserTest() {
         super("", "nim", new NimParserDefinition());
     }
 
-    public void testParsingTestData() {
-        doTest(true);
+    public void testHello() {
+        doTest(true, true);
+    }
+
+    public void testHelloSpace() {
+        doTest(true, true);
+    }
+
+    public void testEchoFoo() {
+        doTest(true, true);
     }
 
     /**
-     *
      * @return path to test data file directory relative to root of this module.
      */
     @Override

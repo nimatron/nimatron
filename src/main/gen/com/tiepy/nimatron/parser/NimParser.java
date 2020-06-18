@@ -3068,7 +3068,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // typeKeyw optInd typeDesc |  prefixOperator* identOrLiteral primarySuffix*|'bind' primary
+  // typeKeyw optInd typeDesc | prefixOperator* identOrLiteral primarySuffix* | 'bind' primary
   public static boolean primary(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary")) return false;
     boolean r;
