@@ -493,6 +493,7 @@ private meta section ::= COMMENT? <<RULE>> | (IND_GT (<<RULE>> | COMMENT) (IND_E
 //enum = 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
 //enum ::= 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
 
+/*
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
 //            ('else' colcom objectPart COMMENT?)?
@@ -524,6 +525,7 @@ objectPart ::= IND_GT objectPart (IND_EQ objectPart)* DED
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
 //object ::= 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
+*/
 
 //typeClassParam = ('var' | 'out')? symbol
 typeClassParam ::= ('var' | 'out')? symbol
