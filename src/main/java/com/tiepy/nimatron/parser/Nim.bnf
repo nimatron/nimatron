@@ -163,7 +163,7 @@ explicitGenericInstantiation ::= '[:' exprList ']' ( '(' exprColonEqExpr ')' )?
 qualifiedIdent ::= symbol ('.' optInd symbol)?
 
 //setOrTableConstr = '{' ((exprColonEqExpr comma)* | ':' ) '}'
-setOrTableConstr ::= '{' ((exprColonEqExpr comma)* | ':' ) '}'
+setOrTableConstr ::= '{' ((exprColonEqExpr comma)+ | ':' ) '}'
 
 //castExpr = 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
 castExpr ::= 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
@@ -477,7 +477,7 @@ genericParamList ::= '[' optInd
 pattern ::= '{' stmt '}'
 
 //indAndComment = (IND{>} COMMENT)? | COMMENT?
-indAndComment ::= (IND_GT COMMENT)? | COMMENT?
+indAndComment ::= ((IND_GT COMMENT) | COMMENT)?
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
