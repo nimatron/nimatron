@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimVarTuple extends PsiElement {
 
   @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
   NimExpr getExpr();
 
   @NotNull

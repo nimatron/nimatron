@@ -28,12 +28,6 @@ public class NimGenericParamListImpl extends ASTWrapperPsiElement implements Nim
 
   @Override
   @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimGenericParam> getGenericParamList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimGenericParam.class);
   }
@@ -48,12 +42,6 @@ public class NimGenericParamListImpl extends ASTWrapperPsiElement implements Nim
   @NotNull
   public NimOptPar getOptPar() {
     return findNotNullChildByClass(NimOptPar.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimSemicolon> getSemicolonList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSemicolon.class);
   }
 
 }

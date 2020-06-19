@@ -28,12 +28,6 @@ public class NimStaticStmtImpl extends ASTWrapperPsiElement implements NimStatic
 
   @Override
   @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
-  @NotNull
   public NimStmt getStmt() {
     return findNotNullChildByClass(NimStmt.class);
   }

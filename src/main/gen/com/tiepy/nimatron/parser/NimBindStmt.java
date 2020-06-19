@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimBindStmt extends PsiElement {
 
   @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
   NimOptInd getOptInd();
 
   @NotNull

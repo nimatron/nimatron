@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimCondStmt extends PsiElement {
 
   @NotNull
-  List<NimColcom> getColcomList();
-
-  @NotNull
   List<NimExpr> getExprList();
 
   @NotNull

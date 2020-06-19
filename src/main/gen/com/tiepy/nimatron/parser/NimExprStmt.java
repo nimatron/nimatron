@@ -11,9 +11,6 @@ public interface NimExprStmt extends PsiElement {
   NimColonBody getColonBody();
 
   @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
   List<NimExpr> getExprList();
 
   @Nullable

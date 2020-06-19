@@ -27,12 +27,6 @@ public class NimColonBodyImpl extends ASTWrapperPsiElement implements NimColonBo
   }
 
   @Override
-  @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
   @Nullable
   public NimPostExprBlocks getPostExprBlocks() {
     return findChildByClass(NimPostExprBlocks.class);

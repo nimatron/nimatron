@@ -28,12 +28,6 @@ public class NimDoBlockImpl extends ASTWrapperPsiElement implements NimDoBlock {
 
   @Override
   @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
-  @NotNull
   public NimParamListArrow getParamListArrow() {
     return findNotNullChildByClass(NimParamListArrow.class);
   }

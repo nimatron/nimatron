@@ -28,12 +28,6 @@ public class NimMixinStmtImpl extends ASTWrapperPsiElement implements NimMixinSt
 
   @Override
   @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
-  @NotNull
   public NimOptInd getOptInd() {
     return findNotNullChildByClass(NimOptInd.class);
   }

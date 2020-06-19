@@ -28,12 +28,6 @@ public class NimTryStmtImpl extends ASTWrapperPsiElement implements NimTryStmt {
 
   @Override
   @NotNull
-  public List<NimColcom> getColcomList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimColcom.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimExprList> getExprListList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprList.class);
   }

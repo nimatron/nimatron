@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimGenericParamList extends PsiElement {
 
   @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
   List<NimGenericParam> getGenericParamList();
 
   @NotNull
@@ -18,8 +15,5 @@ public interface NimGenericParamList extends PsiElement {
 
   @NotNull
   NimOptPar getOptPar();
-
-  @NotNull
-  List<NimSemicolon> getSemicolonList();
 
 }

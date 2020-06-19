@@ -27,12 +27,6 @@ public class NimIdentColonEqualsImpl extends ASTWrapperPsiElement implements Nim
   }
 
   @Override
-  @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
   @Nullable
   public NimExpr getExpr() {
     return findChildByClass(NimExpr.class);

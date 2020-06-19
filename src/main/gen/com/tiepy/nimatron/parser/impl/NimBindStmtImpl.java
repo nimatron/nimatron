@@ -28,12 +28,6 @@ public class NimBindStmtImpl extends ASTWrapperPsiElement implements NimBindStmt
 
   @Override
   @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
-  @NotNull
   public NimOptInd getOptInd() {
     return findNotNullChildByClass(NimOptInd.class);
   }

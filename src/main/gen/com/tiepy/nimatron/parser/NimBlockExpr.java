@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimBlockExpr extends PsiElement {
 
   @NotNull
-  NimColcom getColcom();
-
-  @NotNull
   NimStmt getStmt();
 
   @Nullable

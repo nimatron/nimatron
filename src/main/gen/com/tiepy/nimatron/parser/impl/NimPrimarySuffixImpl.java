@@ -27,12 +27,6 @@ public class NimPrimarySuffixImpl extends ASTWrapperPsiElement implements NimPri
   }
 
   @Override
-  @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
   @Nullable
   public NimExpr getExpr() {
     return findChildByClass(NimExpr.class);

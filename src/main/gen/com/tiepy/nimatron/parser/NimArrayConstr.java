@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimArrayConstr extends PsiElement {
 
   @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
   List<NimExprColonEqExpr> getExprColonEqExprList();
 
   @NotNull

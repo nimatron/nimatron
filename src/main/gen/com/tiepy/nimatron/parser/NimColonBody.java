@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface NimColonBody extends PsiElement {
 
-  @NotNull
-  NimColcom getColcom();
-
   @Nullable
   NimPostExprBlocks getPostExprBlocks();
 

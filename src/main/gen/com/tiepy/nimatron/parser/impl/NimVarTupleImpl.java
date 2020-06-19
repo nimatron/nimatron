@@ -28,12 +28,6 @@ public class NimVarTupleImpl extends ASTWrapperPsiElement implements NimVarTuple
 
   @Override
   @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
-  @NotNull
   public NimExpr getExpr() {
     return findNotNullChildByClass(NimExpr.class);
   }

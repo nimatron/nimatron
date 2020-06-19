@@ -23,10 +23,7 @@ public interface NimTypes {
   IElementType CASE_STMT = new NimElementType("CASE_STMT");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
   IElementType CMP_EXPR = new NimElementType("CMP_EXPR");
-  IElementType COLCOM = new NimElementType("COLCOM");
-  IElementType COLON = new NimElementType("COLON");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
-  IElementType COMMA = new NimElementType("COMMA");
   IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
   IElementType COND_STMT = new NimElementType("COND_STMT");
@@ -84,7 +81,6 @@ public interface NimTypes {
   IElementType RAISE_STMT = new NimElementType("RAISE_STMT");
   IElementType RETURN_STMT = new NimElementType("RETURN_STMT");
   IElementType ROUTINE = new NimElementType("ROUTINE");
-  IElementType SEMICOLON = new NimElementType("SEMICOLON");
   IElementType SET_OR_TABLE_CONSTR = new NimElementType("SET_OR_TABLE_CONSTR");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
   IElementType SIMPLE_STMT = new NimElementType("SIMPLE_STMT");
@@ -192,17 +188,8 @@ public interface NimTypes {
       else if (type == CMP_EXPR) {
         return new NimCmpExprImpl(node);
       }
-      else if (type == COLCOM) {
-        return new NimColcomImpl(node);
-      }
-      else if (type == COLON) {
-        return new NimColonImpl(node);
-      }
       else if (type == COLON_BODY) {
         return new NimColonBodyImpl(node);
-      }
-      else if (type == COMMA) {
-        return new NimCommaImpl(node);
       }
       else if (type == COMPLEX_OR_SIMPLE_STMT) {
         return new NimComplexOrSimpleStmtImpl(node);
@@ -374,9 +361,6 @@ public interface NimTypes {
       }
       else if (type == ROUTINE) {
         return new NimRoutineImpl(node);
-      }
-      else if (type == SEMICOLON) {
-        return new NimSemicolonImpl(node);
       }
       else if (type == SET_OR_TABLE_CONSTR) {
         return new NimSetOrTableConstrImpl(node);
