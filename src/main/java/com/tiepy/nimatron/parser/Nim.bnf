@@ -67,7 +67,7 @@ ampExpr ::= plusExpr (OP7 optInd plusExpr)*
 plusExpr ::= mulExpr (OP8 optInd mulExpr)*
 mulExpr ::= dollarExpr (OP9 optInd dollarExpr)*
 dollarExpr ::= primary (OP10 optInd primary)*
-symbol ::= '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
+symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|IDENT|KEYW
 exprColonEqExpr ::= expr (':'|'=' expr)?
 exprList ::= expr (',' expr)*
 exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
