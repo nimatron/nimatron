@@ -10,7 +10,7 @@ public interface NimStmt extends PsiElement {
   @NotNull
   List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
 
-  @NotNull
-  List<NimSimpleStmt> getSimpleStmtList();
+  @Nullable
+  NimSimpleStmt getSimpleStmt();
 
 }

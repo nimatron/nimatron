@@ -53,7 +53,7 @@
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
-module ::= (stmt ((';'|IND_EQ) stmt)*)?
+module ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
 comma ::= ','
 semicolon ::= ';'
 colon ::= ':'
@@ -189,5 +189,4 @@ complexOrSimpleStmt ::= (ifStmt|whenStmt|whileStmt
                       | ('let'|'var'|'using') <<section variable>>
                       | bindStmt|mixinStmt)
                       | simpleStmt
-stmt ::= (IND_GT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* IND_LT)
-       | simpleStmt (';' simpleStmt)*
+stmt ::= (IND_GT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* IND_LT) | simpleStmt

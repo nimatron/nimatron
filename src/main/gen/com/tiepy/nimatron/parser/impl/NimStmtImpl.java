@@ -33,9 +33,9 @@ public class NimStmtImpl extends ASTWrapperPsiElement implements NimStmt {
   }
 
   @Override
-  @NotNull
-  public List<NimSimpleStmt> getSimpleStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSimpleStmt.class);
+  @Nullable
+  public NimSimpleStmt getSimpleStmt() {
+    return findChildByClass(NimSimpleStmt.class);
   }
 
 }
