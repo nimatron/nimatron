@@ -1130,7 +1130,7 @@ private void handleIndent() {
             // fall through
           case 81: break;
           case 25: 
-            { popState(); return NimTypes.COMMENT;
+            { popState(); return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 82: break;
@@ -1200,7 +1200,7 @@ private void handleIndent() {
             // fall through
           case 95: break;
           case 39: 
-            { if (popState() == 0) return NimTypes.COMMENT;
+            { if (popState() == 0) return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 96: break;

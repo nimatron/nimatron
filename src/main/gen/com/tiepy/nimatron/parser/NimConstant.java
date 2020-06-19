@@ -17,9 +17,6 @@ public interface NimConstant extends PsiElement {
   NimIdentWithPragma getIdentWithPragma();
 
   @NotNull
-  NimIndAndComment getIndAndComment();
-
-  @NotNull
   NimOptInd getOptInd();
 
   @Nullable

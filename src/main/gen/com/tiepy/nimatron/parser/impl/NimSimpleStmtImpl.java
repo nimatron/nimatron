@@ -34,12 +34,6 @@ public class NimSimpleStmtImpl extends ASTWrapperPsiElement implements NimSimple
 
   @Override
   @Nullable
-  public NimCommentStmt getCommentStmt() {
-    return findChildByClass(NimCommentStmt.class);
-  }
-
-  @Override
-  @Nullable
   public NimContinueStmt getContinueStmt() {
     return findChildByClass(NimContinueStmt.class);
   }

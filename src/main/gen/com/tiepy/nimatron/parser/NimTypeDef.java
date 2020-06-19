@@ -7,25 +7,22 @@ import com.intellij.psi.PsiElement;
 
 public interface NimTypeDef extends PsiElement {
 
-  @Nullable
-  NimGenericParamList getGenericParamList();
-
-  @Nullable
-  NimIdentVisDot getIdentVisDot();
-
-  @Nullable
-  NimIdentWithPragmaDot getIdentWithPragmaDot();
-
-  @Nullable
-  NimIndAndComment getIndAndComment();
+  @NotNull
+  List<NimGenericParamList> getGenericParamListList();
 
   @NotNull
-  NimOptInd getOptInd();
+  NimIdentVisDot getIdentVisDot();
 
-  @Nullable
+  @NotNull
+  NimIdentWithPragmaDot getIdentWithPragmaDot();
+
+  @NotNull
+  List<NimOptInd> getOptIndList();
+
+  @NotNull
   NimPragma getPragma();
 
   @NotNull
-  NimTypeDefAux getTypeDefAux();
+  List<NimTypeDefAux> getTypeDefAuxList();
 
 }

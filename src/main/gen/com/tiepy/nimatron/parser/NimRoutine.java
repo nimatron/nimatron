@@ -14,9 +14,6 @@ public interface NimRoutine extends PsiElement {
   NimIdentVis getIdentVis();
 
   @NotNull
-  NimIndAndComment getIndAndComment();
-
-  @NotNull
   NimOptInd getOptInd();
 
   @NotNull

@@ -41,8 +41,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class NimParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-    public static final TokenSet COMMENTS = TokenSet.create(NimTypes.COMMENT);
-
     public static final IFileElementType FILE = new IFileElementType(NimLanguage.INSTANCE);
 
     @NotNull
@@ -60,7 +58,7 @@ public class NimParserDefinition implements ParserDefinition {
     @NotNull
     @Override
     public TokenSet getCommentTokens() {
-        return COMMENTS;
+        return TokenSet.EMPTY;
     }
 
     @NotNull

@@ -27,45 +27,39 @@ public class NimTypeDefImpl extends ASTWrapperPsiElement implements NimTypeDef {
   }
 
   @Override
-  @Nullable
-  public NimGenericParamList getGenericParamList() {
-    return findChildByClass(NimGenericParamList.class);
+  @NotNull
+  public List<NimGenericParamList> getGenericParamListList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimGenericParamList.class);
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimIdentVisDot getIdentVisDot() {
-    return findChildByClass(NimIdentVisDot.class);
+    return findNotNullChildByClass(NimIdentVisDot.class);
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimIdentWithPragmaDot getIdentWithPragmaDot() {
-    return findChildByClass(NimIdentWithPragmaDot.class);
-  }
-
-  @Override
-  @Nullable
-  public NimIndAndComment getIndAndComment() {
-    return findChildByClass(NimIndAndComment.class);
+    return findNotNullChildByClass(NimIdentWithPragmaDot.class);
   }
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimPragma getPragma() {
-    return findChildByClass(NimPragma.class);
+    return findNotNullChildByClass(NimPragma.class);
   }
 
   @Override
   @NotNull
-  public NimTypeDefAux getTypeDefAux() {
-    return findNotNullChildByClass(NimTypeDefAux.class);
+  public List<NimTypeDefAux> getTypeDefAuxList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTypeDefAux.class);
   }
 
 }

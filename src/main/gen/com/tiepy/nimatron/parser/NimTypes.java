@@ -27,7 +27,6 @@ public interface NimTypes {
   IElementType COLON = new NimElementType("COLON");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
   IElementType COMMA = new NimElementType("COMMA");
-  IElementType COMMENT_STMT = new NimElementType("COMMENT_STMT");
   IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
   IElementType COND_STMT = new NimElementType("COND_STMT");
@@ -60,7 +59,6 @@ public interface NimTypes {
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType IMPORT_STMT = new NimElementType("IMPORT_STMT");
   IElementType INCLUDE_STMT = new NimElementType("INCLUDE_STMT");
-  IElementType IND_AND_COMMENT = new NimElementType("IND_AND_COMMENT");
   IElementType LITERAL = new NimElementType("LITERAL");
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
   IElementType MUL_EXPR = new NimElementType("MUL_EXPR");
@@ -111,7 +109,6 @@ public interface NimTypes {
 
   IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
-  IElementType COMMENT = new NimTokenType("COMMENT");
   IElementType C_COMMA = new NimTokenType("C_COMMA");
   IElementType C_GRAVE_ACCENT = new NimTokenType("C_GRAVE_ACCENT");
   IElementType C_SEMICOLON = new NimTokenType("C_SEMICOLON");
@@ -206,9 +203,6 @@ public interface NimTypes {
       }
       else if (type == COMMA) {
         return new NimCommaImpl(node);
-      }
-      else if (type == COMMENT_STMT) {
-        return new NimCommentStmtImpl(node);
       }
       else if (type == COMPLEX_OR_SIMPLE_STMT) {
         return new NimComplexOrSimpleStmtImpl(node);
@@ -305,9 +299,6 @@ public interface NimTypes {
       }
       else if (type == INCLUDE_STMT) {
         return new NimIncludeStmtImpl(node);
-      }
-      else if (type == IND_AND_COMMENT) {
-        return new NimIndAndCommentImpl(node);
       }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);

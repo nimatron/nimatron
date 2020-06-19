@@ -11,9 +11,6 @@ public interface NimSimpleStmt extends PsiElement {
   NimBreakStmt getBreakStmt();
 
   @Nullable
-  NimCommentStmt getCommentStmt();
-
-  @Nullable
   NimContinueStmt getContinueStmt();
 
   @Nullable

@@ -222,19 +222,19 @@ private void handleIndent() {
 }
 
 <LINE_COMMENT> {
-    .+                          { popState(); return NimTypes.COMMENT; }
+    .+                          { popState(); return TokenType.WHITE_SPACE; }
 }
 
 <BLOCK_COMMENT> {
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
-    {BLOCK_COMMENT_END}         { if (popState() == 0) return NimTypes.COMMENT; }
+    {BLOCK_COMMENT_END}         { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
 }
 
 <BLOCK_DOC_COMMENT> {
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
-    {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return NimTypes.COMMENT; }
+    {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
 }

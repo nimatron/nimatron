@@ -39,12 +39,6 @@ public class NimVariableImpl extends ASTWrapperPsiElement implements NimVariable
   }
 
   @Override
-  @NotNull
-  public NimIndAndComment getIndAndComment() {
-    return findNotNullChildByClass(NimIndAndComment.class);
-  }
-
-  @Override
   @Nullable
   public NimVarTuple getVarTuple() {
     return findChildByClass(NimVarTuple.class);
