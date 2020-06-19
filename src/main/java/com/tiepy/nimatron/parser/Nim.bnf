@@ -80,7 +80,7 @@ exprColonEqExprList2 ::= exprColonEqExpr (comma exprColonEqExpr)* (comma)?
 qualifiedIdent ::= symbol ('.' optInd symbol)?
 setOrTableConstr ::= '{' ((exprColonEqExpr comma)+|':' ) '}'
 castExpr ::= 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
-parKeyw ::= 'discard'|'include'|'if'|'while'|'case'|'try'|'finally'|'except'|'for'|'block'|'const'|'let'|'when'|'var'|'mixin'
+//parKeyw ::= 'discard'|'include'|'if'|'while'|'case'|'try'|'finally'|'except'|'for'|'block'|'const'|'let'|'when'|'var'|'mixin'
 par ::= '(' optInd ( /*&parKeyw*/ complexOrSimpleStmt (';' complexOrSimpleStmt)*
             | ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
             | pragmaStmt
