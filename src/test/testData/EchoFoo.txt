@@ -19,8 +19,6 @@ Nim File(0,9)
                                     PsiElement(NimTokenType.IDENT)('echo')(0,4)
                               PsiWhiteSpace(' ')(4,5)
                               PsiElement(NimTokenType.OP10)('$')(5,6)
-                              NimOptIndImpl(OPT_IND)(6,6)
-                                <empty list>
                               NimPrimaryImpl(PRIMARY)(6,9)
                                 NimIdentOrLiteralImpl(IDENT_OR_LITERAL)(6,9)
                                   NimSymbolImpl(SYMBOL)(6,9)

@@ -54,34 +54,33 @@
 
 module ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
 operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
-private meta optInd ::= ((<<RULE>>) | (IND_GT (<<RULE>>) IND_LT))
-simpleExpr ::= arrowExpr (OP0 <<optInd (arrowExpr)>>)* pragma?
-arrowExpr ::= assignExpr (OP1 <<optInd (assignExpr)>>)*
-assignExpr ::= orExpr (OP2 <<optInd (orExpr)>>)*
-orExpr ::= andExpr (OP3 <<optInd (andExpr)>>)*
-andExpr ::= cmpExpr (OP4 <<optInd (cmpExpr)>>)*
-cmpExpr ::= sliceExpr (OP5 <<optInd (sliceExpr)>>)*
-sliceExpr ::= ampExpr (OP6 <<optInd (ampExpr)>>)*
-ampExpr ::= plusExpr (OP7 <<optInd (plusExpr)>>)*
-plusExpr ::= mulExpr (OP8 <<optInd (mulExpr)>>)*
-mulExpr ::= dollarExpr (OP9 <<optInd (dollarExpr)>>)*
-dollarExpr ::= primary (OP10 <<optInd (primary)>>)*
+private meta optInd ::= <<RULE>> | (IND_GT <<RULE>> IND_LT)
+simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* pragma?
+arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
+assignExpr ::= orExpr (OP2 <<optInd orExpr>>)*
+orExpr ::= andExpr (OP3 <<optInd andExpr>>)*
+andExpr ::= cmpExpr (OP4 <<optInd cmpExpr>>)*
+cmpExpr ::= sliceExpr (OP5 <<optInd sliceExpr>>)*
+sliceExpr ::= ampExpr (OP6 <<optInd ampExpr>>)*
+ampExpr ::= plusExpr (OP7 <<optInd plusExpr>>)*
+plusExpr ::= mulExpr (OP8 <<optInd mulExpr>>)*
+mulExpr ::= dollarExpr (OP9 <<optInd dollarExpr>>)*
+dollarExpr ::= primary (OP10 <<optInd primary>>)*
 symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|IDENT|KEYW
 exprColonEqExpr ::= expr (':'|'=' expr)?
 exprList ::= expr (',' expr)*
 exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
-qualifiedIdent ::= symbol ('.' <<optInd (symbol)>>)?
+qualifiedIdent ::= symbol ('.' <<optInd symbol>>)?
 setOrTableConstr ::= '{' ((exprColonEqExpr ',')+ | ':') '}'
 private optInd1 ::= ']'
-private optInd2 ::= expr optInd
-castExpr ::= 'cast' '[' <<optInd (typeDesc)>> <<optInd (optInd1)>> '(' <<optInd (optInd2)>> ')'
+castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd optInd1>> '(' <<optInd expr>> <<optInd optInd4>>
 optInd3 ::=       (complexOrSimpleStmt (';' complexOrSimpleStmt)*)
             | (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)
             | pragmaStmt
             | (simpleExpr (('=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?)
                          | (':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?)))
 optInd4 ::= ')'
-par ::= '(' <<optInd (optInd3)>> <<optInd (optInd4)>>
+par ::= '(' <<optInd optInd3>> <<optInd optInd4>>
 literal ::= INT_LIT
           | INT8_LIT
           | INT16_LIT
@@ -104,34 +103,34 @@ generalizedLit ::= GENERALIZED_STR_LIT|GENERALIZED_TRIPLESTR_LIT
 identOrLiteral ::= generalizedLit|symbol|literal|par|arrayConstr|setOrTableConstr|castExpr
 optInd5 ::= (exprColonEqExpr ','?)*
 optInd6 ::= ']'
-arrayConstr ::= '[' <<optInd (optInd5)>> <<optInd (optInd6)>>
+arrayConstr ::= '[' <<optInd optInd5>> <<optInd optInd6>>
 optInd7 ::= symbol generalizedLit?
 optInd8 ::= '}'
 primarySuffix ::= ('(' (exprColonEqExpr ','?)* ')')
-        | ('.' <<optInd (optInd7)>>)
-        | ('[' <<optInd (exprColonEqExprList2)>> <<optInd (optInd6)>>)
-        | ('{' <<optInd (exprColonEqExprList2)>> <<optInd (optInd8)>>)
+        | ('.' <<optInd optInd7>>)
+        | ('[' <<optInd exprColonEqExprList2>> <<optInd optInd6>>)
+        | ('{' <<optInd exprColonEqExprList2>> <<optInd optInd8>>)
         | expr // command syntax
-condExpr ::= expr ':' <<optInd (expr)>> ('elif' expr ':' <<optInd (expr)>>)* 'else' ':' expr
+condExpr ::= expr ':' <<optInd expr>> ('elif' expr ':' <<optInd expr>>)* 'else' ':' expr
 ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr
 optInd9 ::= (exprColonEqExpr ','?)*
 optInd10 ::= '.}'|'}'
-pragma ::= '{.' <<optInd (optInd9)>> <<optInd (optInd10)>>
+pragma ::= '{.' <<optInd (optInd9)>> <<optInd optInd10>>
 identVis ::= symbol OPR? // postfix position
-identVisDot ::= symbol '.' <<optInd (symbol)>> OPR?
+identVisDot ::= symbol '.' <<optInd symbol>> OPR?
 identWithPragma ::= identVis pragma?
 identWithPragmaDot ::= identVisDot pragma?
-declColonEquals ::= identWithPragma (',' identWithPragma)* ','? (':' <<optInd (typeDesc)>>)? ('=' <<optInd (expr)>>)?
-identColonEquals ::= IDENT (',' IDENT)* ','? (':' <<optInd (typeDesc)>>)? ('=' <<optInd (expr)>>)?
+declColonEquals ::= identWithPragma (',' identWithPragma)* ','? (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
+identColonEquals ::= IDENT (',' IDENT)* ','? (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
 paramList ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
-paramListArrow ::= paramList? ('->' <<optInd (typeDesc)>>)?
-paramListColon ::= paramList? (':' <<optInd (typeDesc)>>)?
+paramListArrow ::= paramList? ('->' <<optInd typeDesc>>)?
+paramListColon ::= paramList? (':' <<optInd typeDesc>>)?
 doBlock ::= 'do' paramListArrow pragma? ':' stmt
 forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' stmt
 expr ::= blockExpr|ifExpr|whenExpr|caseStmt|forStmt|tryExpr|simpleExpr
 typeKeyw ::= 'var'|'out'|'ref'|'ptr'|'shared'|'tuple'|'proc'|'iterator'|'distinct'|'object'|'enum'
-primary ::= (typeKeyw <<optInd (typeDesc)>>) | (operator* identOrLiteral primarySuffix*) | ('bind' primary)
+primary ::= (typeKeyw <<optInd typeDesc>>) | (operator* identOrLiteral primarySuffix*) | ('bind' primary)
 typeDesc ::= simpleExpr ('not' expr)?
 typeDefAux ::= simpleExpr ('not' expr)? | 'concept' typeClass
 postExprBlocks ::= ':' stmt? ( (IND_EQ doBlock)
@@ -139,18 +138,18 @@ postExprBlocks ::= ':' stmt? ( (IND_EQ doBlock)
                              | (IND_EQ 'elif' expr ':' stmt)
                              | (IND_EQ 'except' exprList ':' stmt)
                              | (IND_EQ 'else' ':' stmt) )*
-exprStmt ::= simpleExpr (('=' <<optInd (expr)>> colonBody?) | (expr (',' expr)* postExprBlocks))?
+exprStmt ::= simpleExpr (('=' <<optInd expr>> colonBody?) | (expr (',' expr)* postExprBlocks))?
 optInd11 ::= expr (',' expr)*
-importStmt ::= 'import' <<optInd (expr)>> ((',' expr)+ | ('except' <<optInd (optInd11)>> ))
-exportStmt ::= 'export' <<optInd (expr)>> ((',' expr)+ | ('except' <<optInd (optInd11)>> ))
-includeStmt ::= 'include' <<optInd (expr)>> (',' expr)*
-fromStmt ::= 'from' expr 'import' <<optInd (expr)>> (',' expr)*
-returnStmt ::= 'return' <<optInd (expr)>>?
-raiseStmt ::= 'raise' <<optInd (expr)>>?
-yieldStmt ::= 'yield' <<optInd (expr)>>?
-discardStmt ::= 'discard' <<optInd (expr)>>?
-breakStmt ::= 'break' <<optInd (expr)>>?
-continueStmt ::= 'break' <<optInd (expr)>>?
+importStmt ::= 'import' <<optInd expr>> ((',' expr)+ | ('except' <<optInd optInd11>> ))
+exportStmt ::= 'export' <<optInd expr>> ((',' expr)+ | ('except' <<optInd optInd11>> ))
+includeStmt ::= 'include' <<optInd expr>> (',' expr)*
+fromStmt ::= 'from' expr 'import' <<optInd expr>> (',' expr)*
+returnStmt ::= 'return' <<optInd expr>>?
+raiseStmt ::= 'raise' <<optInd expr>>?
+yieldStmt ::= 'yield' <<optInd expr>>?
+discardStmt ::= 'discard' <<optInd expr>>?
+breakStmt ::= 'break' <<optInd expr>>?
+continueStmt ::= 'break' <<optInd expr>>?
 condStmt ::= expr ':' stmt (IND_EQ 'elif' expr ':' stmt)* (IND_EQ 'else' ':' stmt)?
 ifStmt ::= 'if' condStmt
 whenStmt ::= 'when' condStmt
@@ -161,32 +160,32 @@ caseStmt ::= 'case' expr ':'? ((IND_GT ofBranches IND_LT) | (IND_EQ ofBranches))
 tryStmt ::= 'try' ':' stmt (IND_EQ? 'except' exprList ':' stmt)* (IND_EQ? 'finally' ':' stmt)?
 optInd12 ::= 'except' exprList ':' stmt
 optInd13 ::= 'finally' ':' stmt
-tryExpr ::= 'try' ':' stmt (<<optInd (optInd12)>> )* (<<optInd (optInd13)>>)?
+tryExpr ::= 'try' ':' stmt (<<optInd optInd12>> )* (<<optInd optInd13>>)?
 blockStmt ::= 'block' symbol? ':' stmt
 blockExpr ::= 'block' symbol? ':' stmt
 staticStmt ::= 'static' ':' stmt
 deferStmt ::= 'defer' ':' stmt
 asmStmt ::= 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
-genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd (expr)>>)?
+genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
 optInd14 ::= (genericParam ((','|';') genericParam)*)?
-genericParamList ::= '[' <<optInd (optInd14)>> <<optInd (optInd6)>>
+genericParamList ::= '[' <<optInd optInd14>> <<optInd optInd6>>
 pattern ::= '{' stmt '}'
 optInd15 ::= identVis pattern? genericParamList? paramListColon pragma? ('=' stmt)?
-routine ::= <<optInd (optInd15)>>
+routine ::= <<optInd optInd15>>
 private meta section ::= <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
 typeClassParam ::= ('var'|'out')? symbol
 typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc (',' typeDesc)*)?)?
-typeDef ::= identWithPragmaDot genericParamList? '=' <<optInd (typeDefAux)>>
-            identVisDot genericParamList? pragma '=' <<optInd (typeDefAux)>>
+typeDef ::= identWithPragmaDot genericParamList? '=' <<optInd typeDefAux>>
+            identVisDot genericParamList? pragma '=' <<optInd typeDefAux>>
 optInd16 ::= identWithPragma (',' identWithPragma)*
 optInd17 ::= ')'
-varTuple ::= '(' <<optInd (optInd16)>> <<optInd (optInd17)>> '=' <<optInd (expr)>>
+varTuple ::= '(' <<optInd optInd16>> <<optInd optInd17>> '=' <<optInd expr>>
 colonBody ::= ':' stmt postExprBlocks?
 variable ::= (varTuple|identColonEquals) colonBody?
-constant ::= (varTuple|identWithPragma) (':' typeDesc)? '=' <<optInd (expr)>>
+constant ::= (varTuple|identWithPragma) (':' typeDesc)? '=' <<optInd expr>>
 optInd18 ::= qualifiedIdent (',' qualifiedIdent)*
-bindStmt ::= 'bind' <<optInd (optInd18)>>
-mixinStmt ::= 'mixin' <<optInd (optInd18)>>
+bindStmt ::= 'bind' <<optInd optInd18>>
+mixinStmt ::= 'mixin' <<optInd optInd18>>
 pragmaStmt ::= pragma (':' stmt)?
 simpleStmt ::= returnStmt
              | raiseStmt
