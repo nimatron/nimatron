@@ -102,14 +102,13 @@ public interface NimTypes {
 
   IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
-  IElementType C_COMMA = new NimTokenType("C_COMMA");
-  IElementType C_GRAVE_ACCENT = new NimTokenType("C_GRAVE_ACCENT");
-  IElementType C_SEMICOLON = new NimTokenType("C_SEMICOLON");
+  IElementType COMMA = new NimTokenType("C_COMMA");
   IElementType FLOAT32_LIT = new NimTokenType("FLOAT32_LIT");
   IElementType FLOAT64_LIT = new NimTokenType("FLOAT64_LIT");
   IElementType FLOAT_LIT = new NimTokenType("FLOAT_LIT");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
   IElementType GENERALIZED_TRIPLESTR_LIT = new NimTokenType("GENERALIZED_TRIPLESTR_LIT");
+  IElementType GRAVE_ACCENT = new NimTokenType("C_GRAVE_ACCENT");
   IElementType IDENT = new NimTokenType("IDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
   IElementType IND_GT = new NimTokenType("IND_GT");
@@ -133,8 +132,8 @@ public interface NimTypes {
   IElementType OP8 = new NimTokenType("OP8");
   IElementType OP9 = new NimTokenType("OP9");
   IElementType OPR = new NimTokenType("OPR");
-  IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
   IElementType RSTR_LIT = new NimTokenType("RSTR_LIT");
+  IElementType SEMICOLON = new NimTokenType("C_SEMICOLON");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
   IElementType TRIPLESTR_LIT = new NimTokenType("TRIPLESTR_LIT");
   IElementType UINT16_LIT = new NimTokenType("UINT16_LIT");

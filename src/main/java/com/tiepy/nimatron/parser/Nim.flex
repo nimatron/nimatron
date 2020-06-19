@@ -104,12 +104,10 @@ FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_
 
 NIL=nil
 
-BRACKET=[\{\}\[\]]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)
-PARENTHESIS=[\(\)]|(\(\.)|(\.\))
-
-C_SEMICOLON=;
-C_COMMA=,
-C_GRAVE_ACCENT=`
+BRACKET=\{|\}|\[|\]|\(|\)|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
+SEMICOLON=;
+COMMA=,
+GRAVE_ACCENT=`
 
 KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
@@ -196,10 +194,9 @@ private void handleIndent() {
     {OP10}                      { return NimTypes.OP10; }
     {OPR}                       { return NimTypes.OPR; }
     {BRACKET}                   { return NimTypes.BRACKET; }
-    {PARENTHESIS}               { return NimTypes.PARENTHESIS; }
-    {C_SEMICOLON}               { return NimTypes.C_SEMICOLON; }
-    {C_COMMA}                   { return NimTypes.C_COMMA; }
-    {C_GRAVE_ACCENT}            { return NimTypes.C_GRAVE_ACCENT; }
+    {SEMICOLON}                 { return NimTypes.SEMICOLON; }
+    {COMMA}                     { return NimTypes.COMMA; }
+    {GRAVE_ACCENT}              { return NimTypes.GRAVE_ACCENT; }
     {IDENT}                     { return NimTypes.IDENT; }
     .                           { return TokenType.BAD_CHARACTER; }
 }

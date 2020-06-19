@@ -44,10 +44,9 @@
 
   tokens = [
     BRACKET="BRACKET"
-    PARENTHESIS="PARENTHESIS"
-    C_SEMICOLON="C_SEMICOLON"
-    C_COMMA="C_COMMA"
-    C_GRAVE_ACCENT="C_GRAVE_ACCENT"
+    SEMICOLON="C_SEMICOLON"
+    COMMA="C_COMMA"
+    GRAVE_ACCENT="C_GRAVE_ACCENT"
   ]
 
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
