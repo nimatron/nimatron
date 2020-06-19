@@ -152,7 +152,7 @@ genericParam ::= symbol (',' symbol)* (':' expr)? ('=' optInd expr)?
 genericParamList ::= '[' optInd (genericParam ((','|';') genericParam)*)? optInd ']'
 pattern ::= '{' stmt '}'
 routine ::= optInd identVis pattern? genericParamList? paramListColon pragma? ('=' stmt)?
-private meta section ::= <<RULE>> | (IND_GT (<<RULE>>)? (IND_EQ (<<RULE>>)?)* IND_LT)
+private meta section ::= (<<RULE>>) | (IND_GT (<<RULE>>)? (IND_EQ (<<RULE>>)?)* IND_LT)
 typeClassParam ::= ('var'|'out')? symbol
 typeClass ::= (typeClassParam (',' typeClassParam)*)? (pragma)? ('of' (typeDesc (',' typeDesc)*)?)? /*&IND_GT stmt*/
 typeDef ::= identWithPragmaDot genericParamList? '=' optInd typeDefAux
