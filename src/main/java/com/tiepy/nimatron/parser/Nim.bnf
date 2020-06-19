@@ -74,8 +74,7 @@ exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
 qualifiedIdent ::= symbol ('.' optInd symbol)?
 setOrTableConstr ::= '{' ((exprColonEqExpr ',')+ | ':') '}'
 castExpr ::= 'cast' '[' optInd typeDesc optInd ']' '(' optInd expr optInd ')'
-//parKeyw ::= 'discard'|'include'|'if'|'while'|'case'|'try'|'finally'|'except'|'for'|'block'|'const'|'let'|'when'|'var'|'mixin'
-par ::= '(' optInd ( /*&parKeyw*/ complexOrSimpleStmt (';' complexOrSimpleStmt)*
+par ::= '(' optInd (complexOrSimpleStmt (';' complexOrSimpleStmt)*
             | ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
             | pragmaStmt
             | simpleExpr ( ('=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)* )? )
@@ -93,7 +92,7 @@ primarySuffix ::= '(' (exprColonEqExpr ','?)* ')'
         | '.' optInd symbol generalizedLit?
         | '[' optInd exprColonEqExprList2 optInd ']'
         | '{' optInd exprColonEqExprList2 optInd '}'
-        | /*&('`'|IDENT|literal|'cast'|'addr'|'type')*/ expr // command syntax
+        | expr // command syntax
 condExpr ::= expr ':' expr optInd ('elif' expr ':' expr optInd)* 'else' ':' expr
 ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr
@@ -137,10 +136,10 @@ whileStmt ::= 'while' expr ':' stmt
 ofBranch ::= 'of' exprList ':' stmt
 ofBranches ::= ofBranch (IND_EQ ofBranch)* (IND_EQ 'elif' expr ':' stmt)* (IND_EQ 'else' ':' stmt)?
 caseStmt ::= 'case' expr ':'? (IND_GT ofBranches IND_LT|IND_EQ ofBranches)
-tryStmt ::= 'try' ':' stmt /*&(IND_EQ? 'except'|'finally')*/
+tryStmt ::= 'try' ':' stmt
              (IND_EQ? 'except' exprList ':' stmt)*
              (IND_EQ? 'finally' ':' stmt)?
-tryExpr ::= 'try' ':' stmt /*&(optInd 'except'|'finally')*/
+tryExpr ::= 'try' ':' stmt
              (optInd 'except' exprList ':' stmt)*
              (optInd 'finally' ':' stmt)?
 blockStmt ::= 'block' symbol? ':' stmt
@@ -154,7 +153,7 @@ pattern ::= '{' stmt '}'
 routine ::= optInd identVis pattern? genericParamList? paramListColon pragma? ('=' stmt)?
 private meta section ::= <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
 typeClassParam ::= ('var'|'out')? symbol
-typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc (',' typeDesc)*)?)? /*&IND_GT stmt*/
+typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc (',' typeDesc)*)?)?
 typeDef ::= identWithPragmaDot genericParamList? '=' optInd typeDefAux
               identVisDot genericParamList? pragma '=' optInd typeDefAux
 varTuple ::= '(' optInd identWithPragma (',' identWithPragma)* optInd ')' '=' optInd expr
