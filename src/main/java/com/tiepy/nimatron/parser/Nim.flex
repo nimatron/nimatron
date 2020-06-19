@@ -111,8 +111,7 @@ GRAVE_ACCENT=`
 
 KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
-|mixin|object|out|proc|ptr|raise|ref|return|static|template|try|tuple|type|using|var
-|when|while|yield
+|mixin|object|out|proc|ptr|raise|ref|return|static|template|try|tuple|type|using|var|when|while|yield
 
 %{
 

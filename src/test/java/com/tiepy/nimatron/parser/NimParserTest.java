@@ -57,11 +57,31 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testIf() {
+        doTest(true, true);
+    }
+
+    public void testIf2() {
+        doTest(true, true);
+    }
+
+    public void testIf3() {
+        doTest(true, true);
+    }
+
     public void testWhatsYourName() {
         doTest(true, true);
     }
 
     public void testWhatsYourNameV2() {
+        doTest(true, true);
+    }
+
+    public void testWhatsYourNameV3() {
+        doTest(true, true);
+    }
+
+    public void testWhatsYourNameV4() {
         doTest(true, true);
     }
 
