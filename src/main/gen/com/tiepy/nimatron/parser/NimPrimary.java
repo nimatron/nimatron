@@ -10,11 +10,11 @@ public interface NimPrimary extends PsiElement {
   @Nullable
   NimIdentOrLiteral getIdentOrLiteral();
 
+  @NotNull
+  List<NimOperator> getOperatorList();
+
   @Nullable
   NimOptInd getOptInd();
-
-  @NotNull
-  List<NimPrefixOperator> getPrefixOperatorList();
 
   @Nullable
   NimPrimary getPrimary();

@@ -127,10 +127,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitForExpr(@NotNull NimForExpr o) {
-    visitPsiElement(o);
-  }
-
   public void visitForStmt(@NotNull NimForStmt o) {
     visitPsiElement(o);
   }
@@ -256,10 +252,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitPragmaStmt(@NotNull NimPragmaStmt o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPrefixOperator(@NotNull NimPrefixOperator o) {
     visitPsiElement(o);
   }
 

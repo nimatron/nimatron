@@ -14,7 +14,7 @@ public interface NimExpr extends PsiElement {
   NimCaseStmt getCaseStmt();
 
   @Nullable
-  NimForExpr getForExpr();
+  NimForStmt getForStmt();
 
   @Nullable
   NimIfExpr getIfExpr();

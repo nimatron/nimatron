@@ -40,7 +40,6 @@ public interface NimTypes {
   IElementType EXPR_COLON_EQ_EXPR_LIST_2 = new NimElementType("EXPR_COLON_EQ_EXPR_LIST_2");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
-  IElementType FOR_EXPR = new NimElementType("FOR_EXPR");
   IElementType FOR_STMT = new NimElementType("FOR_STMT");
   IElementType FROM_STMT = new NimElementType("FROM_STMT");
   IElementType GENERALIZED_LIT = new NimElementType("GENERALIZED_LIT");
@@ -73,7 +72,6 @@ public interface NimTypes {
   IElementType POST_EXPR_BLOCKS = new NimElementType("POST_EXPR_BLOCKS");
   IElementType PRAGMA = new NimElementType("PRAGMA");
   IElementType PRAGMA_STMT = new NimElementType("PRAGMA_STMT");
-  IElementType PREFIX_OPERATOR = new NimElementType("PREFIX_OPERATOR");
   IElementType PRIMARY = new NimElementType("PRIMARY");
   IElementType PRIMARY_SUFFIX = new NimElementType("PRIMARY_SUFFIX");
   IElementType QUALIFIED_IDENT = new NimElementType("QUALIFIED_IDENT");
@@ -238,9 +236,6 @@ public interface NimTypes {
       else if (type == EXPR_STMT) {
         return new NimExprStmtImpl(node);
       }
-      else if (type == FOR_EXPR) {
-        return new NimForExprImpl(node);
-      }
       else if (type == FOR_STMT) {
         return new NimForStmtImpl(node);
       }
@@ -336,9 +331,6 @@ public interface NimTypes {
       }
       else if (type == PRAGMA_STMT) {
         return new NimPragmaStmtImpl(node);
-      }
-      else if (type == PREFIX_OPERATOR) {
-        return new NimPrefixOperatorImpl(node);
       }
       else if (type == PRIMARY) {
         return new NimPrimaryImpl(node);

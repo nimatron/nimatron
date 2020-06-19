@@ -40,8 +40,8 @@ public class NimExprImpl extends ASTWrapperPsiElement implements NimExpr {
 
   @Override
   @Nullable
-  public NimForExpr getForExpr() {
-    return findChildByClass(NimForExpr.class);
+  public NimForStmt getForStmt() {
+    return findChildByClass(NimForStmt.class);
   }
 
   @Override
