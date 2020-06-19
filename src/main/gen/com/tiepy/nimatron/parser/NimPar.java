@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimPar extends PsiElement {
 
   @NotNull
-  NimOptInd3 getOptInd3();
-
-  @NotNull
-  NimOptInd4 getOptInd4();
+  NimOptPar getOptPar();
 
 }

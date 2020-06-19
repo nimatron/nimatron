@@ -28,14 +28,8 @@ public class NimArrayConstrImpl extends ASTWrapperPsiElement implements NimArray
 
   @Override
   @NotNull
-  public NimOptInd5 getOptInd5() {
-    return findNotNullChildByClass(NimOptInd5.class);
-  }
-
-  @Override
-  @NotNull
-  public NimOptInd6 getOptInd6() {
-    return findNotNullChildByClass(NimOptInd6.class);
+  public List<NimExprColonEqExpr> getExprColonEqExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
   }
 
 }

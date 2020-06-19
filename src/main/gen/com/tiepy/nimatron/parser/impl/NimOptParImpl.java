@@ -11,14 +11,14 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimOptInd9Impl extends ASTWrapperPsiElement implements NimOptInd9 {
+public class NimOptParImpl extends ASTWrapperPsiElement implements NimOptPar {
 
-  public NimOptInd9Impl(@NotNull ASTNode node) {
+  public NimOptParImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitOptInd9(this);
+    visitor.visitOptPar(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,8 +28,32 @@ public class NimOptInd9Impl extends ASTWrapperPsiElement implements NimOptInd9 {
 
   @Override
   @NotNull
+  public List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
+  }
+
+  @Override
+  @Nullable
+  public NimExpr getExpr() {
+    return findChildByClass(NimExpr.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimExprColonEqExpr> getExprColonEqExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public NimPragmaStmt getPragmaStmt() {
+    return findChildByClass(NimPragmaStmt.class);
+  }
+
+  @Override
+  @Nullable
+  public NimSimpleExpr getSimpleExpr() {
+    return findChildByClass(NimSimpleExpr.class);
   }
 
 }

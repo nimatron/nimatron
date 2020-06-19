@@ -72,15 +72,13 @@ exprList ::= expr (',' expr)*
 exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
 qualifiedIdent ::= symbol ('.' <<optInd symbol>>)?
 setOrTableConstr ::= '{' ((exprColonEqExpr ',')+ | ':') '}'
-private optInd1 ::= ']'
-castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd optInd1>> '(' <<optInd expr>> <<optInd optInd4>>
-optInd3 ::=       (complexOrSimpleStmt (';' complexOrSimpleStmt)*)
+castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>> <<optInd (')')>>
+optPar ::=       (complexOrSimpleStmt (';' complexOrSimpleStmt)*)
             | (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)
             | pragmaStmt
             | (simpleExpr (('=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?)
                          | (':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?)))
-optInd4 ::= ')'
-par ::= '(' <<optInd optInd3>> <<optInd optInd4>>
+par ::= '(' <<optInd optPar>> <<optInd (')')>>
 literal ::= INT_LIT
           | INT8_LIT
           | INT16_LIT
@@ -101,22 +99,16 @@ literal ::= INT_LIT
           | NIL
 generalizedLit ::= GENERALIZED_STR_LIT|GENERALIZED_TRIPLESTR_LIT
 identOrLiteral ::= generalizedLit|symbol|literal|par|arrayConstr|setOrTableConstr|castExpr
-optInd5 ::= (exprColonEqExpr ','?)*
-optInd6 ::= ']'
-arrayConstr ::= '[' <<optInd optInd5>> <<optInd optInd6>>
-optInd7 ::= symbol generalizedLit?
-optInd8 ::= '}'
+arrayConstr ::= '[' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd (']')>>
 primarySuffix ::= ('(' (exprColonEqExpr ','?)* ')')
-        | ('.' <<optInd optInd7>>)
-        | ('[' <<optInd exprColonEqExprList2>> <<optInd optInd6>>)
-        | ('{' <<optInd exprColonEqExprList2>> <<optInd optInd8>>)
+        | ('.' <<optInd (symbol generalizedLit?)>>)
+        | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
+        | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
         | expr // command syntax
 condExpr ::= expr ':' <<optInd expr>> ('elif' expr ':' <<optInd expr>>)* 'else' ':' expr
 ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr
-optInd9 ::= (exprColonEqExpr ','?)*
-optInd10 ::= '.}'|'}'
-pragma ::= '{.' <<optInd (optInd9)>> <<optInd optInd10>>
+pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd ('.}'|'}')>>
 identVis ::= symbol OPR? // postfix position
 identVisDot ::= symbol '.' <<optInd symbol>> OPR?
 identWithPragma ::= identVis pragma?
@@ -139,9 +131,8 @@ postExprBlocks ::= ':' stmt? ( (IND_EQ doBlock)
                              | (IND_EQ 'except' exprList ':' stmt)
                              | (IND_EQ 'else' ':' stmt) )*
 exprStmt ::= simpleExpr (('=' <<optInd expr>> colonBody?) | (expr (',' expr)* postExprBlocks))?
-optInd11 ::= expr (',' expr)*
-importStmt ::= 'import' <<optInd expr>> ((',' expr)+ | ('except' <<optInd optInd11>> ))
-exportStmt ::= 'export' <<optInd expr>> ((',' expr)+ | ('except' <<optInd optInd11>> ))
+importStmt ::= 'import' <<optInd expr>> ((',' expr)+ | ('except' <<optInd (expr (',' expr)*)>> ))
+exportStmt ::= 'export' <<optInd expr>> ((',' expr)+ | ('except' <<optInd (expr (',' expr)*)>> ))
 includeStmt ::= 'include' <<optInd expr>> (',' expr)*
 fromStmt ::= 'from' expr 'import' <<optInd expr>> (',' expr)*
 returnStmt ::= 'return' <<optInd expr>>?
@@ -158,34 +149,27 @@ ofBranch ::= 'of' exprList ':' stmt
 ofBranches ::= ofBranch (IND_EQ ofBranch)* (IND_EQ 'elif' expr ':' stmt)* (IND_EQ 'else' ':' stmt)?
 caseStmt ::= 'case' expr ':'? ((IND_GT ofBranches IND_LT) | (IND_EQ ofBranches))
 tryStmt ::= 'try' ':' stmt (IND_EQ? 'except' exprList ':' stmt)* (IND_EQ? 'finally' ':' stmt)?
-optInd12 ::= 'except' exprList ':' stmt
-optInd13 ::= 'finally' ':' stmt
-tryExpr ::= 'try' ':' stmt (<<optInd optInd12>> )* (<<optInd optInd13>>)?
+tryExpr ::= 'try' ':' stmt (<<optInd ('except' exprList ':' stmt)>> )* (<<optInd ('finally' ':' stmt)>>)?
 blockStmt ::= 'block' symbol? ':' stmt
 blockExpr ::= 'block' symbol? ':' stmt
 staticStmt ::= 'static' ':' stmt
 deferStmt ::= 'defer' ':' stmt
 asmStmt ::= 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
 genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
-optInd14 ::= (genericParam ((','|';') genericParam)*)?
-genericParamList ::= '[' <<optInd optInd14>> <<optInd optInd6>>
+genericParamList ::= '[' <<optInd ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
 pattern ::= '{' stmt '}'
-optInd15 ::= identVis pattern? genericParamList? paramListColon pragma? ('=' stmt)?
-routine ::= <<optInd optInd15>>
+routine ::= <<optInd (identVis pattern? genericParamList? paramListColon pragma? ('=' stmt)?)>>
 private meta section ::= <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
 typeClassParam ::= ('var'|'out')? symbol
 typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc (',' typeDesc)*)?)?
 typeDef ::= identWithPragmaDot genericParamList? '=' <<optInd typeDefAux>>
             identVisDot genericParamList? pragma '=' <<optInd typeDefAux>>
-optInd16 ::= identWithPragma (',' identWithPragma)*
-optInd17 ::= ')'
-varTuple ::= '(' <<optInd optInd16>> <<optInd optInd17>> '=' <<optInd expr>>
+varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
 colonBody ::= ':' stmt postExprBlocks?
 variable ::= (varTuple|identColonEquals) colonBody?
 constant ::= (varTuple|identWithPragma) (':' typeDesc)? '=' <<optInd expr>>
-optInd18 ::= qualifiedIdent (',' qualifiedIdent)*
-bindStmt ::= 'bind' <<optInd optInd18>>
-mixinStmt ::= 'mixin' <<optInd optInd18>>
+bindStmt ::= 'bind' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
+mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
 pragmaStmt ::= pragma (':' stmt)?
 simpleStmt ::= returnStmt
              | raiseStmt

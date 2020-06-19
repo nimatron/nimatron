@@ -28,14 +28,8 @@ public class NimParImpl extends ASTWrapperPsiElement implements NimPar {
 
   @Override
   @NotNull
-  public NimOptInd3 getOptInd3() {
-    return findNotNullChildByClass(NimOptInd3.class);
-  }
-
-  @Override
-  @NotNull
-  public NimOptInd4 getOptInd4() {
-    return findNotNullChildByClass(NimOptInd4.class);
+  public NimOptPar getOptPar() {
+    return findNotNullChildByClass(NimOptPar.class);
   }
 
 }

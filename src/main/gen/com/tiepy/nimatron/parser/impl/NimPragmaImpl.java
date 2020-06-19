@@ -28,14 +28,8 @@ public class NimPragmaImpl extends ASTWrapperPsiElement implements NimPragma {
 
   @Override
   @NotNull
-  public NimOptInd10 getOptInd10() {
-    return findNotNullChildByClass(NimOptInd10.class);
-  }
-
-  @Override
-  @NotNull
-  public NimOptInd9 getOptInd9() {
-    return findNotNullChildByClass(NimOptInd9.class);
+  public List<NimExprColonEqExpr> getExprColonEqExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
   }
 
 }

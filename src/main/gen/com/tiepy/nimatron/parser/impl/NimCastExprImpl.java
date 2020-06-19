@@ -34,12 +34,6 @@ public class NimCastExprImpl extends ASTWrapperPsiElement implements NimCastExpr
 
   @Override
   @NotNull
-  public NimOptInd4 getOptInd4() {
-    return findNotNullChildByClass(NimOptInd4.class);
-  }
-
-  @Override
-  @NotNull
   public NimTypeDesc getTypeDesc() {
     return findNotNullChildByClass(NimTypeDesc.class);
   }

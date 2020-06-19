@@ -8,12 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimTryExpr extends PsiElement {
 
   @NotNull
-  List<NimOptInd12> getOptInd12List();
-
-  @Nullable
-  NimOptInd13 getOptInd13();
+  List<NimExprList> getExprListList();
 
   @NotNull
-  NimStmt getStmt();
+  List<NimStmt> getStmtList();
 
 }

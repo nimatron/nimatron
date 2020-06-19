@@ -211,67 +211,7 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitOptInd10(@NotNull NimOptInd10 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd11(@NotNull NimOptInd11 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd12(@NotNull NimOptInd12 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd13(@NotNull NimOptInd13 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd14(@NotNull NimOptInd14 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd15(@NotNull NimOptInd15 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd16(@NotNull NimOptInd16 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd17(@NotNull NimOptInd17 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd18(@NotNull NimOptInd18 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd3(@NotNull NimOptInd3 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd4(@NotNull NimOptInd4 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd5(@NotNull NimOptInd5 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd6(@NotNull NimOptInd6 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd7(@NotNull NimOptInd7 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd8(@NotNull NimOptInd8 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOptInd9(@NotNull NimOptInd9 o) {
+  public void visitOptPar(@NotNull NimOptPar o) {
     visitPsiElement(o);
   }
 

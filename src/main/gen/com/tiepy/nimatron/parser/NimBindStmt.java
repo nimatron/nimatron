@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimBindStmt extends PsiElement {
 
   @NotNull
-  NimOptInd18 getOptInd18();
+  List<NimQualifiedIdent> getQualifiedIdentList();
 
 }
