@@ -113,15 +113,15 @@ expr ::= blockExpr|ifExpr|whenExpr|caseStmt|forStmt|tryExpr|simpleExpr
 typeKeyw ::= 'var'|'out'|'ref'|'ptr'|'shared'|'tuple'|'proc'|'iterator'|'distinct'|'object'|'enum'
 primary ::= (typeKeyw optInd typeDesc) | (operator* identOrLiteral primarySuffix*) | ('bind' primary)
 typeDesc ::= simpleExpr ('not' expr)?
-typeDefAux ::= simpleExpr ('not' expr)?|'concept' typeClass
+typeDefAux ::= simpleExpr ('not' expr)? | 'concept' typeClass
 postExprBlocks ::= ':' stmt? ( IND_EQ doBlock
                              | IND_EQ 'of' exprList ':' stmt
                              | IND_EQ 'elif' expr ':' stmt
                              | IND_EQ 'except' exprList ':' stmt
                              | IND_EQ 'else' ':' stmt )*
-exprStmt ::= simpleExpr (( '=' optInd expr colonBody? )|( expr (',' expr)* postExprBlocks ))?
-importStmt ::= 'import' optInd expr ((',' expr)+|'except' optInd (expr (',' expr)*))
-exportStmt ::= 'export' optInd expr ((',' expr)+|'except' optInd (expr (',' expr)*))
+exprStmt ::= simpleExpr (('=' optInd expr colonBody?) | (expr (',' expr)* postExprBlocks))?
+importStmt ::= 'import' optInd expr ((',' expr)+ | 'except' optInd (expr (',' expr)*))
+exportStmt ::= 'export' optInd expr ((',' expr)+ | 'except' optInd (expr (',' expr)*))
 includeStmt ::= 'include' optInd expr (',' expr)*
 fromStmt ::= 'from' expr 'import' optInd expr (',' expr)*
 returnStmt ::= 'return' optInd expr?
