@@ -72,7 +72,7 @@ exprColonEqExpr ::= expr (':'|'=' expr)?
 exprList ::= expr (',' expr)*
 exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
 qualifiedIdent ::= symbol ('.' optInd symbol)?
-setOrTableConstr ::= '{' ((exprColonEqExpr ',')+|':' ) '}'
+setOrTableConstr ::= '{' ((exprColonEqExpr ',')+ | ':') '}'
 castExpr ::= 'cast' '[' optInd typeDesc optInd ']' '(' optInd expr optInd ')'
 //parKeyw ::= 'discard'|'include'|'if'|'while'|'case'|'try'|'finally'|'except'|'for'|'block'|'const'|'let'|'when'|'var'|'mixin'
 par ::= '(' optInd ( /*&parKeyw*/ complexOrSimpleStmt (';' complexOrSimpleStmt)*
