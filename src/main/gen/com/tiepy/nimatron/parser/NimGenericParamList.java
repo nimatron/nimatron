@@ -11,9 +11,6 @@ public interface NimGenericParamList extends PsiElement {
   List<NimGenericParam> getGenericParamList();
 
   @NotNull
-  NimOptInd getOptInd();
-
-  @NotNull
-  NimOptPar getOptPar();
+  List<NimOptInd> getOptIndList();
 
 }

@@ -63,7 +63,6 @@ public interface NimTypes {
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
   IElementType OPT_IND = new NimElementType("OPT_IND");
-  IElementType OPT_PAR = new NimElementType("OPT_PAR");
   IElementType OR_EXPR = new NimElementType("OR_EXPR");
   IElementType PAR = new NimElementType("PAR");
   IElementType PARAM_LIST = new NimElementType("PARAM_LIST");
@@ -307,9 +306,6 @@ public interface NimTypes {
       }
       else if (type == OPT_IND) {
         return new NimOptIndImpl(node);
-      }
-      else if (type == OPT_PAR) {
-        return new NimOptParImpl(node);
       }
       else if (type == OR_EXPR) {
         return new NimOrExprImpl(node);

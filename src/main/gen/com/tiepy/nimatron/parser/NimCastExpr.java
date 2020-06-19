@@ -14,9 +14,6 @@ public interface NimCastExpr extends PsiElement {
   List<NimOptInd> getOptIndList();
 
   @NotNull
-  List<NimOptPar> getOptParList();
-
-  @NotNull
   NimTypeDesc getTypeDesc();
 
 }

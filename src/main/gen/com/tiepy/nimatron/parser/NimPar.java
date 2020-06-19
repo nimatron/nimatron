@@ -17,10 +17,7 @@ public interface NimPar extends PsiElement {
   List<NimExprColonEqExpr> getExprColonEqExprList();
 
   @NotNull
-  NimOptInd getOptInd();
-
-  @NotNull
-  NimOptPar getOptPar();
+  List<NimOptInd> getOptIndList();
 
   @Nullable
   NimPragmaStmt getPragmaStmt();

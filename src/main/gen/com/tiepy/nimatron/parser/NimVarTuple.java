@@ -16,7 +16,4 @@ public interface NimVarTuple extends PsiElement {
   @NotNull
   List<NimOptInd> getOptIndList();
 
-  @NotNull
-  NimOptPar getOptPar();
-
 }

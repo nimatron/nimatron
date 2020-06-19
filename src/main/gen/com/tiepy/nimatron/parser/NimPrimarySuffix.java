@@ -23,9 +23,6 @@ public interface NimPrimarySuffix extends PsiElement {
   NimOptInd getOptInd();
 
   @Nullable
-  NimOptPar getOptPar();
-
-  @Nullable
   NimSymbol getSymbol();
 
 }
