@@ -10,7 +10,7 @@ public interface NimExportStmt extends PsiElement {
   @NotNull
   List<NimExpr> getExprList();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
+  @Nullable
+  NimOptInd11 getOptInd11();
 
 }

@@ -11,9 +11,9 @@ public interface NimVarTuple extends PsiElement {
   NimExpr getExpr();
 
   @NotNull
-  List<NimIdentWithPragma> getIdentWithPragmaList();
+  NimOptInd16 getOptInd16();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  NimOptInd17 getOptInd17();
 
 }

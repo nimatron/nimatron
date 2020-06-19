@@ -32,10 +32,4 @@ public class NimIncludeStmtImpl extends ASTWrapperPsiElement implements NimInclu
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
 }

@@ -33,12 +33,6 @@ public class NimGenericParamImpl extends ASTWrapperPsiElement implements NimGene
   }
 
   @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
   @NotNull
   public List<NimSymbol> getSymbolList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSymbol.class);

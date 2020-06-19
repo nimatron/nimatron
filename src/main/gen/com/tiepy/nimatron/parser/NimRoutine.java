@@ -7,25 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimRoutine extends PsiElement {
 
-  @Nullable
-  NimGenericParamList getGenericParamList();
-
   @NotNull
-  NimIdentVis getIdentVis();
-
-  @NotNull
-  NimOptInd getOptInd();
-
-  @NotNull
-  NimParamListColon getParamListColon();
-
-  @Nullable
-  NimPattern getPattern();
-
-  @Nullable
-  NimPragma getPragma();
-
-  @Nullable
-  NimStmt getStmt();
+  NimOptInd15 getOptInd15();
 
 }

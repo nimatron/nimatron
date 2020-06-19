@@ -10,7 +10,4 @@ public interface NimRaiseStmt extends PsiElement {
   @Nullable
   NimExpr getExpr();
 
-  @NotNull
-  NimOptInd getOptInd();
-
 }

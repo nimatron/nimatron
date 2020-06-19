@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimPragma extends PsiElement {
 
   @NotNull
-  List<NimExprColonEqExpr> getExprColonEqExprList();
+  NimOptInd10 getOptInd10();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  NimOptInd9 getOptInd9();
 
 }

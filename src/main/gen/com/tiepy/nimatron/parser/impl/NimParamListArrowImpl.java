@@ -28,12 +28,6 @@ public class NimParamListArrowImpl extends ASTWrapperPsiElement implements NimPa
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
   public NimParamList getParamList() {
     return findChildByClass(NimParamList.class);
   }

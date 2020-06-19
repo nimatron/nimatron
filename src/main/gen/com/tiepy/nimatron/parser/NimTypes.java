@@ -61,7 +61,22 @@ public interface NimTypes {
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
-  IElementType OPT_IND = new NimElementType("OPT_IND");
+  IElementType OPT_IND_10 = new NimElementType("OPT_IND_10");
+  IElementType OPT_IND_11 = new NimElementType("OPT_IND_11");
+  IElementType OPT_IND_12 = new NimElementType("OPT_IND_12");
+  IElementType OPT_IND_13 = new NimElementType("OPT_IND_13");
+  IElementType OPT_IND_14 = new NimElementType("OPT_IND_14");
+  IElementType OPT_IND_15 = new NimElementType("OPT_IND_15");
+  IElementType OPT_IND_16 = new NimElementType("OPT_IND_16");
+  IElementType OPT_IND_17 = new NimElementType("OPT_IND_17");
+  IElementType OPT_IND_18 = new NimElementType("OPT_IND_18");
+  IElementType OPT_IND_3 = new NimElementType("OPT_IND_3");
+  IElementType OPT_IND_4 = new NimElementType("OPT_IND_4");
+  IElementType OPT_IND_5 = new NimElementType("OPT_IND_5");
+  IElementType OPT_IND_6 = new NimElementType("OPT_IND_6");
+  IElementType OPT_IND_7 = new NimElementType("OPT_IND_7");
+  IElementType OPT_IND_8 = new NimElementType("OPT_IND_8");
+  IElementType OPT_IND_9 = new NimElementType("OPT_IND_9");
   IElementType OR_EXPR = new NimElementType("OR_EXPR");
   IElementType PAR = new NimElementType("PAR");
   IElementType PARAM_LIST = new NimElementType("PARAM_LIST");
@@ -298,8 +313,53 @@ public interface NimTypes {
       else if (type == OPERATOR) {
         return new NimOperatorImpl(node);
       }
-      else if (type == OPT_IND) {
-        return new NimOptIndImpl(node);
+      else if (type == OPT_IND_10) {
+        return new NimOptInd10Impl(node);
+      }
+      else if (type == OPT_IND_11) {
+        return new NimOptInd11Impl(node);
+      }
+      else if (type == OPT_IND_12) {
+        return new NimOptInd12Impl(node);
+      }
+      else if (type == OPT_IND_13) {
+        return new NimOptInd13Impl(node);
+      }
+      else if (type == OPT_IND_14) {
+        return new NimOptInd14Impl(node);
+      }
+      else if (type == OPT_IND_15) {
+        return new NimOptInd15Impl(node);
+      }
+      else if (type == OPT_IND_16) {
+        return new NimOptInd16Impl(node);
+      }
+      else if (type == OPT_IND_17) {
+        return new NimOptInd17Impl(node);
+      }
+      else if (type == OPT_IND_18) {
+        return new NimOptInd18Impl(node);
+      }
+      else if (type == OPT_IND_3) {
+        return new NimOptInd3Impl(node);
+      }
+      else if (type == OPT_IND_4) {
+        return new NimOptInd4Impl(node);
+      }
+      else if (type == OPT_IND_5) {
+        return new NimOptInd5Impl(node);
+      }
+      else if (type == OPT_IND_6) {
+        return new NimOptInd6Impl(node);
+      }
+      else if (type == OPT_IND_7) {
+        return new NimOptInd7Impl(node);
+      }
+      else if (type == OPT_IND_8) {
+        return new NimOptInd8Impl(node);
+      }
+      else if (type == OPT_IND_9) {
+        return new NimOptInd9Impl(node);
       }
       else if (type == OR_EXPR) {
         return new NimOrExprImpl(node);

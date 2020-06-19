@@ -40,12 +40,6 @@ public class NimExprStmtImpl extends ASTWrapperPsiElement implements NimExprStmt
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
   public NimPostExprBlocks getPostExprBlocks() {
     return findChildByClass(NimPostExprBlocks.class);
   }

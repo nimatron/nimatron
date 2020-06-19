@@ -10,7 +10,4 @@ public interface NimAndExpr extends PsiElement {
   @NotNull
   List<NimCmpExpr> getCmpExprList();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
 }

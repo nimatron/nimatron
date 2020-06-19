@@ -40,12 +40,6 @@ public class NimPrimaryImpl extends ASTWrapperPsiElement implements NimPrimary {
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
   public NimPrimary getPrimary() {
     return findChildByClass(NimPrimary.class);
   }

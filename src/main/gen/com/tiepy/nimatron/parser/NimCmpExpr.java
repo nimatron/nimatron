@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimCmpExpr extends PsiElement {
 
   @NotNull
-  List<NimOptInd> getOptIndList();
-
-  @NotNull
   List<NimSliceExpr> getSliceExprList();
 
 }

@@ -10,7 +10,4 @@ public interface NimMulExpr extends PsiElement {
   @NotNull
   List<NimDollarExpr> getDollarExprList();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
 }

@@ -10,7 +10,4 @@ public interface NimYieldStmt extends PsiElement {
   @Nullable
   NimExpr getExpr();
 
-  @NotNull
-  NimOptInd getOptInd();
-
 }

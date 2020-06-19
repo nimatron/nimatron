@@ -10,7 +10,4 @@ public interface NimDiscardStmt extends PsiElement {
   @Nullable
   NimExpr getExpr();
 
-  @NotNull
-  NimOptInd getOptInd();
-
 }

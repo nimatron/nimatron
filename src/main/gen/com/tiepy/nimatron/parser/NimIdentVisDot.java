@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimIdentVisDot extends PsiElement {
 
   @NotNull
-  NimOptInd getOptInd();
-
-  @NotNull
   List<NimSymbol> getSymbolList();
 
 }

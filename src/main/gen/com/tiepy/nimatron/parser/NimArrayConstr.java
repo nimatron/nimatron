@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimArrayConstr extends PsiElement {
 
   @NotNull
-  List<NimExprColonEqExpr> getExprColonEqExprList();
+  NimOptInd5 getOptInd5();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  NimOptInd6 getOptInd6();
 
 }

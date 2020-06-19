@@ -10,9 +10,6 @@ public interface NimGenericParam extends PsiElement {
   @NotNull
   List<NimExpr> getExprList();
 
-  @Nullable
-  NimOptInd getOptInd();
-
   @NotNull
   List<NimSymbol> getSymbolList();
 

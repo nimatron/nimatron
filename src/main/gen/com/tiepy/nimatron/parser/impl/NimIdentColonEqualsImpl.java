@@ -33,12 +33,6 @@ public class NimIdentColonEqualsImpl extends ASTWrapperPsiElement implements Nim
   }
 
   @Override
-  @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
   @Nullable
   public NimTypeDesc getTypeDesc() {
     return findChildByClass(NimTypeDesc.class);

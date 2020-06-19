@@ -10,7 +10,4 @@ public interface NimArrowExpr extends PsiElement {
   @NotNull
   List<NimAssignExpr> getAssignExprList();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
 }

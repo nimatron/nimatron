@@ -33,12 +33,6 @@ public class NimSimpleExprImpl extends ASTWrapperPsiElement implements NimSimple
   }
 
   @Override
-  @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
   @Nullable
   public NimPragma getPragma() {
     return findChildByClass(NimPragma.class);

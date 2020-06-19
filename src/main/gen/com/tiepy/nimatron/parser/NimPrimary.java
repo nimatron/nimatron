@@ -14,9 +14,6 @@ public interface NimPrimary extends PsiElement {
   List<NimOperator> getOperatorList();
 
   @Nullable
-  NimOptInd getOptInd();
-
-  @Nullable
   NimPrimary getPrimary();
 
   @NotNull

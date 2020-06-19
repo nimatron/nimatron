@@ -32,10 +32,4 @@ public class NimRaiseStmtImpl extends ASTWrapperPsiElement implements NimRaiseSt
     return findChildByClass(NimExpr.class);
   }
 
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
 }

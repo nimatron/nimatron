@@ -11,14 +11,14 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimOptIndImpl extends ASTWrapperPsiElement implements NimOptInd {
+public class NimOptInd8Impl extends ASTWrapperPsiElement implements NimOptInd8 {
 
-  public NimOptIndImpl(@NotNull ASTNode node) {
+  public NimOptInd8Impl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitOptInd(this);
+    visitor.visitOptInd8(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

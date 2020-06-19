@@ -28,12 +28,6 @@ public class NimAssignExprImpl extends ASTWrapperPsiElement implements NimAssign
 
   @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimOrExpr> getOrExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOrExpr.class);
   }

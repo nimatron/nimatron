@@ -39,12 +39,6 @@ public class NimConstantImpl extends ASTWrapperPsiElement implements NimConstant
   }
 
   @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
-  @Override
   @Nullable
   public NimTypeDesc getTypeDesc() {
     return findChildByClass(NimTypeDesc.class);

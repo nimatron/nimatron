@@ -32,10 +32,4 @@ public class NimMulExprImpl extends ASTWrapperPsiElement implements NimMulExpr {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimDollarExpr.class);
   }
 
-  @Override
-  @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
 }

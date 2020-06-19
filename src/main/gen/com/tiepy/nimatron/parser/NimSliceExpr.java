@@ -10,7 +10,4 @@ public interface NimSliceExpr extends PsiElement {
   @NotNull
   List<NimAmpExpr> getAmpExprList();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
 }

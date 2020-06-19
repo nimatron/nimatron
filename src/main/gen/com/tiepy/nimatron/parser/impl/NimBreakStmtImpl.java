@@ -32,10 +32,4 @@ public class NimBreakStmtImpl extends ASTWrapperPsiElement implements NimBreakSt
     return findChildByClass(NimExpr.class);
   }
 
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
 }

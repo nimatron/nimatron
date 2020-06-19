@@ -8,21 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimPar extends PsiElement {
 
   @NotNull
-  List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
-
-  @Nullable
-  NimExpr getExpr();
+  NimOptInd3 getOptInd3();
 
   @NotNull
-  List<NimExprColonEqExpr> getExprColonEqExprList();
-
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
-  @Nullable
-  NimPragmaStmt getPragmaStmt();
-
-  @Nullable
-  NimSimpleExpr getSimpleExpr();
+  NimOptInd4 getOptInd4();
 
 }

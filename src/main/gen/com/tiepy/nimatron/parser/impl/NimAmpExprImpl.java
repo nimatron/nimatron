@@ -28,12 +28,6 @@ public class NimAmpExprImpl extends ASTWrapperPsiElement implements NimAmpExpr {
 
   @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimPlusExpr> getPlusExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPlusExpr.class);
   }

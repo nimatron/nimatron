@@ -27,45 +27,9 @@ public class NimRoutineImpl extends ASTWrapperPsiElement implements NimRoutine {
   }
 
   @Override
-  @Nullable
-  public NimGenericParamList getGenericParamList() {
-    return findChildByClass(NimGenericParamList.class);
-  }
-
-  @Override
   @NotNull
-  public NimIdentVis getIdentVis() {
-    return findNotNullChildByClass(NimIdentVis.class);
-  }
-
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
-  public NimParamListColon getParamListColon() {
-    return findNotNullChildByClass(NimParamListColon.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPattern getPattern() {
-    return findChildByClass(NimPattern.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPragma getPragma() {
-    return findChildByClass(NimPragma.class);
-  }
-
-  @Override
-  @Nullable
-  public NimStmt getStmt() {
-    return findChildByClass(NimStmt.class);
+  public NimOptInd15 getOptInd15() {
+    return findNotNullChildByClass(NimOptInd15.class);
   }
 
 }

@@ -10,9 +10,6 @@ public interface NimIdentColonEquals extends PsiElement {
   @Nullable
   NimExpr getExpr();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
   @Nullable
   NimTypeDesc getTypeDesc();
 

@@ -28,12 +28,6 @@ public class NimDollarExprImpl extends ASTWrapperPsiElement implements NimDollar
 
   @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimPrimary> getPrimaryList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimary.class);
   }

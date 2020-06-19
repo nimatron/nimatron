@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimGenericParamList extends PsiElement {
 
   @NotNull
-  List<NimGenericParam> getGenericParamList();
+  NimOptInd14 getOptInd14();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  NimOptInd6 getOptInd6();
 
 }

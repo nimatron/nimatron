@@ -10,7 +10,4 @@ public interface NimBreakStmt extends PsiElement {
   @Nullable
   NimExpr getExpr();
 
-  @NotNull
-  NimOptInd getOptInd();
-
 }

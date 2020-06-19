@@ -32,10 +32,4 @@ public class NimDiscardStmtImpl extends ASTWrapperPsiElement implements NimDisca
     return findChildByClass(NimExpr.class);
   }
 
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
 }

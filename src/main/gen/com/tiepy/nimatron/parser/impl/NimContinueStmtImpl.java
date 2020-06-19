@@ -32,10 +32,4 @@ public class NimContinueStmtImpl extends ASTWrapperPsiElement implements NimCont
     return findChildByClass(NimExpr.class);
   }
 
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
 }

@@ -17,12 +17,12 @@ public interface NimPrimarySuffix extends PsiElement {
   NimExprColonEqExprList2 getExprColonEqExprList2();
 
   @Nullable
-  NimGeneralizedLit getGeneralizedLit();
+  NimOptInd6 getOptInd6();
 
   @Nullable
-  NimOptInd getOptInd();
+  NimOptInd7 getOptInd7();
 
   @Nullable
-  NimSymbol getSymbol();
+  NimOptInd8 getOptInd8();
 
 }

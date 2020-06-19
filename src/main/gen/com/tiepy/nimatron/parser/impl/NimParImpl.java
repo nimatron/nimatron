@@ -28,38 +28,14 @@ public class NimParImpl extends ASTWrapperPsiElement implements NimPar {
 
   @Override
   @NotNull
-  public List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public NimExpr getExpr() {
-    return findChildByClass(NimExpr.class);
+  public NimOptInd3 getOptInd3() {
+    return findNotNullChildByClass(NimOptInd3.class);
   }
 
   @Override
   @NotNull
-  public List<NimExprColonEqExpr> getExprColonEqExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPragmaStmt getPragmaStmt() {
-    return findChildByClass(NimPragmaStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public NimSimpleExpr getSimpleExpr() {
-    return findChildByClass(NimSimpleExpr.class);
+  public NimOptInd4 getOptInd4() {
+    return findNotNullChildByClass(NimOptInd4.class);
   }
 
 }
