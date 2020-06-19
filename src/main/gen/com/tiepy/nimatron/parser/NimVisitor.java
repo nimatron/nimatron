@@ -251,10 +251,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitParKeyw(@NotNull NimParKeyw o) {
-    visitPsiElement(o);
-  }
-
   public void visitParamList(@NotNull NimParamList o) {
     visitPsiElement(o);
   }

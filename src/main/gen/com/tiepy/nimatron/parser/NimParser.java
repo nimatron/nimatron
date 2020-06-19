@@ -2631,31 +2631,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'discard'|'include'|'if'|'while'|'case'|'try'|'finally'|'except'|'for'|'block'|'const'|'let'|'when'|'var'|'mixin'
-  public static boolean parKeyw(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "parKeyw")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PAR_KEYW, "<par keyw>");
-    r = consumeToken(b, "discard");
-    if (!r) r = consumeToken(b, "include");
-    if (!r) r = consumeToken(b, "if");
-    if (!r) r = consumeToken(b, "while");
-    if (!r) r = consumeToken(b, "case");
-    if (!r) r = consumeToken(b, "try");
-    if (!r) r = consumeToken(b, "finally");
-    if (!r) r = consumeToken(b, "except");
-    if (!r) r = consumeToken(b, "for");
-    if (!r) r = consumeToken(b, "block");
-    if (!r) r = consumeToken(b, "const");
-    if (!r) r = consumeToken(b, "let");
-    if (!r) r = consumeToken(b, "when");
-    if (!r) r = consumeToken(b, "var");
-    if (!r) r = consumeToken(b, "mixin");
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // '(' (declColonEquals ((comma|semicolon) declColonEquals)*)? ')'
   public static boolean paramList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "paramList")) return false;
