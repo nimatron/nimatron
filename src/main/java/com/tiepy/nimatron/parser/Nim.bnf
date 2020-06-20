@@ -73,7 +73,7 @@ exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
 qualifiedIdent ::= symbol ('.' <<optInd symbol>>)?
 setOrTableConstr ::= '{' ((exprColonEqExpr ',')+ | ':') '}'
 castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>> <<optInd (')')>>
-optPar ::=       (complexOrSimpleStmt (';' complexOrSimpleStmt)*)
+optPar ::=        (complexOrSimpleStmt (';' complexOrSimpleStmt)*)
             | (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)
             | pragmaStmt
             | (simpleExpr (('=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?)
@@ -104,7 +104,7 @@ primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                 | ('.' <<optInd (symbol generalizedLit?)>>)
                 | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
                 | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
-                | <<optInd expr>> // command syntax
+                | <<optInd exprList>> // command syntax
 condExpr ::= expr ':' <<optInd expr>> ('elif' expr ':' <<optInd expr>>)* 'else' ':' expr
 ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr

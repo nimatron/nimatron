@@ -7,14 +7,14 @@ import com.intellij.psi.PsiElement;
 
 public interface NimPrimarySuffix extends PsiElement {
 
-  @Nullable
-  NimExpr getExpr();
-
   @NotNull
   List<NimExprColonEqExpr> getExprColonEqExprList();
 
   @Nullable
   NimExprColonEqExprList2 getExprColonEqExprList2();
+
+  @Nullable
+  NimExprList getExprList();
 
   @Nullable
   NimGeneralizedLit getGeneralizedLit();

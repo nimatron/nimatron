@@ -2981,7 +2981,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   //                 | ('.' <<optInd (symbol generalizedLit?)>>)
   //                 | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
   //                 | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
-  //                 | <<optInd expr>>
+  //                 | <<optInd exprList>>
   public static boolean primarySuffix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primarySuffix")) return false;
     boolean r;
@@ -2990,7 +2990,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = primarySuffix_1(b, l + 1);
     if (!r) r = primarySuffix_2(b, l + 1);
     if (!r) r = primarySuffix_3(b, l + 1);
-    if (!r) r = optInd(b, l + 1, expr_parser_);
+    if (!r) r = optInd(b, l + 1, exprList_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -4225,6 +4225,11 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser exprColonEqExprList2_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return exprColonEqExprList2(b, l + 1);
+    }
+  };
+  static final Parser exprList_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return exprList(b, l + 1);
     }
   };
   static final Parser expr_parser_ = new Parser() {

@@ -27,12 +27,6 @@ public class NimPrimarySuffixImpl extends ASTWrapperPsiElement implements NimPri
   }
 
   @Override
-  @Nullable
-  public NimExpr getExpr() {
-    return findChildByClass(NimExpr.class);
-  }
-
-  @Override
   @NotNull
   public List<NimExprColonEqExpr> getExprColonEqExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
@@ -42,6 +36,12 @@ public class NimPrimarySuffixImpl extends ASTWrapperPsiElement implements NimPri
   @Nullable
   public NimExprColonEqExprList2 getExprColonEqExprList2() {
     return findChildByClass(NimExprColonEqExprList2.class);
+  }
+
+  @Override
+  @Nullable
+  public NimExprList getExprList() {
+    return findChildByClass(NimExprList.class);
   }
 
   @Override
