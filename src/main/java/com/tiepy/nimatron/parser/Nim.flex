@@ -115,7 +115,7 @@ KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|
 
 %{
 
-private Stack<Integer> stateStack = new Stack<Integer>();
+private final Stack<Integer> stateStack = new Stack<Integer>();
 
 private int pushState(int newState) {
     stateStack.push(yystate());
@@ -135,6 +135,50 @@ private void handleIndent() {
     lastIndentSpaces = indentSpaces;
     indentSpaces = 0;
     pushState(INDENTER);
+}
+
+private class Indent {
+    public int Column;
+    public int Increment;
+}
+
+private final Stack<Indent> indentStack = new Stack<Indent>();
+
+private IElementType getIndenterToken() {
+    if (indentSpaces == lastIndentSpaces) {
+        popState();
+        return NimTypes.IND_EQ;
+    } else if (indentSpaces > lastIndentSpaces) {
+
+        // Note the incremental column positions for indentation.
+        int lastLength = 0;
+        if (indentStack.size() > 0) lastLength = indentStack.peek().Column;
+        Indent indent = new Indent();
+        indent.Column = indentSpaces;
+        indent.Increment = indentSpaces - lastLength;
+        indentStack.push(indent);
+
+        popState();
+        return NimTypes.IND_GT;
+    } else {
+        Indent lastIndent = indentStack.pop();
+        int diff = lastIndent.Column - indentSpaces;
+
+        // Handle exact proper single dedent.
+        if (diff == lastIndent.Increment) {
+            popState();
+            return NimTypes.IND_LT;
+        }
+
+        // Handle multi-dedent.
+        // NOTE: Since popState() hasn't been called, it will return additional IND_LT tokens.
+        if (diff > lastIndent.Increment) {
+            return NimTypes.IND_LT;
+        }
+
+        popState();
+        return TokenType.BAD_CHARACTER;
+    }
 }
 
 %}
@@ -203,29 +247,8 @@ private void handleIndent() {
 <INDENTER> {
     {CRLF}                      { indentSpaces = 0; }
     \                           { indentSpaces++; }
-    .                           {
-        yypushback(1);
-        popState();
-
-        if (indentSpaces == lastIndentSpaces) {
-            return NimTypes.IND_EQ;
-        } else if (indentSpaces > lastIndentSpaces) {
-            return NimTypes.IND_GT;
-        } else {
-            return NimTypes.IND_LT;
-        }
-    }
-    <<EOF>>                     {
-        popState();
-
-        if (indentSpaces == lastIndentSpaces) {
-            return NimTypes.IND_EQ;
-        } else if (indentSpaces > lastIndentSpaces) {
-            return NimTypes.IND_GT;
-        } else {
-            return NimTypes.IND_LT;
-        }
-    }
+    .                           { yypushback(1); return getIndenterToken(); }
+    <<EOF>>                     { return getIndenterToken(); }
 }
 
 <LINE_COMMENT> {
