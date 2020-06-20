@@ -89,6 +89,14 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testNestedIfs() {
+        doTest(true, true);
+    }
+
+    public void testNestedIfsDoubleDed() {
+        doTest(true, true);
+    }
+
     /**
      * @return path to test data file directory relative to root of this module.
      */
