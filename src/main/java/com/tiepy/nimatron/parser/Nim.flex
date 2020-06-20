@@ -33,7 +33,7 @@ package com.tiepy.nimatron.parser;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
-import com.tiepy.nimatron.parser.NimTypes;
+import com.tiepy.nimatron.parser.NimTypes;import jdk.nashorn.internal.parser.Token;
 import java.util.Stack;
 
 %%
@@ -230,6 +230,7 @@ private void handleIndent() {
 
 <LINE_COMMENT> {
     .+                          { popState(); return TokenType.WHITE_SPACE; }
+    <<EOF>>                     { popState(); return TokenType.WHITE_SPACE; }
 }
 
 <BLOCK_COMMENT> {
@@ -237,6 +238,7 @@ private void handleIndent() {
     {BLOCK_COMMENT_END}         { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <BLOCK_DOC_COMMENT> {
@@ -244,6 +246,7 @@ private void handleIndent() {
     {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <STRING_LITERAL> {
@@ -251,12 +254,14 @@ private void handleIndent() {
     \"                          { popState(); return NimTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <TRIPLE_STRING_LITERAL> {
     \"\"\"                      { popState(); return NimTypes.TRIPLESTR_LIT; }
     {CRLF}                      { }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <RAW_STRING_LITERAL> {
@@ -264,6 +269,7 @@ private void handleIndent() {
     \"                          { popState(); return NimTypes.RSTR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <GENERALIZED_STRING_LITERAL> {
@@ -271,16 +277,19 @@ private void handleIndent() {
     \"                          { popState(); return NimTypes.GENERALIZED_STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
     \"\"\"                      { popState(); return NimTypes.GENERALIZED_TRIPLESTR_LIT; }
     {CRLF}                      { }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <CHARACTER_LITERAL> {
     '                           { popState(); return NimTypes.CHAR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
+    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
