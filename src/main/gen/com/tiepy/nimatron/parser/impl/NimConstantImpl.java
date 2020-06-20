@@ -28,26 +28,14 @@ public class NimConstantImpl extends ASTWrapperPsiElement implements NimConstant
 
   @Override
   @NotNull
-  public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
-  @Nullable
-  public NimIdentWithPragma getIdentWithPragma() {
-    return findChildByClass(NimIdentWithPragma.class);
-  }
-
-  @Override
-  @Nullable
-  public NimTypeDesc getTypeDesc() {
-    return findChildByClass(NimTypeDesc.class);
-  }
-
-  @Override
-  @Nullable
-  public NimVarTuple getVarTuple() {
-    return findChildByClass(NimVarTuple.class);
+  @NotNull
+  public List<NimPrimary> getPrimaryList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimary.class);
   }
 
 }

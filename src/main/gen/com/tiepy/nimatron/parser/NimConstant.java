@@ -8,15 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimConstant extends PsiElement {
 
   @NotNull
-  NimExpr getExpr();
+  List<NimExpr> getExprList();
 
-  @Nullable
-  NimIdentWithPragma getIdentWithPragma();
-
-  @Nullable
-  NimTypeDesc getTypeDesc();
-
-  @Nullable
-  NimVarTuple getVarTuple();
+  @NotNull
+  List<NimPrimary> getPrimaryList();
 
 }

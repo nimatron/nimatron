@@ -7,25 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface NimExpr extends PsiElement {
 
-  @Nullable
-  NimBlockExpr getBlockExpr();
+  @NotNull
+  List<NimExpr> getExprList();
+
+  @NotNull
+  List<NimPrimary> getPrimaryList();
 
   @Nullable
-  NimCaseStmt getCaseStmt();
-
-  @Nullable
-  NimForStmt getForStmt();
-
-  @Nullable
-  NimIfExpr getIfExpr();
-
-  @Nullable
-  NimSimpleExpr getSimpleExpr();
-
-  @Nullable
-  NimTryExpr getTryExpr();
-
-  @Nullable
-  NimWhenExpr getWhenExpr();
+  NimStmt getStmt();
 
 }

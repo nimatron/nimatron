@@ -27,21 +27,21 @@ public class NimVariableImpl extends ASTWrapperPsiElement implements NimVariable
   }
 
   @Override
-  @Nullable
-  public NimColonBody getColonBody() {
-    return findChildByClass(NimColonBody.class);
+  @NotNull
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
-  @Nullable
-  public NimIdentColonEquals getIdentColonEquals() {
-    return findChildByClass(NimIdentColonEquals.class);
+  @NotNull
+  public List<NimPrimary> getPrimaryList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimary.class);
   }
 
   @Override
-  @Nullable
-  public NimVarTuple getVarTuple() {
-    return findChildByClass(NimVarTuple.class);
+  @NotNull
+  public List<NimStmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
 }

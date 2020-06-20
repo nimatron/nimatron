@@ -27,39 +27,33 @@ public class NimPrimaryImpl extends ASTWrapperPsiElement implements NimPrimary {
   }
 
   @Override
-  @Nullable
-  public NimIdentOrLiteral getIdentOrLiteral() {
-    return findChildByClass(NimIdentOrLiteral.class);
+  @NotNull
+  public List<NimConstant> getConstantList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimConstant.class);
   }
 
   @Override
   @NotNull
-  public List<NimOperator> getOperatorList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOperator.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPrimary getPrimary() {
-    return findChildByClass(NimPrimary.class);
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
   @NotNull
-  public List<NimPrimarySuffix> getPrimarySuffixList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
+  public List<NimPrimary> getPrimaryList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimary.class);
   }
 
   @Override
-  @Nullable
-  public NimTypeDesc getTypeDesc() {
-    return findChildByClass(NimTypeDesc.class);
+  @NotNull
+  public List<NimStmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
   @Override
-  @Nullable
-  public NimTypeKeyw getTypeKeyw() {
-    return findChildByClass(NimTypeKeyw.class);
+  @NotNull
+  public List<NimVariable> getVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimVariable.class);
   }
 
 }

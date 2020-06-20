@@ -7,22 +7,19 @@ import com.intellij.psi.PsiElement;
 
 public interface NimPrimary extends PsiElement {
 
-  @Nullable
-  NimIdentOrLiteral getIdentOrLiteral();
+  @NotNull
+  List<NimConstant> getConstantList();
 
   @NotNull
-  List<NimOperator> getOperatorList();
-
-  @Nullable
-  NimPrimary getPrimary();
+  List<NimExpr> getExprList();
 
   @NotNull
-  List<NimPrimarySuffix> getPrimarySuffixList();
+  List<NimPrimary> getPrimaryList();
 
-  @Nullable
-  NimTypeDesc getTypeDesc();
+  @NotNull
+  List<NimStmt> getStmtList();
 
-  @Nullable
-  NimTypeKeyw getTypeKeyw();
+  @NotNull
+  List<NimVariable> getVariableList();
 
 }
