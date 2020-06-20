@@ -215,6 +215,17 @@ private void handleIndent() {
             return NimTypes.IND_LT;
         }
     }
+    <<EOF>>                     {
+        popState();
+
+        if (indentSpaces == lastIndentSpaces) {
+            return NimTypes.IND_EQ;
+        } else if (indentSpaces > lastIndentSpaces) {
+            return NimTypes.IND_GT;
+        } else {
+            return NimTypes.IND_LT;
+        }
+    }
 }
 
 <LINE_COMMENT> {

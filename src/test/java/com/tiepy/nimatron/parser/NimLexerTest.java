@@ -67,7 +67,7 @@ public class NimLexerTest {
         int tokenCount = parse("if name == \"\":\n" +
                 "  echo \"Poor soul, you lost your name?\"\n");
 
-        Assert.assertEquals(12, tokenCount);
+        Assert.assertEquals(13, tokenCount);
     }
 
     @Test
@@ -116,6 +116,6 @@ public class NimLexerTest {
                 "\n" +
                 "var checkpoints* {.threadvar.}: seq[string]\n");
 
-        Assert.assertEquals(209, tokenCount);
+        Assert.assertEquals(210, tokenCount);
     }
 }

@@ -997,7 +997,22 @@ private void handleIndent() {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
         zzDoEOF();
+        switch (zzLexicalState) {
+            case INDENTER: {
+              popState();
+
+        if (indentSpaces == lastIndentSpaces) {
+            return NimTypes.IND_EQ;
+        } else if (indentSpaces > lastIndentSpaces) {
+            return NimTypes.IND_GT;
+        } else {
+            return NimTypes.IND_LT;
+        }
+            }  // fall though
+            case 254: break;
+            default:
         return null;
+        }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
