@@ -77,6 +77,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testIfIndentAdditionalLine() {
+        doTest(true, true);
+    }
+
     public void testIfIndentElseSameLine() {
         doTest(true, true);
     }
@@ -94,6 +98,10 @@ public class NimParserTest extends ParsingTestCase {
     }
 
     public void testNestedIfsDoubleDed() {
+        doTest(true, true);
+    }
+
+    public void testTwoLines() {
         doTest(true, true);
     }
 
