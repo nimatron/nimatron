@@ -100,11 +100,11 @@ literal ::= INT_LIT
 generalizedLit ::= GENERALIZED_STR_LIT|GENERALIZED_TRIPLESTR_LIT
 identOrLiteral ::= generalizedLit|symbol|literal|par|arrayConstr|setOrTableConstr|castExpr
 arrayConstr ::= '[' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd (']')>>
-primarySuffix ::= ('(' (exprColonEqExpr ','?)* ')')
-        | ('.' <<optInd (symbol generalizedLit?)>>)
-        | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
-        | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
-        | expr // command syntax
+primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
+                | ('.' <<optInd (symbol generalizedLit?)>>)
+                | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
+                | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
+                | <<optInd expr>> // command syntax
 condExpr ::= expr ':' <<optInd expr>> ('elif' expr ':' <<optInd expr>>)* 'else' ':' expr
 ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr

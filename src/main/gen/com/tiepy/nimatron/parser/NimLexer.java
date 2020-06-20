@@ -35,7 +35,7 @@ package com.tiepy.nimatron.parser;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
-import com.tiepy.nimatron.parser.NimTypes;
+import com.tiepy.nimatron.parser.NimTypes;import jdk.nashorn.internal.parser.Token;
 import java.util.Stack;
 
 
@@ -1010,6 +1010,42 @@ private void handleIndent() {
         }
             }  // fall though
             case 254: break;
+            case LINE_COMMENT: {
+              popState(); return TokenType.WHITE_SPACE;
+            }  // fall though
+            case 255: break;
+            case BLOCK_COMMENT: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 256: break;
+            case BLOCK_DOC_COMMENT: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 257: break;
+            case STRING_LITERAL: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 258: break;
+            case TRIPLE_STRING_LITERAL: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 259: break;
+            case RAW_STRING_LITERAL: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 260: break;
+            case GENERALIZED_STRING_LITERAL: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 261: break;
+            case GENERALIZED_TRIPLE_STRING_LITERAL: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 262: break;
+            case CHARACTER_LITERAL: {
+              return TokenType.BAD_CHARACTER;
+            }  // fall though
+            case 263: break;
             default:
         return null;
         }
