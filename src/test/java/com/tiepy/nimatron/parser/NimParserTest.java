@@ -41,7 +41,19 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
-    public void testEchoFoo() {
+    public void testEchoBracketed() {
+        doTest(true, true);
+    }
+
+    public void testEchoDollarFoo() {
+        doTest(true, true);
+    }
+
+    public void testEchoMultiArgsNoBrackets() {
+        doTest(true, true);
+    }
+
+    public void testEchoSpace() {
         doTest(true, true);
     }
 
@@ -49,43 +61,31 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
-    public void testHello() {
+    public void testIfElifElse() {
         doTest(true, true);
     }
 
-    public void testHelloSpace() {
+    public void testIfElifElseMultiArgsNoBrackets() {
         doTest(true, true);
     }
 
-    public void testIf() {
+    public void testIfElifElseWithoutIndent() {
         doTest(true, true);
     }
 
-    public void testIf2() {
+    public void testIfIndent() {
         doTest(true, true);
     }
 
-    public void testIf3() {
+    public void testIfIndentElseSameLine() {
         doTest(true, true);
     }
 
-    public void testIf4() {
+    public void testIfIndentNewLineElseSameLine() {
         doTest(true, true);
     }
 
-    public void testWhatsYourName() {
-        doTest(true, true);
-    }
-
-    public void testWhatsYourNameV2() {
-        doTest(true, true);
-    }
-
-    public void testWhatsYourNameV3() {
-        doTest(true, true);
-    }
-
-    public void testWhatsYourNameV4() {
+    public void testIfSameLine() {
         doTest(true, true);
     }
 
