@@ -2225,7 +2225,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<RULE>> | (IND_GT <<RULE>> IND_LT)
+  // <<RULE>> | (IND_GT <<RULE>> termInd)
   static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
     boolean r;
@@ -2236,14 +2236,14 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // IND_GT <<RULE>> IND_LT
+  // IND_GT <<RULE>> termInd
   private static boolean optInd_1(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IND_GT);
     r = r && _RULE.parse(b, l);
-    r = r && consumeToken(b, IND_LT);
+    r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -3586,6 +3586,18 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "{");
     if (!r) r = consumeToken(b, "}");
     if (!r) r = consumeToken(b, "=");
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IND_LT | <<eof>>
+  static boolean termInd(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "termInd")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_LT);
+    if (!r) r = eof(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
