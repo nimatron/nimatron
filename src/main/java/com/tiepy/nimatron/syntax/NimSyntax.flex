@@ -92,7 +92,7 @@ BRACKET=[\{\}\[\]]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)
 PARENTHESIS=[\(\)]|(\(\.)|(\.\))
 SEMICOLON=;
 COMMA=,
-OTHER=`
+GRAVE_ACCENT=`
 BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|AssertionError|AtomType|auto|BackwardsIndex
 |BiggestFloat|BiggestInt|BiggestUInt|bool|byte|ByteAddress|CatchableError|cchar|cdouble|cfloat|char|cint|clong
 |clongdouble|clonglong|cschar|cshort|csize|csize_t|cstring|cstringArray|cuchar|cuint|culong|culonglong|cushort
@@ -169,6 +169,7 @@ public void yypopState() {
     {PARENTHESIS}               { return NimSyntaxTypes.PARENTHESIS; }
     {SEMICOLON}                 { return NimSyntaxTypes.SEMICOLON; }
     {COMMA}                     { return NimSyntaxTypes.COMMA; }
+    {GRAVE_ACCENT}              { return NimSyntaxTypes.GRAVE_ACCENT; }
     {BUILT_IN_TYPES}            { return NimSyntaxTypes.TYPES; }
     {BUILT_IN_PROCS}            { return NimSyntaxTypes.PROCS; }
     {IDENT}+                    { return NimSyntaxTypes.IDENT; }

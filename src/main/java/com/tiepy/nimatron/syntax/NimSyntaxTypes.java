@@ -33,6 +33,7 @@ public interface NimSyntaxTypes {
     IElementType BRACKET = new NimTokenType("BRACKET");
     IElementType COMMA = new NimTokenType("COMMA");
     IElementType COMMENT = new NimTokenType("COMMENT");
+    IElementType GRAVE_ACCENT = new NimTokenType("GRAVE_ACCENT");
     IElementType IDENT = new NimTokenType("IDENT");
     IElementType KEYWORD = new NimTokenType("KEYWORD");
     IElementType NUMERICAL_CONSTANT = new NimTokenType("NUMERICAL_CONSTANT");
