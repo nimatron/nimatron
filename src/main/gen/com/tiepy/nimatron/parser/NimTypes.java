@@ -10,12 +10,15 @@ import com.tiepy.nimatron.parser.impl.*;
 
 public interface NimTypes {
 
-  IElementType CONSTANT = new NimElementType("CONSTANT");
+  IElementType COMMAND = new NimElementType("COMMAND");
   IElementType EXPR = new NimElementType("EXPR");
-  IElementType PRIMARY = new NimElementType("PRIMARY");
+  IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
+  IElementType IF_STMT = new NimElementType("IF_STMT");
+  IElementType LITERAL = new NimElementType("LITERAL");
+  IElementType OPT_IND = new NimElementType("OPT_IND");
   IElementType STMT = new NimElementType("STMT");
-  IElementType VARIABLE = new NimElementType("VARIABLE");
 
+  IElementType BOOL_LIT = new NimTokenType("BOOL_LIT");
   IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
   IElementType COMMA = new NimTokenType("COMMA");
@@ -61,20 +64,26 @@ public interface NimTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == CONSTANT) {
-        return new NimConstantImpl(node);
+      if (type == COMMAND) {
+        return new NimCommandImpl(node);
       }
       else if (type == EXPR) {
         return new NimExprImpl(node);
       }
-      else if (type == PRIMARY) {
-        return new NimPrimaryImpl(node);
+      else if (type == EXPR_LIST) {
+        return new NimExprListImpl(node);
+      }
+      else if (type == IF_STMT) {
+        return new NimIfStmtImpl(node);
+      }
+      else if (type == LITERAL) {
+        return new NimLiteralImpl(node);
+      }
+      else if (type == OPT_IND) {
+        return new NimOptIndImpl(node);
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);
-      }
-      else if (type == VARIABLE) {
-        return new NimVariableImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimExpr extends PsiElement {
+public interface NimCommand extends PsiElement {
 
   @NotNull
-  NimLiteral getLiteral();
+  NimOptInd getOptInd();
 
 }

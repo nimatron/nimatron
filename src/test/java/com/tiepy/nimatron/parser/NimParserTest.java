@@ -37,71 +37,7 @@ public class NimParserTest extends ParsingTestCase {
         super("", "nim", new NimParserDefinition());
     }
 
-    public void testBlockCommentCommand() {
-        doTest(true, true);
-    }
-
-    public void testEchoBracketed() {
-        doTest(true, true);
-    }
-
-    public void testEchoDollarFoo() {
-        doTest(true, true);
-    }
-
-    public void testEchoMultiArgsNoBrackets() {
-        doTest(true, true);
-    }
-
-    public void testEchoSpace() {
-        doTest(true, true);
-    }
-
-    public void testEmpty() {
-        doTest(true, true);
-    }
-
-    public void testIfElifElse() {
-        doTest(true, true);
-    }
-
-    public void testIfElifElseMultiArgsNoBrackets() {
-        doTest(true, true);
-    }
-
-    public void testIfElifElseWithoutIndent() {
-        doTest(true, true);
-    }
-
-    public void testIfIndent() {
-        doTest(true, true);
-    }
-
-    public void testIfIndentAdditionalLine() {
-        doTest(true, true);
-    }
-
-    public void testIfIndentElseSameLine() {
-        doTest(true, true);
-    }
-
-    public void testIfIndentNewLineElseSameLine() {
-        doTest(true, true);
-    }
-
-    public void testIfSameLine() {
-        doTest(true, true);
-    }
-
-    public void testNestedIfs() {
-        doTest(true, true);
-    }
-
-    public void testNestedIfsDoubleDed() {
-        doTest(true, true);
-    }
-
-    public void testTwoLines() {
+    public void testIfTrueEchoOk() {
         doTest(true, true);
     }
 

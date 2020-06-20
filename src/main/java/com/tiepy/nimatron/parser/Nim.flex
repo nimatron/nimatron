@@ -100,7 +100,7 @@ FLOAT64_SUFFIX=(f|F)64
 FLOAT32_LIT=({HEX_LIT}'{FLOAT32_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT32_SUFFIX})
 FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT64_SUFFIX})
 
-//BOOLEAN_CONSTANT=true|false
+BOOL_LIT=true|false
 
 NIL=nil
 
@@ -224,6 +224,7 @@ private IElementType getIndenterToken() {
     {FLOAT32_LIT}               { return NimTypes.FLOAT32_LIT; }
     {FLOAT64_LIT}               { return NimTypes.FLOAT64_LIT; }
     {NIL}                       { return NimTypes.NIL; }
+    {BOOL_LIT}                  { return NimTypes.BOOL_LIT; }
     {OP0}                       { return NimTypes.OP0; }
     {OP1}                       { return NimTypes.OP1; }
     {OP2}                       { return NimTypes.OP2; }

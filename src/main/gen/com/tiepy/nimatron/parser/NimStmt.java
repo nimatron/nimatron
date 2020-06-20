@@ -7,19 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimStmt extends PsiElement {
 
-  @NotNull
-  List<NimConstant> getConstantList();
+  @Nullable
+  NimCommand getCommand();
 
-  @NotNull
-  List<NimExpr> getExprList();
-
-  @NotNull
-  List<NimPrimary> getPrimaryList();
-
-  @NotNull
-  List<NimStmt> getStmtList();
-
-  @NotNull
-  List<NimVariable> getVariableList();
+  @Nullable
+  NimIfStmt getIfStmt();
 
 }

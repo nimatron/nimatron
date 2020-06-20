@@ -43,15 +43,66 @@
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
   tokens = [
+//    BRACKET="BRACKET"
+//    SEMICOLON="SEMICOLON"
+//    COMMA="COMMA"
+//    GRAVE_ACCENT="GRAVE_ACCENT"
+
     BRACKET="BRACKET"
-    SEMICOLON="SEMICOLON"
     COMMA="COMMA"
+    GENERALIZED_STR_LIT="GENERALIZED_STR_LIT"
+    GENERALIZED_TRIPLESTR_LIT="GENERALIZED_TRIPLESTR_LIT"
     GRAVE_ACCENT="GRAVE_ACCENT"
+    KEYW="KEYW"
+    OP0="OP0"
+    OP1="OP1"
+    OP10="OP10"
+    OP2="OP2"
+    OP3="OP3"
+    OP4="OP4"
+    OP5="OP5"
+    OP6="OP6"
+    OP7="OP7"
+    OP8="OP8"
+    OP9="OP9"
+    OPR="OPR"
+    SEMICOLON="SEMICOLON"
   ]
 
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
+nimFile ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
+stmt ::= ifStmt|command
+ifStmt ::= 'if' expr ':' stmt (IND_EQ 'elif' expr ':' stmt)* (IND_EQ 'else' ':' stmt)?
+command ::= IDENT <<optInd exprList>>
+exprList ::= expr (',' expr)*
+expr ::= literal
+literal ::= INT_LIT
+          | INT8_LIT
+          | INT16_LIT
+          | INT32_LIT
+          | INT64_LIT
+          | UINT_LIT
+          | UINT8_LIT
+          | UINT16_LIT
+          | UINT32_LIT
+          | UINT64_LIT
+          | FLOAT_LIT
+          | FLOAT32_LIT
+          | FLOAT64_LIT
+          | BOOL_LIT
+          | STR_LIT
+          | RSTR_LIT
+          | TRIPLESTR_LIT
+          | CHAR_LIT
+          | NIL
+
+// meta rules
+private termInd ::= IND_LT | <<eof>>
+meta optInd ::= <<RULE>> | (IND_GT <<RULE>> termInd)
+
+/*
 module ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
 private operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
 private meta optInd ::= <<RULE>> | (IND_GT <<RULE>> termInd)
@@ -207,3 +258,4 @@ private complexOrSimpleStmt ::= ifStmt
                               | mixinStmt
                               | simpleStmt
 stmt ::= (IND_GT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* IND_LT) | simpleStmt
+*/

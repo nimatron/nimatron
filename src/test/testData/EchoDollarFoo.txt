@@ -1,8 +1,0 @@
-Nim File(0,9)
-  NimStmtImpl(STMT)(0,9)
-    NimPrimaryImpl(PRIMARY)(0,4)
-      PsiElement(NimTokenType.IDENT)('echo')(0,4)
-    PsiWhiteSpace(' ')(4,5)
-    PsiElement(NimTokenType.OP10)('$')(5,6)
-    NimPrimaryImpl(PRIMARY)(6,9)
-      PsiElement(NimTokenType.IDENT)('foo')(6,9)

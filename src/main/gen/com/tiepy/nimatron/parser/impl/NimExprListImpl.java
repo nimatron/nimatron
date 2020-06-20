@@ -11,14 +11,14 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimPrimaryImpl extends ASTWrapperPsiElement implements NimPrimary {
+public class NimExprListImpl extends ASTWrapperPsiElement implements NimExprList {
 
-  public NimPrimaryImpl(@NotNull ASTNode node) {
+  public NimExprListImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitPrimary(this);
+    visitor.visitExprList(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,32 +28,8 @@ public class NimPrimaryImpl extends ASTWrapperPsiElement implements NimPrimary {
 
   @Override
   @NotNull
-  public List<NimConstant> getConstantList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimConstant.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimPrimary> getPrimaryList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimary.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimStmt> getStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimVariable> getVariableList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimVariable.class);
   }
 
 }

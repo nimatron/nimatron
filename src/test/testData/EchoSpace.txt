@@ -1,8 +1,0 @@
-Nim File(0,20)
-  NimStmtImpl(STMT)(0,20)
-    NimPrimaryImpl(PRIMARY)(0,20)
-      PsiElement(NimTokenType.IDENT)('echo')(0,4)
-      PsiWhiteSpace(' ')(4,5)
-      NimExprImpl(EXPR)(5,20)
-        NimPrimaryImpl(PRIMARY)(5,20)
-          PsiElement(NimTokenType.STR_LIT)('"Hello, World!"')(5,20)
