@@ -295,13 +295,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // <<RULE>> | (IND_GT <<RULE>> termInd)
-  public static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
+  static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = _RULE.parse(b, l);
     if (!r) r = optInd_1(b, l + 1, _RULE);
-    exit_section_(b, m, OPT_IND, r);
+    exit_section_(b, m, null, r);
     return r;
   }
 

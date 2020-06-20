@@ -15,7 +15,6 @@ public interface NimTypes {
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
-  IElementType OPT_IND = new NimElementType("OPT_IND");
   IElementType STMT = new NimElementType("STMT");
 
   IElementType BOOL_LIT = new NimTokenType("BOOL_LIT");
@@ -78,9 +77,6 @@ public interface NimTypes {
       }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);
-      }
-      else if (type == OPT_IND) {
-        return new NimOptIndImpl(node);
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);

@@ -28,8 +28,8 @@ public class NimCommandImpl extends ASTWrapperPsiElement implements NimCommand {
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimExprList getExprList() {
+    return findNotNullChildByClass(NimExprList.class);
   }
 
 }

@@ -100,7 +100,7 @@ literal ::= INT_LIT
 
 // meta rules
 private termInd ::= IND_LT | <<eof>>
-meta optInd ::= <<RULE>> | (IND_GT <<RULE>> termInd)
+private meta optInd ::= <<RULE>> | (IND_GT <<RULE>> termInd)
 
 /*
 module ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
