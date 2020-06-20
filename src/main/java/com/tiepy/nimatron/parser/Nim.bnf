@@ -75,7 +75,7 @@
 nimFile ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
 stmt ::= ifStmt|command
 ifStmt ::= 'if' expr ':' stmt (IND_EQ 'elif' expr ':' stmt)* (IND_EQ 'else' ':' stmt)?
-command ::= IDENT <<optInd exprList>>
+command ::= IDENT ('(' <<optInd exprList>>? ')' | <<optInd exprList>>)
 exprList ::= expr (',' expr)*
 expr ::= literal
 literal ::= INT_LIT

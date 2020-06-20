@@ -36,16 +36,46 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENT <<optInd exprList>>
+  // IDENT ('(' <<optInd exprList>>? ')' | <<optInd exprList>>)
   public static boolean command(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "command")) return false;
     if (!nextTokenIs(b, IDENT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IDENT);
-    r = r && optInd(b, l + 1, exprList_parser_);
+    r = r && command_1(b, l + 1);
     exit_section_(b, m, COMMAND, r);
     return r;
+  }
+
+  // '(' <<optInd exprList>>? ')' | <<optInd exprList>>
+  private static boolean command_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "command_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = command_1_0(b, l + 1);
+    if (!r) r = optInd(b, l + 1, exprList_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '(' <<optInd exprList>>? ')'
+  private static boolean command_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "command_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "(");
+    r = r && command_1_0_1(b, l + 1);
+    r = r && consumeToken(b, ")");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<optInd exprList>>?
+  private static boolean command_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "command_1_0_1")) return false;
+    optInd(b, l + 1, exprList_parser_);
+    return true;
   }
 
   /* ********************************************************** */

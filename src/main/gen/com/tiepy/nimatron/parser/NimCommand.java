@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimCommand extends PsiElement {
 
-  @NotNull
+  @Nullable
   NimExprList getExprList();
 
 }

@@ -27,9 +27,9 @@ public class NimCommandImpl extends ASTWrapperPsiElement implements NimCommand {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimExprList getExprList() {
-    return findNotNullChildByClass(NimExprList.class);
+    return findChildByClass(NimExprList.class);
   }
 
 }
