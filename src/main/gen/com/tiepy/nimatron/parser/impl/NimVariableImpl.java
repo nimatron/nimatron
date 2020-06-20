@@ -11,14 +11,14 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimExprImpl extends ASTWrapperPsiElement implements NimExpr {
+public class NimVariableImpl extends ASTWrapperPsiElement implements NimVariable {
 
-  public NimExprImpl(@NotNull ASTNode node) {
+  public NimVariableImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitExpr(this);
+    visitor.visitVariable(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,21 +27,15 @@ public class NimExprImpl extends ASTWrapperPsiElement implements NimExpr {
   }
 
   @Override
-  @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
+  @Nullable
+  public NimExpr getExpr() {
+    return findChildByClass(NimExpr.class);
   }
 
   @Override
-  @NotNull
-  public List<NimExprList> getExprListList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprList.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimLiteral> getLiteralList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimLiteral.class);
+  @Nullable
+  public NimStmt getStmt() {
+    return findChildByClass(NimStmt.class);
   }
 
 }

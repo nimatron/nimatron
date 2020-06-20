@@ -10,12 +10,14 @@ import com.tiepy.nimatron.parser.impl.*;
 
 public interface NimTypes {
 
-  IElementType COMMAND = new NimElementType("COMMAND");
   IElementType EXPR = new NimElementType("EXPR");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
+  IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
   IElementType STMT = new NimElementType("STMT");
+  IElementType VARIABLE = new NimElementType("VARIABLE");
+  IElementType VAR_STMT = new NimElementType("VAR_STMT");
 
   IElementType BOOL_LIT = new NimTokenType("BOOL_LIT");
   IElementType BRACKET = new NimTokenType("BRACKET");
@@ -63,14 +65,14 @@ public interface NimTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == COMMAND) {
-        return new NimCommandImpl(node);
-      }
-      else if (type == EXPR) {
+      if (type == EXPR) {
         return new NimExprImpl(node);
       }
       else if (type == EXPR_LIST) {
         return new NimExprListImpl(node);
+      }
+      else if (type == EXPR_STMT) {
+        return new NimExprStmtImpl(node);
       }
       else if (type == IF_STMT) {
         return new NimIfStmtImpl(node);
@@ -80,6 +82,12 @@ public interface NimTypes {
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);
+      }
+      else if (type == VARIABLE) {
+        return new NimVariableImpl(node);
+      }
+      else if (type == VAR_STMT) {
+        return new NimVarStmtImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

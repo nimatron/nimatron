@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimStmt extends PsiElement {
+public interface NimVarStmt extends PsiElement {
 
-  @Nullable
-  NimExprStmt getExprStmt();
-
-  @Nullable
-  NimIfStmt getIfStmt();
-
-  @Nullable
-  NimVarStmt getVarStmt();
+  @NotNull
+  List<NimVariable> getVariableList();
 
 }

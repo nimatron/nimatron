@@ -49,6 +49,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testVar() {
+        doTest(true, true);
+    }
+
     public void testWhatsYourName() {
         doTest(true, true);
     }

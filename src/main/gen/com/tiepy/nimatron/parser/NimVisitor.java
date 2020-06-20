@@ -7,15 +7,15 @@ import com.intellij.psi.PsiElement;
 
 public class NimVisitor extends PsiElementVisitor {
 
-  public void visitCommand(@NotNull NimCommand o) {
-    visitPsiElement(o);
-  }
-
   public void visitExpr(@NotNull NimExpr o) {
     visitPsiElement(o);
   }
 
   public void visitExprList(@NotNull NimExprList o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExprStmt(@NotNull NimExprStmt o) {
     visitPsiElement(o);
   }
 
@@ -28,6 +28,14 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitStmt(@NotNull NimStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVarStmt(@NotNull NimVarStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVariable(@NotNull NimVariable o) {
     visitPsiElement(o);
   }
 

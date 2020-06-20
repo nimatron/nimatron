@@ -36,56 +36,89 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENT ('(' <<optInd exprList>>? ')' | <<optInd exprList>>)
-  public static boolean command(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "command")) return false;
-    if (!nextTokenIs(b, IDENT)) return false;
+  // ':' stmt
+  static boolean colonBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "colonBody")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENT);
-    r = r && command_1(b, l + 1);
-    exit_section_(b, m, COMMAND, r);
-    return r;
-  }
-
-  // '(' <<optInd exprList>>? ')' | <<optInd exprList>>
-  private static boolean command_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "command_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = command_1_0(b, l + 1);
-    if (!r) r = optInd(b, l + 1, exprList_parser_);
+    r = consumeToken(b, ":");
+    r = r && stmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
-  }
-
-  // '(' <<optInd exprList>>? ')'
-  private static boolean command_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "command_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, "(");
-    r = r && command_1_0_1(b, l + 1);
-    r = r && consumeToken(b, ")");
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // <<optInd exprList>>?
-  private static boolean command_1_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "command_1_0_1")) return false;
-    optInd(b, l + 1, exprList_parser_);
-    return true;
   }
 
   /* ********************************************************** */
-  // literal
+  // primary (OP10 <<optInd primary>>)*
   public static boolean expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, EXPR, "<expr>");
-    r = literal(b, l + 1);
+    Marker m = enter_section_(b, l, _COLLAPSE_, EXPR, "<expr>");
+    r = primary(b, l + 1);
+    r = r && expr_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (OP10 <<optInd primary>>)*
+  private static boolean expr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!expr_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "expr_1", c)) break;
+    }
+    return true;
+  }
+
+  // OP10 <<optInd primary>>
+  private static boolean expr_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OP10);
+    r = r && optInd(b, l + 1, primary_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr (':'|'=' expr)?
+  static boolean exprColonEqExpr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprColonEqExpr")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1);
+    r = r && exprColonEqExpr_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (':'|'=' expr)?
+  private static boolean exprColonEqExpr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprColonEqExpr_1")) return false;
+    exprColonEqExpr_1_0(b, l + 1);
+    return true;
+  }
+
+  // ':'|'=' expr
+  private static boolean exprColonEqExpr_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprColonEqExpr_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ":");
+    if (!r) r = exprColonEqExpr_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '=' expr
+  private static boolean exprColonEqExpr_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprColonEqExpr_1_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "=");
+    r = r && expr(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -120,6 +153,160 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ",");
     r = r && expr(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr (('=' <<optInd expr>> colonBody?) | (expr (',' expr)* ))?
+  public static boolean exprStmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, EXPR_STMT, "<expr stmt>");
+    r = expr(b, l + 1);
+    r = r && exprStmt_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (('=' <<optInd expr>> colonBody?) | (expr (',' expr)* ))?
+  private static boolean exprStmt_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1")) return false;
+    exprStmt_1_0(b, l + 1);
+    return true;
+  }
+
+  // ('=' <<optInd expr>> colonBody?) | (expr (',' expr)* )
+  private static boolean exprStmt_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = exprStmt_1_0_0(b, l + 1);
+    if (!r) r = exprStmt_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '=' <<optInd expr>> colonBody?
+  private static boolean exprStmt_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "=");
+    r = r && optInd(b, l + 1, expr_parser_);
+    r = r && exprStmt_1_0_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // colonBody?
+  private static boolean exprStmt_1_0_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1_0_0_2")) return false;
+    colonBody(b, l + 1);
+    return true;
+  }
+
+  // expr (',' expr)*
+  private static boolean exprStmt_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1);
+    r = r && exprStmt_1_0_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' expr)*
+  private static boolean exprStmt_1_0_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1_0_1_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!exprStmt_1_0_1_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "exprStmt_1_0_1_1", c)) break;
+    }
+    return true;
+  }
+
+  // ',' expr
+  private static boolean exprStmt_1_0_1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "exprStmt_1_0_1_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ",");
+    r = r && expr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)?
+  static boolean identColonEquals(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identColonEquals")) return false;
+    if (!nextTokenIs(b, IDENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENT);
+    r = r && identColonEquals_1(b, l + 1);
+    r = r && identColonEquals_2(b, l + 1);
+    r = r && identColonEquals_3(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' IDENT)*
+  private static boolean identColonEquals_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identColonEquals_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!identColonEquals_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "identColonEquals_1", c)) break;
+    }
+    return true;
+  }
+
+  // ',' IDENT
+  private static boolean identColonEquals_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identColonEquals_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ",");
+    r = r && consumeToken(b, IDENT);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ','?
+  private static boolean identColonEquals_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identColonEquals_2")) return false;
+    consumeToken(b, ",");
+    return true;
+  }
+
+  // ('=' <<optInd expr>>)?
+  private static boolean identColonEquals_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identColonEquals_3")) return false;
+    identColonEquals_3_0(b, l + 1);
+    return true;
+  }
+
+  // '=' <<optInd expr>>
+  private static boolean identColonEquals_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identColonEquals_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "=");
+    r = r && optInd(b, l + 1, expr_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENT|literal
+  static boolean identOrLiteral(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identOrLiteral")) return false;
+    boolean r;
+    r = consumeToken(b, IDENT);
+    if (!r) r = literal(b, l + 1);
     return r;
   }
 
@@ -324,6 +511,24 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9
+  static boolean operator(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operator")) return false;
+    boolean r;
+    r = consumeToken(b, OP0);
+    if (!r) r = consumeToken(b, OP1);
+    if (!r) r = consumeToken(b, OP2);
+    if (!r) r = consumeToken(b, OP3);
+    if (!r) r = consumeToken(b, OP4);
+    if (!r) r = consumeToken(b, OP5);
+    if (!r) r = consumeToken(b, OP6);
+    if (!r) r = consumeToken(b, OP7);
+    if (!r) r = consumeToken(b, OP8);
+    if (!r) r = consumeToken(b, OP9);
+    return r;
+  }
+
+  /* ********************************************************** */
   // <<RULE>> | (IND_GT <<RULE>> termInd)
   static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
@@ -348,13 +553,166 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ifStmt|command
+  // operator* identOrLiteral primarySuffix*
+  static boolean primary(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = primary_0(b, l + 1);
+    r = r && identOrLiteral(b, l + 1);
+    r = r && primary_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // operator*
+  private static boolean primary_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!operator(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primary_0", c)) break;
+    }
+    return true;
+  }
+
+  // primarySuffix*
+  private static boolean primary_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!primarySuffix(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primary_2", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
+  //                         | <<optInd exprList>>
+  static boolean primarySuffix(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = primarySuffix_0(b, l + 1);
+    if (!r) r = optInd(b, l + 1, exprList_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '(' <<optInd ((exprColonEqExpr ','?)*)>> ')'
+  private static boolean primarySuffix_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "(");
+    r = r && optInd(b, l + 1, primarySuffix_0_1_0_parser_);
+    r = r && consumeToken(b, ")");
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (exprColonEqExpr ','?)*
+  private static boolean primarySuffix_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix_0_1_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!primarySuffix_0_1_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primarySuffix_0_1_0", c)) break;
+    }
+    return true;
+  }
+
+  // exprColonEqExpr ','?
+  private static boolean primarySuffix_0_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix_0_1_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = exprColonEqExpr(b, l + 1);
+    r = r && primarySuffix_0_1_0_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ','?
+  private static boolean primarySuffix_0_1_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix_0_1_0_0_1")) return false;
+    consumeToken(b, ",");
+    return true;
+  }
+
+  /* ********************************************************** */
+  // <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
+  static boolean section(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = _RULE.parse(b, l);
+    if (!r) r = section_1(b, l + 1, _RULE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT
+  private static boolean section_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_GT);
+    r = r && section_1_1(b, l + 1, _RULE);
+    r = r && section_1_2(b, l + 1, _RULE);
+    r = r && consumeToken(b, IND_LT);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<RULE>>?
+  private static boolean section_1_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1")) return false;
+    _RULE.parse(b, l);
+    return true;
+  }
+
+  // (IND_EQ <<RULE>>?)*
+  private static boolean section_1_2(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!section_1_2_0(b, l + 1, _RULE)) break;
+      if (!empty_element_parsed_guard_(b, "section_1_2", c)) break;
+    }
+    return true;
+  }
+
+  // IND_EQ <<RULE>>?
+  private static boolean section_1_2_0(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && section_1_2_0_1(b, l + 1, _RULE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<RULE>>?
+  private static boolean section_1_2_0_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_2_0_1")) return false;
+    _RULE.parse(b, l);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // exprStmt
+  //        | ifStmt
+  //        | varStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = ifStmt(b, l + 1);
-    if (!r) r = command(b, l + 1);
+    r = exprStmt(b, l + 1);
+    if (!r) r = ifStmt(b, l + 1);
+    if (!r) r = varStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -371,9 +729,71 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  /* ********************************************************** */
+  // ('let'|'var'|'using') <<section variable>>
+  public static boolean varStmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "varStmt")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, VAR_STMT, "<var stmt>");
+    r = varStmt_0(b, l + 1);
+    r = r && section(b, l + 1, variable_parser_);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // 'let'|'var'|'using'
+  private static boolean varStmt_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "varStmt_0")) return false;
+    boolean r;
+    r = consumeToken(b, "let");
+    if (!r) r = consumeToken(b, "var");
+    if (!r) r = consumeToken(b, "using");
+    return r;
+  }
+
+  /* ********************************************************** */
+  // identColonEquals colonBody?
+  public static boolean variable(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable")) return false;
+    if (!nextTokenIs(b, IDENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = identColonEquals(b, l + 1);
+    r = r && variable_1(b, l + 1);
+    exit_section_(b, m, VARIABLE, r);
+    return r;
+  }
+
+  // colonBody?
+  private static boolean variable_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "variable_1")) return false;
+    colonBody(b, l + 1);
+    return true;
+  }
+
   static final Parser exprList_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return exprList(b, l + 1);
+    }
+  };
+  static final Parser expr_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return expr(b, l + 1);
+    }
+  };
+  static final Parser primarySuffix_0_1_0_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return primarySuffix_0_1_0(b, l + 1);
+    }
+  };
+  static final Parser primary_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return primary(b, l + 1);
+    }
+  };
+  static final Parser variable_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return variable(b, l + 1);
     }
   };
 }
