@@ -63,7 +63,15 @@ public class NimLexerTest {
     }
 
     @Test
-    public void test() {
+    public void testSimpleIf() {
+        int tokenCount = parse("if name == \"\":\n" +
+                "  echo \"Poor soul, you lost your name?\"\n");
+
+        Assert.assertEquals(12, tokenCount);
+    }
+
+    @Test
+    public void testExample() {
         int tokenCount = parse("echo \"Hello, World!\" # This is a line comment\n" +
                 "\n" +
                 "#[\n" +
