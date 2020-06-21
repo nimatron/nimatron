@@ -32,7 +32,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   static boolean parse_root_(IElementType t, PsiBuilder b, int l) {
-    return nimFile(b, l + 1);
+    return module(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -44,6 +44,19 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ":");
     r = r && stmts(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ifStmt
+  //                               | varStmt
+  //                               | simpleStmt
+  static boolean complexOrSimpleStmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "complexOrSimpleStmt")) return false;
+    boolean r;
+    r = ifStmt(b, l + 1);
+    if (!r) r = varStmt(b, l + 1);
+    if (!r) r = simpleStmt(b, l + 1);
     return r;
   }
 
@@ -410,50 +423,50 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // IND_EQ* stmts? ';'? IND_EQ*
-  static boolean nimFile(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nimFile")) return false;
+  static boolean module(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = nimFile_0(b, l + 1);
-    r = r && nimFile_1(b, l + 1);
-    r = r && nimFile_2(b, l + 1);
-    r = r && nimFile_3(b, l + 1);
+    r = module_0(b, l + 1);
+    r = r && module_1(b, l + 1);
+    r = r && module_2(b, l + 1);
+    r = r && module_3(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // IND_EQ*
-  private static boolean nimFile_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nimFile_0")) return false;
+  private static boolean module_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_0")) return false;
     while (true) {
       int c = current_position_(b);
       if (!consumeToken(b, IND_EQ)) break;
-      if (!empty_element_parsed_guard_(b, "nimFile_0", c)) break;
+      if (!empty_element_parsed_guard_(b, "module_0", c)) break;
     }
     return true;
   }
 
   // stmts?
-  private static boolean nimFile_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nimFile_1")) return false;
+  private static boolean module_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_1")) return false;
     stmts(b, l + 1);
     return true;
   }
 
   // ';'?
-  private static boolean nimFile_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nimFile_2")) return false;
+  private static boolean module_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_2")) return false;
     consumeToken(b, ";");
     return true;
   }
 
   // IND_EQ*
-  private static boolean nimFile_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nimFile_3")) return false;
+  private static boolean module_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "module_3")) return false;
     while (true) {
       int c = current_position_(b);
       if (!consumeToken(b, IND_EQ)) break;
-      if (!empty_element_parsed_guard_(b, "nimFile_3", c)) break;
+      if (!empty_element_parsed_guard_(b, "module_3", c)) break;
     }
     return true;
   }
@@ -655,16 +668,19 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // varStmt
-  //        | exprStmt
-  //        | ifStmt
+  // exprStmt
+  static boolean simpleStmt(PsiBuilder b, int l) {
+    return exprStmt(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // complexOrSimpleStmt|simpleStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = varStmt(b, l + 1);
-    if (!r) r = exprStmt(b, l + 1);
-    if (!r) r = ifStmt(b, l + 1);
+    r = complexOrSimpleStmt(b, l + 1);
+    if (!r) r = simpleStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

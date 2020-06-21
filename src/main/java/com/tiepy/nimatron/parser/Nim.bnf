@@ -72,16 +72,40 @@
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
-nimFile ::= IND_EQ* stmts? ';'? IND_EQ*
-
-// Statements
+// module = stmt ^* (';' / IND{=})
+module ::= IND_EQ* stmts? ';'? IND_EQ*
 private stmts ::= stmt ((';'|IND_EQ) stmt)*
-stmt ::= varStmt
-       | exprStmt
-       | ifStmt
+
+// stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
+//      / simpleStmt ^+ ';'
+stmt ::= complexOrSimpleStmt|simpleStmt
+
+// complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
+//                     | tryStmt | forStmt
+//                     | blockStmt | staticStmt | deferStmt | asmStmt
+//                     | 'proc' routine
+//                     | 'func' routine
+//                     | 'method' routine
+//                     | 'iterator' routine
+//                     | 'macro' routine
+//                     | 'template' routine
+//                     | 'converter' routine
+//                     | 'type' section(typeDef)
+//                     | 'const' section(constant)
+//                     | ('let' | 'var' | 'using') section(variable)
+//                     | bindStmt | mixinStmt)
+//                     / simpleStmt
+private complexOrSimpleStmt ::= ifStmt
+                              | varStmt
+                              | simpleStmt
+varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
+
+// simpleStmt = ((returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
+//            | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
+//            | includeStmt | commentStmt) / exprStmt) COMMENT?
+private simpleStmt::= exprStmt
 
 // Variable declaration statement
-varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
 variable ::= identColonEquals colonBody?
 private identColonEquals ::= IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)?
 private colonBody ::= ':' stmts
