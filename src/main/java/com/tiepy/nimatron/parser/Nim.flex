@@ -299,17 +299,14 @@ private IElementType getDedenterToken() {
     {CRLF}                      { indentSpaces = 0; }
     \                           { indentSpaces++; }
     .                           { yypushback(1); return getIndenterToken(); }
-    <<EOF>>                     { return getIndenterToken(); }
 }
 
 <DEDENTER> {
     .                           { yypushback(1); return getDedenterToken(); }
-    <<EOF>>                     { return getDedenterToken(); }
 }
 
 <LINE_COMMENT> {
     .+                          { popState(); return TokenType.WHITE_SPACE; }
-    <<EOF>>                     { popState(); return TokenType.WHITE_SPACE; }
 }
 
 <BLOCK_COMMENT> {
@@ -317,7 +314,6 @@ private IElementType getDedenterToken() {
     {BLOCK_COMMENT_END}         { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <BLOCK_DOC_COMMENT> {
@@ -325,7 +321,6 @@ private IElementType getDedenterToken() {
     {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <STRING_LITERAL> {
@@ -333,14 +328,12 @@ private IElementType getDedenterToken() {
     \"                          { popState(); return NimTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <TRIPLE_STRING_LITERAL> {
     \"\"\"                      { popState(); return NimTypes.TRIPLESTR_LIT; }
     {CRLF}                      { }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <RAW_STRING_LITERAL> {
@@ -348,7 +341,6 @@ private IElementType getDedenterToken() {
     \"                          { popState(); return NimTypes.RSTR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <GENERALIZED_STRING_LITERAL> {
@@ -356,19 +348,16 @@ private IElementType getDedenterToken() {
     \"                          { popState(); return NimTypes.GENERALIZED_STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
     \"\"\"                      { popState(); return NimTypes.GENERALIZED_TRIPLESTR_LIT; }
     {CRLF}                      { }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }
 
 <CHARACTER_LITERAL> {
     '                           { popState(); return NimTypes.CHAR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
-    <<EOF>>                     { return TokenType.BAD_CHARACTER; }
 }

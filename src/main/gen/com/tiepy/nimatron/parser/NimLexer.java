@@ -1105,54 +1105,7 @@ private IElementType getDedenterToken() {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
         zzDoEOF();
-        switch (zzLexicalState) {
-            case INDENTER: {
-              return getIndenterToken();
-            }  // fall though
-            case 261: break;
-            case DEDENTER: {
-              return getDedenterToken();
-            }  // fall though
-            case 262: break;
-            case LINE_COMMENT: {
-              popState(); return TokenType.WHITE_SPACE;
-            }  // fall though
-            case 263: break;
-            case BLOCK_COMMENT: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 264: break;
-            case BLOCK_DOC_COMMENT: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 265: break;
-            case STRING_LITERAL: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 266: break;
-            case TRIPLE_STRING_LITERAL: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 267: break;
-            case RAW_STRING_LITERAL: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 268: break;
-            case GENERALIZED_STRING_LITERAL: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 269: break;
-            case GENERALIZED_TRIPLE_STRING_LITERAL: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 270: break;
-            case CHARACTER_LITERAL: {
-              return TokenType.BAD_CHARACTER;
-            }  // fall though
-            case 271: break;
-            default:
         return null;
-        }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
