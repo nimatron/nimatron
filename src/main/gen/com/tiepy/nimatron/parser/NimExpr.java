@@ -16,4 +16,7 @@ public interface NimExpr extends PsiElement {
   @NotNull
   List<NimLiteral> getLiteralList();
 
+  @NotNull
+  List<NimPrefixOperator> getPrefixOperatorList();
+
 }
