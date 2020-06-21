@@ -78,26 +78,26 @@ nimFile ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
 stmt ::= ifStmt
        | exprStmt
        | varStmt
-exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))? {pin=1}
+exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
 ifStmt ::= 'if' expr ':' <<optInd stmt>>
    (IND_EQ 'elif' expr ':' <<optInd stmt>>)*
-   (IND_EQ 'else' ':' <<optInd stmt>>)? {pin=1}
-varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
+   (IND_EQ 'else' ':' <<optInd stmt>>)?
+varStmt ::= (('let'|'var'|'using') <<section variable>>)
 
 // Variable declaration
-variable ::= identColonEquals colonBody? {pin=1}
-private identColonEquals ::= IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)? {pin=1}
-private colonBody ::= ':' stmt {pin=1}
+variable ::= identColonEquals colonBody?
+private identColonEquals ::= IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)?
+private colonBody ::= ':' stmt
 
 // Expression
-expr ::= primary (OP10 <<optInd primary>>)* {pin=1}
-private primary ::= prefixOperator? identOrLiteral primarySuffix* {pin=2}
+expr ::= primary (OP10 <<optInd primary>>)*
+private primary ::= prefixOperator? identOrLiteral primarySuffix*
 prefixOperator ::= OP8
 private identOrLiteral ::= IDENT|literal
 private primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                              | <<optInd exprList>> // command syntax
-private exprColonEqExpr ::= expr (':'|'=' expr)? {pin=1}
-exprList ::= expr (',' expr)* {pin=1}
+private exprColonEqExpr ::= expr (':'|'=' expr)?
+exprList ::= expr (',' expr)*
 
 // Literal
 literal ::= INT_LIT

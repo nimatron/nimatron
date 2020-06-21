@@ -39,7 +39,7 @@ public class NimLexerTest {
                 "else:\n" +
                 "  echo \"FALSE\"\n");
 
-        Assert.assertEquals(18, tokenCount);
+        Assert.assertEquals(16, tokenCount);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class NimLexerTest {
                 "else:\n" +
                 "  echo \"FALSE L1\"\n");
 
-        Assert.assertEquals(18, tokenCount);
+        Assert.assertEquals(34, tokenCount);
     }
 
     /**

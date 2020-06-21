@@ -203,21 +203,36 @@ private IElementType getIndenterToken() {
         return NimTypes.IND_GT;
     }
 
-    // indentSpaces < lastIndentSpaces
+    // Handle dedents.
+    // Following is where indentSpaces < lastIndentSpaces.
 
     // Determine difference with previous indentation level.
-    Indent lastIndent = indentStack.peek();
+    Indent lastIndent = indentStack.pop();
     int diff = lastIndent.Column - indentSpaces;
 
+    // Handle error case where dedent is smaller than last indent.
     if (diff < lastIndent.Increment) {
         return TokenType.BAD_CHARACTER;
     }
 
-    // Move to previous indentation level.
-    lastIndentSpaces = lastIndent.Column;
-
-    // TODO: How many dedents?
     dedentStack.push(NimTypes.IND_EQ);
+
+    // Add required dedents to stack to be returned.
+    while (diff > lastIndent.Increment) {
+
+        // Determine difference with previous indentation level.
+        lastIndent = indentStack.pop();
+        diff = lastIndent.Column - indentSpaces;
+
+        // Handle error case where dedent is smaller than last indent.
+        if (diff < lastIndent.Increment) {
+            return TokenType.BAD_CHARACTER;
+        }
+
+        dedentStack.push(NimTypes.IND_LT);
+    }
+
+    lastIndentSpaces = lastIndent.Column;
 
     popState();
     pushState(DEDENTER);
