@@ -45,6 +45,14 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testIfIndent() {
+        doTest(true, true);
+    }
+
+    public void testIfElseIndent() {
+        doTest(true, true);
+    }
+
     public void testIfTrueEchoOk() {
         doTest(true, true);
     }
