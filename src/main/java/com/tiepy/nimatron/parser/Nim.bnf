@@ -83,7 +83,7 @@ exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
 ifStmt ::= 'if' expr ':' <<optInd stmts>>
    (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
    (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=1}
-varStmt ::= (('let'|'var'|'using') <<section variable>>)
+varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
 
 // Variable declaration
 variable ::= identColonEquals colonBody?
