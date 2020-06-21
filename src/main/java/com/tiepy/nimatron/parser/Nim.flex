@@ -117,12 +117,21 @@ KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|
 
 private final Stack<Integer> stateStack = new Stack<Integer>();
 
+/**
+ * Pushes new state onto stack and sets parser to begin new state.
+ * @param newState New parser state.
+ * @return New stack size.
+ */
 private int pushState(int newState) {
     stateStack.push(yystate());
     yybegin(newState);
     return stateStack.size();
 }
 
+/**
+ * Pops previous state from stack.
+ * @return Previous state.
+ */
 private int popState() {
     yybegin(stateStack.pop());
     return stateStack.size();
@@ -131,12 +140,19 @@ private int popState() {
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
 
+/**
+ * Records last indent spaces and pushes the INDENTER state onto stack.
+ */
 private void handleIndent() {
     lastIndentSpaces = indentSpaces;
     indentSpaces = 0;
     pushState(INDENTER);
 }
 
+/**
+ * Stores column number and increment for each indentation level.
+ * This is required as it's not certain each indent is same size.
+ */
 private class Indent {
     public int Column;
     public int Increment;
@@ -144,11 +160,17 @@ private class Indent {
 
 private final Stack<Indent> indentStack = new Stack<Indent>();
 
+/**
+ * This method is used to return multiple tokens by stalling the state transition back to YYINITIAL.
+ * @return Next token to be returned to parser.
+ */
 private IElementType getIndenterToken() {
     if (indentSpaces == lastIndentSpaces) {
         popState();
         return NimTypes.IND_EQ;
-    } else if (indentSpaces > lastIndentSpaces) {
+    }
+
+    if (indentSpaces > lastIndentSpaces) {
 
         // Note the incremental column positions for indentation.
         int lastLength = 0;
@@ -160,25 +182,31 @@ private IElementType getIndenterToken() {
 
         popState();
         return NimTypes.IND_GT;
-    } else {
-        Indent lastIndent = indentStack.pop();
-        int diff = lastIndent.Column - indentSpaces;
-
-        // Handle exact proper single dedent.
-        if (diff == lastIndent.Increment) {
-            popState();
-            return NimTypes.IND_LT;
-        }
-
-        // Handle multi-dedent.
-        // NOTE: Since popState() hasn't been called, it will return additional IND_LT tokens.
-        if (diff > lastIndent.Increment) {
-            return NimTypes.IND_LT;
-        }
-
-        popState();
-        return TokenType.BAD_CHARACTER;
     }
+
+    // indentSpaces < lastIndentSpaces
+
+    if (indentStack.size() == 0) {
+        popState();
+        return NimTypes.IND_EQ;
+    }
+
+    Indent lastIndent = indentStack.pop();
+    int diff = lastIndent.Column - indentSpaces;
+    lastIndentSpaces = lastIndent.Column;
+
+    // Handle exact proper single dedent.
+    if (diff == lastIndent.Increment) {
+        return NimTypes.IND_LT;
+    }
+
+    // Handle multi-dedent.
+    if (diff > lastIndent.Increment) {
+        return NimTypes.IND_LT;
+    }
+
+    popState();
+    return TokenType.BAD_CHARACTER;
 }
 
 %}
