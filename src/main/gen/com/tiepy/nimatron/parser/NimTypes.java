@@ -10,11 +10,13 @@ import com.tiepy.nimatron.parser.impl.*;
 
 public interface NimTypes {
 
+  IElementType COND_STMT = new NimElementType("COND_STMT");
   IElementType EXPR = new NimElementType("EXPR");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
+  IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
   IElementType STMT = new NimElementType("STMT");
   IElementType VARIABLE = new NimElementType("VARIABLE");
   IElementType VAR_STMT = new NimElementType("VAR_STMT");
@@ -65,7 +67,10 @@ public interface NimTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == EXPR) {
+      if (type == COND_STMT) {
+        return new NimCondStmtImpl(node);
+      }
+      else if (type == EXPR) {
         return new NimExprImpl(node);
       }
       else if (type == EXPR_LIST) {
@@ -79,6 +84,9 @@ public interface NimTypes {
       }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);
+      }
+      else if (type == SIMPLE_EXPR) {
+        return new NimSimpleExprImpl(node);
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);

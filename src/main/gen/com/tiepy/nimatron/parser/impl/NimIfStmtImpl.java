@@ -27,15 +27,9 @@ public class NimIfStmtImpl extends ASTWrapperPsiElement implements NimIfStmt {
   }
 
   @Override
-  @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimStmt> getStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
+  @Nullable
+  public NimCondStmt getCondStmt() {
+    return findChildByClass(NimCondStmt.class);
   }
 
 }

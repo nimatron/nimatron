@@ -28,20 +28,8 @@ public class NimExprImpl extends ASTWrapperPsiElement implements NimExpr {
 
   @Override
   @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimExprList> getExprListList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprList.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimLiteral> getLiteralList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimLiteral.class);
+  public NimSimpleExpr getSimpleExpr() {
+    return findNotNullChildByClass(NimSimpleExpr.class);
   }
 
 }

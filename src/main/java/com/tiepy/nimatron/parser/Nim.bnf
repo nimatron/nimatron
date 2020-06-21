@@ -72,29 +72,29 @@
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
-// module = stmt ^* (';' / IND{=})
+//module = stmt ^* (';' / IND{=})
 module ::= IND_EQ* stmts? ';'? IND_EQ*
 private stmts ::= stmt ((';'|IND_EQ) stmt)*
 
-// stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
-//      / simpleStmt ^+ ';'
+//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
+//     / simpleStmt ^+ ';'
 stmt ::= complexOrSimpleStmt|simpleStmt
 
-// complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
-//                     | tryStmt | forStmt
-//                     | blockStmt | staticStmt | deferStmt | asmStmt
-//                     | 'proc' routine
-//                     | 'func' routine
-//                     | 'method' routine
-//                     | 'iterator' routine
-//                     | 'macro' routine
-//                     | 'template' routine
-//                     | 'converter' routine
-//                     | 'type' section(typeDef)
-//                     | 'const' section(constant)
-//                     | ('let' | 'var' | 'using') section(variable)
-//                     | bindStmt | mixinStmt)
-//                     / simpleStmt
+//complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
+//                    | tryStmt | forStmt
+//                    | blockStmt | staticStmt | deferStmt | asmStmt
+//                    | 'proc' routine
+//                    | 'func' routine
+//                    | 'method' routine
+//                    | 'iterator' routine
+//                    | 'macro' routine
+//                    | 'template' routine
+//                    | 'converter' routine
+//                    | 'type' section(typeDef)
+//                    | 'const' section(constant)
+//                    | ('let' | 'var' | 'using') section(variable)
+//                    | bindStmt | mixinStmt)
+//                    / simpleStmt
 private complexOrSimpleStmt ::= ifStmt
                               | varStmt
                               | simpleStmt
@@ -105,45 +105,85 @@ varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
 //            | includeStmt | commentStmt) / exprStmt) COMMENT?
 private simpleStmt::= exprStmt
 
-// Variable declaration statement
+// variable = (varTuple / identColonEquals) colonBody? indAndComment
 variable ::= identColonEquals colonBody?
-private identColonEquals ::= IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)?
-private colonBody ::= ':' stmts
 
-// Expression statement
-exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
+//identColonEquals = IDENT (comma IDENT)* comma?
+//     (':' optInd typeDesc)? ('=' optInd expr)?)
+private identColonEquals ::= IDENT (',' IDENT)* ','?
+       ('=' <<optInd expr>>)?
+
+//colonBody = colcom stmt postExprBlocks?
+private colonBody ::= ':' stmt
+
+//exprStmt = simpleExpr
+//         (( '=' optInd expr colonBody? )
+//         / ( expr ^+ comma
+//             postExprBlocks
+//           ))?
+exprStmt ::= simpleExpr
+           (( '=' <<optInd (expr colonBody?)>>)
+           | ( expr (',' expr)* ))?
+
+//expr = (blockExpr
+//      | ifExpr
+//      | whenExpr
+//      | caseStmt
+//      | forExpr
+//      | tryExpr)
+//      / simpleExpr
 expr ::= simpleExpr
-private simpleExpr ::= primary (OP5 <<optInd primary>>)* {pin=2}
+
+//simpleExpr = arrowExpr (OP0 optInd arrowExpr)* pragma?
+simpleExpr ::= primary (OP5 <<optInd primary>>)* {pin=2}
+
+//primary = typeKeyw optInd typeDesc
+//        /  prefixOperator* identOrLiteral primarySuffix*
+//        / 'bind' primary
 private primary ::= identOrLiteral primarySuffix*
+
+//identOrLiteral = generalizedLit | symbol | literal
+//               | par | arrayConstr | setOrTableConstr
+//               | castExpr
 private identOrLiteral ::= IDENT|literal
-literal ::= INT_LIT
-          | INT8_LIT
-          | INT16_LIT
-          | INT32_LIT
-          | INT64_LIT
-          | UINT_LIT
-          | UINT8_LIT
-          | UINT16_LIT
-          | UINT32_LIT
-          | UINT64_LIT
-          | FLOAT_LIT
-          | FLOAT32_LIT
-          | FLOAT64_LIT
-          | BOOL_LIT
-          | STR_LIT
-          | RSTR_LIT
-          | TRIPLESTR_LIT
+
+//literal = | INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
+//          | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
+//          | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
+//          | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
+//          | CHAR_LIT
+//          | NIL
+literal ::= INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
+          | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
+          | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
+          | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
           | CHAR_LIT
+          | BOOL_LIT
           | NIL
+
+//primarySuffix = '(' (exprColonEqExpr comma?)* ')'
+//      | '.' optInd symbol generalizedLit?
+//      | '[' optInd exprColonEqExprList optPar ']'
+//      | '{' optInd exprColonEqExprList optPar '}'
+//      | &( '`'|IDENT|literal|'cast'|'addr'|'type') expr # command syntax
 private primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                              | <<optInd exprList>> // command syntax
+
+//exprColonEqExpr = expr (':'|'=' expr)?
 private exprColonEqExpr ::= expr (':'|'=' expr)?
+
+//exprList = expr ^+ comma
 exprList ::= expr (',' expr)*
 
-// If statement
-ifStmt ::= 'if' expr ':' <<optInd stmts>>
-   (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-   (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=1}
+//ifStmt = 'if' condStmt
+ifStmt ::= 'if' condStmt {pin=1}
+
+//condStmt = expr colcom stmt COMMENT?
+//           (IND{=} 'elif' expr colcom stmt)*
+//           (IND{=} 'else' colcom stmt)?
+condStmt ::= expr ':' <<optInd stmts>>
+             (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
+             (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=2}
 
 // meta rules
 private termInd ::= DEDENT | <<eof>>
