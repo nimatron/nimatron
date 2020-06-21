@@ -377,7 +377,7 @@ exprStmt ::= simpleExpr
 //yieldStmt ::= 'yield' <<optInd expr>>?
 
 //discardStmt = 'discard' optInd expr?
-//discardStmt ::= 'discard' <<optInd expr>>?
+discardStmt ::= 'discard' <<optInd expr>>?
 
 //breakStmt = 'break' optInd expr?
 //breakStmt ::= 'break' <<optInd expr>>?
@@ -536,7 +536,7 @@ variable ::= identColonEquals colonBody?
 //simpleStmt ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //             | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
 //             | includeStmt | exprStmt
-private simpleStmt::= exprStmt
+private simpleStmt::= discardStmt | exprStmt
 
 //complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
 //                    | tryStmt | forStmt

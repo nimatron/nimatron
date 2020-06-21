@@ -11,6 +11,7 @@ import com.tiepy.nimatron.parser.impl.*;
 public interface NimTypes {
 
   IElementType COND_STMT = new NimElementType("COND_STMT");
+  IElementType DISCARD_STMT = new NimElementType("DISCARD_STMT");
   IElementType EXPR = new NimElementType("EXPR");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
@@ -70,6 +71,9 @@ public interface NimTypes {
       IElementType type = node.getElementType();
       if (type == COND_STMT) {
         return new NimCondStmtImpl(node);
+      }
+      else if (type == DISCARD_STMT) {
+        return new NimDiscardStmtImpl(node);
       }
       else if (type == EXPR) {
         return new NimExprImpl(node);

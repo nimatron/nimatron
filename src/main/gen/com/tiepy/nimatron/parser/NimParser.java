@@ -124,6 +124,25 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // 'discard' <<optInd expr>>?
+  public static boolean discardStmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "discardStmt")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, DISCARD_STMT, "<discard stmt>");
+    r = consumeToken(b, "discard");
+    r = r && discardStmt_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // <<optInd expr>>?
+  private static boolean discardStmt_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "discardStmt_1")) return false;
+    optInd(b, l + 1, expr_parser_);
+    return true;
+  }
+
+  /* ********************************************************** */
   // simpleExpr
   public static boolean expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr")) return false;
@@ -687,9 +706,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // exprStmt
+  // discardStmt | exprStmt
   static boolean simpleStmt(PsiBuilder b, int l) {
-    return exprStmt(b, l + 1);
+    if (!recursion_guard_(b, l, "simpleStmt")) return false;
+    boolean r;
+    r = discardStmt(b, l + 1);
+    if (!r) r = exprStmt(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */

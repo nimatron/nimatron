@@ -11,6 +11,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDiscardStmt(@NotNull NimDiscardStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitExpr(@NotNull NimExpr o) {
     visitPsiElement(o);
   }

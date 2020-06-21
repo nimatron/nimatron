@@ -65,6 +65,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testNimLangNewVariableDeclarationSyntax() {
+        doTest(true, true);
+    }
+
     public void testVar() {
         doTest(true, true);
     }
