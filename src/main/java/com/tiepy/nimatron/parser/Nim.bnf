@@ -122,15 +122,15 @@ ifStmt ::= 'if' expr ':' <<optInd stmts>>
    (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=1}
 
 // meta rules
-private termInd ::= IND_LT | <<eof>>
-private meta optInd ::= <<RULE>> | (IND_GT <<RULE>> termInd)
-private meta section ::= <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
+private termInd ::= DEDENT | <<eof>>
+private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
+private meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
 
 /*
 module ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
 private operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
-private meta optInd ::= <<RULE>> | (IND_GT <<RULE>> termInd)
-private termInd ::= IND_LT | <<eof>>
+private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
+private termInd ::= DEDENT | <<eof>>
 private simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* pragma?
 private arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
 private assignExpr ::= orExpr (OP2 <<optInd orExpr>>)*
@@ -223,7 +223,7 @@ private whenStmt ::= 'when' condStmt
 private whileStmt ::= 'while' expr ':' stmt
 private ofBranch ::= 'of' exprList ':' stmt
 private ofBranches ::= ofBranch (IND_EQ ofBranch)* (IND_EQ 'elif' expr ':' stmt)* (IND_EQ 'else' ':' stmt)?
-private caseStmt ::= 'case' expr ':'? ((IND_GT ofBranches IND_LT) | (IND_EQ ofBranches))
+private caseStmt ::= 'case' expr ':'? ((INDENT ofBranches DEDENT) | (IND_EQ ofBranches))
 private tryStmt ::= 'try' ':' stmt (IND_EQ? 'except' exprList ':' stmt)* (IND_EQ? 'finally' ':' stmt)?
 private tryExpr ::= 'try' ':' stmt (<<optInd ('except' exprList ':' stmt)>> )* (<<optInd ('finally' ':' stmt)>>)?
 private blockStmt ::= 'block' symbol? ':' stmt
@@ -235,7 +235,7 @@ private genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
 private genericParamList ::= '[' <<optInd ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
 private pattern ::= '{' stmt '}'
 private routine ::= <<optInd (identVis pattern? genericParamList? paramListColon pragma? ('=' stmt)?)>>
-private meta section ::= <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
+private meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
 private typeClassParam ::= ('var'|'out')? symbol
 private typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc (',' typeDesc)*)?)?
 private typeDef ::= identWithPragmaDot genericParamList? '=' <<optInd typeDefAux>>
@@ -281,5 +281,5 @@ private complexOrSimpleStmt ::= ifStmt
                               | bindStmt
                               | mixinStmt
                               | simpleStmt
-stmt ::= (IND_GT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* IND_LT) | simpleStmt
+stmt ::= (INDENT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* DEDENT) | simpleStmt
 */

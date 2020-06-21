@@ -200,7 +200,7 @@ private IElementType getIndenterToken() {
         indentStack.push(indent);
 
         popState();
-        return NimTypes.IND_GT;
+        return NimTypes.INDENT;
     }
 
     // Handle dedents.
@@ -229,14 +229,14 @@ private IElementType getIndenterToken() {
             return TokenType.BAD_CHARACTER;
         }
 
-        dedentStack.push(NimTypes.IND_LT);
+        dedentStack.push(NimTypes.DEDENT);
     }
 
     lastIndentSpaces = lastIndent.Column;
 
     popState();
     pushState(DEDENTER);
-    return NimTypes.IND_LT;
+    return NimTypes.DEDENT;
 }
 
 private IElementType getDedenterToken() {

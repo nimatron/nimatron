@@ -459,7 +459,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<RULE>> | (IND_GT <<RULE>> termInd)
+  // <<RULE>> | (INDENT <<RULE>> termInd)
   static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
     boolean r;
@@ -470,12 +470,12 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // IND_GT <<RULE>> termInd
+  // INDENT <<RULE>> termInd
   private static boolean optInd_1(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IND_GT);
+    r = consumeToken(b, INDENT);
     r = r && _RULE.parse(b, l);
     r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
@@ -560,7 +560,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<RULE>> | (IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT)
+  // <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
   static boolean section(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "section")) return false;
     boolean r;
@@ -571,15 +571,15 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // IND_GT <<RULE>>? (IND_EQ <<RULE>>?)* IND_LT
+  // INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT
   private static boolean section_1(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "section_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IND_GT);
+    r = consumeToken(b, INDENT);
     r = r && section_1_1(b, l + 1, _RULE);
     r = r && section_1_2(b, l + 1, _RULE);
-    r = r && consumeToken(b, IND_LT);
+    r = r && consumeToken(b, DEDENT);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -713,12 +713,12 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IND_LT | <<eof>>
+  // DEDENT | <<eof>>
   static boolean termInd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "termInd")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IND_LT);
+    r = consumeToken(b, DEDENT);
     if (!r) r = eof(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
