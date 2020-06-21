@@ -72,22 +72,23 @@
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
-nimFile ::= IND_EQ* (stmt ((';'|IND_EQ) stmt)*)? ';'? IND_EQ*
+nimFile ::= IND_EQ* stmts? ';'? IND_EQ*
 
 // Statements
+private stmts ::= stmt ((';'|IND_EQ) stmt)*
 stmt ::= ifStmt
        | exprStmt
        | varStmt
 exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
-ifStmt ::= 'if' expr ':' <<optInd stmt>>
-   (IND_EQ 'elif' expr ':' <<optInd stmt>>)*
-   (IND_EQ 'else' ':' <<optInd stmt>>)?
+ifStmt ::= 'if' expr ':' <<optInd stmts>>
+   (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
+   (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=1}
 varStmt ::= (('let'|'var'|'using') <<section variable>>)
 
 // Variable declaration
 variable ::= identColonEquals colonBody?
 private identColonEquals ::= IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)?
-private colonBody ::= ':' stmt
+private colonBody ::= ':' stmts
 
 // Expression
 expr ::= primary (OP10 <<optInd primary>>)*

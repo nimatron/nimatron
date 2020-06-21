@@ -33,9 +33,9 @@ public class NimExprStmtImpl extends ASTWrapperPsiElement implements NimExprStmt
   }
 
   @Override
-  @Nullable
-  public NimStmt getStmt() {
-    return findChildByClass(NimStmt.class);
+  @NotNull
+  public List<NimStmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
 }

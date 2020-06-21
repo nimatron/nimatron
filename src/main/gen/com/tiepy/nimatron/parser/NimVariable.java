@@ -10,7 +10,7 @@ public interface NimVariable extends PsiElement {
   @Nullable
   NimExpr getExpr();
 
-  @Nullable
-  NimStmt getStmt();
+  @NotNull
+  List<NimStmt> getStmtList();
 
 }
