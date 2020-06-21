@@ -76,31 +76,21 @@ nimFile ::= IND_EQ* stmts? ';'? IND_EQ*
 
 // Statements
 private stmts ::= stmt ((';'|IND_EQ) stmt)*
-stmt ::= ifStmt
+stmt ::= varStmt
        | exprStmt
-       | varStmt
-exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
-ifStmt ::= 'if' expr ':' <<optInd stmts>>
-   (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-   (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=1}
-varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
+       | ifStmt
 
-// Variable declaration
+// Variable declaration statement
+varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
 variable ::= identColonEquals colonBody?
 private identColonEquals ::= IDENT (',' IDENT)* ','? ('=' <<optInd expr>>)?
 private colonBody ::= ':' stmts
 
-// Expression
-expr ::= primary (OP10 <<optInd primary>>)*
-private primary ::= prefixOperator? identOrLiteral primarySuffix*
-prefixOperator ::= OP8
+// Expression statement
+exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
+expr ::= primary
+private primary ::= identOrLiteral primarySuffix*
 private identOrLiteral ::= IDENT|literal
-private primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
-                             | <<optInd exprList>> // command syntax
-private exprColonEqExpr ::= expr (':'|'=' expr)?
-exprList ::= expr (',' expr)*
-
-// Literal
 literal ::= INT_LIT
           | INT8_LIT
           | INT16_LIT
@@ -120,6 +110,15 @@ literal ::= INT_LIT
           | TRIPLESTR_LIT
           | CHAR_LIT
           | NIL
+private primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
+                             | <<optInd exprList>> // command syntax
+private exprColonEqExpr ::= expr (':'|'=' expr)?
+exprList ::= expr (',' expr)*
+
+// If statement
+ifStmt ::= 'if' expr ':' <<optInd stmts>>
+   (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
+   (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=1}
 
 // meta rules
 private termInd ::= IND_LT | <<eof>>

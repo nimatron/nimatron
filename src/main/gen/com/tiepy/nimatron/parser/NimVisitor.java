@@ -27,10 +27,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitPrefixOperator(@NotNull NimPrefixOperator o) {
-    visitPsiElement(o);
-  }
-
   public void visitStmt(@NotNull NimStmt o) {
     visitPsiElement(o);
   }

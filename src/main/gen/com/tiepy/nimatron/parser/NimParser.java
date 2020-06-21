@@ -48,36 +48,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary (OP10 <<optInd primary>>)*
+  // primary
   public static boolean expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _COLLAPSE_, EXPR, "<expr>");
     r = primary(b, l + 1);
-    r = r && expr_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // (OP10 <<optInd primary>>)*
-  private static boolean expr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expr_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!expr_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "expr_1", c)) break;
-    }
-    return true;
-  }
-
-  // OP10 <<optInd primary>>
-  private static boolean expr_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expr_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, OP10);
-    r = r && optInd(b, l + 1, primary_parser_);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -506,44 +483,24 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OP8
-  public static boolean prefixOperator(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "prefixOperator")) return false;
-    if (!nextTokenIs(b, OP8)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, OP8);
-    exit_section_(b, m, PREFIX_OPERATOR, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // prefixOperator? identOrLiteral primarySuffix*
+  // identOrLiteral primarySuffix*
   static boolean primary(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = primary_0(b, l + 1);
-    r = r && identOrLiteral(b, l + 1);
-    r = r && primary_2(b, l + 1);
+    r = identOrLiteral(b, l + 1);
+    r = r && primary_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // prefixOperator?
-  private static boolean primary_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary_0")) return false;
-    prefixOperator(b, l + 1);
-    return true;
-  }
-
   // primarySuffix*
-  private static boolean primary_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary_2")) return false;
+  private static boolean primary_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary_1")) return false;
     while (true) {
       int c = current_position_(b);
       if (!primarySuffix(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primary_2", c)) break;
+      if (!empty_element_parsed_guard_(b, "primary_1", c)) break;
     }
     return true;
   }
@@ -664,16 +621,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ifStmt
+  // varStmt
   //        | exprStmt
-  //        | varStmt
+  //        | ifStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = ifStmt(b, l + 1);
+    r = varStmt(b, l + 1);
     if (!r) r = exprStmt(b, l + 1);
-    if (!r) r = varStmt(b, l + 1);
+    if (!r) r = ifStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -737,12 +694,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   // ('let'|'var'|'using') <<section variable>>
   public static boolean varStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "varStmt")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, VAR_STMT, "<var stmt>");
     r = varStmt_0(b, l + 1);
+    p = r; // pin = 1
     r = r && section(b, l + 1, variable_parser_);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // 'let'|'var'|'using'
@@ -793,11 +751,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser primarySuffix_0_1_0_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return primarySuffix_0_1_0(b, l + 1);
-    }
-  };
-  static final Parser primary_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return primary(b, l + 1);
     }
   };
   static final Parser stmts_parser_ = new Parser() {

@@ -15,7 +15,6 @@ public interface NimTypes {
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
-  IElementType PREFIX_OPERATOR = new NimElementType("PREFIX_OPERATOR");
   IElementType STMT = new NimElementType("STMT");
   IElementType VARIABLE = new NimElementType("VARIABLE");
   IElementType VAR_STMT = new NimElementType("VAR_STMT");
@@ -80,9 +79,6 @@ public interface NimTypes {
       }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);
-      }
-      else if (type == PREFIX_OPERATOR) {
-        return new NimPrefixOperatorImpl(node);
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);
