@@ -306,6 +306,19 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
+  public static boolean generalizedLit(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "generalizedLit")) return false;
+    if (!nextTokenIs(b, "<generalized lit>", GENERALIZED_STR_LIT, GENERALIZED_TRIPLESTR_LIT)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, GENERALIZED_LIT, "<generalized lit>");
+    r = consumeToken(b, GENERALIZED_STR_LIT);
+    if (!r) r = consumeToken(b, GENERALIZED_TRIPLESTR_LIT);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // IDENT (',' IDENT)* ','?
   //        ('=' <<optInd expr>>)?
   static boolean identColonEquals(PsiBuilder b, int l) {
@@ -369,11 +382,12 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENT|literal
+  // generalizedLit | IDENT | literal
   static boolean identOrLiteral(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "identOrLiteral")) return false;
     boolean r;
-    r = consumeToken(b, IDENT);
+    r = generalizedLit(b, l + 1);
+    if (!r) r = consumeToken(b, IDENT);
     if (!r) r = literal(b, l + 1);
     return r;
   }

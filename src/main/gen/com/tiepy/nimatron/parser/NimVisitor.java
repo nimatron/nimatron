@@ -23,6 +23,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitGeneralizedLit(@NotNull NimGeneralizedLit o) {
+    visitPsiElement(o);
+  }
+
   public void visitIfStmt(@NotNull NimIfStmt o) {
     visitPsiElement(o);
   }

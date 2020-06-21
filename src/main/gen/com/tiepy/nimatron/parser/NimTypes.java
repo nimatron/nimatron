@@ -14,6 +14,7 @@ public interface NimTypes {
   IElementType EXPR = new NimElementType("EXPR");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
+  IElementType GENERALIZED_LIT = new NimElementType("GENERALIZED_LIT");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
@@ -78,6 +79,9 @@ public interface NimTypes {
       }
       else if (type == EXPR_STMT) {
         return new NimExprStmtImpl(node);
+      }
+      else if (type == GENERALIZED_LIT) {
+        return new NimGeneralizedLitImpl(node);
       }
       else if (type == IF_STMT) {
         return new NimIfStmtImpl(node);

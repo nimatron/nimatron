@@ -40,6 +40,12 @@ public class NimSimpleExprImpl extends ASTWrapperPsiElement implements NimSimple
 
   @Override
   @NotNull
+  public List<NimGeneralizedLit> getGeneralizedLitList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimGeneralizedLit.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimLiteral> getLiteralList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimLiteral.class);
   }
