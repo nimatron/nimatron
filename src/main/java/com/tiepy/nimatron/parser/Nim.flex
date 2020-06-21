@@ -161,7 +161,7 @@ private class Indent {
 private final Stack<Indent> indentStack = new Stack<Indent>();
 
 /**
- * This method is used to return multiple tokens by stalling the state transition back to YYINITIAL.
+ * This method is used to return multiple tokens by stalling the return state transition.
  * @return Next token to be returned to parser.
  */
 private IElementType getIndenterToken() {
