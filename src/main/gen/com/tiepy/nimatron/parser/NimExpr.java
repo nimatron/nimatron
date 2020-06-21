@@ -13,7 +13,7 @@ public interface NimExpr extends PsiElement {
   @NotNull
   List<NimExprList> getExprListList();
 
-  @Nullable
-  NimLiteral getLiteral();
+  @NotNull
+  List<NimLiteral> getLiteralList();
 
 }

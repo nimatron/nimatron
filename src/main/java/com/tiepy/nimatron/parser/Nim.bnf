@@ -88,7 +88,8 @@ private colonBody ::= ':' stmts
 
 // Expression statement
 exprStmt ::= expr (('=' <<optInd (expr colonBody?)>>) | (expr (',' expr)* ))?
-expr ::= primary
+expr ::= simpleExpr
+private simpleExpr ::= primary (OP5 <<optInd primary>>)* {pin=2}
 private primary ::= identOrLiteral primarySuffix*
 private identOrLiteral ::= IDENT|literal
 literal ::= INT_LIT

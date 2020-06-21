@@ -39,9 +39,9 @@ public class NimExprImpl extends ASTWrapperPsiElement implements NimExpr {
   }
 
   @Override
-  @Nullable
-  public NimLiteral getLiteral() {
-    return findChildByClass(NimLiteral.class);
+  @NotNull
+  public List<NimLiteral> getLiteralList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimLiteral.class);
   }
 
 }

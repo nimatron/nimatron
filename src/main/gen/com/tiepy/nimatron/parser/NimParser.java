@@ -48,12 +48,12 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary
+  // simpleExpr
   public static boolean expr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _COLLAPSE_, EXPR, "<expr>");
-    r = primary(b, l + 1);
+    r = simpleExpr(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -621,6 +621,40 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // primary (OP5 <<optInd primary>>)*
+  static boolean simpleExpr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "simpleExpr")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = primary(b, l + 1);
+    r = r && simpleExpr_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (OP5 <<optInd primary>>)*
+  private static boolean simpleExpr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "simpleExpr_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!simpleExpr_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "simpleExpr_1", c)) break;
+    }
+    return true;
+  }
+
+  // OP5 <<optInd primary>>
+  private static boolean simpleExpr_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "simpleExpr_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OP5);
+    r = r && optInd(b, l + 1, primary_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // varStmt
   //        | exprStmt
   //        | ifStmt
@@ -751,6 +785,11 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser primarySuffix_0_1_0_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return primarySuffix_0_1_0(b, l + 1);
+    }
+  };
+  static final Parser primary_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return primary(b, l + 1);
     }
   };
   static final Parser stmts_parser_ = new Parser() {
