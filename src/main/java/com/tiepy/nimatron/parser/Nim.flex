@@ -115,6 +115,10 @@ KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|
 
 %{
 
+// -----------------------------------------------------------------------------
+// State stack
+// -----------------------------------------------------------------------------
+
 private final Stack<Integer> stateStack = new Stack<Integer>();
 
 /**
@@ -137,6 +141,10 @@ private int popState() {
     return stateStack.size();
 }
 
+// -----------------------------------------------------------------------------
+// Indent spaces handler
+// -----------------------------------------------------------------------------
+
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
 
@@ -149,6 +157,10 @@ private void handleIndent() {
     pushState(INDENTER);
 }
 
+// -----------------------------------------------------------------------------
+// Stack indenter
+// -----------------------------------------------------------------------------
+
 /**
  * Stores column number and increment for each indentation level.
  * This is required as it's not certain each indent is same size.
@@ -159,22 +171,29 @@ private class Indent {
 }
 
 private final Stack<Indent> indentStack = new Stack<Indent>();
+private final Stack<IElementType> dedentStack = new Stack<IElementType>();
 
 /**
  * This method is used to return multiple tokens by stalling the return state transition.
  * @return Next token to be returned to parser.
  */
 private IElementType getIndenterToken() {
+
+    // Return from INDENTER state with indent at same level, when length same.
     if (indentSpaces == lastIndentSpaces) {
         popState();
         return NimTypes.IND_EQ;
     }
 
+    // Return from INDENTER state with indent at higher level, when length greater.
     if (indentSpaces > lastIndentSpaces) {
 
-        // Note the incremental column positions for indentation.
+        // Length of last indent on stack, if any.
         int lastLength = 0;
         if (indentStack.size() > 0) lastLength = indentStack.peek().Column;
+
+        // Push an entry onto the indenter stack.
+        // Note the incremental column positions for indentation.
         Indent indent = new Indent();
         indent.Column = indentSpaces;
         indent.Increment = indentSpaces - lastLength;
@@ -186,33 +205,36 @@ private IElementType getIndenterToken() {
 
     // indentSpaces < lastIndentSpaces
 
-    if (indentStack.size() == 0) {
-        popState();
-        return NimTypes.IND_EQ;
+    // Determine difference with previous indentation level.
+    Indent lastIndent = indentStack.peek();
+    int diff = lastIndent.Column - indentSpaces;
+
+    if (diff < lastIndent.Increment) {
+        return TokenType.BAD_CHARACTER;
     }
 
-    Indent lastIndent = indentStack.pop();
-    int diff = lastIndent.Column - indentSpaces;
+    // Move to previous indentation level.
     lastIndentSpaces = lastIndent.Column;
 
-    // Handle exact proper single dedent.
-    if (diff == lastIndent.Increment) {
-        return NimTypes.IND_LT;
-    }
-
-    // Handle multi-dedent.
-    if (diff > lastIndent.Increment) {
-        return NimTypes.IND_LT;
-    }
+    // TODO: How many dedents?
+    dedentStack.push(NimTypes.IND_EQ);
 
     popState();
-    return TokenType.BAD_CHARACTER;
+    pushState(DEDENTER);
+    return NimTypes.IND_LT;
+}
+
+private IElementType getDedenterToken() {
+    IElementType token = dedentStack.pop();
+    if (dedentStack.size() == 0) popState();
+    return token;
 }
 
 %}
 
 %state YYINITIAL
 %state INDENTER
+%state DEDENTER
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
@@ -278,6 +300,11 @@ private IElementType getIndenterToken() {
     \                           { indentSpaces++; }
     .                           { yypushback(1); return getIndenterToken(); }
     <<EOF>>                     { return getIndenterToken(); }
+}
+
+<DEDENTER> {
+    .                           { yypushback(1); return getDedenterToken(); }
+    <<EOF>>                     { return getDedenterToken(); }
 }
 
 <LINE_COMMENT> {
