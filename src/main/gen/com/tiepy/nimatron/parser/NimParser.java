@@ -534,24 +534,47 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identOrLiteral primarySuffix*
+  // (typeKeyw <<optInd typeDesc>>)
+  //                   | (/*operator**/ identOrLiteral primarySuffix*)
   static boolean primary(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary")) return false;
     boolean r;
     Marker m = enter_section_(b);
+    r = primary_0(b, l + 1);
+    if (!r) r = primary_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // typeKeyw <<optInd typeDesc>>
+  private static boolean primary_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = typeKeyw(b, l + 1);
+    r = r && optInd(b, l + 1, typeDesc_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // identOrLiteral primarySuffix*
+  private static boolean primary_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
     r = identOrLiteral(b, l + 1);
-    r = r && primary_1(b, l + 1);
+    r = r && primary_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // primarySuffix*
-  private static boolean primary_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary_1")) return false;
+  private static boolean primary_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary_1_1")) return false;
     while (true) {
       int c = current_position_(b);
       if (!primarySuffix(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primary_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "primary_1_1", c)) break;
     }
     return true;
   }
@@ -783,6 +806,58 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // simpleExpr ('not' expr)?
+  public static boolean typeDesc(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeDesc")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TYPE_DESC, "<type desc>");
+    r = simpleExpr(b, l + 1);
+    r = r && typeDesc_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ('not' expr)?
+  private static boolean typeDesc_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeDesc_1")) return false;
+    typeDesc_1_0(b, l + 1);
+    return true;
+  }
+
+  // 'not' expr
+  private static boolean typeDesc_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeDesc_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "not");
+    r = r && expr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
+  //            | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
+  public static boolean typeKeyw(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeKeyw")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TYPE_KEYW, "<type keyw>");
+    r = consumeToken(b, "var");
+    if (!r) r = consumeToken(b, "out");
+    if (!r) r = consumeToken(b, "ref");
+    if (!r) r = consumeToken(b, "ptr");
+    if (!r) r = consumeToken(b, "shared");
+    if (!r) r = consumeToken(b, "tuple");
+    if (!r) r = consumeToken(b, "proc");
+    if (!r) r = consumeToken(b, "iterator");
+    if (!r) r = consumeToken(b, "distinct");
+    if (!r) r = consumeToken(b, "object");
+    if (!r) r = consumeToken(b, "enum");
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // ('let'|'var'|'using') <<section variable>>
   public static boolean varStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "varStmt")) return false;
@@ -853,6 +928,11 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser stmts_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return stmts(b, l + 1);
+    }
+  };
+  static final Parser typeDesc_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return typeDesc(b, l + 1);
     }
   };
   static final Parser variable_parser_ = new Parser() {

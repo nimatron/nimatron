@@ -303,19 +303,18 @@ expr ::= simpleExpr
 
 //typeKeyw = 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
-//typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-//           | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
+typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
+           | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
 
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-//primary ::= (typeKeyw <<optInd typeDesc>>)
-//          | (operator* identOrLiteral primarySuffix*)
-//          | ('bind' primary)
-private primary ::= identOrLiteral primarySuffix*
+private primary ::= (typeKeyw <<optInd typeDesc>>)
+                  | (/*operator**/ identOrLiteral primarySuffix*)
+                  /*| ('bind' primary)*/
 
 //typeDesc = simpleExpr ('not' expr)?
-//typeDesc ::= simpleExpr ('not' expr)?
+typeDesc ::= simpleExpr ('not' expr)?
 
 //typeDefAux = simpleExpr ('not' expr)?
 //           | 'concept' typeClass

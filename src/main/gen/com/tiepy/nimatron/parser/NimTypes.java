@@ -20,6 +20,8 @@ public interface NimTypes {
   IElementType LITERAL = new NimElementType("LITERAL");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
   IElementType STMT = new NimElementType("STMT");
+  IElementType TYPE_DESC = new NimElementType("TYPE_DESC");
+  IElementType TYPE_KEYW = new NimElementType("TYPE_KEYW");
   IElementType VARIABLE = new NimElementType("VARIABLE");
   IElementType VAR_STMT = new NimElementType("VAR_STMT");
 
@@ -98,6 +100,12 @@ public interface NimTypes {
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);
+      }
+      else if (type == TYPE_DESC) {
+        return new NimTypeDescImpl(node);
+      }
+      else if (type == TYPE_KEYW) {
+        return new NimTypeKeywImpl(node);
       }
       else if (type == VARIABLE) {
         return new NimVariableImpl(node);
