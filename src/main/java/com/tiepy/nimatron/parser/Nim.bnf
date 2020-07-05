@@ -74,7 +74,7 @@
 
 //module = stmt ^* (';' / IND{=})
 module ::= IND_EQ* stmts? ';'? IND_EQ*
-stmts ::= stmt ((';'|IND_EQ) stmt)*
+private stmts ::= stmt ((';'|IND_EQ) stmt)*
 
 //comma = ',' COMMENT?
 //semicolon = ';' COMMENT?
@@ -90,8 +90,8 @@ stmts ::= stmt ((';'|IND_EQ) stmt)*
 //prefixOperator = operator
 
 //optInd = COMMENT? IND?
-termInd ::= DEDENT | <<eof>>
-meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
+private termInd ::= DEDENT | <<eof>>
+private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 
 //optPar = (IND{>} | IND{=})?
 
@@ -134,7 +134,7 @@ simpleExpr ::= primary (OP5 <<optInd primary>>)* {pin=2}
 //symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|IDENT|KEYW
 
 //exprColonEqExpr = expr (':'|'=' expr)?
-exprColonEqExpr ::= expr (':'|'=' expr)?
+private exprColonEqExpr ::= expr (':'|'=' expr)?
 
 //exprList = expr ^+ comma
 exprList ::= expr (',' expr)*
@@ -196,7 +196,7 @@ generalizedLit ::= GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
 //identOrLiteral ::= generalizedLit | symbol | literal
 //                 | par | arrayConstr | setOrTableConstr
 //                 | castExpr
-identOrLiteral ::= generalizedLit | IDENT | literal
+private identOrLiteral ::= generalizedLit | IDENT | literal
 
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
@@ -213,7 +213,7 @@ identOrLiteral ::= generalizedLit | IDENT | literal
 //                | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
 //                | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
 //                | <<optInd exprList>> // command syntax
-primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
+private primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                              | <<optInd exprList>> // command syntax
 
 //condExpr = expr colcom expr optInd
@@ -253,7 +253,7 @@ primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
 //     (':' optInd typeDesc)? ('=' optInd expr)?)
 //identColonEquals ::= IDENT (',' IDENT)* ','?
 //     (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
-identColonEquals ::= IDENT (',' IDENT)* ','?
+private identColonEquals ::= IDENT (',' IDENT)* ','?
        ('=' <<optInd expr>>)?
 
 //inlTupleDecl = 'tuple'
@@ -309,7 +309,7 @@ typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-primary ::= (typeKeyw <<optInd typeDesc>>)
+private primary ::= (typeKeyw <<optInd typeDesc>>)
                   | (/*operator**/ identOrLiteral primarySuffix*)
                   /*| ('bind' primary)*/
 
@@ -472,7 +472,7 @@ ifStmt ::= 'if' condStmt {pin=1}
 //commentStmt = COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
+private meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -511,7 +511,7 @@ meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
 
 //colonBody = colcom stmt postExprBlocks?
 //colonBody ::= ':' stmt postExprBlocks?
-colonBody ::= ':' stmt
+private colonBody ::= ':' stmt
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
 //variable ::= (varTuple|identColonEquals) colonBody?
@@ -535,7 +535,7 @@ variable ::= identColonEquals colonBody?
 //simpleStmt ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //             | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
 //             | includeStmt | exprStmt
-simpleStmt::= discardStmt | exprStmt
+private simpleStmt::= discardStmt | exprStmt
 
 //complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
 //                    | tryStmt | forStmt
@@ -574,7 +574,7 @@ simpleStmt::= discardStmt | exprStmt
 //                      | bindStmt
 //                      | mixinStmt
 //                      | simpleStmt
-complexOrSimpleStmt ::= ifStmt
+private complexOrSimpleStmt ::= ifStmt
                               | varStmt
                               | simpleStmt
 varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
