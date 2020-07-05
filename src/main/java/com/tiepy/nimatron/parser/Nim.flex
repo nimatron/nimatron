@@ -253,6 +253,7 @@ private IElementType getDedenterToken() {
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
+%state DISCARD_COMMENT
 %state STRING_LITERAL
 %state TRIPLE_STRING_LITERAL
 %state RAW_STRING_LITERAL
@@ -268,6 +269,7 @@ private IElementType getDedenterToken() {
     #                           { pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
+    discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
     {KEYW}                      { return NimTypes.KEYW; }
     r\"                         { pushState(RAW_STRING_LITERAL); }
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); }
@@ -334,6 +336,12 @@ private IElementType getDedenterToken() {
 <BLOCK_DOC_COMMENT> {
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
     {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return TokenType.WHITE_SPACE; }
+    {CRLF}                      { }
+    .                           { }
+}
+
+<DISCARD_COMMENT> {
+    \"\"\"                      { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
 }
