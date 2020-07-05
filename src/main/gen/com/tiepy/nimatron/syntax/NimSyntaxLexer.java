@@ -2451,12 +2451,12 @@ class NimSyntaxLexer implements FlexLexer {
 
 private Stack<Integer> stack = new Stack<Integer>();
 
-public void yypushState(int newState) {
+public void pushState(int newState) {
     stack.push(yystate());
     yybegin(newState);
 }
 
-public void yypopState() {
+public void popState() {
     yybegin(stack.pop());
 }
 
@@ -2725,7 +2725,7 @@ public void yypopState() {
             // fall through
           case 28: break;
           case 2: 
-            { yypushState(LINE_COMMENT); return NimSyntaxTypes.COMMENT;
+            { pushState(LINE_COMMENT); return NimSyntaxTypes.COMMENT;
             } 
             // fall through
           case 29: break;
@@ -2745,7 +2745,7 @@ public void yypopState() {
             // fall through
           case 32: break;
           case 6: 
-            { yypushState(CHARACTER_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 33: break;
@@ -2775,7 +2775,7 @@ public void yypopState() {
             // fall through
           case 38: break;
           case 12: 
-            { yypushState(STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 39: break;
@@ -2785,7 +2785,7 @@ public void yypopState() {
             // fall through
           case 40: break;
           case 14: 
-            { yypopState(); return NimSyntaxTypes.COMMENT;
+            { popState(); return NimSyntaxTypes.COMMENT;
             } 
             // fall through
           case 41: break;
@@ -2800,17 +2800,17 @@ public void yypopState() {
             // fall through
           case 43: break;
           case 17: 
-            { yypopState(); return NimSyntaxTypes.STRING_LITERAL;
+            { popState(); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 44: break;
           case 18: 
-            { yypushState(BLOCK_COMMENT); return NimSyntaxTypes.COMMENT;
+            { pushState(BLOCK_COMMENT); return NimSyntaxTypes.COMMENT;
             } 
             // fall through
           case 45: break;
           case 19: 
-            { yypushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 46: break;
@@ -2820,7 +2820,7 @@ public void yypopState() {
             // fall through
           case 47: break;
           case 21: 
-            { yypushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 48: break;
@@ -2830,7 +2830,7 @@ public void yypopState() {
             // fall through
           case 49: break;
           case 23: 
-            { yypushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT;
+            { pushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT;
             } 
             // fall through
           case 50: break;
@@ -2840,17 +2840,17 @@ public void yypopState() {
             // fall through
           case 51: break;
           case 25: 
-            { yypushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 52: break;
           case 26: 
-            { yypushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
             } 
             // fall through
           case 53: break;
           case 27: 
-            { yypushState(DISCARD_COMMENT); return NimSyntaxTypes.COMMENT;
+            { pushState(DISCARD_COMMENT); return NimSyntaxTypes.COMMENT;
             } 
             // fall through
           case 54: break;
