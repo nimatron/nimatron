@@ -213,8 +213,10 @@ private identOrLiteral ::= generalizedLit | IDENT | literal
 //                | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
 //                | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
 //                | <<optInd exprList>> // command syntax
-private primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
-                             | <<optInd exprList>> // command syntax
+private primarySuffix ::= primarySuffix1
+                        | primarySuffix2
+private primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr ','?)*)>> ')'
+private primarySuffix2 ::= <<optInd exprList>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
@@ -309,9 +311,12 @@ typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-private primary ::= (typeKeyw <<optInd typeDesc>>)
-                  | (/*operator**/ identOrLiteral primarySuffix*)
-                  /*| ('bind' primary)*/
+private primary ::= primary1
+                  | primary2
+                  | primary3
+private primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
+private primary2 ::= /*operator**/ identOrLiteral primarySuffix* {pin=1}
+private primary3 ::= 'bind' primary {pin=1}
 
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= simpleExpr ('not' expr)?
@@ -342,9 +347,9 @@ typeDesc ::= simpleExpr ('not' expr)?
 //           | ( expr (',' expr)*
 //               postExprBlocks
 //             ))?
-exprStmt ::= simpleExpr
-           (( '=' <<optInd (expr colonBody?)>>)
-           | ( expr (',' expr)* ))?
+exprStmt ::= simpleExpr (exprStmt1 | exprStmt2)?
+private exprStmt1 ::= '=' <<optInd (expr colonBody?)>>
+private exprStmt2 ::= expr (',' expr)*
 
 //importStmt = 'import' optInd expr
 //              ((comma expr)*
@@ -472,7 +477,7 @@ ifStmt ::= 'if' condStmt {pin=1}
 //commentStmt = COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-private meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* DEDENT)
+private meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -535,7 +540,7 @@ variable ::= identColonEquals colonBody?
 //simpleStmt ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //             | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
 //             | includeStmt | exprStmt
-private simpleStmt::= discardStmt | exprStmt
+private simpleStmt ::= discardStmt | exprStmt
 
 //complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
 //                    | tryStmt | forStmt
@@ -577,10 +582,10 @@ private simpleStmt::= discardStmt | exprStmt
 private complexOrSimpleStmt ::= ifStmt
                               | varStmt
                               | simpleStmt
-varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
+varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
 //     / simpleStmt ^+ ';'
 //stmt ::= (INDENT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* DEDENT)
 //       | simpleStmt
-stmt ::= complexOrSimpleStmt|simpleStmt
+stmt ::= complexOrSimpleStmt | simpleStmt
