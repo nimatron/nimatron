@@ -31,6 +31,15 @@
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
+        <action
+                id="NewNimFile"
+                class="com.tiepy.nimatron.NimCreateFileAction"
+                text="Nim File"
+                description="Create new Nim file">
+            <add-to-group
+                    group-id="NewGroup"
+                    anchor="before"
+                    relative-to-action="NewFromTemplate"/>
+        </action>
     </actions>
 </idea-plugin>
