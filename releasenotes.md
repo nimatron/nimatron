@@ -1,5 +1,9 @@
 # Release notes
 
+## 1.1.0-preview
+
+  * Adding lexer support for discard-style block comment.
+
 ## 1.0.2
 
   * Minor update to include New Nim File action.
