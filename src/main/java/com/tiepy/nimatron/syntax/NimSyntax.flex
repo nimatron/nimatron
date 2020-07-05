@@ -140,6 +140,7 @@ public void yypopState() {
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
+%state DISCARD_COMMENT
 %state STRING_LITERAL
 %state TRIPLE_STRING_LITERAL
 %state RAW_STRING_LITERAL
@@ -155,6 +156,7 @@ public void yypopState() {
     #                           { yypushState(LINE_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_COMMENT_BEGIN}       { yypushState(BLOCK_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_DOC_COMMENT_BEGIN}   { yypushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT; }
+    discard\ \"\"\"             { yypushState(DISCARD_COMMENT); return NimSyntaxTypes.COMMENT; }
     {KEYWORD}                   { return NimSyntaxTypes.KEYWORD; }
     r\"                         { yypushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     \"\"\"                      { yypushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
@@ -193,6 +195,12 @@ public void yypopState() {
     {BLOCK_DOC_COMMENT_BEGIN}   { yypushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_DOC_COMMENT_END}     { yypopState(); return NimSyntaxTypes.COMMENT; }
     {CRLF}+                     { return NimSyntaxTypes.COMMENT; }
+    .                           { return NimSyntaxTypes.COMMENT; }
+}
+
+<DISCARD_COMMENT> {
+    \"\"\"                      { yypopState(); return NimSyntaxTypes.COMMENT; }
+    {CRLF}                      { return NimSyntaxTypes.COMMENT; }
     .                           { return NimSyntaxTypes.COMMENT; }
 }
 
