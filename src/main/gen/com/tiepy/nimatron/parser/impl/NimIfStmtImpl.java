@@ -27,9 +27,9 @@ public class NimIfStmtImpl extends ASTWrapperPsiElement implements NimIfStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimCondStmt getCondStmt() {
-    return findChildByClass(NimCondStmt.class);
+    return findNotNullChildByClass(NimCondStmt.class);
   }
 
 }

@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimIfStmt extends PsiElement {
 
-  @Nullable
+  @NotNull
   NimCondStmt getCondStmt();
 
 }

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimVarStmt extends PsiElement {
 
   @NotNull
-  List<NimVariable> getVariableList();
+  NimSection getSection();
 
 }

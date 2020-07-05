@@ -11,14 +11,14 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimStmtImpl extends ASTWrapperPsiElement implements NimStmt {
+public class NimPrimaryImpl extends ASTWrapperPsiElement implements NimPrimary {
 
-  public NimStmtImpl(@NotNull ASTNode node) {
+  public NimPrimaryImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitStmt(this);
+    visitor.visitPrimary(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,14 +28,26 @@ public class NimStmtImpl extends ASTWrapperPsiElement implements NimStmt {
 
   @Override
   @Nullable
-  public NimComplexOrSimpleStmt getComplexOrSimpleStmt() {
-    return findChildByClass(NimComplexOrSimpleStmt.class);
+  public NimIdentOrLiteral getIdentOrLiteral() {
+    return findChildByClass(NimIdentOrLiteral.class);
   }
 
   @Override
   @Nullable
-  public NimSimpleStmt getSimpleStmt() {
-    return findChildByClass(NimSimpleStmt.class);
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimPrimarySuffix> getPrimarySuffixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTypeKeyw getTypeKeyw() {
+    return findChildByClass(NimTypeKeyw.class);
   }
 
 }

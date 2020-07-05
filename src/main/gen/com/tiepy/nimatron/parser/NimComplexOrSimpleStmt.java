@@ -5,9 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimDiscardStmt extends PsiElement {
+public interface NimComplexOrSimpleStmt extends PsiElement {
 
   @Nullable
-  NimOptInd getOptInd();
+  NimIfStmt getIfStmt();
+
+  @Nullable
+  NimSimpleStmt getSimpleStmt();
+
+  @Nullable
+  NimVarStmt getVarStmt();
 
 }
