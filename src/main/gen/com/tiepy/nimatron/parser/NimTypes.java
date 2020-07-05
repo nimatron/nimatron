@@ -10,28 +10,16 @@ import com.tiepy.nimatron.parser.impl.*;
 
 public interface NimTypes {
 
-  IElementType COLON_BODY = new NimElementType("COLON_BODY");
-  IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
   IElementType COND_STMT = new NimElementType("COND_STMT");
   IElementType DISCARD_STMT = new NimElementType("DISCARD_STMT");
   IElementType EXPR = new NimElementType("EXPR");
-  IElementType EXPR_COLON_EQ_EXPR = new NimElementType("EXPR_COLON_EQ_EXPR");
   IElementType EXPR_LIST = new NimElementType("EXPR_LIST");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
   IElementType GENERALIZED_LIT = new NimElementType("GENERALIZED_LIT");
-  IElementType IDENT_COLON_EQUALS = new NimElementType("IDENT_COLON_EQUALS");
-  IElementType IDENT_OR_LITERAL = new NimElementType("IDENT_OR_LITERAL");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
-  IElementType OPT_IND = new NimElementType("OPT_IND");
-  IElementType PRIMARY = new NimElementType("PRIMARY");
-  IElementType PRIMARY_SUFFIX = new NimElementType("PRIMARY_SUFFIX");
-  IElementType SECTION = new NimElementType("SECTION");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
-  IElementType SIMPLE_STMT = new NimElementType("SIMPLE_STMT");
   IElementType STMT = new NimElementType("STMT");
-  IElementType STMTS = new NimElementType("STMTS");
-  IElementType TERM_IND = new NimElementType("TERM_IND");
   IElementType TYPE_DESC = new NimElementType("TYPE_DESC");
   IElementType TYPE_KEYW = new NimElementType("TYPE_KEYW");
   IElementType VARIABLE = new NimElementType("VARIABLE");
@@ -83,13 +71,7 @@ public interface NimTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == COLON_BODY) {
-        return new NimColonBodyImpl(node);
-      }
-      else if (type == COMPLEX_OR_SIMPLE_STMT) {
-        return new NimComplexOrSimpleStmtImpl(node);
-      }
-      else if (type == COND_STMT) {
+      if (type == COND_STMT) {
         return new NimCondStmtImpl(node);
       }
       else if (type == DISCARD_STMT) {
@@ -97,9 +79,6 @@ public interface NimTypes {
       }
       else if (type == EXPR) {
         return new NimExprImpl(node);
-      }
-      else if (type == EXPR_COLON_EQ_EXPR) {
-        return new NimExprColonEqExprImpl(node);
       }
       else if (type == EXPR_LIST) {
         return new NimExprListImpl(node);
@@ -110,44 +89,17 @@ public interface NimTypes {
       else if (type == GENERALIZED_LIT) {
         return new NimGeneralizedLitImpl(node);
       }
-      else if (type == IDENT_COLON_EQUALS) {
-        return new NimIdentColonEqualsImpl(node);
-      }
-      else if (type == IDENT_OR_LITERAL) {
-        return new NimIdentOrLiteralImpl(node);
-      }
       else if (type == IF_STMT) {
         return new NimIfStmtImpl(node);
       }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);
       }
-      else if (type == OPT_IND) {
-        return new NimOptIndImpl(node);
-      }
-      else if (type == PRIMARY) {
-        return new NimPrimaryImpl(node);
-      }
-      else if (type == PRIMARY_SUFFIX) {
-        return new NimPrimarySuffixImpl(node);
-      }
-      else if (type == SECTION) {
-        return new NimSectionImpl(node);
-      }
       else if (type == SIMPLE_EXPR) {
         return new NimSimpleExprImpl(node);
       }
-      else if (type == SIMPLE_STMT) {
-        return new NimSimpleStmtImpl(node);
-      }
       else if (type == STMT) {
         return new NimStmtImpl(node);
-      }
-      else if (type == STMTS) {
-        return new NimStmtsImpl(node);
-      }
-      else if (type == TERM_IND) {
-        return new NimTermIndImpl(node);
       }
       else if (type == TYPE_DESC) {
         return new NimTypeDescImpl(node);

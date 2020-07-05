@@ -28,8 +28,8 @@ public class NimVarStmtImpl extends ASTWrapperPsiElement implements NimVarStmt {
 
   @Override
   @NotNull
-  public NimSection getSection() {
-    return findNotNullChildByClass(NimSection.class);
+  public List<NimVariable> getVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimVariable.class);
   }
 
 }

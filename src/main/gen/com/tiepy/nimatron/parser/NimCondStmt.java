@@ -11,6 +11,6 @@ public interface NimCondStmt extends PsiElement {
   List<NimExpr> getExprList();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  List<NimStmt> getStmtList();
 
 }

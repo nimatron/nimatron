@@ -97,7 +97,7 @@ meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 
 //simpleExpr = arrowExpr (OP0 optInd arrowExpr)* pragma?
 //simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* pragma?
-simpleExpr ::= primary (OP5 <<optInd primary>>)*
+simpleExpr ::= primary (OP5 <<optInd primary>>)* {pin=2}
 
 //arrowExpr = assignExpr (OP1 optInd assignExpr)*
 //arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
@@ -389,10 +389,10 @@ discardStmt ::= 'discard' <<optInd expr>>?
 //           (IND{=} 'else' colcom stmt)?
 condStmt ::= expr ':' <<optInd stmts>>
              (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-             (IND_EQ 'else' ':' <<optInd stmts>>)?
+             (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=2}
 
 //ifStmt = 'if' condStmt
-ifStmt ::= 'if' condStmt
+ifStmt ::= 'if' condStmt {pin=1}
 
 //whenStmt = 'when' condStmt
 //whenStmt ::= 'when' condStmt
@@ -577,7 +577,7 @@ simpleStmt::= discardStmt | exprStmt
 complexOrSimpleStmt ::= ifStmt
                               | varStmt
                               | simpleStmt
-varStmt ::= (('let'|'var'|'using') <<section variable>>)
+varStmt ::= (('let'|'var'|'using') <<section variable>>) {pin=1}
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
 //     / simpleStmt ^+ ';'

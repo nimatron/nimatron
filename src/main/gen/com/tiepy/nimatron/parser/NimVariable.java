@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimVariable extends PsiElement {
 
   @Nullable
-  NimColonBody getColonBody();
+  NimExpr getExpr();
 
-  @NotNull
-  NimIdentColonEquals getIdentColonEquals();
+  @Nullable
+  NimStmt getStmt();
 
 }

@@ -8,9 +8,21 @@ import com.intellij.psi.PsiElement;
 public interface NimSimpleExpr extends PsiElement {
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  List<NimExpr> getExprList();
 
   @NotNull
-  NimPrimary getPrimary();
+  List<NimExprList> getExprListList();
+
+  @NotNull
+  List<NimGeneralizedLit> getGeneralizedLitList();
+
+  @NotNull
+  List<NimLiteral> getLiteralList();
+
+  @NotNull
+  List<NimTypeDesc> getTypeDescList();
+
+  @NotNull
+  List<NimTypeKeyw> getTypeKeywList();
 
 }

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimDiscardStmt extends PsiElement {
 
   @Nullable
-  NimOptInd getOptInd();
+  NimExpr getExpr();
 
 }
