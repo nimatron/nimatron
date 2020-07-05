@@ -37,47 +37,47 @@ public class NimParserTest extends ParsingTestCase {
         super("", "nim", new NimParserDefinition());
     }
 
-    public void testEchoOk() {
+    public void testMiscEchoOk() {
         doTest(true, true);
     }
 
-    public void testEchoOkX2() {
+    public void testMiscEchoOkX2() {
         doTest(true, true);
     }
 
-    public void testIfIndent() {
+    public void testMiscIfIndent() {
         doTest(true, true);
     }
 
-    public void testIfIndentX2() {
+    public void testMiscIfIndentX2() {
         doTest(true, true);
     }
 
-    public void testIfElseIndent() {
+    public void testMiscIfElseIndent() {
         doTest(true, true);
     }
 
-    public void testIfElseIndentX2() {
+    public void testMiscIfElseIndentX2() {
         doTest(true, true);
     }
 
-    public void testIfTrueEchoOk() {
+    public void testMiscIfTrueEchoOk() {
         doTest(true, true);
     }
 
-    public void testNimLangNewVariableDeclarationSyntax() {
+    public void testMiscVar() {
         doTest(true, true);
     }
 
-    public void testVar() {
+    public void testMiscVar2() {
         doTest(true, true);
     }
 
-    public void testVar2() {
+    public void testMiscWhatsYourName() {
         doTest(true, true);
     }
 
-    public void testWhatsYourName() {
+    public void testNimVarStmtVarDecl() {
         doTest(true, true);
     }
 
