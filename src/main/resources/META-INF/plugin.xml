@@ -1,8 +1,7 @@
 <idea-plugin>
     <id>com.tiepy.nimatron</id>
     <name>Nimatron</name>
-    <vendor email="nimatron-support@tiepy.com" url="https://www.tiepy.com">TiePy</vendor>
-
+    <vendor email="nimatron-support@tiepy.com" url="https://tiepy.com">TiePy</vendor>
     <description><![CDATA[
     Syntax-highlighting for the Nim programming language. More to come.
     ]]></description>
@@ -12,14 +11,23 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="Nim File" implementationClass="com.tiepy.nimatron.NimFileType"
-                  fieldName="INSTANCE" language="Nim" extensions="nim"/>
-        <lang.parserDefinition language="Nim"
-                               implementationClass="com.tiepy.nimatron.NimParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="Nim"
-                                       implementationClass="com.tiepy.nimatron.NimSyntaxHighlighterFactory"/>
-        <colorSettingsPage implementation="com.tiepy.nimatron.NimColorSettingsPage"/>
-        <lang.commenter language="Nim" implementationClass="com.tiepy.nimatron.NimCommenter"/>
+        <fileType
+                name="Nim File"
+                implementationClass="com.tiepy.nimatron.NimFileType"
+                fieldName="INSTANCE"
+                language="Nim"
+                extensions="nim"/>
+        <lang.parserDefinition
+                language="Nim"
+                implementationClass="com.tiepy.nimatron.NimParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Nim"
+                implementationClass="com.tiepy.nimatron.NimSyntaxHighlighterFactory"/>
+        <colorSettingsPage
+                implementation="com.tiepy.nimatron.NimColorSettingsPage"/>
+        <lang.commenter
+                language="Nim"
+                implementationClass="com.tiepy.nimatron.NimCommenter"/>
     </extensions>
 
     <actions>
