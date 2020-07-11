@@ -219,13 +219,13 @@ identColonEquals ::= IDENT (',' IDENT)* ','?
 //tupleClass = 'tuple'
 
 //paramList = '(' declColonEquals ^* (comma/semicolon) ')'
-paramList ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
+params ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
 
 //paramListArrow = paramList? ('->' optInd typeDesc)?
-paramListArrow ::= paramList? ('->' <<optInd typeDesc>>)?
+paramListArrow ::= params? ('->' <<optInd typeDesc>>)?
 
 //paramListColon = paramList? (':' optInd typeDesc)?
-paramListColon ::= paramList? (':' <<optInd typeDesc>>)?
+paramListColon ::= params? (':' <<optInd typeDesc>>)?
 
 //doBlock = 'do' paramListArrow pragma? colcom stmt
 doBlock ::= 'do' paramListArrow pragma? ':' stmt
