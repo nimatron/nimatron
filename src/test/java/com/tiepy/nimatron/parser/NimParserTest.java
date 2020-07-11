@@ -81,6 +81,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testNimTypes6456() {
+        doTest(true, true);
+    }
+
     /**
      * @return path to test data file directory relative to root of this module.
      */
