@@ -28,8 +28,8 @@ public class NimYieldStmtImpl extends ASTWrapperPsiElement implements NimYieldSt
 
   @Override
   @Nullable
-  public NimExpr getExpr() {
-    return findChildByClass(NimExpr.class);
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
 }

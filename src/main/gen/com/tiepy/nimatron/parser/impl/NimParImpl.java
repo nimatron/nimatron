@@ -28,8 +28,8 @@ public class NimParImpl extends ASTWrapperPsiElement implements NimPar {
 
   @Override
   @NotNull
-  public NimPar2 getPar2() {
-    return findNotNullChildByClass(NimPar2.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

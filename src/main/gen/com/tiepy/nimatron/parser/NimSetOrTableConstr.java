@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimSetOrTableConstr extends PsiElement {
 
   @NotNull
-  List<NimExpr> getExprList();
+  List<NimExprColonEqExpr> getExprColonEqExprList();
 
 }

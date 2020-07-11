@@ -33,9 +33,15 @@ public class NimPar2Impl extends ASTWrapperPsiElement implements NimPar2 {
   }
 
   @Override
+  @Nullable
+  public NimExpr getExpr() {
+    return findChildByClass(NimExpr.class);
+  }
+
+  @Override
   @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
+  public List<NimExprColonEqExpr> getExprColonEqExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
   }
 
   @Override

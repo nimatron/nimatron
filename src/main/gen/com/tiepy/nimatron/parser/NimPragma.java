@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimPragma extends PsiElement {
 
   @NotNull
-  List<NimExpr> getExprList();
+  List<NimOptInd> getOptIndList();
 
 }

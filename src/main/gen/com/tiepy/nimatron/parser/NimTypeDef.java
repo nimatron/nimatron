@@ -17,9 +17,9 @@ public interface NimTypeDef extends PsiElement {
   NimIdentWithPragmaDot getIdentWithPragmaDot();
 
   @NotNull
-  NimPragma getPragma();
+  List<NimOptInd> getOptIndList();
 
   @NotNull
-  List<NimTypeDefAux> getTypeDefAuxList();
+  NimPragma getPragma();
 
 }

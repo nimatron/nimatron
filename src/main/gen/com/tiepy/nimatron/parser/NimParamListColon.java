@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimParamListColon extends PsiElement {
 
   @Nullable
-  NimParamList getParamList();
+  NimOptInd getOptInd();
 
   @Nullable
-  NimTypeDesc getTypeDesc();
+  NimParamList getParamList();
 
 }

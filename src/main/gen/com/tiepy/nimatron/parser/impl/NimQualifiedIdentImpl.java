@@ -27,9 +27,15 @@ public class NimQualifiedIdentImpl extends ASTWrapperPsiElement implements NimQu
   }
 
   @Override
+  @Nullable
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
+  }
+
+  @Override
   @NotNull
-  public List<NimSymbol> getSymbolList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSymbol.class);
+  public NimSymbol getSymbol() {
+    return findNotNullChildByClass(NimSymbol.class);
   }
 
 }

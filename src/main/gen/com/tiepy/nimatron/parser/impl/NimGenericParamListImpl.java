@@ -28,8 +28,8 @@ public class NimGenericParamListImpl extends ASTWrapperPsiElement implements Nim
 
   @Override
   @NotNull
-  public List<NimGenericParam> getGenericParamList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimGenericParam.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

@@ -933,13 +933,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // expr (':'|'=' expr)?
-  static boolean exprColonEqExpr(PsiBuilder b, int l) {
+  public static boolean exprColonEqExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exprColonEqExpr")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, EXPR_COLON_EQ_EXPR, "<expr colon eq expr>");
     r = expr(b, l + 1);
     r = r && exprColonEqExpr_1(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -1993,13 +1993,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // <<RULE>> | (INDENT <<RULE>> termInd)
-  static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
+  public static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = _RULE.parse(b, l);
     if (!r) r = optInd_1(b, l + 1, _RULE);
-    exit_section_(b, m, null, r);
+    exit_section_(b, m, OPT_IND, r);
     return r;
   }
 
@@ -2608,38 +2608,40 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // primary1
-  //                   | primary2
-  //                   | primary3
-  static boolean primary(PsiBuilder b, int l) {
+  //           | primary2
+  //           | primary3
+  public static boolean primary(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, PRIMARY, "<primary>");
     r = primary1(b, l + 1);
     if (!r) r = primary2(b, l + 1);
     if (!r) r = primary3(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
   // typeKeyw <<optInd typeDesc>>
-  static boolean primary1(PsiBuilder b, int l) {
+  public static boolean primary1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary1")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, PRIMARY_1, "<primary 1>");
     r = typeKeyw(b, l + 1);
     r = r && optInd(b, l + 1, typeDesc_parser_);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
   // identOrLiteral primarySuffix*
-  static boolean primary2(PsiBuilder b, int l) {
+  public static boolean primary2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, PRIMARY_2, "<primary 2>");
     r = identOrLiteral(b, l + 1);
     r = r && primary2_1(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -2656,13 +2658,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // 'bind' primary
-  static boolean primary3(PsiBuilder b, int l) {
+  public static boolean primary3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary3")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, PRIMARY_3, "<primary 3>");
     r = consumeToken(b, "bind");
     r = r && primary(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -2936,13 +2938,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
-  static boolean section(PsiBuilder b, int l, Parser _RULE) {
+  public static boolean section(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "section")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = _RULE.parse(b, l);
     if (!r) r = section_1(b, l + 1, _RULE);
-    exit_section_(b, m, null, r);
+    exit_section_(b, m, SECTION, r);
     return r;
   }
 
@@ -3138,13 +3140,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // stmt ((';'|IND_EQ) stmt)*
-  static boolean stmts(PsiBuilder b, int l) {
+  public static boolean stmts(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmts")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, STMTS, "<stmts>");
     r = stmt(b, l + 1);
     r = r && stmts_1(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3239,13 +3241,13 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // DEDENT | <<eof>>
-  static boolean termInd(PsiBuilder b, int l) {
+  public static boolean termInd(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "termInd")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, TERM_IND, "<term ind>");
     r = consumeToken(b, DEDENT);
     if (!r) r = eof(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

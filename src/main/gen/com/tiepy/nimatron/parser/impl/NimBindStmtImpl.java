@@ -28,8 +28,8 @@ public class NimBindStmtImpl extends ASTWrapperPsiElement implements NimBindStmt
 
   @Override
   @NotNull
-  public List<NimQualifiedIdent> getQualifiedIdentList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimQualifiedIdent.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

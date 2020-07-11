@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimQualifiedIdent extends PsiElement {
 
+  @Nullable
+  NimOptInd getOptInd();
+
   @NotNull
-  List<NimSymbol> getSymbolList();
+  NimSymbol getSymbol();
 
 }

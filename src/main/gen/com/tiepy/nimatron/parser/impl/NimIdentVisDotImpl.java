@@ -28,8 +28,14 @@ public class NimIdentVisDotImpl extends ASTWrapperPsiElement implements NimIdent
 
   @Override
   @NotNull
-  public List<NimSymbol> getSymbolList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSymbol.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
+  }
+
+  @Override
+  @NotNull
+  public NimSymbol getSymbol() {
+    return findNotNullChildByClass(NimSymbol.class);
   }
 
 }

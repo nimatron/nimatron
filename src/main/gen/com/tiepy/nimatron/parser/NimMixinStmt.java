@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimMixinStmt extends PsiElement {
 
   @NotNull
-  List<NimQualifiedIdent> getQualifiedIdentList();
+  NimOptInd getOptInd();
 
 }

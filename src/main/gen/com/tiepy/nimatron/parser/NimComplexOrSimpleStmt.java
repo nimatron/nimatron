@@ -16,9 +16,6 @@ public interface NimComplexOrSimpleStmt extends PsiElement {
   @Nullable
   NimBlockStmt getBlockStmt();
 
-  @NotNull
-  List<NimConstant> getConstantList();
-
   @Nullable
   NimDeferStmt getDeferStmt();
 
@@ -35,6 +32,9 @@ public interface NimComplexOrSimpleStmt extends PsiElement {
   NimRoutine getRoutine();
 
   @Nullable
+  NimSection getSection();
+
+  @Nullable
   NimSimpleStmt getSimpleStmt();
 
   @Nullable
@@ -42,12 +42,6 @@ public interface NimComplexOrSimpleStmt extends PsiElement {
 
   @Nullable
   NimTryStmt getTryStmt();
-
-  @NotNull
-  List<NimTypeDef> getTypeDefList();
-
-  @NotNull
-  List<NimVariable> getVariableList();
 
   @Nullable
   NimWhenStmt getWhenStmt();

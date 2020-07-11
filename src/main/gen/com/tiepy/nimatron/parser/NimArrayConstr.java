@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimArrayConstr extends PsiElement {
 
   @NotNull
-  List<NimExpr> getExprList();
+  List<NimOptInd> getOptIndList();
 
 }

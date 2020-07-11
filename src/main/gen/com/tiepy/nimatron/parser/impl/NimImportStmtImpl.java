@@ -32,4 +32,10 @@ public class NimImportStmtImpl extends ASTWrapperPsiElement implements NimImport
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
+  @Override
+  @NotNull
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  }
+
 }

@@ -28,14 +28,14 @@ public class NimSimpleExprImpl extends ASTWrapperPsiElement implements NimSimple
 
   @Override
   @NotNull
-  public List<NimIdentOrLiteral> getIdentOrLiteralList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIdentOrLiteral.class);
+  public List<NimOp> getOpList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOp.class);
   }
 
   @Override
   @NotNull
-  public List<NimOp> getOpList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOp.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
   @Override
@@ -46,20 +46,8 @@ public class NimSimpleExprImpl extends ASTWrapperPsiElement implements NimSimple
 
   @Override
   @NotNull
-  public List<NimPrimarySuffix> getPrimarySuffixList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimTypeDesc> getTypeDescList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTypeDesc.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimTypeKeyw> getTypeKeywList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTypeKeyw.class);
+  public NimPrimary getPrimary() {
+    return findNotNullChildByClass(NimPrimary.class);
   }
 
 }

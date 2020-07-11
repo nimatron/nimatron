@@ -10,8 +10,11 @@ public interface NimPar2 extends PsiElement {
   @NotNull
   List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
 
+  @Nullable
+  NimExpr getExpr();
+
   @NotNull
-  List<NimExpr> getExprList();
+  List<NimExprColonEqExpr> getExprColonEqExprList();
 
   @Nullable
   NimPragmaStmt getPragmaStmt();

@@ -7,11 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface NimConstant extends PsiElement {
 
-  @NotNull
-  NimExpr getExpr();
-
   @Nullable
   NimIdentWithPragma getIdentWithPragma();
+
+  @NotNull
+  NimOptInd getOptInd();
 
   @Nullable
   NimTypeDesc getTypeDesc();

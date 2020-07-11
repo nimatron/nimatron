@@ -54,7 +54,7 @@
 
 //module = stmt ^* (';' / IND{=})
 module ::= IND_EQ* stmts? ';'? IND_EQ*
-private stmts ::= stmt ((';'|IND_EQ) stmt)*
+stmts ::= stmt ((';'|IND_EQ) stmt)*
 
 //comma = ',' COMMENT?
 //semicolon = ';' COMMENT?
@@ -70,8 +70,8 @@ operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
 //prefixOperator = operator
 
 //optInd = COMMENT? IND?
-private termInd ::= DEDENT | <<eof>>
-private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
+termInd ::= DEDENT | <<eof>>
+meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 
 //optPar = (IND{>} | IND{=})?
 
@@ -93,7 +93,7 @@ simpleExpr ::= primary (op <<optInd primary>>)* pragma?
 symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|IDENT|KEYW
 
 //exprColonEqExpr = expr (':'|'=' expr)?
-private exprColonEqExpr ::= expr (':'|'=' expr)?
+exprColonEqExpr ::= expr (':'|'=' expr)?
 
 //exprList = expr ^+ comma
 exprList2 ::= expr (',' expr)*
@@ -262,12 +262,12 @@ typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-private primary ::= primary1
-                  | primary2
-                  | primary3
-private primary1 ::= typeKeyw <<optInd typeDesc>>
-private primary2 ::= /*operator**/ identOrLiteral primarySuffix*
-private primary3 ::= 'bind' primary
+primary ::= primary1
+          | primary2
+          | primary3
+primary1 ::= typeKeyw <<optInd typeDesc>>
+primary2 ::= /*operator**/ identOrLiteral primarySuffix*
+primary3 ::= 'bind' primary
 
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= simpleExpr ('not' expr)?
@@ -425,7 +425,7 @@ routine ::= <<optInd (identVis pattern? genericParamList?
 //commentStmt = COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-private meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
+meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -464,7 +464,6 @@ varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd ('
 
 //colonBody = colcom stmt postExprBlocks?
 colonBody ::= ':' stmt postExprBlocks?
-//private colonBody ::= ':' stmt
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
 variable ::= (varTuple|identColonEquals) colonBody?
@@ -488,7 +487,6 @@ pragmaStmt ::= pragma (':' stmt)?
 simpleStmt ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
              | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
              | includeStmt | exprStmt
-//private simpleStmt ::= discardStmt | exprStmt
 
 //complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
 //                    | tryStmt | forStmt

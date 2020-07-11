@@ -7,8 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface NimGenericParam extends PsiElement {
 
-  @NotNull
-  List<NimExpr> getExprList();
+  @Nullable
+  NimExpr getExpr();
+
+  @Nullable
+  NimOptInd getOptInd();
 
   @NotNull
   List<NimSymbol> getSymbolList();

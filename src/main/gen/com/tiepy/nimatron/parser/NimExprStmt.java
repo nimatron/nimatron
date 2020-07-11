@@ -14,6 +14,9 @@ public interface NimExprStmt extends PsiElement {
   List<NimExpr> getExprList();
 
   @Nullable
+  NimOptInd getOptInd();
+
+  @Nullable
   NimPostExprBlocks getPostExprBlocks();
 
   @NotNull

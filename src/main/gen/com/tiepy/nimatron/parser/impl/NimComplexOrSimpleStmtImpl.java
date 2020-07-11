@@ -45,12 +45,6 @@ public class NimComplexOrSimpleStmtImpl extends ASTWrapperPsiElement implements 
   }
 
   @Override
-  @NotNull
-  public List<NimConstant> getConstantList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimConstant.class);
-  }
-
-  @Override
   @Nullable
   public NimDeferStmt getDeferStmt() {
     return findChildByClass(NimDeferStmt.class);
@@ -82,6 +76,12 @@ public class NimComplexOrSimpleStmtImpl extends ASTWrapperPsiElement implements 
 
   @Override
   @Nullable
+  public NimSection getSection() {
+    return findChildByClass(NimSection.class);
+  }
+
+  @Override
+  @Nullable
   public NimSimpleStmt getSimpleStmt() {
     return findChildByClass(NimSimpleStmt.class);
   }
@@ -96,18 +96,6 @@ public class NimComplexOrSimpleStmtImpl extends ASTWrapperPsiElement implements 
   @Nullable
   public NimTryStmt getTryStmt() {
     return findChildByClass(NimTryStmt.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimTypeDef> getTypeDefList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTypeDef.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimVariable> getVariableList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimVariable.class);
   }
 
   @Override

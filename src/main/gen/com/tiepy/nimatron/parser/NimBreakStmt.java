@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimBreakStmt extends PsiElement {
 
   @Nullable
-  NimExpr getExpr();
+  NimOptInd getOptInd();
 
 }
