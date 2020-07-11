@@ -28,26 +28,14 @@ public class NimExprStmtImpl extends ASTWrapperPsiElement implements NimExprStmt
 
   @Override
   @Nullable
-  public NimColonBody getColonBody() {
-    return findChildByClass(NimColonBody.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
+  public NimExprStmt1 getExprStmt1() {
+    return findChildByClass(NimExprStmt1.class);
   }
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPostExprBlocks getPostExprBlocks() {
-    return findChildByClass(NimPostExprBlocks.class);
+  public NimExprStmt2 getExprStmt2() {
+    return findChildByClass(NimExprStmt2.class);
   }
 
   @Override

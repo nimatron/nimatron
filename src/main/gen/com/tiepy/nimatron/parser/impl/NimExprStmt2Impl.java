@@ -11,25 +11,19 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimExportStmtImpl extends ASTWrapperPsiElement implements NimExportStmt {
+public class NimExprStmt2Impl extends ASTWrapperPsiElement implements NimExprStmt2 {
 
-  public NimExportStmtImpl(@NotNull ASTNode node) {
+  public NimExprStmt2Impl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitExportStmt(this);
+    visitor.visitExprStmt2(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof NimVisitor) accept((NimVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public NimExportStmt1 getExportStmt1() {
-    return findChildByClass(NimExportStmt1.class);
   }
 
   @Override
@@ -40,8 +34,8 @@ public class NimExportStmtImpl extends ASTWrapperPsiElement implements NimExport
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimPostExprBlocks getPostExprBlocks() {
+    return findNotNullChildByClass(NimPostExprBlocks.class);
   }
 
 }

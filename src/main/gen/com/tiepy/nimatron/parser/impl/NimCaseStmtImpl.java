@@ -27,15 +27,21 @@ public class NimCaseStmtImpl extends ASTWrapperPsiElement implements NimCaseStmt
   }
 
   @Override
-  @NotNull
-  public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
+  @Nullable
+  public NimCaseStmt1 getCaseStmt1() {
+    return findChildByClass(NimCaseStmt1.class);
+  }
+
+  @Override
+  @Nullable
+  public NimCaseStmt2 getCaseStmt2() {
+    return findChildByClass(NimCaseStmt2.class);
   }
 
   @Override
   @NotNull
-  public NimOfBranches getOfBranches() {
-    return findNotNullChildByClass(NimOfBranches.class);
+  public NimExpr getExpr() {
+    return findNotNullChildByClass(NimExpr.class);
   }
 
 }

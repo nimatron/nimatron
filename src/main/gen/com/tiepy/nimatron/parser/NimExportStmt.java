@@ -7,10 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface NimExportStmt extends PsiElement {
 
+  @Nullable
+  NimExportStmt1 getExportStmt1();
+
   @NotNull
   List<NimExpr> getExprList();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  NimOptInd getOptInd();
 
 }

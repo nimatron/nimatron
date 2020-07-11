@@ -54,7 +54,7 @@
 
 //module = stmt ^* (';' / IND{=})
 module ::= IND_EQ* stmts? ';'? IND_EQ*
-stmts ::= stmt ((';'|IND_EQ) stmt)*
+stmts ::= stmt ((';' | IND_EQ) stmt)*
 
 //comma = ',' COMMENT?
 //semicolon = ';' COMMENT?
@@ -86,7 +86,7 @@ meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-op ::= OP0|OP1/*|OP2*/|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
+op ::= OP0|OP1/*|OP2*/|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10 // TODO: Reconsider OP2 which was removed here.
 simpleExpr ::= primary (op <<optInd primary>>)* pragma?
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
@@ -130,7 +130,7 @@ par1 ::= par2
        | par3
        | pragmaStmt
        | par4
-par2 ::= complexOrSimpleStmt (';' complexOrSimpleStmt)*
+par2 ::= complexOrSimpleStmt (';' complexOrSimpleStmt)* // TODO: Consider &parKeyw that was removed from here.
 par3 ::= ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
 par4 ::= simpleExpr (par5 | par6)
 par5 ::= '=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?
@@ -147,7 +147,7 @@ literal ::= INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
           | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
           | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
           | CHAR_LIT
-          | BOOL_LIT
+          | BOOL_LIT // NOTE: BOOL_LIT was added here.
           | NIL
 
 //generalizedLit = GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
@@ -179,7 +179,7 @@ primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr ','?)*)>> ')'
 primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
 primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
-primarySuffix5 ::= <<optInd exprs>> // command syntax
+primarySuffix5 ::= /* &('`'|IDENT|literal|'cast'|'addr'|'type') */ <<optInd exprs>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
@@ -275,7 +275,7 @@ primary ::= primary1
           | primary2
           | primary3
 primary1 ::= typeKeyw <<optInd typeDesc>>
-primary2 ::= /*operator**/ identOrLiteral primarySuffix*
+primary2 ::= /* operator* */ identOrLiteral primarySuffix* // TODO: Re-consider prefixOperator that was removed here.
 primary3 ::= 'bind' primary
 
 //typeDesc = simpleExpr ('not' expr)?
@@ -307,25 +307,21 @@ postExprBlocks5 ::= IND_EQ 'else' ':' stmt
 //         / ( expr ^+ comma
 //             postExprBlocks
 //           ))?
-exprStmt ::= simpleExpr
-           (( '=' <<optInd expr>> colonBody?)
-           | ( expr (',' expr)*
-               postExprBlocks
-             ))?
+exprStmt ::= simpleExpr (exprStmt1 | exprStmt2)?
+exprStmt1 ::= '=' <<optInd expr>> colonBody?
+exprStmt2 ::= expr (',' expr)* postExprBlocks
 
 //importStmt = 'import' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-importStmt ::= 'import' <<optInd expr>>
-                ((',' expr)+
-               | ('except' <<optInd (expr (',' expr)*)>> ))
+importStmt ::= 'import' <<optInd expr>> ((',' expr)+ | importStmt1)
+importStmt1 ::= 'except' <<optInd (expr (',' expr)*)>>
 
 //exportStmt = 'export' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-exportStmt ::= 'export' <<optInd expr>>
-                ((',' expr)+
-               | ('except' <<optInd (expr (',' expr)*)>> ))
+exportStmt ::= 'export' <<optInd expr>> ((',' expr)+ | exportStmt1)
+exportStmt1 ::= 'except' <<optInd (expr (',' expr)*)>>
 
 //includeStmt = 'include' optInd expr ^+ comma
 includeStmt ::= 'include' <<optInd expr>> (',' expr)*
@@ -380,9 +376,9 @@ ofBranches ::= ofBranch (IND_EQ ofBranch)*
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
 //            | IND{=} ofBranches)
-caseStmt ::= 'case' expr ':'?
-              ((INDENT ofBranches DEDENT)
-              | (IND_EQ ofBranches))
+caseStmt ::= 'case' expr ':'? (caseStmt1 | caseStmt2)
+caseStmt1 ::= INDENT ofBranches DEDENT
+caseStmt2 ::= IND_EQ ofBranches
 
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
@@ -395,7 +391,7 @@ tryStmt ::= 'try' ':' stmt
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
 tryExpr ::= 'try' ':' stmt
-             (<<optInd ('except' exprs ':' stmt)>> )*
+             (<<optInd ('except' exprs ':' stmt)>>)*
              (<<optInd ('finally' ':' stmt)>>)?
 
 //exceptBlock = 'except' colcom stmt
@@ -422,9 +418,6 @@ genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
 //  genericParam ^* (comma/semicolon) optPar ']'
 genericParams ::= '[' <<optInd
   ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
-
-//genericParamList = '[' optInd
-//  genericParam ^* (comma/semicolon) optPar ']'
 
 //pattern = '{' stmt '}'
 pattern ::= '{' stmt '}'
@@ -463,8 +456,7 @@ meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 //typeClassParam = ('var' | 'out')? symbol
 typeClassParam ::= ('var'|'out')? symbol
 
-//typeClass = typeClassParam ^* ',' (pragma)? ('of' typeDesc ^* ',')?
-//              &IND{>} stmt
+//typeClass = typeClassParam ^* ',' (pragma)? ('of' typeDesc ^* ',')? &IND{>} stmt
 typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc (',' typeDesc)*)?)?
 
 //typeDef = identWithPragmaDot genericParamList? '=' optInd typeDefAux

@@ -17,6 +17,8 @@ public interface NimTypes {
   IElementType BLOCK_STMT = new NimElementType("BLOCK_STMT");
   IElementType BREAK_STMT = new NimElementType("BREAK_STMT");
   IElementType CASE_STMT = new NimElementType("CASE_STMT");
+  IElementType CASE_STMT_1 = new NimElementType("CASE_STMT_1");
+  IElementType CASE_STMT_2 = new NimElementType("CASE_STMT_2");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
   IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
@@ -29,11 +31,14 @@ public interface NimTypes {
   IElementType DISCARD_STMT = new NimElementType("DISCARD_STMT");
   IElementType DO_BLOCK = new NimElementType("DO_BLOCK");
   IElementType EXPORT_STMT = new NimElementType("EXPORT_STMT");
+  IElementType EXPORT_STMT_1 = new NimElementType("EXPORT_STMT_1");
   IElementType EXPR = new NimElementType("EXPR");
   IElementType EXPRS = new NimElementType("EXPRS");
   IElementType EXPR_COLON_EQ_EXPR = new NimElementType("EXPR_COLON_EQ_EXPR");
   IElementType EXPR_COLON_EQ_EXPRS = new NimElementType("EXPR_COLON_EQ_EXPRS");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
+  IElementType EXPR_STMT_1 = new NimElementType("EXPR_STMT_1");
+  IElementType EXPR_STMT_2 = new NimElementType("EXPR_STMT_2");
   IElementType FOR_STMT = new NimElementType("FOR_STMT");
   IElementType FROM_STMT = new NimElementType("FROM_STMT");
   IElementType GENERALIZED_LIT = new NimElementType("GENERALIZED_LIT");
@@ -48,6 +53,7 @@ public interface NimTypes {
   IElementType IF_EXPR = new NimElementType("IF_EXPR");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType IMPORT_STMT = new NimElementType("IMPORT_STMT");
+  IElementType IMPORT_STMT_1 = new NimElementType("IMPORT_STMT_1");
   IElementType INCLUDE_STMT = new NimElementType("INCLUDE_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
@@ -180,6 +186,12 @@ public interface NimTypes {
       else if (type == CASE_STMT) {
         return new NimCaseStmtImpl(node);
       }
+      else if (type == CASE_STMT_1) {
+        return new NimCaseStmt1Impl(node);
+      }
+      else if (type == CASE_STMT_2) {
+        return new NimCaseStmt2Impl(node);
+      }
       else if (type == CAST_EXPR) {
         return new NimCastExprImpl(node);
       }
@@ -216,6 +228,9 @@ public interface NimTypes {
       else if (type == EXPORT_STMT) {
         return new NimExportStmtImpl(node);
       }
+      else if (type == EXPORT_STMT_1) {
+        return new NimExportStmt1Impl(node);
+      }
       else if (type == EXPR) {
         return new NimExprImpl(node);
       }
@@ -230,6 +245,12 @@ public interface NimTypes {
       }
       else if (type == EXPR_STMT) {
         return new NimExprStmtImpl(node);
+      }
+      else if (type == EXPR_STMT_1) {
+        return new NimExprStmt1Impl(node);
+      }
+      else if (type == EXPR_STMT_2) {
+        return new NimExprStmt2Impl(node);
       }
       else if (type == FOR_STMT) {
         return new NimForStmtImpl(node);
@@ -272,6 +293,9 @@ public interface NimTypes {
       }
       else if (type == IMPORT_STMT) {
         return new NimImportStmtImpl(node);
+      }
+      else if (type == IMPORT_STMT_1) {
+        return new NimImportStmt1Impl(node);
       }
       else if (type == INCLUDE_STMT) {
         return new NimIncludeStmtImpl(node);

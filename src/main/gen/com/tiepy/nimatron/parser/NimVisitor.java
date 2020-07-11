@@ -35,6 +35,14 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCaseStmt1(@NotNull NimCaseStmt1 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitCaseStmt2(@NotNull NimCaseStmt2 o) {
+    visitPsiElement(o);
+  }
+
   public void visitCastExpr(@NotNull NimCastExpr o) {
     visitPsiElement(o);
   }
@@ -83,6 +91,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitExportStmt1(@NotNull NimExportStmt1 o) {
+    visitPsiElement(o);
+  }
+
   public void visitExpr(@NotNull NimExpr o) {
     visitPsiElement(o);
   }
@@ -96,6 +108,14 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitExprStmt(@NotNull NimExprStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExprStmt1(@NotNull NimExprStmt1 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExprStmt2(@NotNull NimExprStmt2 o) {
     visitPsiElement(o);
   }
 
@@ -156,6 +176,10 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitImportStmt(@NotNull NimImportStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImportStmt1(@NotNull NimImportStmt1 o) {
     visitPsiElement(o);
   }
 

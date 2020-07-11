@@ -33,9 +33,15 @@ public class NimImportStmtImpl extends ASTWrapperPsiElement implements NimImport
   }
 
   @Override
+  @Nullable
+  public NimImportStmt1 getImportStmt1() {
+    return findChildByClass(NimImportStmt1.class);
+  }
+
+  @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }
