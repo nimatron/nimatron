@@ -97,7 +97,7 @@ private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 
 //simpleExpr = arrowExpr (OP0 optInd arrowExpr)* pragma?
 //simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* pragma?
-simpleExpr ::= primary (OP5 <<optInd primary>>)* {pin=2}
+simpleExpr ::= primary (OP5 <<optInd primary>>)*
 
 //arrowExpr = assignExpr (OP1 optInd assignExpr)*
 //arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
@@ -314,9 +314,9 @@ typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 private primary ::= primary1
                   | primary2
                   | primary3
-private primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
-private primary2 ::= /*operator**/ identOrLiteral primarySuffix* {pin=1}
-private primary3 ::= 'bind' primary {pin=1}
+private primary1 ::= typeKeyw <<optInd typeDesc>>
+private primary2 ::= /*operator**/ identOrLiteral primarySuffix*
+private primary3 ::= 'bind' primary
 
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= simpleExpr ('not' expr)?
@@ -394,10 +394,10 @@ discardStmt ::= 'discard' <<optInd expr>>?
 //           (IND{=} 'else' colcom stmt)?
 condStmt ::= expr ':' <<optInd stmts>>
              (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-             (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=2}
+             (IND_EQ 'else' ':' <<optInd stmts>>)?
 
 //ifStmt = 'if' condStmt
-ifStmt ::= 'if' condStmt {pin=1}
+ifStmt ::= 'if' condStmt
 
 //whenStmt = 'when' condStmt
 //whenStmt ::= 'when' condStmt
@@ -582,7 +582,7 @@ private simpleStmt ::= discardStmt | exprStmt
 private complexOrSimpleStmt ::= ifStmt
                               | varStmt
                               | simpleStmt
-varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
+varStmt ::= ('let'|'var'|'using') <<section variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
 //     / simpleStmt ^+ ';'
