@@ -137,7 +137,7 @@ par1 ::= par2
        | par3
        | pragmaStmt
        | par4
-par2 ::= stmt (';' stmt)* // TODO: Consider &parKeyw that was removed from here.
+par2 ::= stmt (';' stmt)*
 par3 ::= ';' stmt (';' stmt)*
 par4 ::= simpleExpr (par5 | par6)
 par5 ::= '=' expr (';' stmt (';' stmt)*)?
@@ -186,10 +186,7 @@ primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr comma?)*)>> ')'
 primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
 primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
-primarySuffix5 ::= /* &('`'|IDENT|literal|'cast'|'addr'|'type') */ <<optInd exprs>> // command syntax
-// TODO: Consider the lookahead operator that was removed from the last rule here.
-// NOTE: That in last rule above, this has been changed from 'expr' to '<<optInd exprs>>'. This is currently required
-// to support command syntax with multiple args, like echo "A", "B"
+primarySuffix5 ::= <<optInd exprs>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
@@ -285,7 +282,7 @@ primary ::= primary1
           | primary2
           | primary3
 primary1 ::= typeKeyw <<optInd typeDesc>>
-primary2 ::= /* operator* */ identOrLiteral primarySuffix* // TODO: Re-consider prefixOperator that was removed here.
+primary2 ::= operator* identOrLiteral primarySuffix*
 primary3 ::= 'bind' primary
 
 //typeDesc = simpleExpr ('not' expr)?
@@ -397,7 +394,6 @@ tryStmt ::= 'try' colcom <<optInd stmts>>
              (IND_EQ? 'except' exprs colcom <<optInd stmts>>)*
              (IND_EQ? 'finally' colcom <<optInd stmts>>)?
 
-// TODO: Consider combining 'tryExpr' with 'tryStmt'. They may be equivalent.
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?

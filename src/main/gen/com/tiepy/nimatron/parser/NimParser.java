@@ -2639,24 +2639,36 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identOrLiteral primarySuffix*
+  // operator* identOrLiteral primarySuffix*
   public static boolean primary2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PRIMARY_2, "<primary 2>");
-    r = identOrLiteral(b, l + 1);
-    r = r && primary2_1(b, l + 1);
+    r = primary2_0(b, l + 1);
+    r = r && identOrLiteral(b, l + 1);
+    r = r && primary2_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  // operator*
+  private static boolean primary2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary2_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!operator(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primary2_0", c)) break;
+    }
+    return true;
+  }
+
   // primarySuffix*
-  private static boolean primary2_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary2_1")) return false;
+  private static boolean primary2_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary2_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!primarySuffix(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primary2_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "primary2_2", c)) break;
     }
     return true;
   }

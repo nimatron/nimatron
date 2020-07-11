@@ -11,6 +11,9 @@ public interface NimPrimary2 extends PsiElement {
   NimIdentOrLiteral getIdentOrLiteral();
 
   @NotNull
+  List<NimOperator> getOperatorList();
+
+  @NotNull
   List<NimPrimarySuffix> getPrimarySuffixList();
 
 }

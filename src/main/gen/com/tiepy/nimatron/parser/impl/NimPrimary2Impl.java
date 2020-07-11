@@ -34,6 +34,12 @@ public class NimPrimary2Impl extends ASTWrapperPsiElement implements NimPrimary2
 
   @Override
   @NotNull
+  public List<NimOperator> getOperatorList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOperator.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimPrimarySuffix> getPrimarySuffixList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
   }
