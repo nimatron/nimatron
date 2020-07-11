@@ -62,10 +62,4 @@ public class NimRoutineImpl extends ASTWrapperPsiElement implements NimRoutine {
     return findChildByClass(NimPragma.class);
   }
 
-  @Override
-  @Nullable
-  public NimRem getRem() {
-    return findChildByClass(NimRem.class);
-  }
-
 }

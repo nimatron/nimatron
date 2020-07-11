@@ -26,10 +26,4 @@ public class NimColonImpl extends ASTWrapperPsiElement implements NimColon {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public NimRem getRem() {
-    return findChildByClass(NimRem.class);
-  }
-
 }

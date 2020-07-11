@@ -26,10 +26,4 @@ public class NimColcomImpl extends ASTWrapperPsiElement implements NimColcom {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public NimRem getRem() {
-    return findChildByClass(NimRem.class);
-  }
-
 }

@@ -16,7 +16,4 @@ public interface NimCaseStmt extends PsiElement {
   @NotNull
   NimExpr getExpr();
 
-  @Nullable
-  NimRem getRem();
-
 }

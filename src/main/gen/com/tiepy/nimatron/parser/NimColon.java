@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface NimColon extends PsiElement {
 
-  @Nullable
-  NimRem getRem();
-
 }

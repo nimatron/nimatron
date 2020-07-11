@@ -28,12 +28,6 @@ public class NimStmtsImpl extends ASTWrapperPsiElement implements NimStmts {
 
   @Override
   @NotNull
-  public List<NimRem> getRemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimRem.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimSemicolon> getSemicolonList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSemicolon.class);
   }
