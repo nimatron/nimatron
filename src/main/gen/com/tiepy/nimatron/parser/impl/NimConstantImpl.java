@@ -28,12 +28,6 @@ public class NimConstantImpl extends ASTWrapperPsiElement implements NimConstant
 
   @Override
   @Nullable
-  public NimColon getColon() {
-    return findChildByClass(NimColon.class);
-  }
-
-  @Override
-  @Nullable
   public NimIdentWithPragma getIdentWithPragma() {
     return findChildByClass(NimIdentWithPragma.class);
   }

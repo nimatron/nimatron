@@ -28,12 +28,6 @@ public class NimTryExprImpl extends ASTWrapperPsiElement implements NimTryExpr {
 
   @Override
   @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimOptInd> getOptIndList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }

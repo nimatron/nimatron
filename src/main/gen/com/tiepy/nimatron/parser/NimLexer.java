@@ -1232,17 +1232,17 @@ private IElementType getDedenterToken() {
             // fall through
           case 75: break;
           case 17: 
-            { return NimTypes.C_SEMICOLON;
+            { return NimTypes.SEMICOLON;
             } 
             // fall through
           case 76: break;
           case 18: 
-            { return NimTypes.C_COMMA;
+            { return NimTypes.COMMA;
             } 
             // fall through
           case 77: break;
           case 19: 
-            { return NimTypes.C_GRAVE_ACCENT;
+            { return NimTypes.GRAVE_ACCENT;
             } 
             // fall through
           case 78: break;
@@ -1272,7 +1272,7 @@ private IElementType getDedenterToken() {
             // fall through
           case 83: break;
           case 25: 
-            { popState(); return NimTypes.COMMENT;
+            { popState(); return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 84: break;
@@ -1342,7 +1342,7 @@ private IElementType getDedenterToken() {
             // fall through
           case 97: break;
           case 39: 
-            { if (popState() == 0) return NimTypes.COMMENT;
+            { if (popState() == 0) return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 98: break;

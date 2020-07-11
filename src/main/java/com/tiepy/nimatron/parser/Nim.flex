@@ -105,9 +105,9 @@ BOOL_LIT=true|false
 NIL=nil
 
 BRACKET=\{|\}|\[|\]|\(|\)|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
-C_SEMICOLON=;
-C_COMMA=,
-C_GRAVE_ACCENT=`
+SEMICOLON=;
+COMMA=,
+GRAVE_ACCENT=`
 
 KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
@@ -305,9 +305,9 @@ private IElementType getDedenterToken() {
     {OP10}                      { return NimTypes.OP10; }
     {OPR}                       { return NimTypes.OPR; }
     {BRACKET}                   { return NimTypes.BRACKET; }
-    {C_SEMICOLON}               { return NimTypes.C_SEMICOLON; }
-    {C_COMMA}                   { return NimTypes.C_COMMA; }
-    {C_GRAVE_ACCENT}            { return NimTypes.C_GRAVE_ACCENT; }
+    {SEMICOLON}                 { return NimTypes.SEMICOLON; }
+    {COMMA}                     { return NimTypes.COMMA; }
+    {GRAVE_ACCENT}              { return NimTypes.GRAVE_ACCENT; }
     {IDENT}                     { return NimTypes.IDENT; }
     .                           { return TokenType.BAD_CHARACTER; }
 }
@@ -323,25 +323,25 @@ private IElementType getDedenterToken() {
 }
 
 <LINE_COMMENT> {
-    .+                          { popState(); return NimTypes.COMMENT; }
+    .+                          { popState(); return TokenType.WHITE_SPACE; }
 }
 
 <BLOCK_COMMENT> {
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
-    {BLOCK_COMMENT_END}         { if (popState() == 0) return NimTypes.COMMENT; }
+    {BLOCK_COMMENT_END}         { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
 }
 
 <BLOCK_DOC_COMMENT> {
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
-    {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return NimTypes.COMMENT; }
+    {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
 }
 
 <DISCARD_COMMENT> {
-    \"\"\"                      { if (popState() == 0) return NimTypes.COMMENT; }
+    \"\"\"                      { if (popState() == 0) return TokenType.WHITE_SPACE; }
     {CRLF}                      { }
     .                           { }
 }

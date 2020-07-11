@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimStaticStmt extends PsiElement {
 
   @NotNull
-  NimColcom getColcom();
-
-  @NotNull
   NimOptInd getOptInd();
 
 }

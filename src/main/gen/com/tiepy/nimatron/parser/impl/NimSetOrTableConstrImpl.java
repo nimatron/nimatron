@@ -28,12 +28,6 @@ public class NimSetOrTableConstrImpl extends ASTWrapperPsiElement implements Nim
 
   @Override
   @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimExprColonEqExpr> getExprColonEqExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
   }
