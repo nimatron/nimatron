@@ -520,19 +520,30 @@ complexOrSimpleStmt ::= ifStmt
                       | staticStmt
                       | deferStmt
                       | asmStmt
-                      | 'proc' routine
-                      | 'func' routine
-                      | 'method' routine
-                      | 'iterator' routine
-                      | 'macro' routine
-                      | 'template' routine
-                      | 'converter' routine
-                      | 'type' <<section typeDef>>
-                      | 'const' <<section constant>>
-                      | ('let'|'var'|'using') <<section variable>>
+                      | procStmt
+                      | funcStmt
+                      | methodStmt
+                      | iteratorStmt
+                      | macroStmt
+                      | templateStmt
+                      | converterStmt
+                      | typeStmt
+                      | constStmt
+                      | varStmt
                       | bindStmt
                       | mixinStmt
                       | simpleStmt
+
+procStmt ::= 'proc' routine
+funcStmt ::= 'func' routine
+methodStmt ::= 'method' routine
+iteratorStmt ::= 'iterator' routine
+macroStmt ::= 'macro' routine
+templateStmt ::= 'template' routine
+converterStmt ::= 'converter' routine
+typeStmt ::= 'type' <<section typeDef>>
+constStmt ::= 'const' <<section constant>>
+varStmt ::= ('let'|'var'|'using') <<section variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 stmt ::= complexOrSimpleStmt | simpleStmt
