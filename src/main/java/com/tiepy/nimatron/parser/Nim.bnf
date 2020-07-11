@@ -467,7 +467,6 @@ colonBody ::= ':' stmt postExprBlocks?
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
 variable ::= (varTuple|identColonEquals) colonBody?
-//variable ::= identColonEquals colonBody?
 
 //constant = (varTuple / identWithPragma) (colon typeDesc)? '=' optInd expr indAndComment
 constant ::= (varTuple|identWithPragma) (':' typeDesc)? '=' <<optInd expr>>
