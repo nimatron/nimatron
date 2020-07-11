@@ -18,8 +18,7 @@ var
 let
   d = "foo"
   e = 5
-  # Compile-time error, must be initialized at creation
-  f: float
+  f: float = 0
 
 # Works fine, `a` is mutable
 a.add("bar")
@@ -27,8 +26,8 @@ b += 1
 c = 3
 
 # Compile-time error, const cannot be modified at run-time
-alphabet = "abc"
+# alphabet = "abc"
 
 # Compile-time error, `d` and `e` are immutable
-d.add("bar")
-e += 1
+# d.add("bar")
+# e += 1
