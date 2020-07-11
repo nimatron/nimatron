@@ -222,13 +222,13 @@ identColonEquals ::= IDENT (',' IDENT)* ','?
 params ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
 
 //paramListArrow = paramList? ('->' optInd typeDesc)?
-paramListArrow ::= params? ('->' <<optInd typeDesc>>)?
+paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
 
 //paramListColon = paramList? (':' optInd typeDesc)?
 paramListColon ::= params? (':' <<optInd typeDesc>>)?
 
 //doBlock = 'do' paramListArrow pragma? colcom stmt
-doBlock ::= 'do' paramListArrow pragma? ':' stmt
+doBlock ::= 'do' paramsArrow pragma? ':' stmt
 
 //procExpr = 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
 
