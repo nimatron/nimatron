@@ -19,7 +19,10 @@ public interface NimTypes {
   IElementType CASE_STMT_1 = new NimElementType("CASE_STMT_1");
   IElementType CASE_STMT_2 = new NimElementType("CASE_STMT_2");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
+  IElementType COLCOM = new NimElementType("COLCOM");
+  IElementType COLON = new NimElementType("COLON");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
+  IElementType COMMA = new NimElementType("COMMA");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
   IElementType COND_STMT = new NimElementType("COND_STMT");
   IElementType CONSTANT = new NimElementType("CONSTANT");
@@ -100,6 +103,7 @@ public interface NimTypes {
   IElementType RAISE_STMT = new NimElementType("RAISE_STMT");
   IElementType RETURN_STMT = new NimElementType("RETURN_STMT");
   IElementType ROUTINE = new NimElementType("ROUTINE");
+  IElementType SEMICOLON = new NimElementType("SEMICOLON");
   IElementType SET_OR_TABLE_CONSTR = new NimElementType("SET_OR_TABLE_CONSTR");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
   IElementType STATIC_STMT = new NimElementType("STATIC_STMT");
@@ -128,14 +132,16 @@ public interface NimTypes {
   IElementType BOOL_LIT = new NimTokenType("BOOL_LIT");
   IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
-  IElementType COMMA = new NimTokenType("COMMA");
+  IElementType COMMENT = new NimTokenType("COMMENT");
+  IElementType C_COMMA = new NimTokenType("C_COMMA");
+  IElementType C_GRAVE_ACCENT = new NimTokenType("C_GRAVE_ACCENT");
+  IElementType C_SEMICOLON = new NimTokenType("C_SEMICOLON");
   IElementType DEDENT = new NimTokenType("DEDENT");
   IElementType FLOAT32_LIT = new NimTokenType("FLOAT32_LIT");
   IElementType FLOAT64_LIT = new NimTokenType("FLOAT64_LIT");
   IElementType FLOAT_LIT = new NimTokenType("FLOAT_LIT");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
   IElementType GENERALIZED_TRIPLESTR_LIT = new NimTokenType("GENERALIZED_TRIPLESTR_LIT");
-  IElementType GRAVE_ACCENT = new NimTokenType("GRAVE_ACCENT");
   IElementType IDENT = new NimTokenType("IDENT");
   IElementType INDENT = new NimTokenType("INDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
@@ -159,7 +165,6 @@ public interface NimTypes {
   IElementType OP9 = new NimTokenType("OP9");
   IElementType OPR = new NimTokenType("OPR");
   IElementType RSTR_LIT = new NimTokenType("RSTR_LIT");
-  IElementType SEMICOLON = new NimTokenType("SEMICOLON");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
   IElementType TRIPLESTR_LIT = new NimTokenType("TRIPLESTR_LIT");
   IElementType UINT16_LIT = new NimTokenType("UINT16_LIT");
@@ -198,8 +203,17 @@ public interface NimTypes {
       else if (type == CAST_EXPR) {
         return new NimCastExprImpl(node);
       }
+      else if (type == COLCOM) {
+        return new NimColcomImpl(node);
+      }
+      else if (type == COLON) {
+        return new NimColonImpl(node);
+      }
       else if (type == COLON_BODY) {
         return new NimColonBodyImpl(node);
+      }
+      else if (type == COMMA) {
+        return new NimCommaImpl(node);
       }
       else if (type == COND_EXPR) {
         return new NimCondExprImpl(node);
@@ -440,6 +454,9 @@ public interface NimTypes {
       }
       else if (type == ROUTINE) {
         return new NimRoutineImpl(node);
+      }
+      else if (type == SEMICOLON) {
+        return new NimSemicolonImpl(node);
       }
       else if (type == SET_OR_TABLE_CONSTR) {
         return new NimSetOrTableConstrImpl(node);

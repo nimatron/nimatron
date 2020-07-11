@@ -8,6 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface NimParams extends PsiElement {
 
   @NotNull
+  List<NimComma> getCommaList();
+
+  @NotNull
   List<NimDeclColonEquals> getDeclColonEqualsList();
+
+  @NotNull
+  List<NimSemicolon> getSemicolonList();
 
 }

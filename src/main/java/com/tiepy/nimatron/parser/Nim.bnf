@@ -44,22 +44,29 @@
 
   tokens = [
     BRACKET="BRACKET"
-    SEMICOLON="SEMICOLON"
-    COMMA="COMMA"
-    GRAVE_ACCENT="GRAVE_ACCENT"
+    C_SEMICOLON="C_SEMICOLON"
+    C_COMMA="C_COMMA"
+    C_GRAVE_ACCENT="C_GRAVE_ACCENT"
   ]
 
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
 //module = stmt ^* (';' / IND{=})
-module ::= IND_EQ* stmts? ';'? IND_EQ*
-stmts ::= stmt ((';' | IND_EQ) stmt)*
+module ::= IND_EQ* stmts? semicolon? IND_EQ*
+stmts ::= stmt ((semicolon | IND_EQ) stmt)*
 
 //comma = ',' COMMENT?
+comma ::= ',' COMMENT?
+
 //semicolon = ';' COMMENT?
+semicolon ::= ';' COMMENT?
+
 //colon = ':' COMMENT?
+colon ::= ':' COMMENT?
+
 //colcom = ':' COMMENT?
+colcom ::= ':' COMMENT?
 
 //operator =  OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
 //         | 'or' | 'xor' | 'and'
@@ -96,10 +103,10 @@ symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|ID
 exprColonEqExpr ::= expr (':'|'=' expr)?
 
 //exprList = expr ^+ comma
-exprs ::= expr (',' expr)*
+exprs ::= expr (comma expr)*
 
-//exprColonEqExprList = exprColonEqExpr (comma exprColonEqExpr)* (comma)?
-exprColonEqExprs ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
+//exprColonEqExprList = exprColonEqExpr (comma exprColonEqExpr)* comma?
+exprColonEqExprs ::= exprColonEqExpr (comma exprColonEqExpr)* comma?
 
 //dotExpr = expr '.' optInd (symbol | '[:' exprList ']')
 
@@ -109,7 +116,7 @@ exprColonEqExprs ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
 qualifiedIdent ::= symbol ('.' <<optInd symbol>>)?
 
 //setOrTableConstr = '{' ((exprColonEqExpr comma)* | ':' ) '}'
-setOrTableConstr ::= '{' ((exprColonEqExpr ',')+ | ':') '}'
+setOrTableConstr ::= '{' ((exprColonEqExpr comma)+ | ':') '}'
 
 //castExpr = 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
 castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>> <<optInd (')')>>
@@ -163,7 +170,7 @@ identOrLiteral ::= generalizedLit | symbol | literal
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
 //arrayConstr = '[' optInd (exprColonEqExpr comma?)* optPar ']'
-arrayConstr ::= '[' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd (']')>>
+arrayConstr ::= '[' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd (']')>>
 
 //primarySuffix = '(' (exprColonEqExpr comma?)* ')'
 //      | '.' optInd symbol generalizedLit?
@@ -175,7 +182,7 @@ primarySuffix ::= primarySuffix1
                 | primarySuffix3
                 | primarySuffix4
                 | primarySuffix5
-primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr ','?)*)>> ')'
+primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr comma?)*)>> ')'
 primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
 primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
@@ -187,9 +194,9 @@ primarySuffix5 ::= /* &('`'|IDENT|literal|'cast'|'addr'|'type') */ <<optInd expr
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
 //         'else' colcom expr
-condExpr ::= expr ':' <<optInd expr>>
-          ('elif' expr ':' <<optInd expr>>)*
-           'else' ':' expr
+condExpr ::= expr colcom <<optInd expr>>
+          ('elif' expr colcom <<optInd expr>>)*
+           'else' colcom expr
 
 //ifExpr = 'if' condExpr
 ifExpr ::= 'if' condExpr
@@ -198,7 +205,7 @@ ifExpr ::= 'if' condExpr
 whenExpr ::= 'when' condExpr
 
 //pragma = '{.' optInd (exprColonEqExpr comma?)* optPar ('.}' | '}')
-pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd ('.}'|'}')>>
+pragma ::= '{.' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd ('.}'|'}')>>
 
 //identVis = symbol OPR?  # postfix position
 identVis ::= symbol OPR? // postfix position
@@ -219,7 +226,7 @@ declColonEquals ::= identWithPragma (',' identWithPragma)* ','?
 
 //identColonEquals = IDENT (comma IDENT)* comma?
 //     (':' optInd typeDesc)? ('=' optInd expr)?)
-identColonEquals ::= IDENT (',' IDENT)* ','?
+identColonEquals ::= IDENT (comma IDENT)* comma?
      (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
 
 //inlTupleDecl = 'tuple'
@@ -231,7 +238,7 @@ identColonEquals ::= IDENT (',' IDENT)* ','?
 //tupleClass = 'tuple'
 
 //paramList = '(' declColonEquals ^* (comma/semicolon) ')'
-params ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
+params ::= '(' (declColonEquals ((comma|semicolon) declColonEquals)*)? ')'
 
 //paramListArrow = paramList? ('->' optInd typeDesc)?
 paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
@@ -240,14 +247,14 @@ paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
 paramsColon ::= params? (':' <<optInd typeDesc>>)?
 
 //doBlock = 'do' paramListArrow pragma? colcom stmt
-doBlock ::= 'do' paramsArrow pragma? ':' <<optInd stmts>>
+doBlock ::= 'do' paramsArrow pragma? colcom <<optInd stmts>>
 
 //procExpr = 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
 
 //distinct = 'distinct' optInd typeDesc
 
 //forStmt = 'for' (identWithPragma ^+ comma) 'in' expr colcom stmt
-forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optInd stmts>>
+forStmt ::= 'for' (identWithPragma (comma identWithPragma)*) 'in' expr colcom <<optInd stmts>>
 
 //forExpr = forStmt
 
@@ -312,25 +319,25 @@ postExprBlocks5 ::= IND_EQ 'else' ':' <<optInd stmts>>
 //           ))?
 exprStmt ::= simpleExpr (exprStmt1 | exprStmt2)?
 exprStmt1 ::= '=' <<optInd expr>> colonBody?
-exprStmt2 ::= expr (',' expr)* postExprBlocks
+exprStmt2 ::= expr (comma expr)* postExprBlocks
 
 //importStmt = 'import' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-importStmt ::= 'import' <<optInd expr>> ((',' expr)+ | importStmt1)
-importStmt1 ::= 'except' <<optInd (expr (',' expr)*)>>
+importStmt ::= 'import' <<optInd expr>> ((comma expr)+ | importStmt1)
+importStmt1 ::= 'except' <<optInd (expr (comma expr)*)>>
 
 //exportStmt = 'export' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
 exportStmt ::= 'export' <<optInd expr>> ((',' expr)+ | exportStmt1)
-exportStmt1 ::= 'except' <<optInd (expr (',' expr)*)>>
+exportStmt1 ::= 'except' <<optInd (expr (comma expr)*)>>
 
 //includeStmt = 'include' optInd expr ^+ comma
-includeStmt ::= 'include' <<optInd expr>> (',' expr)*
+includeStmt ::= 'include' <<optInd expr>> (comma expr)*
 
 //fromStmt = 'from' expr 'import' optInd expr (comma expr)*
-fromStmt ::= 'from' expr 'import' <<optInd expr>> (',' expr)*
+fromStmt ::= 'from' expr 'import' <<optInd expr>> (comma expr)*
 
 //returnStmt = 'return' optInd expr?
 returnStmt ::= 'return' <<optInd expr>>?
@@ -353,9 +360,9 @@ continueStmt ::= 'break' <<optInd expr>>?
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
-condStmt ::= expr ':' <<optInd stmts>>
-             (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-             (IND_EQ 'else' ':' <<optInd stmts>>)?
+condStmt ::= expr colcom <<optInd stmts>>
+             (IND_EQ 'elif' expr colcom <<optInd stmts>>)*
+             (IND_EQ 'else' colcom <<optInd stmts>>)?
 
 //ifStmt = 'if' condStmt
 ifStmt ::= 'if' condStmt
@@ -364,17 +371,17 @@ ifStmt ::= 'if' condStmt
 whenStmt ::= 'when' condStmt
 
 //whileStmt = 'while' expr colcom stmt
-whileStmt ::= 'while' expr ':' <<optInd stmts>>
+whileStmt ::= 'while' expr colcom <<optInd stmts>>
 
 //ofBranch = 'of' exprList colcom stmt
-ofBranch ::= 'of' exprs ':' <<optInd stmts>>
+ofBranch ::= 'of' exprs colcom <<optInd stmts>>
 
 //ofBranches = ofBranch (IND{=} ofBranch)*
 //                      (IND{=} 'elif' expr colcom stmt)*
 //                      (IND{=} 'else' colcom stmt)?
 ofBranches ::= ofBranch (IND_EQ ofBranch)*
-                        (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-                        (IND_EQ 'else' ':' <<optInd stmts>>)?
+                        (IND_EQ 'elif' expr colcom <<optInd stmts>>)*
+                        (IND_EQ 'else' colcom <<optInd stmts>>)?
 
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
@@ -386,40 +393,40 @@ caseStmt2 ::= IND_EQ ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':' <<optInd stmts>>
-             (IND_EQ? 'except' exprs ':' <<optInd stmts>>)*
-             (IND_EQ? 'finally' ':' <<optInd stmts>>)?
+tryStmt ::= 'try' colcom <<optInd stmts>>
+             (IND_EQ? 'except' exprs colcom <<optInd stmts>>)*
+             (IND_EQ? 'finally' colcom <<optInd stmts>>)?
 
 // TODO: Consider combining 'tryExpr' with 'tryStmt'. They may be equivalent.
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
-tryExpr ::= 'try' ':' <<optInd stmts>>
-             (<<optInd ('except' exprs ':' <<optInd stmts>>)>>)*
-             (<<optInd ('finally' ':' <<optInd stmts>>)>>)?
+tryExpr ::= 'try' colcom <<optInd stmts>>
+             (<<optInd ('except' exprs colcom <<optInd stmts>>)>>)*
+             (<<optInd ('finally' colcom <<optInd stmts>>)>>)?
 
 //exceptBlock = 'except' colcom stmt
 
 //blockStmt = 'block' symbol? colcom stmt
 //blockExpr = 'block' symbol? colcom stmt
-blockStmt ::= 'block' symbol? ':' <<optInd stmts>>
+blockStmt ::= 'block' symbol? colcom <<optInd stmts>>
 
 //staticStmt = 'static' colcom stmt
-staticStmt ::= 'static' ':' <<optInd stmts>>
+staticStmt ::= 'static' colcom <<optInd stmts>>
 
 //deferStmt = 'defer' colcom stmt
-deferStmt ::= 'defer' ':' <<optInd stmts>>
+deferStmt ::= 'defer' colcom <<optInd stmts>>
 
 //asmStmt = 'asm' pragma? (STR_LIT | RSTR_LIT | TRIPLESTR_LIT)
 asmStmt ::= 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
 
 //genericParam = symbol (comma symbol)* (colon expr)? ('=' optInd expr)?
-genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
+genericParam ::= symbol (comma symbol)* (colon expr)? ('=' <<optInd expr>>)?
 
 //genericParamList = '[' optInd
 //  genericParam ^* (comma/semicolon) optPar ']'
 genericParams ::= '[' <<optInd
-  ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
+  ((genericParam ((comma|semicolon) genericParam)*)?)>> <<optInd (']')>>
 
 //pattern = '{' stmt '}'
 pattern ::= '{' <<optInd stmts>> '}'
@@ -467,22 +474,22 @@ typeDef ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
             identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
 
 //varTuple = '(' optInd identWithPragma ^+ comma optPar ')' '=' optInd expr
-varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
+varTuple ::= '(' <<optInd (identWithPragma (comma identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
 
 //colonBody = colcom stmt postExprBlocks?
-colonBody ::= ':' <<optInd stmts>> postExprBlocks?
+colonBody ::= colcom <<optInd stmts>> postExprBlocks?
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
 variable ::= (varTuple|identColonEquals) colonBody?
 
 //constant = (varTuple / identWithPragma) (colon typeDesc)? '=' optInd expr indAndComment
-constant ::= (varTuple|identWithPragma) (':' typeDesc)? '=' <<optInd expr>>
+constant ::= (varTuple|identWithPragma) (colon typeDesc)? '=' <<optInd expr>>
 
 //bindStmt = 'bind' optInd qualifiedIdent ^+ comma
-bindStmt ::= 'bind' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
+bindStmt ::= 'bind' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>>
 
 //mixinStmt = 'mixin' optInd qualifiedIdent ^+ comma
-mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
+mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>>
 
 //pragmaStmt = pragma (':' COMMENT? stmt)?
 pragmaStmt ::= pragma (':' <<optInd stmts>>)?

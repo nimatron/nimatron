@@ -28,8 +28,20 @@ public class NimParamsImpl extends ASTWrapperPsiElement implements NimParams {
 
   @Override
   @NotNull
+  public List<NimComma> getCommaList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimDeclColonEquals> getDeclColonEqualsList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimDeclColonEquals.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimSemicolon> getSemicolonList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSemicolon.class);
   }
 
 }

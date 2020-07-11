@@ -28,6 +28,12 @@ public class NimOfBranchImpl extends ASTWrapperPsiElement implements NimOfBranch
 
   @Override
   @NotNull
+  public NimColcom getColcom() {
+    return findNotNullChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @NotNull
   public NimExprs getExprs() {
     return findNotNullChildByClass(NimExprs.class);
   }

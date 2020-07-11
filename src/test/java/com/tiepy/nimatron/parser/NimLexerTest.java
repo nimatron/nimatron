@@ -60,6 +60,7 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testIfIndentX2() {
         int tokenCount = parse("if true:\n" +
@@ -69,6 +70,18 @@ public class NimLexerTest {
                 "echo \"Outside conditionals\"\n");
 
         Assert.assertEquals(34, tokenCount);
+    }
+*/
+
+    @Test
+    public void testIgnoredComment() {
+        int tokenCount = parse("proc getAlphabet(): string =\n" +
+                "  return \"\"\n" +
+                "\n" +
+                "# Computed at compilation time\n" +
+                "const alphabet = getAlphabet()\n");
+
+        Assert.assertEquals(27, tokenCount);
     }
 
     /**
