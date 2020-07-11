@@ -180,6 +180,9 @@ primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
 primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
 primarySuffix5 ::= /* &('`'|IDENT|literal|'cast'|'addr'|'type') */ <<optInd exprs>> // command syntax
+// TODO: Consider the lookahead operator that was removed from the last rule here.
+// NOTE: That in last rule above, this has been changed from 'expr' to '<<optInd exprs>>'. This is currently required
+// to support command syntax with multiple args, like echo "A", "B"
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
