@@ -8,12 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface NimDoBlock extends PsiElement {
 
   @NotNull
+  NimOptInd getOptInd();
+
+  @NotNull
   NimParamsArrow getParamsArrow();
 
   @Nullable
   NimPragma getPragma();
-
-  @NotNull
-  NimStmt getStmt();
 
 }

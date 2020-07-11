@@ -14,6 +14,6 @@ public interface NimOfBranches extends PsiElement {
   List<NimOfBranch> getOfBranchList();
 
   @NotNull
-  List<NimStmt> getStmtList();
+  List<NimOptInd> getOptIndList();
 
 }

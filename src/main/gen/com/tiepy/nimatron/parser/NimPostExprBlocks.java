@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface NimPostExprBlocks extends PsiElement {
 
+  @Nullable
+  NimOptInd getOptInd();
+
   @NotNull
   List<NimPostExprBlocks1> getPostExprBlocks1List();
 
@@ -21,8 +24,5 @@ public interface NimPostExprBlocks extends PsiElement {
 
   @NotNull
   List<NimPostExprBlocks5> getPostExprBlocks5List();
-
-  @Nullable
-  NimStmt getStmt();
 
 }

@@ -28,6 +28,12 @@ public class NimDoBlockImpl extends ASTWrapperPsiElement implements NimDoBlock {
 
   @Override
   @NotNull
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
+  }
+
+  @Override
+  @NotNull
   public NimParamsArrow getParamsArrow() {
     return findNotNullChildByClass(NimParamsArrow.class);
   }
@@ -36,12 +42,6 @@ public class NimDoBlockImpl extends ASTWrapperPsiElement implements NimDoBlock {
   @Nullable
   public NimPragma getPragma() {
     return findChildByClass(NimPragma.class);
-  }
-
-  @Override
-  @NotNull
-  public NimStmt getStmt() {
-    return findNotNullChildByClass(NimStmt.class);
   }
 
 }

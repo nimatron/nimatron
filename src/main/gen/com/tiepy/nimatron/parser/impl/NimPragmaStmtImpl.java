@@ -27,15 +27,15 @@ public class NimPragmaStmtImpl extends ASTWrapperPsiElement implements NimPragma
   }
 
   @Override
-  @NotNull
-  public NimPragma getPragma() {
-    return findNotNullChildByClass(NimPragma.class);
+  @Nullable
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
-  @Nullable
-  public NimStmt getStmt() {
-    return findChildByClass(NimStmt.class);
+  @NotNull
+  public NimPragma getPragma() {
+    return findNotNullChildByClass(NimPragma.class);
   }
 
 }

@@ -1,0 +1,2 @@
+block a:
+  echo "OK"

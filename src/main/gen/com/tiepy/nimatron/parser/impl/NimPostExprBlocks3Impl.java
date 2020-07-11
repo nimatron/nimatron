@@ -34,8 +34,8 @@ public class NimPostExprBlocks3Impl extends ASTWrapperPsiElement implements NimP
 
   @Override
   @NotNull
-  public NimStmt getStmt() {
-    return findNotNullChildByClass(NimStmt.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

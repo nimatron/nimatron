@@ -27,6 +27,12 @@ public class NimPostExprBlocksImpl extends ASTWrapperPsiElement implements NimPo
   }
 
   @Override
+  @Nullable
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
+  }
+
+  @Override
   @NotNull
   public List<NimPostExprBlocks1> getPostExprBlocks1List() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks1.class);
@@ -54,12 +60,6 @@ public class NimPostExprBlocksImpl extends ASTWrapperPsiElement implements NimPo
   @NotNull
   public List<NimPostExprBlocks5> getPostExprBlocks5List() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks5.class);
-  }
-
-  @Override
-  @Nullable
-  public NimStmt getStmt() {
-    return findChildByClass(NimStmt.class);
   }
 
 }

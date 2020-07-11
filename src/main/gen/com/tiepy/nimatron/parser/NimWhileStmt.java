@@ -11,6 +11,6 @@ public interface NimWhileStmt extends PsiElement {
   NimExpr getExpr();
 
   @NotNull
-  NimStmt getStmt();
+  NimOptInd getOptInd();
 
 }

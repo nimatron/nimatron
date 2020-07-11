@@ -34,8 +34,8 @@ public class NimOfBranchImpl extends ASTWrapperPsiElement implements NimOfBranch
 
   @Override
   @NotNull
-  public NimStmt getStmt() {
-    return findNotNullChildByClass(NimStmt.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

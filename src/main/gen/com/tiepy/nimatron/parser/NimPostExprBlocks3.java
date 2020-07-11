@@ -11,6 +11,6 @@ public interface NimPostExprBlocks3 extends PsiElement {
   NimExpr getExpr();
 
   @NotNull
-  NimStmt getStmt();
+  NimOptInd getOptInd();
 
 }

@@ -11,6 +11,6 @@ public interface NimOfBranch extends PsiElement {
   NimExprs getExprs();
 
   @NotNull
-  NimStmt getStmt();
+  NimOptInd getOptInd();
 
 }

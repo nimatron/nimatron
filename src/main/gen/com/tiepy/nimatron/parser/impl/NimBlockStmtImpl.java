@@ -28,8 +28,8 @@ public class NimBlockStmtImpl extends ASTWrapperPsiElement implements NimBlockSt
 
   @Override
   @NotNull
-  public NimStmt getStmt() {
-    return findNotNullChildByClass(NimStmt.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
   @Override

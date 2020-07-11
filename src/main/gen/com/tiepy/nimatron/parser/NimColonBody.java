@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimColonBody extends PsiElement {
 
+  @NotNull
+  NimOptInd getOptInd();
+
   @Nullable
   NimPostExprBlocks getPostExprBlocks();
-
-  @NotNull
-  NimStmt getStmt();
 
 }

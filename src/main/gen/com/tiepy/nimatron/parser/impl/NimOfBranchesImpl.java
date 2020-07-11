@@ -40,8 +40,8 @@ public class NimOfBranchesImpl extends ASTWrapperPsiElement implements NimOfBran
 
   @Override
   @NotNull
-  public List<NimStmt> getStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }
