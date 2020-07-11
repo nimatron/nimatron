@@ -81,11 +81,15 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
-    public void testNimProc() {
+    public void testNimByExampleVariables() {
         doTest(true, true);
     }
 
-    public void testNimVarStmtVarDecl() {
+    public void testNimTestProc() {
+        doTest(true, true);
+    }
+
+    public void testNimTestVarStmtVarDecl() {
         doTest(true, true);
     }
 
