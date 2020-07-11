@@ -25,7 +25,4 @@ public interface NimRoutine extends PsiElement {
   @Nullable
   NimPragma getPragma();
 
-  @Nullable
-  NimRem getRem();
-
 }

@@ -54,21 +54,19 @@
 
 //module = stmt ^* (';' / IND{=})
 module ::= IND_EQ* stmts? semicolon? IND_EQ*
-stmts ::= rem? stmt ((semicolon | IND_EQ) rem? stmt)* rem?
-
-rem ::= COMMENT IND_EQ?
+stmts ::= stmt ((semicolon | IND_EQ) stmt)*
 
 //comma = ',' COMMENT?
-comma ::= ',' rem?
+comma ::= ',' COMMENT?
 
 //semicolon = ';' COMMENT?
-semicolon ::= ';' rem?
+semicolon ::= ';' COMMENT?
 
 //colon = ':' COMMENT?
-colon ::= ':' rem?
+colon ::= ':' COMMENT?
 
 //colcom = ':' COMMENT?
-colcom ::= ':' rem?
+colcom ::= ':' COMMENT?
 
 //operator =  OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
 //         | 'or' | 'xor' | 'and'
@@ -362,7 +360,7 @@ continueStmt ::= 'break' <<optInd expr>>?
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
-condStmt ::= expr colcom <<optInd stmts>> rem?
+condStmt ::= expr colcom <<optInd stmts>>
              (IND_EQ 'elif' expr colcom <<optInd stmts>>)*
              (IND_EQ 'else' colcom <<optInd stmts>>)?
 
@@ -388,7 +386,7 @@ ofBranches ::= ofBranch (IND_EQ ofBranch)*
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
 //            | IND{=} ofBranches)
-caseStmt ::= 'case' expr ':'? rem? (caseStmt1 | caseStmt2)
+caseStmt ::= 'case' expr ':'? (caseStmt1 | caseStmt2)
 caseStmt1 ::= INDENT ofBranches DEDENT
 caseStmt2 ::= IND_EQ ofBranches
 
@@ -437,7 +435,7 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= identVis pattern? genericParams? paramsColon pragma? ('=' rem? <<optInd stmts>>)?
+routine ::= identVis pattern? genericParams? paramsColon pragma? ('=' <<optInd stmts>>)?
 
 //commentStmt = COMMENT
 
@@ -494,7 +492,7 @@ bindStmt ::= 'bind' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>>
 mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>>
 
 //pragmaStmt = pragma (':' COMMENT? stmt)?
-pragmaStmt ::= pragma (':' rem? <<optInd stmts>>)?
+pragmaStmt ::= pragma (':' <<optInd stmts>>)?
 
 //simpleStmt = ((returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //           | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
@@ -562,4 +560,3 @@ stmt ::= ifStmt
        | fromStmt
        | includeStmt
        | exprStmt
-       | rem

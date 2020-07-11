@@ -44,10 +44,4 @@ public class NimCondStmtImpl extends ASTWrapperPsiElement implements NimCondStmt
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
-  @Override
-  @Nullable
-  public NimRem getRem() {
-    return findChildByClass(NimRem.class);
-  }
-
 }

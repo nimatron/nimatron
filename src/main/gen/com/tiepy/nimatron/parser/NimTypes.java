@@ -101,7 +101,6 @@ public interface NimTypes {
   IElementType PROC_STMT = new NimElementType("PROC_STMT");
   IElementType QUALIFIED_IDENT = new NimElementType("QUALIFIED_IDENT");
   IElementType RAISE_STMT = new NimElementType("RAISE_STMT");
-  IElementType REM = new NimElementType("REM");
   IElementType RETURN_STMT = new NimElementType("RETURN_STMT");
   IElementType ROUTINE = new NimElementType("ROUTINE");
   IElementType SEMICOLON = new NimElementType("SEMICOLON");
@@ -449,9 +448,6 @@ public interface NimTypes {
       }
       else if (type == RAISE_STMT) {
         return new NimRaiseStmtImpl(node);
-      }
-      else if (type == REM) {
-        return new NimRemImpl(node);
       }
       else if (type == RETURN_STMT) {
         return new NimReturnStmtImpl(node);

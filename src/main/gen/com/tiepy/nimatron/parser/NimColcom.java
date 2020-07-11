@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface NimColcom extends PsiElement {
 
-  @Nullable
-  NimRem getRem();
-
 }

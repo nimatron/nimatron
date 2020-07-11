@@ -26,10 +26,4 @@ public class NimSemicolonImpl extends ASTWrapperPsiElement implements NimSemicol
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public NimRem getRem() {
-    return findChildByClass(NimRem.class);
-  }
-
 }
