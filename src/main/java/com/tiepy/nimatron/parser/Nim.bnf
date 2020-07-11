@@ -96,7 +96,7 @@ symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|ID
 exprColonEqExpr ::= expr (':'|'=' expr)?
 
 //exprList = expr ^+ comma
-exprList2 ::= expr (',' expr)*
+exprs ::= expr (',' expr)*
 
 //exprColonEqExprList = exprColonEqExpr (comma exprColonEqExpr)* (comma)?
 exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
@@ -170,7 +170,7 @@ primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                 | ('.' <<optInd (symbol generalizedLit?)>>)
                 | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
                 | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
-                | <<optInd exprList2>> // command syntax
+                | <<optInd exprs>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
@@ -283,9 +283,9 @@ typeDefAux ::= simpleExpr ('not' expr)?
 //                           | IND{=} 'except' exprList ':' stmt
 //                           | IND{=} 'else' ':' stmt )*
 postExprBlocks ::= ':' stmt? ( (IND_EQ doBlock)
-                             | (IND_EQ 'of' exprList2 ':' stmt)
+                             | (IND_EQ 'of' exprs ':' stmt)
                              | (IND_EQ 'elif' expr ':' stmt)
-                             | (IND_EQ 'except' exprList2 ':' stmt)
+                             | (IND_EQ 'except' exprs ':' stmt)
                              | (IND_EQ 'else' ':' stmt) )*
 
 //exprStmt = simpleExpr
@@ -354,7 +354,7 @@ whenStmt ::= 'when' condStmt
 whileStmt ::= 'while' expr ':' stmt
 
 //ofBranch = 'of' exprList colcom stmt
-ofBranch ::= 'of' exprList2 ':' stmt
+ofBranch ::= 'of' exprs ':' stmt
 
 //ofBranches = ofBranch (IND{=} ofBranch)*
 //                      (IND{=} 'elif' expr colcom stmt)*
@@ -374,14 +374,14 @@ caseStmt ::= 'case' expr ':'?
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
 tryStmt ::= 'try' ':' stmt
-             (IND_EQ? 'except' exprList2 ':' stmt)*
+             (IND_EQ? 'except' exprs ':' stmt)*
              (IND_EQ? 'finally' ':' stmt)?
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
 tryExpr ::= 'try' ':' stmt
-             (<<optInd ('except' exprList2 ':' stmt)>> )*
+             (<<optInd ('except' exprs ':' stmt)>> )*
              (<<optInd ('finally' ':' stmt)>>)?
 
 //exceptBlock = 'except' colcom stmt
