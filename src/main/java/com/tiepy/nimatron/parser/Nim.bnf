@@ -56,7 +56,7 @@
 module ::= IND_EQ* stmts? semicolon? IND_EQ*
 stmts ::= rem? stmt ((semicolon | IND_EQ) rem? stmt)* rem?
 
-rem ::= COMMENT+
+rem ::= COMMENT IND_EQ?
 
 //comma = ',' COMMENT?
 comma ::= ',' rem?
@@ -80,7 +80,7 @@ operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
 
 //optInd = COMMENT? IND?
 termInd ::= DEDENT | <<eof>>
-meta optInd ::= <<RULE>> | (INDENT <<RULE>>? COMMENT? (IND_EQ <<RULE>>? COMMENT?)* termInd)
+meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //optPar = (IND{>} | IND{=})?
 
@@ -419,7 +419,7 @@ staticStmt ::= 'static' colcom <<optInd stmts>>
 //deferStmt = 'defer' colcom stmt
 deferStmt ::= 'defer' colcom <<optInd stmts>>
 
-//asmStmt = 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
+//asmStmt = 'asm' pragma? (STR_LIT | RSTR_LIT | TRIPLESTR_LIT)
 asmStmt ::= 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
 
 //genericParam = symbol (comma symbol)* (colon expr)? ('=' optInd expr)?
