@@ -528,6 +528,57 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd ('.}'|'}')>>
+  public static boolean pragma(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pragma")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, PRAGMA, "<pragma>");
+    r = consumeToken(b, "{.");
+    r = r && optInd(b, l + 1, pragma_1_0_parser_);
+    r = r && optInd(b, l + 1, pragma_2_0_parser_);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (exprColonEqExpr ','?)*
+  private static boolean pragma_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pragma_1_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!pragma_1_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "pragma_1_0", c)) break;
+    }
+    return true;
+  }
+
+  // exprColonEqExpr ','?
+  private static boolean pragma_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pragma_1_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = exprColonEqExpr(b, l + 1);
+    r = r && pragma_1_0_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ','?
+  private static boolean pragma_1_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pragma_1_0_0_1")) return false;
+    consumeToken(b, ",");
+    return true;
+  }
+
+  // '.}'|'}'
+  private static boolean pragma_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "pragma_2_0")) return false;
+    boolean r;
+    r = consumeToken(b, ".}");
+    if (!r) r = consumeToken(b, "}");
+    return r;
+  }
+
+  /* ********************************************************** */
   // primary1
   //                   | primary2
   //                   | primary3
@@ -708,18 +759,19 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary (OP5 <<optInd primary>>)*
+  // primary (OP <<optInd primary>>)* pragma?
   public static boolean simpleExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SIMPLE_EXPR, "<simple expr>");
     r = primary(b, l + 1);
     r = r && simpleExpr_1(b, l + 1);
+    r = r && simpleExpr_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (OP5 <<optInd primary>>)*
+  // (OP <<optInd primary>>)*
   private static boolean simpleExpr_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr_1")) return false;
     while (true) {
@@ -730,15 +782,22 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // OP5 <<optInd primary>>
+  // OP <<optInd primary>>
   private static boolean simpleExpr_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, OP5);
+    r = consumeToken(b, OP);
     r = r && optInd(b, l + 1, primary_parser_);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // pragma?
+  private static boolean simpleExpr_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "simpleExpr_2")) return false;
+    pragma(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -925,6 +984,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser expr_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return expr(b, l + 1);
+    }
+  };
+  static final Parser pragma_1_0_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return pragma_1_0(b, l + 1);
+    }
+  };
+  static final Parser pragma_2_0_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return pragma_2_0(b, l + 1);
     }
   };
   static final Parser primarySuffix1_1_0_parser_ = new Parser() {

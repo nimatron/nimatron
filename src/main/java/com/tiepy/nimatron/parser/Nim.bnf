@@ -56,7 +56,6 @@
     KEYW="KEYW"
     OP0="OP0"
     OP1="OP1"
-    OP10="OP10"
     OP2="OP2"
     OP3="OP3"
     OP4="OP4"
@@ -65,6 +64,8 @@
     OP7="OP7"
     OP8="OP8"
     OP9="OP9"
+    OP10="OP10"
+    OP="OP"
     OPR="OPR"
     SEMICOLON="SEMICOLON"
   ]
@@ -97,7 +98,7 @@ private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 
 //simpleExpr = arrowExpr (OP0 optInd arrowExpr)* pragma?
 //simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* pragma?
-simpleExpr ::= primary (OP5 <<optInd primary>>)*
+simpleExpr ::= primary (OP <<optInd primary>>)* pragma?
 
 //arrowExpr = assignExpr (OP1 optInd assignExpr)*
 //arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
@@ -232,7 +233,7 @@ private primarySuffix2 ::= <<optInd exprList>> // command syntax
 //whenExpr ::= 'when' condExpr
 
 //pragma = '{.' optInd (exprColonEqExpr comma?)* optPar ('.}' | '}')
-//pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd ('.}'|'}')>>
+pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd ('.}'|'}')>>
 
 //identVis = symbol OPR?  # postfix position
 //identVis ::= symbol OPR? // postfix position

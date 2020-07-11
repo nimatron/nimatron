@@ -58,6 +58,8 @@ OP8=\+|-
 OP9=\*|\/|div|mod|shl|shr|%
 OP10=\$|\^
 
+OP={OP0}|{OP1}/*|{OP2}*/|{OP3}|{OP4}|{OP5}|{OP6}|{OP7}|{OP8}|{OP9}|{OP10}
+
 OPR=[\=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
 
 DIGIT=[0-9]
@@ -292,17 +294,8 @@ private IElementType getDedenterToken() {
     {FLOAT64_LIT}               { return NimTypes.FLOAT64_LIT; }
     {NIL}                       { return NimTypes.NIL; }
     {BOOL_LIT}                  { return NimTypes.BOOL_LIT; }
-    {OP0}                       { return NimTypes.OP0; }
-    {OP1}                       { return NimTypes.OP1; }
+    {OP}                        { return NimTypes.OP; }
     {OP2}                       { return NimTypes.OP2; }
-    {OP3}                       { return NimTypes.OP3; }
-    {OP4}                       { return NimTypes.OP4; }
-    {OP5}                       { return NimTypes.OP5; }
-    {OP6}                       { return NimTypes.OP6; }
-    {OP7}                       { return NimTypes.OP7; }
-    {OP8}                       { return NimTypes.OP8; }
-    {OP9}                       { return NimTypes.OP9; }
-    {OP10}                      { return NimTypes.OP10; }
     {OPR}                       { return NimTypes.OPR; }
     {BRACKET}                   { return NimTypes.BRACKET; }
     {SEMICOLON}                 { return NimTypes.SEMICOLON; }

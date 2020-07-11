@@ -39,6 +39,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPragma(@NotNull NimPragma o) {
+    visitPsiElement(o);
+  }
+
   public void visitSimpleExpr(@NotNull NimSimpleExpr o) {
     visitPsiElement(o);
   }

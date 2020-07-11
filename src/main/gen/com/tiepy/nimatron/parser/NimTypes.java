@@ -18,6 +18,7 @@ public interface NimTypes {
   IElementType GENERALIZED_LIT = new NimElementType("GENERALIZED_LIT");
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType LITERAL = new NimElementType("LITERAL");
+  IElementType PRAGMA = new NimElementType("PRAGMA");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
   IElementType STMT = new NimElementType("STMT");
   IElementType TYPE_DESC = new NimElementType("TYPE_DESC");
@@ -46,6 +47,7 @@ public interface NimTypes {
   IElementType INT_LIT = new NimTokenType("INT_LIT");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NIL = new NimTokenType("NIL");
+  IElementType OP = new NimTokenType("OP");
   IElementType OP0 = new NimTokenType("OP0");
   IElementType OP1 = new NimTokenType("OP1");
   IElementType OP10 = new NimTokenType("OP10");
@@ -94,6 +96,9 @@ public interface NimTypes {
       }
       else if (type == LITERAL) {
         return new NimLiteralImpl(node);
+      }
+      else if (type == PRAGMA) {
+        return new NimPragmaImpl(node);
       }
       else if (type == SIMPLE_EXPR) {
         return new NimSimpleExprImpl(node);
