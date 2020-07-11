@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimTypeDef extends PsiElement {
 
   @NotNull
-  List<NimGenericParamList> getGenericParamListList();
+  List<NimGenericParams> getGenericParamsList();
 
   @NotNull
   NimIdentVisDot getIdentVisDot();

@@ -91,15 +91,15 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitExprColonEqExprList2(@NotNull NimExprColonEqExprList2 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitExprList2(@NotNull NimExprList2 o) {
+  public void visitExprColonEqExprs(@NotNull NimExprColonEqExprs o) {
     visitPsiElement(o);
   }
 
   public void visitExprStmt(@NotNull NimExprStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExprs(@NotNull NimExprs o) {
     visitPsiElement(o);
   }
 
@@ -119,7 +119,7 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitGenericParamList(@NotNull NimGenericParamList o) {
+  public void visitGenericParams(@NotNull NimGenericParams o) {
     visitPsiElement(o);
   }
 
@@ -199,15 +199,15 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitParamList(@NotNull NimParamList o) {
+  public void visitParams(@NotNull NimParams o) {
     visitPsiElement(o);
   }
 
-  public void visitParamListArrow(@NotNull NimParamListArrow o) {
+  public void visitParamsArrow(@NotNull NimParamsArrow o) {
     visitPsiElement(o);
   }
 
-  public void visitParamListColon(@NotNull NimParamListColon o) {
+  public void visitParamsColon(@NotNull NimParamsColon o) {
     visitPsiElement(o);
   }
 

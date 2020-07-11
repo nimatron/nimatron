@@ -11,14 +11,14 @@ import static com.tiepy.nimatron.parser.NimTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.tiepy.nimatron.parser.*;
 
-public class NimParamListColonImpl extends ASTWrapperPsiElement implements NimParamListColon {
+public class NimParamsImpl extends ASTWrapperPsiElement implements NimParams {
 
-  public NimParamListColonImpl(@NotNull ASTNode node) {
+  public NimParamsImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitParamListColon(this);
+    visitor.visitParams(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,15 +27,9 @@ public class NimParamListColonImpl extends ASTWrapperPsiElement implements NimPa
   }
 
   @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
-  public NimParamList getParamList() {
-    return findChildByClass(NimParamList.class);
+  @NotNull
+  public List<NimDeclColonEquals> getDeclColonEqualsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimDeclColonEquals.class);
   }
 
 }

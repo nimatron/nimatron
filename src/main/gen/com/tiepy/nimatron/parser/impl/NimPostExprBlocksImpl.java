@@ -40,8 +40,8 @@ public class NimPostExprBlocksImpl extends ASTWrapperPsiElement implements NimPo
 
   @Override
   @NotNull
-  public List<NimExprList2> getExprList2List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprList2.class);
+  public List<NimExprs> getExprsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprs.class);
   }
 
   @Override

@@ -30,15 +30,15 @@ public interface NimTypes {
   IElementType DO_BLOCK = new NimElementType("DO_BLOCK");
   IElementType EXPORT_STMT = new NimElementType("EXPORT_STMT");
   IElementType EXPR = new NimElementType("EXPR");
+  IElementType EXPRS = new NimElementType("EXPRS");
   IElementType EXPR_COLON_EQ_EXPR = new NimElementType("EXPR_COLON_EQ_EXPR");
-  IElementType EXPR_COLON_EQ_EXPR_LIST_2 = new NimElementType("EXPR_COLON_EQ_EXPR_LIST_2");
-  IElementType EXPR_LIST_2 = new NimElementType("EXPR_LIST_2");
+  IElementType EXPR_COLON_EQ_EXPRS = new NimElementType("EXPR_COLON_EQ_EXPRS");
   IElementType EXPR_STMT = new NimElementType("EXPR_STMT");
   IElementType FOR_STMT = new NimElementType("FOR_STMT");
   IElementType FROM_STMT = new NimElementType("FROM_STMT");
   IElementType GENERALIZED_LIT = new NimElementType("GENERALIZED_LIT");
   IElementType GENERIC_PARAM = new NimElementType("GENERIC_PARAM");
-  IElementType GENERIC_PARAM_LIST = new NimElementType("GENERIC_PARAM_LIST");
+  IElementType GENERIC_PARAMS = new NimElementType("GENERIC_PARAMS");
   IElementType IDENT_COLON_EQUALS = new NimElementType("IDENT_COLON_EQUALS");
   IElementType IDENT_OR_LITERAL = new NimElementType("IDENT_OR_LITERAL");
   IElementType IDENT_VIS = new NimElementType("IDENT_VIS");
@@ -57,9 +57,9 @@ public interface NimTypes {
   IElementType OPERATOR = new NimElementType("OPERATOR");
   IElementType OPT_IND = new NimElementType("OPT_IND");
   IElementType PAR = new NimElementType("PAR");
-  IElementType PARAM_LIST = new NimElementType("PARAM_LIST");
-  IElementType PARAM_LIST_ARROW = new NimElementType("PARAM_LIST_ARROW");
-  IElementType PARAM_LIST_COLON = new NimElementType("PARAM_LIST_COLON");
+  IElementType PARAMS = new NimElementType("PARAMS");
+  IElementType PARAMS_ARROW = new NimElementType("PARAMS_ARROW");
+  IElementType PARAMS_COLON = new NimElementType("PARAMS_COLON");
   IElementType PAR_2 = new NimElementType("PAR_2");
   IElementType PATTERN = new NimElementType("PATTERN");
   IElementType POST_EXPR_BLOCKS = new NimElementType("POST_EXPR_BLOCKS");
@@ -204,14 +204,14 @@ public interface NimTypes {
       else if (type == EXPR) {
         return new NimExprImpl(node);
       }
+      else if (type == EXPRS) {
+        return new NimExprsImpl(node);
+      }
       else if (type == EXPR_COLON_EQ_EXPR) {
         return new NimExprColonEqExprImpl(node);
       }
-      else if (type == EXPR_COLON_EQ_EXPR_LIST_2) {
-        return new NimExprColonEqExprList2Impl(node);
-      }
-      else if (type == EXPR_LIST_2) {
-        return new NimExprList2Impl(node);
+      else if (type == EXPR_COLON_EQ_EXPRS) {
+        return new NimExprColonEqExprsImpl(node);
       }
       else if (type == EXPR_STMT) {
         return new NimExprStmtImpl(node);
@@ -228,8 +228,8 @@ public interface NimTypes {
       else if (type == GENERIC_PARAM) {
         return new NimGenericParamImpl(node);
       }
-      else if (type == GENERIC_PARAM_LIST) {
-        return new NimGenericParamListImpl(node);
+      else if (type == GENERIC_PARAMS) {
+        return new NimGenericParamsImpl(node);
       }
       else if (type == IDENT_COLON_EQUALS) {
         return new NimIdentColonEqualsImpl(node);
@@ -285,14 +285,14 @@ public interface NimTypes {
       else if (type == PAR) {
         return new NimParImpl(node);
       }
-      else if (type == PARAM_LIST) {
-        return new NimParamListImpl(node);
+      else if (type == PARAMS) {
+        return new NimParamsImpl(node);
       }
-      else if (type == PARAM_LIST_ARROW) {
-        return new NimParamListArrowImpl(node);
+      else if (type == PARAMS_ARROW) {
+        return new NimParamsArrowImpl(node);
       }
-      else if (type == PARAM_LIST_COLON) {
-        return new NimParamListColonImpl(node);
+      else if (type == PARAMS_COLON) {
+        return new NimParamsColonImpl(node);
       }
       else if (type == PAR_2) {
         return new NimPar2Impl(node);

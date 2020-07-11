@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimExprColonEqExprList2 extends PsiElement {
+public interface NimExprColonEqExprs extends PsiElement {
 
   @NotNull
   List<NimExprColonEqExpr> getExprColonEqExprList();

@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimParamListColon extends PsiElement {
+public interface NimGenericParams extends PsiElement {
 
-  @Nullable
-  NimOptInd getOptInd();
-
-  @Nullable
-  NimParamList getParamList();
+  @NotNull
+  List<NimOptInd> getOptIndList();
 
 }

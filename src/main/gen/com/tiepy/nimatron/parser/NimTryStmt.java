@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimTryStmt extends PsiElement {
 
   @NotNull
-  List<NimExprList2> getExprList2List();
+  List<NimExprs> getExprsList();
 
   @NotNull
   List<NimStmt> getStmtList();
