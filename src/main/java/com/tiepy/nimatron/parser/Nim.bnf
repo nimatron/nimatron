@@ -89,8 +89,7 @@ private meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
 op ::= OP0|OP1/*|OP2*/|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
 simpleExpr ::= primary (op <<optInd primary>>)* pragma?
 
-//symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'
-//       | IDENT | KEYW
+//symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
 symbol ::= '`' (KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'=')+ '`'|IDENT|KEYW
 
 //exprColonEqExpr = expr (':'|'=' expr)?
@@ -156,7 +155,6 @@ generalizedLit ::= GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
 identOrLiteral ::= generalizedLit | symbol | literal
                  | par | arrayConstr | setOrTableConstr
                  | castExpr
-//private identOrLiteral ::= generalizedLit | IDENT | literal
 
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
@@ -173,10 +171,6 @@ primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                 | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
                 | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
                 | <<optInd exprList2>> // command syntax
-//private primarySuffix ::= primarySuffix1
-//                        | primarySuffix2
-//private primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr ','?)*)>> ')'
-//private primarySuffix2 ::= <<optInd exprList2>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
@@ -215,8 +209,6 @@ declColonEquals ::= identWithPragma (',' identWithPragma)* ','?
 //     (':' optInd typeDesc)? ('=' optInd expr)?)
 identColonEquals ::= IDENT (',' IDENT)* ','?
      (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
-//private identColonEquals ::= IDENT (',' IDENT)* ','?
-//       ('=' <<optInd expr>>)?
 
 //inlTupleDecl = 'tuple'
 //    '[' optInd  (identColonEquals (comma/semicolon)?)*  optPar ']'
@@ -261,7 +253,6 @@ expr ::= blockExpr
        | forStmt
        | tryExpr
        | simpleExpr
-//expr ::= simpleExpr
 
 //typeKeyw = 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
@@ -307,9 +298,6 @@ exprStmt ::= simpleExpr
            | ( expr (',' expr)*
                postExprBlocks
              ))?
-//exprStmt ::= simpleExpr (exprStmt1 | exprStmt2)?
-//private exprStmt1 ::= '=' <<optInd (expr colonBody?)>>
-//private exprStmt2 ::= expr (',' expr)*
 
 //importStmt = 'import' optInd expr
 //              ((comma expr)*
@@ -539,13 +527,6 @@ complexOrSimpleStmt ::= ifStmt
                       | bindStmt
                       | mixinStmt
                       | simpleStmt
-//private complexOrSimpleStmt ::= ifStmt
-//                              | varStmt
-//                              | simpleStmt
-//varStmt ::= ('let'|'var'|'using') <<section variable>>
 
-//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED)
-//     / simpleStmt ^+ ';'
-//stmt ::= (INDENT complexOrSimpleStmt ((IND_EQ|';') complexOrSimpleStmt)* DEDENT)
-//       | simpleStmt
+//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 stmt ::= complexOrSimpleStmt | simpleStmt
