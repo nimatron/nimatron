@@ -258,7 +258,7 @@ forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optIn
 //      | forExpr
 //      | tryExpr)
 //      / simpleExpr
-expr ::= blockExpr
+expr ::= blockStmt
        | ifExpr
        | whenExpr
        | caseStmt
@@ -400,10 +400,8 @@ tryExpr ::= 'try' ':' <<optInd stmts>>
 //exceptBlock = 'except' colcom stmt
 
 //blockStmt = 'block' symbol? colcom stmt
-blockStmt ::= 'block' symbol? ':' <<optInd stmts>>
-
 //blockExpr = 'block' symbol? colcom stmt
-blockExpr ::= 'block' symbol? ':' <<optInd stmts>>
+blockStmt ::= 'block' symbol? ':' <<optInd stmts>>
 
 //staticStmt = 'static' colcom stmt
 staticStmt ::= 'static' ':' <<optInd stmts>>
