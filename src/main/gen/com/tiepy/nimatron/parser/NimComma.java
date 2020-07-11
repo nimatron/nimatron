@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimComma extends PsiElement {
 
+  @Nullable
+  NimRem getRem();
+
 }

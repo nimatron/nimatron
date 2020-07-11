@@ -371,6 +371,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitRem(@NotNull NimRem o) {
+    visitPsiElement(o);
+  }
+
   public void visitReturnStmt(@NotNull NimReturnStmt o) {
     visitPsiElement(o);
   }

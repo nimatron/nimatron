@@ -44,4 +44,10 @@ public class NimCaseStmtImpl extends ASTWrapperPsiElement implements NimCaseStmt
     return findNotNullChildByClass(NimExpr.class);
   }
 
+  @Override
+  @Nullable
+  public NimRem getRem() {
+    return findChildByClass(NimRem.class);
+  }
+
 }

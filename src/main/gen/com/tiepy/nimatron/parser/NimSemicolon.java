@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimSemicolon extends PsiElement {
 
+  @Nullable
+  NimRem getRem();
+
 }
