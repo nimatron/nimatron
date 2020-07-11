@@ -527,37 +527,37 @@ varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 
-stmt ::= ifStmt
-       | whenStmt
-       | whileStmt
-       | tryStmt
-       | forStmt
-       | blockStmt
-       | staticStmt
-       | deferStmt
-       | asmStmt
-       | procStmt
-       | funcStmt
-       | methodStmt
-       | iteratorStmt
-       | macroStmt
-       | templateStmt
-       | converterStmt
-       | typeStmt
-       | constStmt
-       | varStmt
-       | bindStmt
-       | mixinStmt
-       | returnStmt
-       | raiseStmt
-       | yieldStmt
-       | discardStmt
-       | breakStmt
-       | continueStmt
-       | pragmaStmt
-       | importStmt
-       | exportStmt
-       | fromStmt
-       | includeStmt
-       | exprStmt
+stmt ::= ifStmt COMMENT?
+       | whenStmt COMMENT?
+       | whileStmt COMMENT?
+       | tryStmt COMMENT?
+       | forStmt COMMENT?
+       | blockStmt COMMENT?
+       | staticStmt COMMENT?
+       | deferStmt COMMENT?
+       | asmStmt COMMENT?
+       | procStmt COMMENT?
+       | funcStmt COMMENT?
+       | methodStmt COMMENT?
+       | iteratorStmt COMMENT?
+       | macroStmt COMMENT?
+       | templateStmt COMMENT?
+       | converterStmt COMMENT?
+       | typeStmt COMMENT?
+       | constStmt COMMENT?
+       | varStmt COMMENT?
+       | bindStmt COMMENT?
+       | mixinStmt COMMENT?
+       | returnStmt COMMENT?
+       | raiseStmt COMMENT?
+       | yieldStmt COMMENT?
+       | discardStmt COMMENT?
+       | breakStmt COMMENT?
+       | continueStmt COMMENT?
+       | pragmaStmt COMMENT?
+       | importStmt COMMENT?
+       | exportStmt COMMENT?
+       | fromStmt COMMENT?
+       | includeStmt COMMENT?
+       | exprStmt COMMENT?
        | COMMENT

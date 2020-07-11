@@ -3088,80 +3088,674 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ifStmt
-  //        | whenStmt
-  //        | whileStmt
-  //        | tryStmt
-  //        | forStmt
-  //        | blockStmt
-  //        | staticStmt
-  //        | deferStmt
-  //        | asmStmt
-  //        | procStmt
-  //        | funcStmt
-  //        | methodStmt
-  //        | iteratorStmt
-  //        | macroStmt
-  //        | templateStmt
-  //        | converterStmt
-  //        | typeStmt
-  //        | constStmt
-  //        | varStmt
-  //        | bindStmt
-  //        | mixinStmt
-  //        | returnStmt
-  //        | raiseStmt
-  //        | yieldStmt
-  //        | discardStmt
-  //        | breakStmt
-  //        | continueStmt
-  //        | pragmaStmt
-  //        | importStmt
-  //        | exportStmt
-  //        | fromStmt
-  //        | includeStmt
-  //        | exprStmt
+  // ifStmt COMMENT?
+  //        | whenStmt COMMENT?
+  //        | whileStmt COMMENT?
+  //        | tryStmt COMMENT?
+  //        | forStmt COMMENT?
+  //        | blockStmt COMMENT?
+  //        | staticStmt COMMENT?
+  //        | deferStmt COMMENT?
+  //        | asmStmt COMMENT?
+  //        | procStmt COMMENT?
+  //        | funcStmt COMMENT?
+  //        | methodStmt COMMENT?
+  //        | iteratorStmt COMMENT?
+  //        | macroStmt COMMENT?
+  //        | templateStmt COMMENT?
+  //        | converterStmt COMMENT?
+  //        | typeStmt COMMENT?
+  //        | constStmt COMMENT?
+  //        | varStmt COMMENT?
+  //        | bindStmt COMMENT?
+  //        | mixinStmt COMMENT?
+  //        | returnStmt COMMENT?
+  //        | raiseStmt COMMENT?
+  //        | yieldStmt COMMENT?
+  //        | discardStmt COMMENT?
+  //        | breakStmt COMMENT?
+  //        | continueStmt COMMENT?
+  //        | pragmaStmt COMMENT?
+  //        | importStmt COMMENT?
+  //        | exportStmt COMMENT?
+  //        | fromStmt COMMENT?
+  //        | includeStmt COMMENT?
+  //        | exprStmt COMMENT?
   //        | COMMENT
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = ifStmt(b, l + 1);
-    if (!r) r = whenStmt(b, l + 1);
-    if (!r) r = whileStmt(b, l + 1);
-    if (!r) r = tryStmt(b, l + 1);
-    if (!r) r = forStmt(b, l + 1);
-    if (!r) r = blockStmt(b, l + 1);
-    if (!r) r = staticStmt(b, l + 1);
-    if (!r) r = deferStmt(b, l + 1);
-    if (!r) r = asmStmt(b, l + 1);
-    if (!r) r = procStmt(b, l + 1);
-    if (!r) r = funcStmt(b, l + 1);
-    if (!r) r = methodStmt(b, l + 1);
-    if (!r) r = iteratorStmt(b, l + 1);
-    if (!r) r = macroStmt(b, l + 1);
-    if (!r) r = templateStmt(b, l + 1);
-    if (!r) r = converterStmt(b, l + 1);
-    if (!r) r = typeStmt(b, l + 1);
-    if (!r) r = constStmt(b, l + 1);
-    if (!r) r = varStmt(b, l + 1);
-    if (!r) r = bindStmt(b, l + 1);
-    if (!r) r = mixinStmt(b, l + 1);
-    if (!r) r = returnStmt(b, l + 1);
-    if (!r) r = raiseStmt(b, l + 1);
-    if (!r) r = yieldStmt(b, l + 1);
-    if (!r) r = discardStmt(b, l + 1);
-    if (!r) r = breakStmt(b, l + 1);
-    if (!r) r = continueStmt(b, l + 1);
-    if (!r) r = pragmaStmt(b, l + 1);
-    if (!r) r = importStmt(b, l + 1);
-    if (!r) r = exportStmt(b, l + 1);
-    if (!r) r = fromStmt(b, l + 1);
-    if (!r) r = includeStmt(b, l + 1);
-    if (!r) r = exprStmt(b, l + 1);
+    r = stmt_0(b, l + 1);
+    if (!r) r = stmt_1(b, l + 1);
+    if (!r) r = stmt_2(b, l + 1);
+    if (!r) r = stmt_3(b, l + 1);
+    if (!r) r = stmt_4(b, l + 1);
+    if (!r) r = stmt_5(b, l + 1);
+    if (!r) r = stmt_6(b, l + 1);
+    if (!r) r = stmt_7(b, l + 1);
+    if (!r) r = stmt_8(b, l + 1);
+    if (!r) r = stmt_9(b, l + 1);
+    if (!r) r = stmt_10(b, l + 1);
+    if (!r) r = stmt_11(b, l + 1);
+    if (!r) r = stmt_12(b, l + 1);
+    if (!r) r = stmt_13(b, l + 1);
+    if (!r) r = stmt_14(b, l + 1);
+    if (!r) r = stmt_15(b, l + 1);
+    if (!r) r = stmt_16(b, l + 1);
+    if (!r) r = stmt_17(b, l + 1);
+    if (!r) r = stmt_18(b, l + 1);
+    if (!r) r = stmt_19(b, l + 1);
+    if (!r) r = stmt_20(b, l + 1);
+    if (!r) r = stmt_21(b, l + 1);
+    if (!r) r = stmt_22(b, l + 1);
+    if (!r) r = stmt_23(b, l + 1);
+    if (!r) r = stmt_24(b, l + 1);
+    if (!r) r = stmt_25(b, l + 1);
+    if (!r) r = stmt_26(b, l + 1);
+    if (!r) r = stmt_27(b, l + 1);
+    if (!r) r = stmt_28(b, l + 1);
+    if (!r) r = stmt_29(b, l + 1);
+    if (!r) r = stmt_30(b, l + 1);
+    if (!r) r = stmt_31(b, l + 1);
+    if (!r) r = stmt_32(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // ifStmt COMMENT?
+  private static boolean stmt_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ifStmt(b, l + 1);
+    r = r && stmt_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_0_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // whenStmt COMMENT?
+  private static boolean stmt_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = whenStmt(b, l + 1);
+    r = r && stmt_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_1_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // whileStmt COMMENT?
+  private static boolean stmt_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = whileStmt(b, l + 1);
+    r = r && stmt_2_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_2_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // tryStmt COMMENT?
+  private static boolean stmt_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_3")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = tryStmt(b, l + 1);
+    r = r && stmt_3_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_3_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_3_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // forStmt COMMENT?
+  private static boolean stmt_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = forStmt(b, l + 1);
+    r = r && stmt_4_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_4_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_4_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // blockStmt COMMENT?
+  private static boolean stmt_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_5")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = blockStmt(b, l + 1);
+    r = r && stmt_5_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_5_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_5_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // staticStmt COMMENT?
+  private static boolean stmt_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_6")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = staticStmt(b, l + 1);
+    r = r && stmt_6_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_6_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_6_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // deferStmt COMMENT?
+  private static boolean stmt_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_7")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = deferStmt(b, l + 1);
+    r = r && stmt_7_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_7_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_7_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // asmStmt COMMENT?
+  private static boolean stmt_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_8")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = asmStmt(b, l + 1);
+    r = r && stmt_8_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_8_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_8_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // procStmt COMMENT?
+  private static boolean stmt_9(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_9")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = procStmt(b, l + 1);
+    r = r && stmt_9_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_9_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_9_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // funcStmt COMMENT?
+  private static boolean stmt_10(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_10")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = funcStmt(b, l + 1);
+    r = r && stmt_10_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_10_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_10_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // methodStmt COMMENT?
+  private static boolean stmt_11(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_11")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = methodStmt(b, l + 1);
+    r = r && stmt_11_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_11_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_11_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // iteratorStmt COMMENT?
+  private static boolean stmt_12(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_12")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = iteratorStmt(b, l + 1);
+    r = r && stmt_12_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_12_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_12_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // macroStmt COMMENT?
+  private static boolean stmt_13(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_13")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = macroStmt(b, l + 1);
+    r = r && stmt_13_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_13_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_13_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // templateStmt COMMENT?
+  private static boolean stmt_14(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_14")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = templateStmt(b, l + 1);
+    r = r && stmt_14_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_14_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_14_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // converterStmt COMMENT?
+  private static boolean stmt_15(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_15")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = converterStmt(b, l + 1);
+    r = r && stmt_15_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_15_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_15_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // typeStmt COMMENT?
+  private static boolean stmt_16(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_16")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = typeStmt(b, l + 1);
+    r = r && stmt_16_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_16_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_16_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // constStmt COMMENT?
+  private static boolean stmt_17(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_17")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = constStmt(b, l + 1);
+    r = r && stmt_17_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_17_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_17_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // varStmt COMMENT?
+  private static boolean stmt_18(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_18")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = varStmt(b, l + 1);
+    r = r && stmt_18_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_18_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_18_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // bindStmt COMMENT?
+  private static boolean stmt_19(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_19")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = bindStmt(b, l + 1);
+    r = r && stmt_19_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_19_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_19_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // mixinStmt COMMENT?
+  private static boolean stmt_20(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_20")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = mixinStmt(b, l + 1);
+    r = r && stmt_20_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_20_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_20_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // returnStmt COMMENT?
+  private static boolean stmt_21(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_21")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = returnStmt(b, l + 1);
+    r = r && stmt_21_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_21_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_21_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // raiseStmt COMMENT?
+  private static boolean stmt_22(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_22")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = raiseStmt(b, l + 1);
+    r = r && stmt_22_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_22_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_22_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // yieldStmt COMMENT?
+  private static boolean stmt_23(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_23")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = yieldStmt(b, l + 1);
+    r = r && stmt_23_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_23_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_23_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // discardStmt COMMENT?
+  private static boolean stmt_24(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_24")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = discardStmt(b, l + 1);
+    r = r && stmt_24_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_24_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_24_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // breakStmt COMMENT?
+  private static boolean stmt_25(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_25")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = breakStmt(b, l + 1);
+    r = r && stmt_25_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_25_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_25_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // continueStmt COMMENT?
+  private static boolean stmt_26(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_26")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = continueStmt(b, l + 1);
+    r = r && stmt_26_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_26_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_26_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // pragmaStmt COMMENT?
+  private static boolean stmt_27(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_27")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = pragmaStmt(b, l + 1);
+    r = r && stmt_27_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_27_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_27_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // importStmt COMMENT?
+  private static boolean stmt_28(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_28")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = importStmt(b, l + 1);
+    r = r && stmt_28_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_28_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_28_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // exportStmt COMMENT?
+  private static boolean stmt_29(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_29")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = exportStmt(b, l + 1);
+    r = r && stmt_29_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_29_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_29_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // fromStmt COMMENT?
+  private static boolean stmt_30(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_30")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = fromStmt(b, l + 1);
+    r = r && stmt_30_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_30_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_30_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // includeStmt COMMENT?
+  private static boolean stmt_31(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_31")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = includeStmt(b, l + 1);
+    r = r && stmt_31_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_31_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_31_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // exprStmt COMMENT?
+  private static boolean stmt_32(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_32")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = exprStmt(b, l + 1);
+    r = r && stmt_32_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean stmt_32_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_32_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
   }
 
   /* ********************************************************** */
