@@ -406,7 +406,7 @@ genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
 
 //genericParamList = '[' optInd
 //  genericParam ^* (comma/semicolon) optPar ']'
-genericParamList ::= '[' <<optInd
+genericParams ::= '[' <<optInd
   ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
 
 //genericParamList = '[' optInd
@@ -419,7 +419,7 @@ pattern ::= '{' stmt '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= <<optInd (identVis pattern? genericParamList?
+routine ::= <<optInd (identVis pattern? genericParams?
   paramsColon pragma? ('=' stmt)?)>>
 
 //commentStmt = COMMENT
@@ -456,8 +456,8 @@ typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc ('
 //typeDef = identWithPragmaDot genericParamList? '=' optInd typeDefAux
 //            indAndComment? / identVisDot genericParamList? pragma '=' optInd typeDefAux
 //            indAndComment?
-typeDef ::= identWithPragmaDot genericParamList? '=' <<optInd typeDefAux>>
-            identVisDot genericParamList? pragma '=' <<optInd typeDefAux>>
+typeDef ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
+            identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
 
 //varTuple = '(' optInd identWithPragma ^+ comma optPar ')' '=' optInd expr
 varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
