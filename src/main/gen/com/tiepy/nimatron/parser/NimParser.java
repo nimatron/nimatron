@@ -1884,13 +1884,14 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OP0|OP1/*|OP2*/|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
+  // OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
   public static boolean op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, OP, "<op>");
     r = consumeToken(b, OP0);
     if (!r) r = consumeToken(b, OP1);
+    if (!r) r = consumeToken(b, OP2);
     if (!r) r = consumeToken(b, OP3);
     if (!r) r = consumeToken(b, OP4);
     if (!r) r = consumeToken(b, OP5);

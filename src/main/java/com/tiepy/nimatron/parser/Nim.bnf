@@ -93,7 +93,7 @@ meta optInd ::= <<RULE>> | (INDENT <<RULE>>? COMMENT? (IND_EQ <<RULE>>? COMMENT?
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-op ::= OP0|OP1/*|OP2*/|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10 // TODO: Reconsider OP2 which was removed here.
+op ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
 simpleExpr ::= primary (op <<optInd primary>>)* pragma?
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
