@@ -1927,7 +1927,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
+  // <<RULE>> | (INDENT <<RULE>>? COMMENT? (IND_EQ <<RULE>>? COMMENT?)* termInd)
   public static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
     boolean r;
@@ -1938,14 +1938,15 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd
+  // INDENT <<RULE>>? COMMENT? (IND_EQ <<RULE>>? COMMENT?)* termInd
   private static boolean optInd_1(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, INDENT);
     r = r && optInd_1_1(b, l + 1, _RULE);
-    r = r && optInd_1_2(b, l + 1, _RULE);
+    r = r && optInd_1_2(b, l + 1);
+    r = r && optInd_1_3(b, l + 1, _RULE);
     r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -1958,32 +1959,47 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (IND_EQ <<RULE>>?)*
-  private static boolean optInd_1_2(PsiBuilder b, int l, Parser _RULE) {
+  // COMMENT?
+  private static boolean optInd_1_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "optInd_1_2")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // (IND_EQ <<RULE>>? COMMENT?)*
+  private static boolean optInd_1_3(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "optInd_1_3")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!optInd_1_2_0(b, l + 1, _RULE)) break;
-      if (!empty_element_parsed_guard_(b, "optInd_1_2", c)) break;
+      if (!optInd_1_3_0(b, l + 1, _RULE)) break;
+      if (!empty_element_parsed_guard_(b, "optInd_1_3", c)) break;
     }
     return true;
   }
 
-  // IND_EQ <<RULE>>?
-  private static boolean optInd_1_2_0(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "optInd_1_2_0")) return false;
+  // IND_EQ <<RULE>>? COMMENT?
+  private static boolean optInd_1_3_0(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "optInd_1_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IND_EQ);
-    r = r && optInd_1_2_0_1(b, l + 1, _RULE);
+    r = r && optInd_1_3_0_1(b, l + 1, _RULE);
+    r = r && optInd_1_3_0_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // <<RULE>>?
-  private static boolean optInd_1_2_0_1(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "optInd_1_2_0_1")) return false;
+  private static boolean optInd_1_3_0_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "optInd_1_3_0_1")) return false;
     _RULE.parse(b, l);
+    return true;
+  }
+
+  // COMMENT?
+  private static boolean optInd_1_3_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "optInd_1_3_0_2")) return false;
+    consumeToken(b, COMMENT);
     return true;
   }
 
@@ -2866,23 +2882,20 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COMMENT IND_EQ?
+  // COMMENT+
   public static boolean rem(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "rem")) return false;
     if (!nextTokenIs(b, COMMENT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMENT);
-    r = r && rem_1(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!consumeToken(b, COMMENT)) break;
+      if (!empty_element_parsed_guard_(b, "rem", c)) break;
+    }
     exit_section_(b, m, REM, r);
     return r;
-  }
-
-  // IND_EQ?
-  private static boolean rem_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "rem_1")) return false;
-    consumeToken(b, IND_EQ);
-    return true;
   }
 
   /* ********************************************************** */
