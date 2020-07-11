@@ -21,7 +21,6 @@ public interface NimTypes {
   IElementType CASE_STMT_2 = new NimElementType("CASE_STMT_2");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
-  IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
   IElementType COND_STMT = new NimElementType("COND_STMT");
   IElementType CONSTANT = new NimElementType("CONSTANT");
@@ -105,7 +104,6 @@ public interface NimTypes {
   IElementType SECTION = new NimElementType("SECTION");
   IElementType SET_OR_TABLE_CONSTR = new NimElementType("SET_OR_TABLE_CONSTR");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
-  IElementType SIMPLE_STMT = new NimElementType("SIMPLE_STMT");
   IElementType STATIC_STMT = new NimElementType("STATIC_STMT");
   IElementType STMT = new NimElementType("STMT");
   IElementType STMTS = new NimElementType("STMTS");
@@ -207,9 +205,6 @@ public interface NimTypes {
       }
       else if (type == COLON_BODY) {
         return new NimColonBodyImpl(node);
-      }
-      else if (type == COMPLEX_OR_SIMPLE_STMT) {
-        return new NimComplexOrSimpleStmtImpl(node);
       }
       else if (type == COND_EXPR) {
         return new NimCondExprImpl(node);
@@ -459,9 +454,6 @@ public interface NimTypes {
       }
       else if (type == SIMPLE_EXPR) {
         return new NimSimpleExprImpl(node);
-      }
-      else if (type == SIMPLE_STMT) {
-        return new NimSimpleStmtImpl(node);
       }
       else if (type == STATIC_STMT) {
         return new NimStaticStmtImpl(node);

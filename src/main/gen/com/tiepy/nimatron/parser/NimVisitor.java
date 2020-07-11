@@ -51,10 +51,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitComplexOrSimpleStmt(@NotNull NimComplexOrSimpleStmt o) {
-    visitPsiElement(o);
-  }
-
   public void visitCondExpr(@NotNull NimCondExpr o) {
     visitPsiElement(o);
   }
@@ -384,10 +380,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitSimpleExpr(@NotNull NimSimpleExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSimpleStmt(@NotNull NimSimpleStmt o) {
     visitPsiElement(o);
   }
 

@@ -28,8 +28,8 @@ public class NimPar2Impl extends ASTWrapperPsiElement implements NimPar2 {
 
   @Override
   @NotNull
-  public List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
+  public List<NimStmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
 }

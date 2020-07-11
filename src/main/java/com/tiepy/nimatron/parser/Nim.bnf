@@ -130,10 +130,10 @@ par1 ::= par2
        | par3
        | pragmaStmt
        | par4
-par2 ::= complexOrSimpleStmt (';' complexOrSimpleStmt)* // TODO: Consider &parKeyw that was removed from here.
-par3 ::= ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
+par2 ::= stmt (';' stmt)* // TODO: Consider &parKeyw that was removed from here.
+par3 ::= ';' stmt (';' stmt)*
 par4 ::= simpleExpr (par5 | par6)
-par5 ::= '=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?
+par5 ::= '=' expr (';' stmt (';' stmt)*)?
 par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
 
 //literal = | INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
@@ -492,9 +492,6 @@ pragmaStmt ::= pragma (':' stmt)?
 //simpleStmt = ((returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //           | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
 //           | includeStmt | commentStmt) / exprStmt) COMMENT?
-simpleStmt ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
-             | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
-             | includeStmt | exprStmt
 
 //complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
 //                    | tryStmt | forStmt
@@ -511,28 +508,6 @@ simpleStmt ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //                    | ('let' | 'var' | 'using') section(variable)
 //                    | bindStmt | mixinStmt)
 //                    / simpleStmt
-complexOrSimpleStmt ::= ifStmt
-                      | whenStmt
-                      | whileStmt
-                      | tryStmt
-                      | forStmt
-                      | blockStmt
-                      | staticStmt
-                      | deferStmt
-                      | asmStmt
-                      | procStmt
-                      | funcStmt
-                      | methodStmt
-                      | iteratorStmt
-                      | macroStmt
-                      | templateStmt
-                      | converterStmt
-                      | typeStmt
-                      | constStmt
-                      | varStmt
-                      | bindStmt
-                      | mixinStmt
-                      | simpleStmt
 
 procStmt ::= 'proc' routine
 funcStmt ::= 'func' routine
@@ -546,4 +521,37 @@ constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<section variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
-stmt ::= complexOrSimpleStmt | simpleStmt
+
+stmt ::= ifStmt
+       | whenStmt
+       | whileStmt
+       | tryStmt
+       | forStmt
+       | blockStmt
+       | staticStmt
+       | deferStmt
+       | asmStmt
+       | procStmt
+       | funcStmt
+       | methodStmt
+       | iteratorStmt
+       | macroStmt
+       | templateStmt
+       | converterStmt
+       | typeStmt
+       | constStmt
+       | varStmt
+       | bindStmt
+       | mixinStmt
+       | returnStmt
+       | raiseStmt
+       | yieldStmt
+       | discardStmt
+       | breakStmt
+       | continueStmt
+       | pragmaStmt
+       | importStmt
+       | exportStmt
+       | fromStmt
+       | includeStmt
+       | exprStmt

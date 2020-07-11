@@ -28,14 +28,14 @@ public class NimPar5Impl extends ASTWrapperPsiElement implements NimPar5 {
 
   @Override
   @NotNull
-  public List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
+  public NimExpr getExpr() {
+    return findNotNullChildByClass(NimExpr.class);
   }
 
   @Override
   @NotNull
-  public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
+  public List<NimStmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
 }

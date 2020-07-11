@@ -338,59 +338,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ifStmt
-  //                       | whenStmt
-  //                       | whileStmt
-  //                       | tryStmt
-  //                       | forStmt
-  //                       | blockStmt
-  //                       | staticStmt
-  //                       | deferStmt
-  //                       | asmStmt
-  //                       | procStmt
-  //                       | funcStmt
-  //                       | methodStmt
-  //                       | iteratorStmt
-  //                       | macroStmt
-  //                       | templateStmt
-  //                       | converterStmt
-  //                       | typeStmt
-  //                       | constStmt
-  //                       | varStmt
-  //                       | bindStmt
-  //                       | mixinStmt
-  //                       | simpleStmt
-  public static boolean complexOrSimpleStmt(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "complexOrSimpleStmt")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, COMPLEX_OR_SIMPLE_STMT, "<complex or simple stmt>");
-    r = ifStmt(b, l + 1);
-    if (!r) r = whenStmt(b, l + 1);
-    if (!r) r = whileStmt(b, l + 1);
-    if (!r) r = tryStmt(b, l + 1);
-    if (!r) r = forStmt(b, l + 1);
-    if (!r) r = blockStmt(b, l + 1);
-    if (!r) r = staticStmt(b, l + 1);
-    if (!r) r = deferStmt(b, l + 1);
-    if (!r) r = asmStmt(b, l + 1);
-    if (!r) r = procStmt(b, l + 1);
-    if (!r) r = funcStmt(b, l + 1);
-    if (!r) r = methodStmt(b, l + 1);
-    if (!r) r = iteratorStmt(b, l + 1);
-    if (!r) r = macroStmt(b, l + 1);
-    if (!r) r = templateStmt(b, l + 1);
-    if (!r) r = converterStmt(b, l + 1);
-    if (!r) r = typeStmt(b, l + 1);
-    if (!r) r = constStmt(b, l + 1);
-    if (!r) r = varStmt(b, l + 1);
-    if (!r) r = bindStmt(b, l + 1);
-    if (!r) r = mixinStmt(b, l + 1);
-    if (!r) r = simpleStmt(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // expr ':' <<optInd expr>>
   //           ('elif' expr ':' <<optInd expr>>)*
   //            'else' ':' expr
@@ -1992,18 +1939,18 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // complexOrSimpleStmt (';' complexOrSimpleStmt)*
+  // stmt (';' stmt)*
   public static boolean par2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par2")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PAR_2, "<par 2>");
-    r = complexOrSimpleStmt(b, l + 1);
+    r = stmt(b, l + 1);
     r = r && par2_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (';' complexOrSimpleStmt)*
+  // (';' stmt)*
   private static boolean par2_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par2_1")) return false;
     while (true) {
@@ -2014,31 +1961,31 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ';' complexOrSimpleStmt
+  // ';' stmt
   private static boolean par2_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par2_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    r = r && complexOrSimpleStmt(b, l + 1);
+    r = r && stmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
+  // ';' stmt (';' stmt)*
   public static boolean par3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par3")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PAR_3, "<par 3>");
     r = consumeToken(b, ";");
-    r = r && complexOrSimpleStmt(b, l + 1);
+    r = r && stmt(b, l + 1);
     r = r && par3_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (';' complexOrSimpleStmt)*
+  // (';' stmt)*
   private static boolean par3_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par3_2")) return false;
     while (true) {
@@ -2049,13 +1996,13 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ';' complexOrSimpleStmt
+  // ';' stmt
   private static boolean par3_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par3_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    r = r && complexOrSimpleStmt(b, l + 1);
+    r = r && stmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2082,7 +2029,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?
+  // '=' expr (';' stmt (';' stmt)*)?
   public static boolean par5(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par5")) return false;
     boolean r;
@@ -2094,26 +2041,26 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?
+  // (';' stmt (';' stmt)*)?
   private static boolean par5_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par5_2")) return false;
     par5_2_0(b, l + 1);
     return true;
   }
 
-  // ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
+  // ';' stmt (';' stmt)*
   private static boolean par5_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par5_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    r = r && complexOrSimpleStmt(b, l + 1);
+    r = r && stmt(b, l + 1);
     r = r && par5_2_0_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // (';' complexOrSimpleStmt)*
+  // (';' stmt)*
   private static boolean par5_2_0_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par5_2_0_2")) return false;
     while (true) {
@@ -2124,13 +2071,13 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ';' complexOrSimpleStmt
+  // ';' stmt
   private static boolean par5_2_0_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "par5_2_0_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    r = r && complexOrSimpleStmt(b, l + 1);
+    r = r && stmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -3061,30 +3008,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
-  //              | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
-  //              | includeStmt | exprStmt
-  public static boolean simpleStmt(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "simpleStmt")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, SIMPLE_STMT, "<simple stmt>");
-    r = returnStmt(b, l + 1);
-    if (!r) r = raiseStmt(b, l + 1);
-    if (!r) r = yieldStmt(b, l + 1);
-    if (!r) r = discardStmt(b, l + 1);
-    if (!r) r = breakStmt(b, l + 1);
-    if (!r) r = continueStmt(b, l + 1);
-    if (!r) r = pragmaStmt(b, l + 1);
-    if (!r) r = importStmt(b, l + 1);
-    if (!r) r = exportStmt(b, l + 1);
-    if (!r) r = fromStmt(b, l + 1);
-    if (!r) r = includeStmt(b, l + 1);
-    if (!r) r = exprStmt(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // 'static' ':' stmt
   public static boolean staticStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "staticStmt")) return false;
@@ -3098,13 +3021,76 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // complexOrSimpleStmt | simpleStmt
+  // ifStmt
+  //        | whenStmt
+  //        | whileStmt
+  //        | tryStmt
+  //        | forStmt
+  //        | blockStmt
+  //        | staticStmt
+  //        | deferStmt
+  //        | asmStmt
+  //        | procStmt
+  //        | funcStmt
+  //        | methodStmt
+  //        | iteratorStmt
+  //        | macroStmt
+  //        | templateStmt
+  //        | converterStmt
+  //        | typeStmt
+  //        | constStmt
+  //        | varStmt
+  //        | bindStmt
+  //        | mixinStmt
+  //        | returnStmt
+  //        | raiseStmt
+  //        | yieldStmt
+  //        | discardStmt
+  //        | breakStmt
+  //        | continueStmt
+  //        | pragmaStmt
+  //        | importStmt
+  //        | exportStmt
+  //        | fromStmt
+  //        | includeStmt
+  //        | exprStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = complexOrSimpleStmt(b, l + 1);
-    if (!r) r = simpleStmt(b, l + 1);
+    r = ifStmt(b, l + 1);
+    if (!r) r = whenStmt(b, l + 1);
+    if (!r) r = whileStmt(b, l + 1);
+    if (!r) r = tryStmt(b, l + 1);
+    if (!r) r = forStmt(b, l + 1);
+    if (!r) r = blockStmt(b, l + 1);
+    if (!r) r = staticStmt(b, l + 1);
+    if (!r) r = deferStmt(b, l + 1);
+    if (!r) r = asmStmt(b, l + 1);
+    if (!r) r = procStmt(b, l + 1);
+    if (!r) r = funcStmt(b, l + 1);
+    if (!r) r = methodStmt(b, l + 1);
+    if (!r) r = iteratorStmt(b, l + 1);
+    if (!r) r = macroStmt(b, l + 1);
+    if (!r) r = templateStmt(b, l + 1);
+    if (!r) r = converterStmt(b, l + 1);
+    if (!r) r = typeStmt(b, l + 1);
+    if (!r) r = constStmt(b, l + 1);
+    if (!r) r = varStmt(b, l + 1);
+    if (!r) r = bindStmt(b, l + 1);
+    if (!r) r = mixinStmt(b, l + 1);
+    if (!r) r = returnStmt(b, l + 1);
+    if (!r) r = raiseStmt(b, l + 1);
+    if (!r) r = yieldStmt(b, l + 1);
+    if (!r) r = discardStmt(b, l + 1);
+    if (!r) r = breakStmt(b, l + 1);
+    if (!r) r = continueStmt(b, l + 1);
+    if (!r) r = pragmaStmt(b, l + 1);
+    if (!r) r = importStmt(b, l + 1);
+    if (!r) r = exportStmt(b, l + 1);
+    if (!r) r = fromStmt(b, l + 1);
+    if (!r) r = includeStmt(b, l + 1);
+    if (!r) r = exprStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
