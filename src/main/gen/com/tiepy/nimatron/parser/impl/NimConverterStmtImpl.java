@@ -28,8 +28,8 @@ public class NimConverterStmtImpl extends ASTWrapperPsiElement implements NimCon
 
   @Override
   @NotNull
-  public NimRoutine getRoutine() {
-    return findNotNullChildByClass(NimRoutine.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

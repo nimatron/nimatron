@@ -71,7 +71,7 @@ operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
 
 //optInd = COMMENT? IND?
 termInd ::= DEDENT | <<eof>>
-meta optInd ::= <<RULE>> | (INDENT <<RULE>> termInd)
+meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //optPar = (IND{>} | IND{=})?
 
@@ -428,13 +428,12 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= <<optInd (identVis pattern? genericParams?
-  paramsColon pragma? ('=' <<optInd stmts>>)?)>>
+routine ::= identVis pattern? genericParams? paramsColon pragma? ('=' <<optInd stmts>>)?
 
 //commentStmt = COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
+//meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -508,16 +507,16 @@ pragmaStmt ::= pragma (':' <<optInd stmts>>)?
 //                    | bindStmt | mixinStmt)
 //                    / simpleStmt
 
-procStmt ::= 'proc' routine
-funcStmt ::= 'func' routine
-methodStmt ::= 'method' routine
-iteratorStmt ::= 'iterator' routine
-macroStmt ::= 'macro' routine
-templateStmt ::= 'template' routine
-converterStmt ::= 'converter' routine
-typeStmt ::= 'type' <<section typeDef>>
-constStmt ::= 'const' <<section constant>>
-varStmt ::= ('let'|'var'|'using') <<section variable>>
+procStmt ::= 'proc' <<optInd routine>>
+funcStmt ::= 'func' <<optInd routine>>
+methodStmt ::= 'method' <<optInd routine>>
+iteratorStmt ::= 'iterator' <<optInd routine>>
+macroStmt ::= 'macro' <<optInd routine>>
+templateStmt ::= 'template' <<optInd routine>>
+converterStmt ::= 'converter' <<optInd routine>>
+typeStmt ::= 'type' <<optInd typeDef>>
+constStmt ::= 'const' <<optInd constant>>
+varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 

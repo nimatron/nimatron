@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimConstStmt extends PsiElement {
 
   @NotNull
-  NimSection getSection();
+  NimOptInd getOptInd();
 
 }

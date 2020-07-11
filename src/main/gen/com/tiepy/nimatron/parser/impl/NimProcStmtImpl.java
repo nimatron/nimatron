@@ -28,8 +28,8 @@ public class NimProcStmtImpl extends ASTWrapperPsiElement implements NimProcStmt
 
   @Override
   @NotNull
-  public NimRoutine getRoutine() {
-    return findNotNullChildByClass(NimRoutine.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

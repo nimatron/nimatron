@@ -28,8 +28,8 @@ public class NimTemplateStmtImpl extends ASTWrapperPsiElement implements NimTemp
 
   @Override
   @NotNull
-  public NimRoutine getRoutine() {
-    return findNotNullChildByClass(NimRoutine.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

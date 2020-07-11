@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimConverterStmt extends PsiElement {
 
   @NotNull
-  NimRoutine getRoutine();
+  NimOptInd getOptInd();
 
 }

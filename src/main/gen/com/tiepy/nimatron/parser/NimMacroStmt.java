@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimMacroStmt extends PsiElement {
 
   @NotNull
-  NimRoutine getRoutine();
+  NimOptInd getOptInd();
 
 }

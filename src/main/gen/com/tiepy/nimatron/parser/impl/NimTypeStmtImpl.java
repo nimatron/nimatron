@@ -28,8 +28,8 @@ public class NimTypeStmtImpl extends ASTWrapperPsiElement implements NimTypeStmt
 
   @Override
   @NotNull
-  public NimSection getSection() {
-    return findNotNullChildByClass(NimSection.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

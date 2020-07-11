@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimProcStmt extends PsiElement {
 
   @NotNull
-  NimRoutine getRoutine();
+  NimOptInd getOptInd();
 
 }

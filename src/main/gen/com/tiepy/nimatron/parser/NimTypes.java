@@ -100,7 +100,6 @@ public interface NimTypes {
   IElementType RAISE_STMT = new NimElementType("RAISE_STMT");
   IElementType RETURN_STMT = new NimElementType("RETURN_STMT");
   IElementType ROUTINE = new NimElementType("ROUTINE");
-  IElementType SECTION = new NimElementType("SECTION");
   IElementType SET_OR_TABLE_CONSTR = new NimElementType("SET_OR_TABLE_CONSTR");
   IElementType SIMPLE_EXPR = new NimElementType("SIMPLE_EXPR");
   IElementType STATIC_STMT = new NimElementType("STATIC_STMT");
@@ -441,9 +440,6 @@ public interface NimTypes {
       }
       else if (type == ROUTINE) {
         return new NimRoutineImpl(node);
-      }
-      else if (type == SECTION) {
-        return new NimSectionImpl(node);
       }
       else if (type == SET_OR_TABLE_CONSTR) {
         return new NimSetOrTableConstrImpl(node);

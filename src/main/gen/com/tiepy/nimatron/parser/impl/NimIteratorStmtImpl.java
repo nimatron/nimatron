@@ -28,8 +28,8 @@ public class NimIteratorStmtImpl extends ASTWrapperPsiElement implements NimIter
 
   @Override
   @NotNull
-  public NimRoutine getRoutine() {
-    return findNotNullChildByClass(NimRoutine.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

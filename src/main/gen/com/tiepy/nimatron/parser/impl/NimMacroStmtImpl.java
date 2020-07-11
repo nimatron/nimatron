@@ -28,8 +28,8 @@ public class NimMacroStmtImpl extends ASTWrapperPsiElement implements NimMacroSt
 
   @Override
   @NotNull
-  public NimRoutine getRoutine() {
-    return findNotNullChildByClass(NimRoutine.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }
