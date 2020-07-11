@@ -2252,13 +2252,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '{' stmt '}'
+  // '{' <<optInd stmts>> '}'
   public static boolean pattern(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "pattern")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PATTERN, "<pattern>");
     r = consumeToken(b, "{");
-    r = r && stmt(b, l + 1);
+    r = r && optInd(b, l + 1, stmts_parser_);
     r = r && consumeToken(b, "}");
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -2768,7 +2768,7 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // <<optInd (identVis pattern? genericParams?
-  //   paramsColon pragma? ('=' stmt)?)>>
+  //   paramsColon pragma? ('=' <<optInd stmts>>)?)>>
   public static boolean routine(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine")) return false;
     boolean r;
@@ -2779,7 +2779,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   // identVis pattern? genericParams?
-  //   paramsColon pragma? ('=' stmt)?
+  //   paramsColon pragma? ('=' <<optInd stmts>>)?
   private static boolean routine_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine_0_0")) return false;
     boolean r;
@@ -2815,20 +2815,20 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ('=' stmt)?
+  // ('=' <<optInd stmts>>)?
   private static boolean routine_0_0_5(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine_0_0_5")) return false;
     routine_0_0_5_0(b, l + 1);
     return true;
   }
 
-  // '=' stmt
+  // '=' <<optInd stmts>>
   private static boolean routine_0_0_5_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine_0_0_5_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, "=");
-    r = r && stmt(b, l + 1);
+    r = r && optInd(b, l + 1, stmts_parser_);
     exit_section_(b, m, null, r);
     return r;
   }

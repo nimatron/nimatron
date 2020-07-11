@@ -422,14 +422,14 @@ genericParams ::= '[' <<optInd
   ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
 
 //pattern = '{' stmt '}'
-pattern ::= '{' stmt '}'
+pattern ::= '{' <<optInd stmts>> '}'
 
 //indAndComment = (IND{>} COMMENT)? | COMMENT?
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
 routine ::= <<optInd (identVis pattern? genericParams?
-  paramsColon pragma? ('=' stmt)?)>>
+  paramsColon pragma? ('=' <<optInd stmts>>)?)>>
 
 //commentStmt = COMMENT
 
