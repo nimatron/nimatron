@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimDeferStmt extends PsiElement {
-
-  @NotNull
-  NimColcom getColcom();
-
-  @NotNull
-  NimOptInd getOptInd();
+public interface NimComma extends PsiElement {
 
 }

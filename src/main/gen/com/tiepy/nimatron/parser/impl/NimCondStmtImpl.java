@@ -28,6 +28,12 @@ public class NimCondStmtImpl extends ASTWrapperPsiElement implements NimCondStmt
 
   @Override
   @NotNull
+  public List<NimColcom> getColcomList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimColcom.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }

@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimConstant extends PsiElement {
 
   @Nullable
+  NimColon getColon();
+
+  @Nullable
   NimIdentWithPragma getIdentWithPragma();
 
   @NotNull

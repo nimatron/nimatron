@@ -28,6 +28,12 @@ public class NimWhileStmtImpl extends ASTWrapperPsiElement implements NimWhileSt
 
   @Override
   @NotNull
+  public NimColcom getColcom() {
+    return findNotNullChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @NotNull
   public NimExpr getExpr() {
     return findNotNullChildByClass(NimExpr.class);
   }
