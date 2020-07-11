@@ -43,30 +43,10 @@
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
   tokens = [
-//    BRACKET="BRACKET"
-//    SEMICOLON="SEMICOLON"
-//    COMMA="COMMA"
-//    GRAVE_ACCENT="GRAVE_ACCENT"
-
     BRACKET="BRACKET"
-    COMMA="COMMA"
-    GENERALIZED_STR_LIT="GENERALIZED_STR_LIT"
-    GENERALIZED_TRIPLESTR_LIT="GENERALIZED_TRIPLESTR_LIT"
-    GRAVE_ACCENT="GRAVE_ACCENT"
-    KEYW="KEYW"
-    OP0="OP0"
-    OP1="OP1"
-    OP10="OP10"
-    OP2="OP2"
-    OP3="OP3"
-    OP4="OP4"
-    OP5="OP5"
-    OP6="OP6"
-    OP7="OP7"
-    OP8="OP8"
-    OP9="OP9"
-    OPR="OPR"
     SEMICOLON="SEMICOLON"
+    COMMA="COMMA"
+    GRAVE_ACCENT="GRAVE_ACCENT"
   ]
 
   psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
