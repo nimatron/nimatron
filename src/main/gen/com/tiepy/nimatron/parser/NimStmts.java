@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimStmts extends PsiElement {
 
   @NotNull
+  List<NimRem> getRemList();
+
+  @NotNull
   List<NimSemicolon> getSemicolonList();
 
   @NotNull

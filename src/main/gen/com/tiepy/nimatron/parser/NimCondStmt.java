@@ -16,4 +16,7 @@ public interface NimCondStmt extends PsiElement {
   @NotNull
   List<NimOptInd> getOptIndList();
 
+  @Nullable
+  NimRem getRem();
+
 }

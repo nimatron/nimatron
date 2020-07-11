@@ -80,6 +80,9 @@ public interface NimStmt extends PsiElement {
   NimRaiseStmt getRaiseStmt();
 
   @Nullable
+  NimRem getRem();
+
+  @Nullable
   NimReturnStmt getReturnStmt();
 
   @Nullable

@@ -13,4 +13,7 @@ public interface NimPragmaStmt extends PsiElement {
   @NotNull
   NimPragma getPragma();
 
+  @Nullable
+  NimRem getRem();
+
 }

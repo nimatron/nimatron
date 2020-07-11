@@ -26,4 +26,10 @@ public class NimCommaImpl extends ASTWrapperPsiElement implements NimComma {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public NimRem getRem() {
+    return findChildByClass(NimRem.class);
+  }
+
 }

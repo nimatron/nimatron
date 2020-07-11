@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimColcom extends PsiElement {
-
-  @Nullable
-  NimRem getRem();
+public interface NimRem extends PsiElement {
 
 }
