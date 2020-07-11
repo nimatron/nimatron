@@ -5,9 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimPar2 extends PsiElement {
+public interface NimPar1 extends PsiElement {
 
-  @NotNull
-  List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
+  @Nullable
+  NimPar2 getPar2();
+
+  @Nullable
+  NimPar3 getPar3();
+
+  @Nullable
+  NimPar4 getPar4();
+
+  @Nullable
+  NimPragmaStmt getPragmaStmt();
 
 }

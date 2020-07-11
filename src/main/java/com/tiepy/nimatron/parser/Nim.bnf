@@ -125,12 +125,16 @@ castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>>
 //          | simpleExpr ( ('=' expr (';' complexOrSimpleStmt ^+ ';' )? )
 //                       | (':' expr (',' exprColonEqExpr     ^+ ',' )? ) ) )
 //          optPar ')'
-par2 ::=        (complexOrSimpleStmt (';' complexOrSimpleStmt)*)
-          | (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)
-          | pragmaStmt
-          | (simpleExpr (('=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?)
-                                 | (':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?)))
-par ::= '(' <<optInd par2>> <<optInd (')')>>
+par ::= '(' <<optInd par1>> <<optInd (')')>>
+par1 ::= par2
+       | par3
+       | pragmaStmt
+       | par4
+par2 ::= complexOrSimpleStmt (';' complexOrSimpleStmt)*
+par3 ::= ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
+par4 ::= simpleExpr (par5 | par6)
+par5 ::= '=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?
+par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
 
 //literal = | INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
 //          | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
@@ -166,11 +170,16 @@ arrayConstr ::= '[' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd (']')>>
 //      | '[' optInd exprColonEqExprList optPar ']'
 //      | '{' optInd exprColonEqExprList optPar '}'
 //      | &( '`'|IDENT|literal|'cast'|'addr'|'type') expr # command syntax
-primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
-                | ('.' <<optInd (symbol generalizedLit?)>>)
-                | ('[' <<optInd exprColonEqExprs>> <<optInd (']')>>)
-                | ('{' <<optInd exprColonEqExprs>> <<optInd ('}')>>)
-                | <<optInd exprs>> // command syntax
+primarySuffix ::= primarySuffix1
+                | primarySuffix2
+                | primarySuffix3
+                | primarySuffix4
+                | primarySuffix5
+primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr ','?)*)>> ')'
+primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
+primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
+primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
+primarySuffix5 ::= <<optInd exprs>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
@@ -282,11 +291,16 @@ typeDefAux ::= simpleExpr ('not' expr)?
 //                           | IND{=} 'elif' expr ':' stmt
 //                           | IND{=} 'except' exprList ':' stmt
 //                           | IND{=} 'else' ':' stmt )*
-postExprBlocks ::= ':' stmt? ( (IND_EQ doBlock)
-                             | (IND_EQ 'of' exprs ':' stmt)
-                             | (IND_EQ 'elif' expr ':' stmt)
-                             | (IND_EQ 'except' exprs ':' stmt)
-                             | (IND_EQ 'else' ':' stmt) )*
+postExprBlocks ::= ':' stmt? ( postExprBlocks1
+                             | postExprBlocks2
+                             | postExprBlocks3
+                             | postExprBlocks4
+                             | postExprBlocks5 )*
+postExprBlocks1 ::= IND_EQ doBlock
+postExprBlocks2 ::= IND_EQ 'of' exprs ':' stmt
+postExprBlocks3 ::= IND_EQ 'elif' expr ':' stmt
+postExprBlocks4 ::= IND_EQ 'except' exprs ':' stmt
+postExprBlocks5 ::= IND_EQ 'else' ':' stmt
 
 //exprStmt = simpleExpr
 //         (( '=' optInd expr colonBody? )

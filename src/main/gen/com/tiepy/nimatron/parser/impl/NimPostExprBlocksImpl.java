@@ -28,26 +28,38 @@ public class NimPostExprBlocksImpl extends ASTWrapperPsiElement implements NimPo
 
   @Override
   @NotNull
-  public List<NimDoBlock> getDoBlockList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimDoBlock.class);
+  public List<NimPostExprBlocks1> getPostExprBlocks1List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks1.class);
   }
 
   @Override
   @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
+  public List<NimPostExprBlocks2> getPostExprBlocks2List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks2.class);
   }
 
   @Override
   @NotNull
-  public List<NimExprs> getExprsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprs.class);
+  public List<NimPostExprBlocks3> getPostExprBlocks3List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks3.class);
   }
 
   @Override
   @NotNull
-  public List<NimStmt> getStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
+  public List<NimPostExprBlocks4> getPostExprBlocks4List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks4.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimPostExprBlocks5> getPostExprBlocks5List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks5.class);
+  }
+
+  @Override
+  @Nullable
+  public NimStmt getStmt() {
+    return findChildByClass(NimStmt.class);
   }
 
 }

@@ -60,9 +60,19 @@ public interface NimTypes {
   IElementType PARAMS = new NimElementType("PARAMS");
   IElementType PARAMS_ARROW = new NimElementType("PARAMS_ARROW");
   IElementType PARAMS_COLON = new NimElementType("PARAMS_COLON");
+  IElementType PAR_1 = new NimElementType("PAR_1");
   IElementType PAR_2 = new NimElementType("PAR_2");
+  IElementType PAR_3 = new NimElementType("PAR_3");
+  IElementType PAR_4 = new NimElementType("PAR_4");
+  IElementType PAR_5 = new NimElementType("PAR_5");
+  IElementType PAR_6 = new NimElementType("PAR_6");
   IElementType PATTERN = new NimElementType("PATTERN");
   IElementType POST_EXPR_BLOCKS = new NimElementType("POST_EXPR_BLOCKS");
+  IElementType POST_EXPR_BLOCKS_1 = new NimElementType("POST_EXPR_BLOCKS_1");
+  IElementType POST_EXPR_BLOCKS_2 = new NimElementType("POST_EXPR_BLOCKS_2");
+  IElementType POST_EXPR_BLOCKS_3 = new NimElementType("POST_EXPR_BLOCKS_3");
+  IElementType POST_EXPR_BLOCKS_4 = new NimElementType("POST_EXPR_BLOCKS_4");
+  IElementType POST_EXPR_BLOCKS_5 = new NimElementType("POST_EXPR_BLOCKS_5");
   IElementType PRAGMA = new NimElementType("PRAGMA");
   IElementType PRAGMA_STMT = new NimElementType("PRAGMA_STMT");
   IElementType PRIMARY = new NimElementType("PRIMARY");
@@ -70,6 +80,11 @@ public interface NimTypes {
   IElementType PRIMARY_2 = new NimElementType("PRIMARY_2");
   IElementType PRIMARY_3 = new NimElementType("PRIMARY_3");
   IElementType PRIMARY_SUFFIX = new NimElementType("PRIMARY_SUFFIX");
+  IElementType PRIMARY_SUFFIX_1 = new NimElementType("PRIMARY_SUFFIX_1");
+  IElementType PRIMARY_SUFFIX_2 = new NimElementType("PRIMARY_SUFFIX_2");
+  IElementType PRIMARY_SUFFIX_3 = new NimElementType("PRIMARY_SUFFIX_3");
+  IElementType PRIMARY_SUFFIX_4 = new NimElementType("PRIMARY_SUFFIX_4");
+  IElementType PRIMARY_SUFFIX_5 = new NimElementType("PRIMARY_SUFFIX_5");
   IElementType QUALIFIED_IDENT = new NimElementType("QUALIFIED_IDENT");
   IElementType RAISE_STMT = new NimElementType("RAISE_STMT");
   IElementType RETURN_STMT = new NimElementType("RETURN_STMT");
@@ -294,14 +309,44 @@ public interface NimTypes {
       else if (type == PARAMS_COLON) {
         return new NimParamsColonImpl(node);
       }
+      else if (type == PAR_1) {
+        return new NimPar1Impl(node);
+      }
       else if (type == PAR_2) {
         return new NimPar2Impl(node);
+      }
+      else if (type == PAR_3) {
+        return new NimPar3Impl(node);
+      }
+      else if (type == PAR_4) {
+        return new NimPar4Impl(node);
+      }
+      else if (type == PAR_5) {
+        return new NimPar5Impl(node);
+      }
+      else if (type == PAR_6) {
+        return new NimPar6Impl(node);
       }
       else if (type == PATTERN) {
         return new NimPatternImpl(node);
       }
       else if (type == POST_EXPR_BLOCKS) {
         return new NimPostExprBlocksImpl(node);
+      }
+      else if (type == POST_EXPR_BLOCKS_1) {
+        return new NimPostExprBlocks1Impl(node);
+      }
+      else if (type == POST_EXPR_BLOCKS_2) {
+        return new NimPostExprBlocks2Impl(node);
+      }
+      else if (type == POST_EXPR_BLOCKS_3) {
+        return new NimPostExprBlocks3Impl(node);
+      }
+      else if (type == POST_EXPR_BLOCKS_4) {
+        return new NimPostExprBlocks4Impl(node);
+      }
+      else if (type == POST_EXPR_BLOCKS_5) {
+        return new NimPostExprBlocks5Impl(node);
       }
       else if (type == PRAGMA) {
         return new NimPragmaImpl(node);
@@ -323,6 +368,21 @@ public interface NimTypes {
       }
       else if (type == PRIMARY_SUFFIX) {
         return new NimPrimarySuffixImpl(node);
+      }
+      else if (type == PRIMARY_SUFFIX_1) {
+        return new NimPrimarySuffix1Impl(node);
+      }
+      else if (type == PRIMARY_SUFFIX_2) {
+        return new NimPrimarySuffix2Impl(node);
+      }
+      else if (type == PRIMARY_SUFFIX_3) {
+        return new NimPrimarySuffix3Impl(node);
+      }
+      else if (type == PRIMARY_SUFFIX_4) {
+        return new NimPrimarySuffix4Impl(node);
+      }
+      else if (type == PRIMARY_SUFFIX_5) {
+        return new NimPrimarySuffix5Impl(node);
       }
       else if (type == QUALIFIED_IDENT) {
         return new NimQualifiedIdentImpl(node);

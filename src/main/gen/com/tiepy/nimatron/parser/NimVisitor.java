@@ -195,7 +195,27 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPar1(@NotNull NimPar1 o) {
+    visitPsiElement(o);
+  }
+
   public void visitPar2(@NotNull NimPar2 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPar3(@NotNull NimPar3 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPar4(@NotNull NimPar4 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPar5(@NotNull NimPar5 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPar6(@NotNull NimPar6 o) {
     visitPsiElement(o);
   }
 
@@ -216,6 +236,26 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitPostExprBlocks(@NotNull NimPostExprBlocks o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPostExprBlocks1(@NotNull NimPostExprBlocks1 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPostExprBlocks2(@NotNull NimPostExprBlocks2 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPostExprBlocks3(@NotNull NimPostExprBlocks3 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPostExprBlocks4(@NotNull NimPostExprBlocks4 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPostExprBlocks5(@NotNull NimPostExprBlocks5 o) {
     visitPsiElement(o);
   }
 
@@ -244,6 +284,26 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitPrimarySuffix(@NotNull NimPrimarySuffix o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPrimarySuffix1(@NotNull NimPrimarySuffix1 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPrimarySuffix2(@NotNull NimPrimarySuffix2 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPrimarySuffix3(@NotNull NimPrimarySuffix3 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPrimarySuffix4(@NotNull NimPrimarySuffix4 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPrimarySuffix5(@NotNull NimPrimarySuffix5 o) {
     visitPsiElement(o);
   }
 
