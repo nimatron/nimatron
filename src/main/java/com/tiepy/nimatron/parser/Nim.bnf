@@ -99,7 +99,7 @@ exprColonEqExpr ::= expr (':'|'=' expr)?
 exprs ::= expr (',' expr)*
 
 //exprColonEqExprList = exprColonEqExpr (comma exprColonEqExpr)* (comma)?
-exprColonEqExprList2 ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
+exprColonEqExprs ::= exprColonEqExpr (',' exprColonEqExpr)* ','?
 
 //dotExpr = expr '.' optInd (symbol | '[:' exprList ']')
 
@@ -168,8 +168,8 @@ arrayConstr ::= '[' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd (']')>>
 //      | &( '`'|IDENT|literal|'cast'|'addr'|'type') expr # command syntax
 primarySuffix ::= ('(' <<optInd ((exprColonEqExpr ','?)*)>> ')')
                 | ('.' <<optInd (symbol generalizedLit?)>>)
-                | ('[' <<optInd exprColonEqExprList2>> <<optInd (']')>>)
-                | ('{' <<optInd exprColonEqExprList2>> <<optInd ('}')>>)
+                | ('[' <<optInd exprColonEqExprs>> <<optInd (']')>>)
+                | ('{' <<optInd exprColonEqExprs>> <<optInd ('}')>>)
                 | <<optInd exprs>> // command syntax
 
 //condExpr = expr colcom expr optInd
