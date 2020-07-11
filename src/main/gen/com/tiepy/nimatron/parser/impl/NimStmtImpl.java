@@ -28,26 +28,14 @@ public class NimStmtImpl extends ASTWrapperPsiElement implements NimStmt {
 
   @Override
   @Nullable
-  public NimDiscardStmt getDiscardStmt() {
-    return findChildByClass(NimDiscardStmt.class);
+  public NimComplexOrSimpleStmt getComplexOrSimpleStmt() {
+    return findChildByClass(NimComplexOrSimpleStmt.class);
   }
 
   @Override
   @Nullable
-  public NimExprStmt getExprStmt() {
-    return findChildByClass(NimExprStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public NimIfStmt getIfStmt() {
-    return findChildByClass(NimIfStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public NimVarStmt getVarStmt() {
-    return findChildByClass(NimVarStmt.class);
+  public NimSimpleStmt getSimpleStmt() {
+    return findChildByClass(NimSimpleStmt.class);
   }
 
 }

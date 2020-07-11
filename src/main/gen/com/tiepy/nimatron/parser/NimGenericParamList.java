@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimExprList extends PsiElement {
+public interface NimGenericParamList extends PsiElement {
 
   @NotNull
-  List<NimExpr> getExprList();
+  List<NimGenericParam> getGenericParamList();
 
 }

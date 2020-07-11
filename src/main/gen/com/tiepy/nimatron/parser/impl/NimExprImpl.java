@@ -27,9 +27,45 @@ public class NimExprImpl extends ASTWrapperPsiElement implements NimExpr {
   }
 
   @Override
-  @NotNull
+  @Nullable
+  public NimBlockExpr getBlockExpr() {
+    return findChildByClass(NimBlockExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public NimCaseStmt getCaseStmt() {
+    return findChildByClass(NimCaseStmt.class);
+  }
+
+  @Override
+  @Nullable
+  public NimForStmt getForStmt() {
+    return findChildByClass(NimForStmt.class);
+  }
+
+  @Override
+  @Nullable
+  public NimIfExpr getIfExpr() {
+    return findChildByClass(NimIfExpr.class);
+  }
+
+  @Override
+  @Nullable
   public NimSimpleExpr getSimpleExpr() {
-    return findNotNullChildByClass(NimSimpleExpr.class);
+    return findChildByClass(NimSimpleExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTryExpr getTryExpr() {
+    return findChildByClass(NimTryExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public NimWhenExpr getWhenExpr() {
+    return findChildByClass(NimWhenExpr.class);
   }
 
 }

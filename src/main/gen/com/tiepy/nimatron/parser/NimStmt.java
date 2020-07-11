@@ -8,15 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimStmt extends PsiElement {
 
   @Nullable
-  NimDiscardStmt getDiscardStmt();
+  NimComplexOrSimpleStmt getComplexOrSimpleStmt();
 
   @Nullable
-  NimExprStmt getExprStmt();
-
-  @Nullable
-  NimIfStmt getIfStmt();
-
-  @Nullable
-  NimVarStmt getVarStmt();
+  NimSimpleStmt getSimpleStmt();
 
 }
