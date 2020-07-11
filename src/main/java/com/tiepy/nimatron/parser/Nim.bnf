@@ -240,14 +240,14 @@ paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
 paramsColon ::= params? (':' <<optInd typeDesc>>)?
 
 //doBlock = 'do' paramListArrow pragma? colcom stmt
-doBlock ::= 'do' paramsArrow pragma? ':' <<optInd stmt>>
+doBlock ::= 'do' paramsArrow pragma? ':' <<optInd stmts>>
 
 //procExpr = 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
 
 //distinct = 'distinct' optInd typeDesc
 
 //forStmt = 'for' (identWithPragma ^+ comma) 'in' expr colcom stmt
-forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optInd stmt>>
+forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optInd stmts>>
 
 //forExpr = forStmt
 
@@ -294,16 +294,16 @@ typeDefAux ::= simpleExpr ('not' expr)?
 //                           | IND{=} 'elif' expr ':' stmt
 //                           | IND{=} 'except' exprList ':' stmt
 //                           | IND{=} 'else' ':' stmt )*
-postExprBlocks ::= ':' <<optInd stmt>>? ( postExprBlocks1
+postExprBlocks ::= ':' <<optInd stmts>>? ( postExprBlocks1
                                         | postExprBlocks2
                                         | postExprBlocks3
                                         | postExprBlocks4
                                         | postExprBlocks5 )*
 postExprBlocks1 ::= IND_EQ doBlock
-postExprBlocks2 ::= IND_EQ 'of' exprs ':' <<optInd stmt>>
-postExprBlocks3 ::= IND_EQ 'elif' expr ':' <<optInd stmt>>
-postExprBlocks4 ::= IND_EQ 'except' exprs ':' <<optInd stmt>>
-postExprBlocks5 ::= IND_EQ 'else' ':' <<optInd stmt>>
+postExprBlocks2 ::= IND_EQ 'of' exprs ':' <<optInd stmts>>
+postExprBlocks3 ::= IND_EQ 'elif' expr ':' <<optInd stmts>>
+postExprBlocks4 ::= IND_EQ 'except' exprs ':' <<optInd stmts>>
+postExprBlocks5 ::= IND_EQ 'else' ':' <<optInd stmts>>
 
 //exprStmt = simpleExpr
 //         (( '=' optInd expr colonBody? )
@@ -364,17 +364,17 @@ ifStmt ::= 'if' condStmt
 whenStmt ::= 'when' condStmt
 
 //whileStmt = 'while' expr colcom stmt
-whileStmt ::= 'while' expr ':' <<optInd stmt>>
+whileStmt ::= 'while' expr ':' <<optInd stmts>>
 
 //ofBranch = 'of' exprList colcom stmt
-ofBranch ::= 'of' exprs ':' <<optInd stmt>>
+ofBranch ::= 'of' exprs ':' <<optInd stmts>>
 
 //ofBranches = ofBranch (IND{=} ofBranch)*
 //                      (IND{=} 'elif' expr colcom stmt)*
 //                      (IND{=} 'else' colcom stmt)?
 ofBranches ::= ofBranch (IND_EQ ofBranch)*
-                        (IND_EQ 'elif' expr ':' <<optInd stmt>>)*
-                        (IND_EQ 'else' ':' <<optInd stmt>>)?
+                        (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
+                        (IND_EQ 'else' ':' <<optInd stmts>>)?
 
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
@@ -386,30 +386,30 @@ caseStmt2 ::= IND_EQ ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':' <<optInd stmt>>
-             (IND_EQ? 'except' exprs ':' <<optInd stmt>>)*
-             (IND_EQ? 'finally' ':' <<optInd stmt>>)?
+tryStmt ::= 'try' ':' <<optInd stmts>>
+             (IND_EQ? 'except' exprs ':' <<optInd stmts>>)*
+             (IND_EQ? 'finally' ':' <<optInd stmts>>)?
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
-tryExpr ::= 'try' ':' <<optInd stmt>>
-             (<<optInd ('except' exprs ':' <<optInd stmt>>)>>)*
-             (<<optInd ('finally' ':' <<optInd stmt>>)>>)?
+tryExpr ::= 'try' ':' <<optInd stmts>>
+             (<<optInd ('except' exprs ':' <<optInd stmts>>)>>)*
+             (<<optInd ('finally' ':' <<optInd stmts>>)>>)?
 
 //exceptBlock = 'except' colcom stmt
 
 //blockStmt = 'block' symbol? colcom stmt
-blockStmt ::= 'block' symbol? ':' <<optInd stmt>>
+blockStmt ::= 'block' symbol? ':' <<optInd stmts>>
 
 //blockExpr = 'block' symbol? colcom stmt
-blockExpr ::= 'block' symbol? ':' <<optInd stmt>>
+blockExpr ::= 'block' symbol? ':' <<optInd stmts>>
 
 //staticStmt = 'static' colcom stmt
-staticStmt ::= 'static' ':' <<optInd stmt>>
+staticStmt ::= 'static' ':' <<optInd stmts>>
 
 //deferStmt = 'defer' colcom stmt
-deferStmt ::= 'defer' ':' <<optInd stmt>>
+deferStmt ::= 'defer' ':' <<optInd stmts>>
 
 //asmStmt = 'asm' pragma? (STR_LIT | RSTR_LIT | TRIPLESTR_LIT)
 asmStmt ::= 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
@@ -472,7 +472,7 @@ typeDef ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
 varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
 
 //colonBody = colcom stmt postExprBlocks?
-colonBody ::= ':' <<optInd stmt>> postExprBlocks?
+colonBody ::= ':' <<optInd stmts>> postExprBlocks?
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
 variable ::= (varTuple|identColonEquals) colonBody?
@@ -487,7 +487,7 @@ bindStmt ::= 'bind' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
 mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
 
 //pragmaStmt = pragma (':' COMMENT? stmt)?
-pragmaStmt ::= pragma (':' <<optInd stmt>>)?
+pragmaStmt ::= pragma (':' <<optInd stmts>>)?
 
 //simpleStmt = ((returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //           | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
