@@ -1949,6 +1949,26 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // OP0|OP1/*|OP2*/|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
+  public static boolean op(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OP, "<op>");
+    r = consumeToken(b, OP0);
+    if (!r) r = consumeToken(b, OP1);
+    if (!r) r = consumeToken(b, OP3);
+    if (!r) r = consumeToken(b, OP4);
+    if (!r) r = consumeToken(b, OP5);
+    if (!r) r = consumeToken(b, OP6);
+    if (!r) r = consumeToken(b, OP7);
+    if (!r) r = consumeToken(b, OP8);
+    if (!r) r = consumeToken(b, OP9);
+    if (!r) r = consumeToken(b, OP10);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
   public static boolean operator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operator")) return false;
@@ -3026,7 +3046,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary (OP <<optInd primary>>)* pragma?
+  // primary (op <<optInd primary>>)* pragma?
   public static boolean simpleExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr")) return false;
     boolean r;
@@ -3038,7 +3058,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (OP <<optInd primary>>)*
+  // (op <<optInd primary>>)*
   private static boolean simpleExpr_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr_1")) return false;
     while (true) {
@@ -3049,12 +3069,12 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // OP <<optInd primary>>
+  // op <<optInd primary>>
   private static boolean simpleExpr_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, OP);
+    r = op(b, l + 1);
     r = r && optInd(b, l + 1, primary_parser_);
     exit_section_(b, m, null, r);
     return r;

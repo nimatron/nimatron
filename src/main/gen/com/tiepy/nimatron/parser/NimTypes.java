@@ -52,6 +52,7 @@ public interface NimTypes {
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
+  IElementType OP = new NimElementType("OP");
   IElementType OPERATOR = new NimElementType("OPERATOR");
   IElementType PAR = new NimElementType("PAR");
   IElementType PARAM_LIST = new NimElementType("PARAM_LIST");
@@ -109,7 +110,6 @@ public interface NimTypes {
   IElementType INT_LIT = new NimTokenType("INT_LIT");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NIL = new NimTokenType("NIL");
-  IElementType OP = new NimTokenType("OP");
   IElementType OP0 = new NimTokenType("OP0");
   IElementType OP1 = new NimTokenType("OP1");
   IElementType OP10 = new NimTokenType("OP10");
@@ -260,6 +260,9 @@ public interface NimTypes {
       }
       else if (type == OF_BRANCHES) {
         return new NimOfBranchesImpl(node);
+      }
+      else if (type == OP) {
+        return new NimOpImpl(node);
       }
       else if (type == OPERATOR) {
         return new NimOperatorImpl(node);

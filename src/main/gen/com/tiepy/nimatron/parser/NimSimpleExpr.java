@@ -10,6 +10,9 @@ public interface NimSimpleExpr extends PsiElement {
   @NotNull
   List<NimIdentOrLiteral> getIdentOrLiteralList();
 
+  @NotNull
+  List<NimOp> getOpList();
+
   @Nullable
   NimPragma getPragma();
 

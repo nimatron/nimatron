@@ -175,6 +175,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitOp(@NotNull NimOp o) {
+    visitPsiElement(o);
+  }
+
   public void visitOperator(@NotNull NimOperator o) {
     visitPsiElement(o);
   }
