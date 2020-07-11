@@ -164,27 +164,6 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // 'block' symbol? ':' <<optInd stmts>>
-  public static boolean blockExpr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "blockExpr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, BLOCK_EXPR, "<block expr>");
-    r = consumeToken(b, "block");
-    r = r && blockExpr_1(b, l + 1);
-    r = r && consumeToken(b, ":");
-    r = r && optInd(b, l + 1, stmts_parser_);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // symbol?
-  private static boolean blockExpr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "blockExpr_1")) return false;
-    symbol(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // 'block' symbol? ':' <<optInd stmts>>
   public static boolean blockStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blockStmt")) return false;
     boolean r;
@@ -757,7 +736,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // blockExpr
+  // blockStmt
   //        | ifExpr
   //        | whenExpr
   //        | caseStmt
@@ -768,7 +747,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "expr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, EXPR, "<expr>");
-    r = blockExpr(b, l + 1);
+    r = blockStmt(b, l + 1);
     if (!r) r = ifExpr(b, l + 1);
     if (!r) r = whenExpr(b, l + 1);
     if (!r) r = caseStmt(b, l + 1);

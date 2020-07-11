@@ -390,6 +390,7 @@ tryStmt ::= 'try' ':' <<optInd stmts>>
              (IND_EQ? 'except' exprs ':' <<optInd stmts>>)*
              (IND_EQ? 'finally' ':' <<optInd stmts>>)?
 
+// TODO: Consider combining 'tryExpr' with 'tryStmt'. They may be equivalent.
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?

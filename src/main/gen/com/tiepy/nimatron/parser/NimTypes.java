@@ -13,7 +13,6 @@ public interface NimTypes {
   IElementType ARRAY_CONSTR = new NimElementType("ARRAY_CONSTR");
   IElementType ASM_STMT = new NimElementType("ASM_STMT");
   IElementType BIND_STMT = new NimElementType("BIND_STMT");
-  IElementType BLOCK_EXPR = new NimElementType("BLOCK_EXPR");
   IElementType BLOCK_STMT = new NimElementType("BLOCK_STMT");
   IElementType BREAK_STMT = new NimElementType("BREAK_STMT");
   IElementType CASE_STMT = new NimElementType("CASE_STMT");
@@ -181,9 +180,6 @@ public interface NimTypes {
       }
       else if (type == BIND_STMT) {
         return new NimBindStmtImpl(node);
-      }
-      else if (type == BLOCK_EXPR) {
-        return new NimBlockExprImpl(node);
       }
       else if (type == BLOCK_STMT) {
         return new NimBlockStmtImpl(node);
