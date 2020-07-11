@@ -63,11 +63,19 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitConstStmt(@NotNull NimConstStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitConstant(@NotNull NimConstant o) {
     visitPsiElement(o);
   }
 
   public void visitContinueStmt(@NotNull NimContinueStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitConverterStmt(@NotNull NimConverterStmt o) {
     visitPsiElement(o);
   }
 
@@ -131,6 +139,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFuncStmt(@NotNull NimFuncStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitGeneralizedLit(@NotNull NimGeneralizedLit o) {
     visitPsiElement(o);
   }
@@ -187,7 +199,19 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitIteratorStmt(@NotNull NimIteratorStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteral(@NotNull NimLiteral o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMacroStmt(@NotNull NimMacroStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMethodStmt(@NotNull NimMethodStmt o) {
     visitPsiElement(o);
   }
 
@@ -331,6 +355,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitProcStmt(@NotNull NimProcStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitQualifiedIdent(@NotNull NimQualifiedIdent o) {
     visitPsiElement(o);
   }
@@ -379,6 +407,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitTemplateStmt(@NotNull NimTemplateStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitTermInd(@NotNull NimTermInd o) {
     visitPsiElement(o);
   }
@@ -412,6 +444,14 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitTypeKeyw(@NotNull NimTypeKeyw o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeStmt(@NotNull NimTypeStmt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVarStmt(@NotNull NimVarStmt o) {
     visitPsiElement(o);
   }
 
