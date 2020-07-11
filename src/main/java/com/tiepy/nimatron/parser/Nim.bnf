@@ -225,7 +225,7 @@ params ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
 paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
 
 //paramListColon = paramList? (':' optInd typeDesc)?
-paramListColon ::= params? (':' <<optInd typeDesc>>)?
+paramsColon ::= params? (':' <<optInd typeDesc>>)?
 
 //doBlock = 'do' paramListArrow pragma? colcom stmt
 doBlock ::= 'do' paramsArrow pragma? ':' stmt
@@ -420,7 +420,7 @@ pattern ::= '{' stmt '}'
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
 routine ::= <<optInd (identVis pattern? genericParamList?
-  paramListColon pragma? ('=' stmt)?)>>
+  paramsColon pragma? ('=' stmt)?)>>
 
 //commentStmt = COMMENT
 
