@@ -66,6 +66,4 @@ Nim File(0,73)
                         NimPrimarySuffixImpl(PRIMARY_SUFFIX)(71,73)
                           NimPrimarySuffix1Impl(PRIMARY_SUFFIX_1)(71,73)
                             PsiElement(NimTokenType.BRACKET)('(')(71,72)
-                            NimOptIndImpl(OPT_IND)(72,72)
-                              <empty list>
                             PsiElement(NimTokenType.BRACKET)(')')(72,73)

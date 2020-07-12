@@ -180,7 +180,7 @@ primarySuffix ::= primarySuffix1
                 | primarySuffix3
                 | primarySuffix4
                 | primarySuffix5
-primarySuffix1 ::= '(' <<optInd ((exprColonEqExpr comma?)*)>> ')'
+primarySuffix1 ::= '(' (exprColonEqExpr comma?)* ')'
 primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
 primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>

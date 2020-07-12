@@ -2739,43 +2739,43 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '(' <<optInd ((exprColonEqExpr comma?)*)>> ')'
+  // '(' (exprColonEqExpr comma?)* ')'
   public static boolean primarySuffix1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primarySuffix1")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PRIMARY_SUFFIX_1, "<primary suffix 1>");
     r = consumeToken(b, "(");
-    r = r && optInd(b, l + 1, primarySuffix1_1_0_parser_);
+    r = r && primarySuffix1_1(b, l + 1);
     r = r && consumeToken(b, ")");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // (exprColonEqExpr comma?)*
-  private static boolean primarySuffix1_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0")) return false;
+  private static boolean primarySuffix1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix1_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!primarySuffix1_1_0_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primarySuffix1_1_0", c)) break;
+      if (!primarySuffix1_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primarySuffix1_1", c)) break;
     }
     return true;
   }
 
   // exprColonEqExpr comma?
-  private static boolean primarySuffix1_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0_0")) return false;
+  private static boolean primarySuffix1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix1_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = exprColonEqExpr(b, l + 1);
-    r = r && primarySuffix1_1_0_0_1(b, l + 1);
+    r = r && primarySuffix1_1_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // comma?
-  private static boolean primarySuffix1_1_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0_0_1")) return false;
+  private static boolean primarySuffix1_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix1_1_0_1")) return false;
     comma(b, l + 1);
     return true;
   }
@@ -4643,11 +4643,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser pragma_2_0_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return pragma_2_0(b, l + 1);
-    }
-  };
-  static final Parser primarySuffix1_1_0_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return primarySuffix1_1_0(b, l + 1);
     }
   };
   static final Parser primarySuffix2_1_0_parser_ = new Parser() {
