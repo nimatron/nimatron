@@ -24,46 +24,32 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.structureView;
 
+import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
+import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
+import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class NimStructureViewModel
-        extends TextEditorBasedStructureViewModel
-        implements StructureViewModel.ElementInfoProvider {
+public class NimStructureViewFactory implements PsiStructureViewFactory {
 
-    private final NimStructureViewElement root;
-
-    public NimStructureViewModel(PsiElement root, Editor editor) {
-        super(editor, root.getContainingFile());
-        this.root = new NimStructureViewElement(root, root);
-    }
-
+    @Nullable
     @Override
-    public boolean isAlwaysShowsPlus(StructureViewTreeElement element) {
-        return false;
-    }
+    public StructureViewBuilder getStructureViewBuilder(@NotNull PsiFile psiFile) {
+        return new TreeBasedStructureViewBuilder() {
 
-    @Override
-    public boolean isAlwaysLeaf(StructureViewTreeElement element) {
-        return false;
-    }
+            @NotNull
+            public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
+                return new NimStructureViewModel(psiFile, editor);
+            }
 
-/*
-    @Override
-    protected boolean isSuitable(PsiElement element) {
-        return element instanceof NimElement;
-    }
-*/
-
-    @NotNull
-    @Override
-    public StructureViewTreeElement getRoot() {
-        return root;
+            public boolean isRootNodeShown() {
+                return false;
+            }
+        };
     }
 }

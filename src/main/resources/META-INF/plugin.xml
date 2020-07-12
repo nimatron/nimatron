@@ -30,7 +30,7 @@
                 implementationClass="com.tiepy.nimatron.NimCommenter"/>
         <lang.psiStructureViewFactory
                 language="Nim"
-                implementationClass="com.tiepy.nimatron.NimStructureViewFactory"/>
+                implementationClass="com.tiepy.nimatron.structureView.NimStructureViewFactory"/>
     </extensions>
 
     <actions>

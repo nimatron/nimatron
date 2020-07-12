@@ -24,32 +24,46 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.structureView;
 
-import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
-import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
-import com.intellij.lang.PsiStructureViewFactory;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class NimStructureViewFactory implements PsiStructureViewFactory {
+public class NimStructureViewModel
+        extends TextEditorBasedStructureViewModel
+        implements StructureViewModel.ElementInfoProvider {
 
-    @Nullable
+    private final NimStructureViewElement root;
+
+    public NimStructureViewModel(PsiElement root, Editor editor) {
+        super(editor, root.getContainingFile());
+        this.root = new NimStructureViewElement(root, root);
+    }
+
     @Override
-    public StructureViewBuilder getStructureViewBuilder(@NotNull PsiFile psiFile) {
-        return new TreeBasedStructureViewBuilder() {
+    public boolean isAlwaysShowsPlus(StructureViewTreeElement element) {
+        return false;
+    }
 
-            @NotNull
-            public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
-                return new NimStructureViewModel(psiFile, editor);
-            }
+    @Override
+    public boolean isAlwaysLeaf(StructureViewTreeElement element) {
+        return false;
+    }
 
-            public boolean isRootNodeShown() {
-                return false;
-            }
-        };
+/*
+    @Override
+    protected boolean isSuitable(PsiElement element) {
+        return element instanceof NimElement;
+    }
+*/
+
+    @NotNull
+    @Override
+    public StructureViewTreeElement getRoot() {
+        return root;
     }
 }

@@ -24,12 +24,13 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.structureView;
 
 import com.google.common.collect.Lists;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.psi.PsiElement;
+import com.tiepy.nimatron.NimFile;
 import com.tiepy.nimatron.psi.impl.NimStmtsImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
