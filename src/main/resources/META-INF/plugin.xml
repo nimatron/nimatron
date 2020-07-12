@@ -22,7 +22,7 @@
                 implementationClass="com.tiepy.nimatron.parser.NimParserDefinition"/>
         <lang.syntaxHighlighterFactory
                 language="Nim"
-                implementationClass="com.tiepy.nimatron.syntax.NimSyntaxHighlighterFactory"/>
+                implementationClass="com.tiepy.nimatron.syntaxHighlighter.NimSyntaxHighlighterFactory"/>
         <colorSettingsPage
                 implementation="com.tiepy.nimatron.NimColorSettingsPage"/>
         <lang.commenter

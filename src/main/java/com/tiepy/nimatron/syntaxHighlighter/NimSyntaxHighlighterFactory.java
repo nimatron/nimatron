@@ -28,14 +28,17 @@
  * questions.
  */
 
-package com.tiepy.nimatron.syntax;
+package com.tiepy.nimatron.syntaxHighlighter;
 
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.fileTypes.*;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.Reader;
-
-public class NimSyntaxLexerAdapter extends FlexAdapter {
-    public NimSyntaxLexerAdapter() {
-        super(new NimSyntaxLexer((Reader) null));
+public class NimSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
+    @NotNull
+    @Override
+    public SyntaxHighlighter getSyntaxHighlighter(Project project, VirtualFile virtualFile) {
+        return new NimSyntaxHighlighter();
     }
 }

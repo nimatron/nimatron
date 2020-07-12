@@ -28,9 +28,8 @@
  * questions.
  */
 
-package com.tiepy.nimatron.syntax;
+package com.tiepy.nimatron.syntaxHighlighter;
 
-import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import java.util.Stack;
