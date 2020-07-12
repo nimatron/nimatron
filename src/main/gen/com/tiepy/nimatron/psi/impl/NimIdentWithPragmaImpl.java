@@ -26,15 +26,15 @@ public class NimIdentWithPragmaImpl extends NimElementImpl implements NimIdentWi
   }
 
   @Override
-  @NotNull
-  public NimIdentVis getIdentVis() {
-    return findNotNullChildByClass(NimIdentVis.class);
-  }
-
-  @Override
   @Nullable
   public NimPragma getPragma() {
     return findChildByClass(NimPragma.class);
+  }
+
+  @Override
+  @NotNull
+  public NimSymbol getSymbol() {
+    return findNotNullChildByClass(NimSymbol.class);
   }
 
 }

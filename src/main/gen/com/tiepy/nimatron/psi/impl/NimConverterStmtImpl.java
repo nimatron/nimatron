@@ -31,4 +31,10 @@ public class NimConverterStmtImpl extends NimElementImpl implements NimConverter
     return findNotNullChildByClass(NimOptInd.class);
   }
 
+  @Override
+  @NotNull
+  public NimSymbol getNameIdentifier() {
+    return findNotNullChildByClass(NimSymbol.class);
+  }
+
 }

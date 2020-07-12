@@ -31,4 +31,10 @@ public class NimIteratorStmtImpl extends NimElementImpl implements NimIteratorSt
     return findNotNullChildByClass(NimOptInd.class);
   }
 
+  @Override
+  @NotNull
+  public NimSymbol getNameIdentifier() {
+    return findNotNullChildByClass(NimSymbol.class);
+  }
+
 }

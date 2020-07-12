@@ -10,4 +10,7 @@ public interface NimProcStmt extends NimElement {
   @NotNull
   NimOptInd getOptInd();
 
+  @NotNull
+  NimSymbol getNameIdentifier();
+
 }

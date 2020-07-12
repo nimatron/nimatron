@@ -32,12 +32,6 @@ public class NimRoutineImpl extends NimElementImpl implements NimRoutine {
   }
 
   @Override
-  @NotNull
-  public NimIdentVis getIdentVis() {
-    return findNotNullChildByClass(NimIdentVis.class);
-  }
-
-  @Override
   @Nullable
   public NimOptInd getOptInd() {
     return findChildByClass(NimOptInd.class);

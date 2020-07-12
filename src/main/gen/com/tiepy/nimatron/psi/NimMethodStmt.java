@@ -10,4 +10,7 @@ public interface NimMethodStmt extends NimElement {
   @NotNull
   NimOptInd getOptInd();
 
+  @NotNull
+  NimSymbol getNameIdentifier();
+
 }

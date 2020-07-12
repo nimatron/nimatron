@@ -48,7 +48,6 @@ public interface NimElementTypes {
   IElementType GENERIC_PARAMS = new NimElementType("GENERIC_PARAMS");
   IElementType IDENT_COLON_EQUALS = new NimElementType("IDENT_COLON_EQUALS");
   IElementType IDENT_OR_LITERAL = new NimElementType("IDENT_OR_LITERAL");
-  IElementType IDENT_VIS = new NimElementType("IDENT_VIS");
   IElementType IDENT_VIS_DOT = new NimElementType("IDENT_VIS_DOT");
   IElementType IDENT_WITH_PRAGMA = new NimElementType("IDENT_WITH_PRAGMA");
   IElementType IDENT_WITH_PRAGMA_DOT = new NimElementType("IDENT_WITH_PRAGMA_DOT");
@@ -293,9 +292,6 @@ public interface NimElementTypes {
       }
       else if (type == IDENT_OR_LITERAL) {
         return new NimIdentOrLiteralImpl(node);
-      }
-      else if (type == IDENT_VIS) {
-        return new NimIdentVisImpl(node);
       }
       else if (type == IDENT_VIS_DOT) {
         return new NimIdentVisDotImpl(node);

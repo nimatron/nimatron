@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimIdentWithPragma extends NimElement {
 
-  @NotNull
-  NimIdentVis getIdentVis();
-
   @Nullable
   NimPragma getPragma();
+
+  @NotNull
+  NimSymbol getSymbol();
 
 }

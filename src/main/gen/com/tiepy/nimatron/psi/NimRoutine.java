@@ -10,9 +10,6 @@ public interface NimRoutine extends NimElement {
   @Nullable
   NimGenericParams getGenericParams();
 
-  @NotNull
-  NimIdentVis getIdentVis();
-
   @Nullable
   NimOptInd getOptInd();
 

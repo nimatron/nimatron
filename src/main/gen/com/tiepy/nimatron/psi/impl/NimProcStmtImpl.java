@@ -31,4 +31,10 @@ public class NimProcStmtImpl extends NimElementImpl implements NimProcStmt {
     return findNotNullChildByClass(NimOptInd.class);
   }
 
+  @Override
+  @NotNull
+  public NimSymbol getNameIdentifier() {
+    return findNotNullChildByClass(NimSymbol.class);
+  }
+
 }

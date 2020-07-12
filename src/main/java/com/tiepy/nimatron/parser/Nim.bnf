@@ -204,13 +204,12 @@ whenExpr ::= 'when' condExpr
 pragma ::= '{.' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd ('.}'|'}')>>
 
 //identVis = symbol OPR?  # postfix position
-identVis ::= symbol OPR? // postfix position
 
 //identVisDot = symbol '.' optInd symbol OPR?
 identVisDot ::= symbol '.' <<optInd symbol>> OPR?
 
 //identWithPragma = identVis pragma?
-identWithPragma ::= identVis pragma?
+identWithPragma ::= symbol OPR? pragma?
 
 //identWithPragmaDot = identVisDot pragma?
 identWithPragmaDot ::= identVisDot pragma?
@@ -430,7 +429,7 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= identVis pattern? genericParams? paramsColon pragma? ('=' COMMENT? <<optInd stmts>>)?
+routine ::= pattern? genericParams? paramsColon pragma? ('=' COMMENT? <<optInd stmts>>)?
 
 //commentStmt = COMMENT
 
@@ -509,13 +508,13 @@ pragmaStmt ::= pragma (':' COMMENT? <<optInd stmts>>)?
 //                    | bindStmt | mixinStmt)
 //                    / simpleStmt
 
-procStmt ::= 'proc' <<optInd routine>>
-funcStmt ::= 'func' <<optInd routine>>
-methodStmt ::= 'method' <<optInd routine>>
-iteratorStmt ::= 'iterator' <<optInd routine>>
-macroStmt ::= 'macro' <<optInd routine>>
-templateStmt ::= 'template' <<optInd routine>>
-converterStmt ::= 'converter' <<optInd routine>>
+procStmt ::= 'proc' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+funcStmt ::= 'func' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+methodStmt ::= 'method' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+iteratorStmt ::= 'iterator' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+macroStmt ::= 'macro' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+templateStmt ::= 'template' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+converterStmt ::= 'converter' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
 typeStmt ::= 'type' <<optInd typeDef>>
 constStmt ::= 'const' <<optInd constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>

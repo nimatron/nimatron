@@ -31,4 +31,10 @@ public class NimMacroStmtImpl extends NimElementImpl implements NimMacroStmt {
     return findNotNullChildByClass(NimOptInd.class);
   }
 
+  @Override
+  @NotNull
+  public NimSymbol getNameIdentifier() {
+    return findNotNullChildByClass(NimSymbol.class);
+  }
+
 }
