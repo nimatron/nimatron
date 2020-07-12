@@ -31,6 +31,7 @@ import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
+import com.tiepy.nimatron.psi.NimElement;
 import org.jetbrains.annotations.NotNull;
 
 public class NimStructureViewModel
@@ -54,12 +55,10 @@ public class NimStructureViewModel
         return false;
     }
 
-/*
     @Override
     protected boolean isSuitable(PsiElement element) {
         return element instanceof NimElement;
     }
-*/
 
     @NotNull
     @Override
