@@ -2117,14 +2117,30 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OPR
+  // OPR|op0|op1|OP2A|OP2C|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
   public static boolean oprCombo(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "oprCombo")) return false;
-    if (!nextTokenIs(b, OPR)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, OPR_COMBO, "<opr combo>");
     r = consumeToken(b, OPR);
-    exit_section_(b, m, OPR_COMBO, r);
+    if (!r) r = op0(b, l + 1);
+    if (!r) r = op1(b, l + 1);
+    if (!r) r = consumeToken(b, OP2A);
+    if (!r) r = consumeToken(b, OP2C);
+    if (!r) r = consumeToken(b, OP5A);
+    if (!r) r = consumeToken(b, OP5B);
+    if (!r) r = consumeToken(b, OP5C);
+    if (!r) r = consumeToken(b, OP5D);
+    if (!r) r = consumeToken(b, OP5E);
+    if (!r) r = consumeToken(b, OP5F);
+    if (!r) r = op6(b, l + 1);
+    if (!r) r = op7(b, l + 1);
+    if (!r) r = op8(b, l + 1);
+    if (!r) r = consumeToken(b, OP9A);
+    if (!r) r = consumeToken(b, OP9B);
+    if (!r) r = consumeToken(b, OP9G);
+    if (!r) r = op10(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

@@ -217,7 +217,9 @@ pragma ::= '{.' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd ('.}'|'}')>>
 //identVis = symbol OPR?  # postfix position
 
 // NOTE: The following replaced OPR so that other OPX tokens are also matched.
-oprCombo ::= OPR/*|op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10*/
+// NOTE: Intention was to include 'op2' however OP2B ':' seems to cause an unhelpful ambiguity.
+//oprCombo ::= OPR|op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
+oprCombo ::= OPR|op0|op1|OP2A|OP2C|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
 
 //identVisDot = symbol '.' optInd symbol OPR?
 identVisDot ::= symbol '.' <<optInd symbol>> oprCombo?
