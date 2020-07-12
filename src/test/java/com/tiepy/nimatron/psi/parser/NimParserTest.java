@@ -77,6 +77,7 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    // TODO: The following test is OK, but shows error in PSI Viewer. Need to investigate further.
     public void testMiscProcWithFollowingBlankLines() {
         doTest(true, true);
     }
@@ -94,6 +95,10 @@ public class NimParserTest extends ParsingTestCase {
     }
 
     public void testNimByExampleProc() {
+        doTest(true, true);
+    }
+
+    public void testNimByExampleProc2() {
         doTest(true, true);
     }
 
