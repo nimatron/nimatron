@@ -34,7 +34,6 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import com.tiepy.nimatron.psi.NimTypes;
@@ -84,7 +83,7 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public Lexer getHighlightingLexer() {
-        return new NimLexerAdapter();
+        return new NimSyntaxLexerAdapter();
     }
 
     @NotNull

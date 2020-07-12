@@ -34,8 +34,8 @@ import com.intellij.lexer.FlexAdapter;
 
 import java.io.Reader;
 
-public class NimLexerAdapter extends FlexAdapter {
-    public NimLexerAdapter() {
+public class NimSyntaxLexerAdapter extends FlexAdapter {
+    public NimSyntaxLexerAdapter() {
         super(new NimLexer((Reader) null));
     }
 }
