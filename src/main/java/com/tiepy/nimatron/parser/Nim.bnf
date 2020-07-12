@@ -43,6 +43,9 @@
   elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
+  implements("procStmt|funcStmt|methodStmt|iteratorStmt|macroStmt|templateStmt|converterStmt")="com.tiepy.nimatron.psi.NimNamedElement"
+  mixin(     "procStmt|funcStmt|methodStmt|iteratorStmt|macroStmt|templateStmt|converterStmt")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
+
   tokens = [
     BRACKET="BRACKET"
     C_SEMICOLON="C_SEMICOLON"

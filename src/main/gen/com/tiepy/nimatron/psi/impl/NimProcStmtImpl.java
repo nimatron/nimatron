@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimProcStmtImpl extends NimElementImpl implements NimProcStmt {
+public class NimProcStmtImpl extends NimNamedElementImpl implements NimProcStmt {
 
   public NimProcStmtImpl(@NotNull ASTNode node) {
     super(node);

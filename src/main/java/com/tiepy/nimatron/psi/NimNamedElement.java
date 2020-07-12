@@ -1,4 +1,8 @@
 /*
+ * This file is based on example provided by the JS GraphQL IntelliJ Plugin.
+ * Copyright (c) 2018-2020, Jim Kynde Meyer.
+ * Use of original example source code is governed by the MIT license.
+ *
  * Copyright 2020 TiePy Ltd. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -26,8 +30,11 @@
 
 package com.tiepy.nimatron.psi;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import org.jetbrains.annotations.Nullable;
 
-public interface NimElement extends PsiElement {
-
+public interface NimNamedElement extends PsiNameIdentifierOwner {
+    @Nullable
+    @Override
+    NimSymbol getNameIdentifier();
 }

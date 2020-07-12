@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimProcStmt extends NimElement {
+public interface NimProcStmt extends NimNamedElement {
 
   @NotNull
   NimOptInd getOptInd();

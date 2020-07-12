@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimIteratorStmt extends NimElement {
+public interface NimIteratorStmt extends NimNamedElement {
 
   @NotNull
   NimOptInd getOptInd();

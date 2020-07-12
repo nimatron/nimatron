@@ -30,7 +30,10 @@ import com.google.common.collect.Lists;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
 import com.tiepy.nimatron.NimFile;
+import com.tiepy.nimatron.psi.impl.NimProcStmtImpl;
+import com.tiepy.nimatron.psi.impl.NimStmtImpl;
 import com.tiepy.nimatron.psi.impl.NimStmtsImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,31 +58,38 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
         final List<StructureViewTreeElement> children = Lists.newArrayList();
 
         if (childrenBase instanceof NimFile) {
-            addFileChildren(children);
+            for (PsiElement expectedStmtsElement : childrenBase.getChildren()) {
+                if (expectedStmtsElement instanceof NimStmtsImpl) {
+                    for (PsiElement expectedStmtElement : expectedStmtsElement.getChildren()) {
+                        if (expectedStmtElement instanceof NimStmtImpl) {
+                            for (PsiElement child : expectedStmtElement.getChildren()) {
+                                PsiElement nodeChildrenBase = child;
+                                PsiElement nodeElement = child;
+
+                                if (child instanceof NimProcStmtImpl) {
+                                    children.add(new NimStructureViewElement(nodeChildrenBase, nodeElement));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         return children;
     }
 
-    private void addFileChildren(List<StructureViewTreeElement> children) {
-        for (PsiElement child : childrenBase.getChildren()) {
-            if (child instanceof NimStmtsImpl) {
-                for (PsiElement grandChild : child.getChildren()) {
-                    PsiElement nodeChildrenBase = grandChild;
-                    PsiElement nodeElement = grandChild;
-
-                    // TODO: Ignore comments.
-
-                    children.add(new NimStructureViewElement(nodeChildrenBase, nodeElement));
-                }
-            }
-        }
-    }
-
     @Nullable
     @Override
     public String getPresentableText() {
-        // String name = ((NamedElement) element).getName();
+
+        if (element instanceof PsiNameIdentifierOwner) {
+            final PsiElement nameIdentifier = ((PsiNameIdentifierOwner) element).getNameIdentifier();
+            if (nameIdentifier != null) {
+                return nameIdentifier.getText();
+            }
+        }
+
         // return element.getText();
         return element.getClass().getName();
     }
