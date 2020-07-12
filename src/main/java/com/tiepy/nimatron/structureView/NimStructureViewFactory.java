@@ -48,7 +48,7 @@ public class NimStructureViewFactory implements PsiStructureViewFactory {
             }
 
             public boolean isRootNodeShown() {
-                return false;
+                return true;
             }
         };
     }

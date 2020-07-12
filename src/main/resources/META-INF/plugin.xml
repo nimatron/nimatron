@@ -31,6 +31,8 @@
         <lang.psiStructureViewFactory
                 language="Nim"
                 implementationClass="com.tiepy.nimatron.structureView.NimStructureViewFactory"/>
+        <iconProvider
+                implementation="com.tiepy.nimatron.NimIconProvider" />
     </extensions>
 
     <actions>

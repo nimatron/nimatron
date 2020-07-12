@@ -61,13 +61,14 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
                     for (PsiElement expectedStmtElement : expectedStmtsElement.getChildren()) {
                         if (expectedStmtElement instanceof NimStmtImpl) {
                             for (PsiElement child : expectedStmtElement.getChildren()) {
-                                if (child instanceof NimProcStmtImpl
+                                if (       child instanceof NimProcStmtImpl
                                         || child instanceof NimFuncStmtImpl
                                         || child instanceof NimMethodStmtImpl
                                         || child instanceof NimIteratorStmtImpl
                                         || child instanceof NimMacroStmtImpl
                                         || child instanceof NimTemplateStmtImpl
                                         || child instanceof NimConverterStmtImpl) {
+
                                     children.add(new NimStructureViewElement(child, child));
                                 }
                             }
@@ -84,6 +85,10 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
     @Override
     public String getPresentableText() {
 
+        if (element instanceof NimFile) {
+            return "File";
+        }
+
         if (element instanceof PsiNameIdentifierOwner) {
             final PsiElement nameIdentifier = ((PsiNameIdentifierOwner) element).getNameIdentifier();
             if (nameIdentifier != null) {
@@ -91,7 +96,7 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
             }
         }
 
-        // return element.getText();
+//        return element.getText();
         return element.getClass().getName();
     }
 }

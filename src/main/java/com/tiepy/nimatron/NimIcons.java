@@ -35,5 +35,16 @@ import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 public class NimIcons {
+
     public static final Icon FILE = IconLoader.getIcon("/icons/nim.svg");
+
+    public static class StructureView {
+        public static final Icon Proc = IconLoader.getIcon("/icons/structureView/proc.svg");
+        public static final Icon Func = IconLoader.getIcon("/icons/structureView/func.svg");
+        public static final Icon Method = IconLoader.getIcon("/icons/structureView/method.svg");
+        public static final Icon Iterator = IconLoader.getIcon("/icons/structureView/iterator.svg");
+        public static final Icon Macro = IconLoader.getIcon("/icons/structureView/macro.svg");
+        public static final Icon Template = IconLoader.getIcon("/icons/structureView/template.svg");
+        public static final Icon Converter = IconLoader.getIcon("/icons/structureView/converter.svg");
+    }
 }
