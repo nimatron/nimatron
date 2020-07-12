@@ -77,6 +77,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscProcWithFollowingBlankLines() {
+        doTest(true, true);
+    }
+
     public void testMiscVar() {
         doTest(true, true);
     }
