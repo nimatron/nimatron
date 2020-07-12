@@ -49,24 +49,25 @@ import java.util.Stack;
 OP0A=->
 OP0B=~>
 OP0C==>
-OP0={OP0A}|{OP0B}|{OP0C}
+//OP0={OP0A}|{OP0B}|{OP0C}
 
 OP1A=\+=
 OP1B=\*=
 OP1C=-=
 OP1D=\/\*
-OP1={OP1A}|{OP1B}|{OP1C}|{OP1D}
+//OP1={OP1A}|{OP1B}|{OP1C}|{OP1D}
 
 OP2A=@
 OP2B=:
 OP2C=\?
-OP2={OP2A}|{OP2B}|{OP2C}
+//OP2={OP2A}|{OP2B}|{OP2C}
 
 OP3A=or
 OP3B=xor
-OP3={OP3A}|{OP3B}
+//OP3={OP3A}|{OP3B}
 
-OP4=and
+OP4A=and
+//OP4={OP4A}
 
 OP5A===
 OP5B=<=
@@ -81,15 +82,17 @@ OP5J=isnot
 OP5K=not
 OP5L=of
 OP5M=as
-OP5={OP5A}|{OP5B}|{OP5C}|{OP5D}|{OP5E}|{OP5F}|{OP5G}|{OP5H}|{OP5I}|{OP5J}|{OP5K}|{OP5L}|{OP5M}
+//OP5={OP5A}|{OP5B}|{OP5C}|{OP5D}|{OP5E}|{OP5F}|{OP5G}|{OP5H}|{OP5I}|{OP5J}|{OP5K}|{OP5L}|{OP5M}
 
-OP6=\.\.
+OP6A=\.\.
+//OP6={OP6A}
 
-OP7=&
+OP7A=&
+//OP7={OP7A}
 
 OP8A=\+
 OP8B=-
-OP8={OP8A}|{OP8B}
+//OP8={OP8A}|{OP8B}
 
 OP9A=\*
 OP9B=\/
@@ -98,11 +101,11 @@ OP9D=mod
 OP9E=shl
 OP9F=shr
 OP9G=%
-OP9={OP9A}|{OP9B}|{OP9C}|{OP9D}|{OP9E}|{OP9F}|{OP9G}
+//OP9={OP9A}|{OP9B}|{OP9C}|{OP9D}|{OP9E}|{OP9F}|{OP9G}
 
 OP10A=\$
 OP10B=\^
-OP10={OP10A}|{OP10B}
+//OP10={OP10A}|{OP10B}
 
 OPR=[\=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
 
@@ -338,17 +341,45 @@ private IElementType getDedenterToken() {
     {FLOAT64_LIT}               { return NimElementTypes.FLOAT64_LIT; }
     {NIL}                       { return NimElementTypes.NIL; }
     {BOOL_LIT}                  { return NimElementTypes.BOOL_LIT; }
-    {OP0}                       { return NimElementTypes.OP0; }
-    {OP1}                       { return NimElementTypes.OP1; }
-    {OP2}                       { return NimElementTypes.OP2; }
-    {OP3}                       { return NimElementTypes.OP3; }
-    {OP4}                       { return NimElementTypes.OP4; }
-    {OP5}                       { return NimElementTypes.OP5; }
-    {OP6}                       { return NimElementTypes.OP6; }
-    {OP7}                       { return NimElementTypes.OP7; }
-    {OP8}                       { return NimElementTypes.OP8; }
-    {OP9}                       { return NimElementTypes.OP9; }
-    {OP10}                      { return NimElementTypes.OP10; }
+    {OP0A}                      { return NimElementTypes.OP0A; }
+    {OP0B}                      { return NimElementTypes.OP0B; }
+    {OP0C}                      { return NimElementTypes.OP0C; }
+    {OP1A}                      { return NimElementTypes.OP1A; }
+    {OP1B}                      { return NimElementTypes.OP1B; }
+    {OP1C}                      { return NimElementTypes.OP1C; }
+    {OP1D}                      { return NimElementTypes.OP1D; }
+    {OP2A}                      { return NimElementTypes.OP2A; }
+    {OP2B}                      { return NimElementTypes.OP2B; }
+    {OP2C}                      { return NimElementTypes.OP2C; }
+    {OP3A}                      { return NimElementTypes.OP3A; }
+    {OP3B}                      { return NimElementTypes.OP3B; }
+    {OP4A}                      { return NimElementTypes.OP4A; }
+    {OP5A}                      { return NimElementTypes.OP5A; }
+    {OP5B}                      { return NimElementTypes.OP5B; }
+    {OP5C}                      { return NimElementTypes.OP5C; }
+    {OP5D}                      { return NimElementTypes.OP5D; }
+    {OP5E}                      { return NimElementTypes.OP5E; }
+    {OP5F}                      { return NimElementTypes.OP5F; }
+    {OP5G}                      { return NimElementTypes.OP5G; }
+    {OP5H}                      { return NimElementTypes.OP5H; }
+    {OP5I}                      { return NimElementTypes.OP5I; }
+    {OP5J}                      { return NimElementTypes.OP5J; }
+    {OP5K}                      { return NimElementTypes.OP5K; }
+    {OP5L}                      { return NimElementTypes.OP5L; }
+    {OP5M}                      { return NimElementTypes.OP5M; }
+    {OP6A}                      { return NimElementTypes.OP6A; }
+    {OP7A}                      { return NimElementTypes.OP7A; }
+    {OP8A}                      { return NimElementTypes.OP8A; }
+    {OP8B}                      { return NimElementTypes.OP8B; }
+    {OP9A}                      { return NimElementTypes.OP9A; }
+    {OP9B}                      { return NimElementTypes.OP9B; }
+    {OP9C}                      { return NimElementTypes.OP9C; }
+    {OP9D}                      { return NimElementTypes.OP9D; }
+    {OP9E}                      { return NimElementTypes.OP9E; }
+    {OP9F}                      { return NimElementTypes.OP9F; }
+    {OP9G}                      { return NimElementTypes.OP9G; }
+    {OP10A}                     { return NimElementTypes.OP10A; }
+    {OP10B}                     { return NimElementTypes.OP10B; }
     {OPR}                       { return NimElementTypes.OPR; }
     {BRACKET}                   { return NimElementTypes.BRACKET; }
     {C_SEMICOLON}               { return NimElementTypes.C_SEMICOLON; }

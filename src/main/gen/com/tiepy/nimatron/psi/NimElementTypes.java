@@ -65,7 +65,19 @@ public interface NimElementTypes {
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OP = new NimElementType("OP");
   IElementType OPERATOR = new NimElementType("OPERATOR");
+  IElementType OPR_COMBO = new NimElementType("OPR_COMBO");
   IElementType OPT_IND = new NimElementType("OPT_IND");
+  IElementType OP_0 = new NimElementType("OP_0");
+  IElementType OP_1 = new NimElementType("OP_1");
+  IElementType OP_10 = new NimElementType("OP_10");
+  IElementType OP_2 = new NimElementType("OP_2");
+  IElementType OP_3 = new NimElementType("OP_3");
+  IElementType OP_4 = new NimElementType("OP_4");
+  IElementType OP_5 = new NimElementType("OP_5");
+  IElementType OP_6 = new NimElementType("OP_6");
+  IElementType OP_7 = new NimElementType("OP_7");
+  IElementType OP_8 = new NimElementType("OP_8");
+  IElementType OP_9 = new NimElementType("OP_9");
   IElementType PAR = new NimElementType("PAR");
   IElementType PARAMS = new NimElementType("PARAMS");
   IElementType PARAMS_ARROW = new NimElementType("PARAMS_ARROW");
@@ -149,17 +161,45 @@ public interface NimElementTypes {
   IElementType INT_LIT = new NimTokenType("INT_LIT");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NIL = new NimTokenType("NIL");
-  IElementType OP0 = new NimTokenType("OP0");
-  IElementType OP1 = new NimTokenType("OP1");
-  IElementType OP10 = new NimTokenType("OP10");
-  IElementType OP2 = new NimTokenType("OP2");
-  IElementType OP3 = new NimTokenType("OP3");
-  IElementType OP4 = new NimTokenType("OP4");
-  IElementType OP5 = new NimTokenType("OP5");
-  IElementType OP6 = new NimTokenType("OP6");
-  IElementType OP7 = new NimTokenType("OP7");
-  IElementType OP8 = new NimTokenType("OP8");
-  IElementType OP9 = new NimTokenType("OP9");
+  IElementType OP0A = new NimTokenType("OP0A");
+  IElementType OP0B = new NimTokenType("OP0B");
+  IElementType OP0C = new NimTokenType("OP0C");
+  IElementType OP10A = new NimTokenType("OP10A");
+  IElementType OP10B = new NimTokenType("OP10B");
+  IElementType OP1A = new NimTokenType("OP1A");
+  IElementType OP1B = new NimTokenType("OP1B");
+  IElementType OP1C = new NimTokenType("OP1C");
+  IElementType OP1D = new NimTokenType("OP1D");
+  IElementType OP2A = new NimTokenType("OP2A");
+  IElementType OP2B = new NimTokenType("OP2B");
+  IElementType OP2C = new NimTokenType("OP2C");
+  IElementType OP3A = new NimTokenType("OP3A");
+  IElementType OP3B = new NimTokenType("OP3B");
+  IElementType OP4A = new NimTokenType("OP4A");
+  IElementType OP5A = new NimTokenType("OP5A");
+  IElementType OP5B = new NimTokenType("OP5B");
+  IElementType OP5C = new NimTokenType("OP5C");
+  IElementType OP5D = new NimTokenType("OP5D");
+  IElementType OP5E = new NimTokenType("OP5E");
+  IElementType OP5F = new NimTokenType("OP5F");
+  IElementType OP5G = new NimTokenType("OP5G");
+  IElementType OP5H = new NimTokenType("OP5H");
+  IElementType OP5I = new NimTokenType("OP5I");
+  IElementType OP5J = new NimTokenType("OP5J");
+  IElementType OP5K = new NimTokenType("OP5K");
+  IElementType OP5L = new NimTokenType("OP5L");
+  IElementType OP5M = new NimTokenType("OP5M");
+  IElementType OP6A = new NimTokenType("OP6A");
+  IElementType OP7A = new NimTokenType("OP7A");
+  IElementType OP8A = new NimTokenType("OP8A");
+  IElementType OP8B = new NimTokenType("OP8B");
+  IElementType OP9A = new NimTokenType("OP9A");
+  IElementType OP9B = new NimTokenType("OP9B");
+  IElementType OP9C = new NimTokenType("OP9C");
+  IElementType OP9D = new NimTokenType("OP9D");
+  IElementType OP9E = new NimTokenType("OP9E");
+  IElementType OP9F = new NimTokenType("OP9F");
+  IElementType OP9G = new NimTokenType("OP9G");
   IElementType OPR = new NimTokenType("OPR");
   IElementType RSTR_LIT = new NimTokenType("RSTR_LIT");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
@@ -344,8 +384,44 @@ public interface NimElementTypes {
       else if (type == OPERATOR) {
         return new NimOperatorImpl(node);
       }
+      else if (type == OPR_COMBO) {
+        return new NimOprComboImpl(node);
+      }
       else if (type == OPT_IND) {
         return new NimOptIndImpl(node);
+      }
+      else if (type == OP_0) {
+        return new NimOp0Impl(node);
+      }
+      else if (type == OP_1) {
+        return new NimOp1Impl(node);
+      }
+      else if (type == OP_10) {
+        return new NimOp10Impl(node);
+      }
+      else if (type == OP_2) {
+        return new NimOp2Impl(node);
+      }
+      else if (type == OP_3) {
+        return new NimOp3Impl(node);
+      }
+      else if (type == OP_4) {
+        return new NimOp4Impl(node);
+      }
+      else if (type == OP_5) {
+        return new NimOp5Impl(node);
+      }
+      else if (type == OP_6) {
+        return new NimOp6Impl(node);
+      }
+      else if (type == OP_7) {
+        return new NimOp7Impl(node);
+      }
+      else if (type == OP_8) {
+        return new NimOp8Impl(node);
+      }
+      else if (type == OP_9) {
+        return new NimOp9Impl(node);
       }
       else if (type == PAR) {
         return new NimParImpl(node);

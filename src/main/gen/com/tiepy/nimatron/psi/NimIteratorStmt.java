@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface NimIteratorStmt extends NimNamedElement {
 
+  @Nullable
+  NimOprCombo getOprCombo();
+
   @NotNull
   NimOptInd getOptInd();
 

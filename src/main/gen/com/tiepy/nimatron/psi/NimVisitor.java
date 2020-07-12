@@ -230,7 +230,55 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitOp0(@NotNull NimOp0 o) {
+    visitElement(o);
+  }
+
+  public void visitOp1(@NotNull NimOp1 o) {
+    visitElement(o);
+  }
+
+  public void visitOp10(@NotNull NimOp10 o) {
+    visitElement(o);
+  }
+
+  public void visitOp2(@NotNull NimOp2 o) {
+    visitElement(o);
+  }
+
+  public void visitOp3(@NotNull NimOp3 o) {
+    visitElement(o);
+  }
+
+  public void visitOp4(@NotNull NimOp4 o) {
+    visitElement(o);
+  }
+
+  public void visitOp5(@NotNull NimOp5 o) {
+    visitElement(o);
+  }
+
+  public void visitOp6(@NotNull NimOp6 o) {
+    visitElement(o);
+  }
+
+  public void visitOp7(@NotNull NimOp7 o) {
+    visitElement(o);
+  }
+
+  public void visitOp8(@NotNull NimOp8 o) {
+    visitElement(o);
+  }
+
+  public void visitOp9(@NotNull NimOp9 o) {
+    visitElement(o);
+  }
+
   public void visitOperator(@NotNull NimOperator o) {
+    visitElement(o);
+  }
+
+  public void visitOprCombo(@NotNull NimOprCombo o) {
     visitElement(o);
   }
 

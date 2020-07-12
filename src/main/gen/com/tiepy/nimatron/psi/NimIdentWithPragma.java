@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimIdentWithPragma extends NimElement {
 
   @Nullable
+  NimOprCombo getOprCombo();
+
+  @Nullable
   NimPragma getPragma();
 
   @NotNull

@@ -26,6 +26,12 @@ public class NimConverterStmtImpl extends NimNamedElementImpl implements NimConv
   }
 
   @Override
+  @Nullable
+  public NimOprCombo getOprCombo() {
+    return findChildByClass(NimOprCombo.class);
+  }
+
+  @Override
   @NotNull
   public NimOptInd getOptInd() {
     return findNotNullChildByClass(NimOptInd.class);

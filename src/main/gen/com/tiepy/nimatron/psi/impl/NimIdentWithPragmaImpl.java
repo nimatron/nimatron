@@ -27,6 +27,12 @@ public class NimIdentWithPragmaImpl extends NimElementImpl implements NimIdentWi
 
   @Override
   @Nullable
+  public NimOprCombo getOprCombo() {
+    return findChildByClass(NimOprCombo.class);
+  }
+
+  @Override
+  @Nullable
   public NimPragma getPragma() {
     return findChildByClass(NimPragma.class);
   }

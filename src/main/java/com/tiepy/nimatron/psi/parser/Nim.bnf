@@ -66,11 +66,23 @@ colon ::= ':' COMMENT?
 //colcom = ':' COMMENT?
 colcom ::= ':' COMMENT?
 
+op0 ::= OP0A|OP0B|OP0C
+op1 ::= OP1A|OP1B|OP1C|OP1D
+op2 ::= OP2A|OP2B|OP2C
+op3 ::= OP3A|OP3B
+op4 ::= OP4A
+op5 ::= OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|OP5G|OP5H|OP5I|OP5J|OP5K|OP5L|OP5M
+op6 ::= OP6A
+op7 ::= OP7A
+op8 ::= OP8A|OP8B
+op9 ::= OP9A|OP9B|OP9C|OP9D|OP9E|OP9F|OP9G
+op10 ::= OP10A|OP10B
+
 //operator =  OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
 //         | 'or' | 'xor' | 'and'
 //         | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from' |
 //         | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
-operator ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|'from'|'static'|'..'
+operator ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|'from'|'static'|'..'
 
 //prefixOperator = operator
 
@@ -91,7 +103,7 @@ meta optInd ::= <<RULE>> | (INDENT <<RULE>>? COMMENT? (IND_EQ <<RULE>>? COMMENT?
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-op ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
+op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 simpleExpr ::= primary (op <<optInd primary>>)* pragma?
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
@@ -204,11 +216,14 @@ pragma ::= '{.' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd ('.}'|'}')>>
 
 //identVis = symbol OPR?  # postfix position
 
+// NOTE: The following replaced OPR so that other OPX tokens are also matched.
+oprCombo ::= OPR/*|op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10*/
+
 //identVisDot = symbol '.' optInd symbol OPR?
-identVisDot ::= symbol '.' <<optInd symbol>> OPR?
+identVisDot ::= symbol '.' <<optInd symbol>> oprCombo?
 
 //identWithPragma = identVis pragma?
-identWithPragma ::= symbol OPR? pragma?
+identWithPragma ::= symbol oprCombo? pragma?
 
 //identWithPragmaDot = identVisDot pragma?
 identWithPragmaDot ::= identVisDot pragma?
@@ -507,13 +522,13 @@ pragmaStmt ::= pragma (':' COMMENT? <<optInd stmts>>)?
 //                    | bindStmt | mixinStmt)
 //                    / simpleStmt
 
-procStmt ::= 'proc' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
-funcStmt ::= 'func' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
-methodStmt ::= 'method' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
-iteratorStmt ::= 'iterator' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
-macroStmt ::= 'macro' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
-templateStmt ::= 'template' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
-converterStmt ::= 'converter' symbol OPR? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+procStmt ::= 'proc' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+funcStmt ::= 'func' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+methodStmt ::= 'method' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+iteratorStmt ::= 'iterator' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+macroStmt ::= 'macro' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+templateStmt ::= 'template' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
+converterStmt ::= 'converter' symbol oprCombo? <<optInd routine>> {methods=[nameIdentifier="symbol"]}
 typeStmt ::= 'type' <<optInd typeDef>>
 constStmt ::= 'const' <<optInd constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
