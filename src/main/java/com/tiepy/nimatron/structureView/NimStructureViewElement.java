@@ -32,9 +32,7 @@ import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.tiepy.nimatron.NimFile;
-import com.tiepy.nimatron.psi.impl.NimProcStmtImpl;
-import com.tiepy.nimatron.psi.impl.NimStmtImpl;
-import com.tiepy.nimatron.psi.impl.NimStmtsImpl;
+import com.tiepy.nimatron.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,11 +61,14 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
                     for (PsiElement expectedStmtElement : expectedStmtsElement.getChildren()) {
                         if (expectedStmtElement instanceof NimStmtImpl) {
                             for (PsiElement child : expectedStmtElement.getChildren()) {
-                                PsiElement nodeChildrenBase = child;
-                                PsiElement nodeElement = child;
-
-                                if (child instanceof NimProcStmtImpl) {
-                                    children.add(new NimStructureViewElement(nodeChildrenBase, nodeElement));
+                                if (child instanceof NimProcStmtImpl
+                                        || child instanceof NimFuncStmtImpl
+                                        || child instanceof NimMethodStmtImpl
+                                        || child instanceof NimIteratorStmtImpl
+                                        || child instanceof NimMacroStmtImpl
+                                        || child instanceof NimTemplateStmtImpl
+                                        || child instanceof NimConverterStmtImpl) {
+                                    children.add(new NimStructureViewElement(child, child));
                                 }
                             }
                         }
