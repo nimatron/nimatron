@@ -73,6 +73,7 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testIgnoredComment() {
         int tokenCount = parse("proc getAlphabet(): string =\n" +
@@ -81,6 +82,13 @@ public class NimLexerTest {
                 "# Computed at compilation time\n" +
                 "const alphabet = getAlphabet()\n");
 
+        Assert.assertEquals(27, tokenCount);
+    }
+*/
+
+    @Test
+    public void testExportSyntax() {
+        int tokenCount = parse("proc foo*(): int = 2");
         Assert.assertEquals(27, tokenCount);
     }
 
