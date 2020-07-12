@@ -35,7 +35,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.tree.*;
-import com.tiepy.nimatron.NimFile;
+import com.tiepy.nimatron.psi.NimFile;
 import com.tiepy.nimatron.NimLanguage;
 import com.tiepy.nimatron.psi.NimElementTypes;
 import org.jetbrains.annotations.NotNull;

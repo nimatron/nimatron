@@ -28,7 +28,7 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.psi;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
