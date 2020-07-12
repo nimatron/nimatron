@@ -24,13 +24,15 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.actions;
 
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
+import com.tiepy.nimatron.NimBundle;
+import com.tiepy.nimatron.NimFileType;
 import org.jetbrains.annotations.NotNull;
 
 public class NimCreateFileAction extends CreateFileFromTemplateAction implements DumbAware {

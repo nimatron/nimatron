@@ -33,7 +33,7 @@
     <actions>
         <action
                 id="NewNimFile"
-                class="com.tiepy.nimatron.NimCreateFileAction"
+                class="com.tiepy.nimatron.actions.NimCreateFileAction"
                 text="Nim File"
                 description="Create new Nim file">
             <add-to-group
