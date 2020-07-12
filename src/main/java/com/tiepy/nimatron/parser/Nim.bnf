@@ -298,10 +298,10 @@ typeDefAux ::= simpleExpr ('not' expr)?
 //                           | IND{=} 'except' exprList ':' stmt
 //                           | IND{=} 'else' ':' stmt )*
 postExprBlocks ::= ':' <<optInd stmts>>? ( postExprBlocks1
-                                        | postExprBlocks2
-                                        | postExprBlocks3
-                                        | postExprBlocks4
-                                        | postExprBlocks5 )*
+                                         | postExprBlocks2
+                                         | postExprBlocks3
+                                         | postExprBlocks4
+                                         | postExprBlocks5 )*
 postExprBlocks1 ::= IND_EQ doBlock
 postExprBlocks2 ::= IND_EQ 'of' exprs ':' <<optInd stmts>>
 postExprBlocks3 ::= IND_EQ 'elif' expr ':' <<optInd stmts>>
