@@ -1,5 +1,5 @@
 // This is a generated file. Not intended for manual editing.
-package com.tiepy.nimatron.parser;
+package com.tiepy.nimatron.psi.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;

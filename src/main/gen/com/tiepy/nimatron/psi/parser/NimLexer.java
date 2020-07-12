@@ -30,7 +30,7 @@
  * questions.
  */
 
-package com.tiepy.nimatron.parser;
+package com.tiepy.nimatron.psi.parser;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;

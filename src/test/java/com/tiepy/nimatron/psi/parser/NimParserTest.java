@@ -28,7 +28,7 @@
  * questions.
  */
 
-package com.tiepy.nimatron.parser;
+package com.tiepy.nimatron.psi.parser;
 
 import com.intellij.testFramework.ParsingTestCase;
 

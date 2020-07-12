@@ -29,7 +29,7 @@
  */
 
 {
-  parserClass="com.tiepy.nimatron.parser.NimParser"
+  parserClass="com.tiepy.nimatron.psi.parser.NimParser"
 
   implements="com.tiepy.nimatron.psi.NimElement"
   extends="com.tiepy.nimatron.psi.impl.NimElementImpl"
