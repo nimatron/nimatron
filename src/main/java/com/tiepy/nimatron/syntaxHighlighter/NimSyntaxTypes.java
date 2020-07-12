@@ -1,8 +1,4 @@
 /*
- * This file is based on example provided by the IntelliJ Platform SDK DevGuide.
- * Copyright 2000-2020 JetBrains s.r.o. and other contributors.
- * Use of original example source code is governed by the Apache 2.0 license.
- *
  * Copyright 2020 TiePy Ltd. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -28,15 +24,22 @@
  * questions.
  */
 
-package com.tiepy.nimatron.psi;
+package com.tiepy.nimatron.syntaxHighlighter;
 
 import com.intellij.psi.tree.IElementType;
-import com.tiepy.nimatron.NimLanguage;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
-public class NimElementType extends IElementType {
-    public NimElementType( @NotNull @NonNls String debugName) {
-        super(debugName, NimLanguage.INSTANCE);
-    }
+public interface NimSyntaxTypes {
+    IElementType BRACKET = new NimSyntaxTokenType("BRACKET");
+    IElementType COMMA = new NimSyntaxTokenType("COMMA");
+    IElementType COMMENT = new NimSyntaxTokenType("COMMENT");
+    IElementType GRAVE_ACCENT = new NimSyntaxTokenType("GRAVE_ACCENT");
+    IElementType IDENT = new NimSyntaxTokenType("IDENT");
+    IElementType KEYWORD = new NimSyntaxTokenType("KEYWORD");
+    IElementType NUMERICAL_CONSTANT = new NimSyntaxTokenType("NUMERICAL_CONSTANT");
+    IElementType OPERATOR = new NimSyntaxTokenType("OPERATOR");
+    IElementType PARENTHESIS = new NimSyntaxTokenType("PARENTHESIS");
+    IElementType PROCS = new NimSyntaxTokenType("PROCS");
+    IElementType SEMICOLON = new NimSyntaxTokenType("SEMICOLON");
+    IElementType STRING_LITERAL = new NimSyntaxTokenType("STRING_LITERAL");
+    IElementType TYPES = new NimSyntaxTokenType("TYPES");
 }

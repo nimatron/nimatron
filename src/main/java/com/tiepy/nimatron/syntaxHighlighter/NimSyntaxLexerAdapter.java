@@ -36,6 +36,6 @@ import java.io.Reader;
 
 public class NimSyntaxLexerAdapter extends FlexAdapter {
     public NimSyntaxLexerAdapter() {
-        super(new NimLexer((Reader) null));
+        super(new NimSyntaxLexer((Reader) null));
     }
 }
