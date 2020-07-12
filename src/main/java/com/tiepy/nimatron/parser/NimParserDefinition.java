@@ -37,6 +37,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.tree.*;
 import com.tiepy.nimatron.NimFile;
 import com.tiepy.nimatron.NimLanguage;
+import com.tiepy.nimatron.psi.NimElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class NimParserDefinition implements ParserDefinition {
@@ -91,6 +92,6 @@ public class NimParserDefinition implements ParserDefinition {
     @NotNull
     @Override
     public PsiElement createElement(ASTNode node) {
-        return NimTypes.Factory.createElement(node);
+        return NimElementTypes.Factory.createElement(node);
     }
 }

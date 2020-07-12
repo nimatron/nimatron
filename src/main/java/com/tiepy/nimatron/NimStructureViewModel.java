@@ -1,8 +1,4 @@
 /*
- * This file is based on example provided by the IntelliJ Platform SDK DevGuide.
- * Copyright 2000-2020 JetBrains s.r.o. and other contributors.
- * Use of original example source code is governed by the Apache 2.0 license.
- *
  * Copyright 2020 TiePy Ltd. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -30,22 +26,23 @@
 
 package com.tiepy.nimatron;
 
-import com.intellij.ide.structureView.*;
-import com.intellij.ide.util.treeView.smartTree.Sorter;
-import com.intellij.psi.PsiFile;
+import com.intellij.ide.structureView.StructureViewModel;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-public class NimStructureViewModel extends StructureViewModelBase implements
-        StructureViewModel.ElementInfoProvider {
-    public NimStructureViewModel(PsiFile psiFile) {
-        super(psiFile, new NimStructureViewElement(psiFile));
-    }
+public class NimStructureViewModel
+        extends TextEditorBasedStructureViewModel
+        implements StructureViewModel.ElementInfoProvider {
 
-    @NotNull
-    public Sorter[] getSorters() {
-        return new Sorter[]{Sorter.ALPHA_SORTER};
-    }
+    private final NimStructureViewElement root;
 
+    public NimStructureViewModel(PsiElement root, Editor editor) {
+        super(editor, root.getContainingFile());
+        this.root = new NimStructureViewElement(root, root);
+    }
 
     @Override
     public boolean isAlwaysShowsPlus(StructureViewTreeElement element) {
@@ -54,6 +51,19 @@ public class NimStructureViewModel extends StructureViewModelBase implements
 
     @Override
     public boolean isAlwaysLeaf(StructureViewTreeElement element) {
-        return element instanceof NimFile;
+        return false;
+    }
+
+/*
+    @Override
+    protected boolean isSuitable(PsiElement element) {
+        return element instanceof NimElement;
+    }
+*/
+
+    @NotNull
+    @Override
+    public StructureViewTreeElement getRoot() {
+        return root;
     }
 }

@@ -1,8 +1,4 @@
 /*
- * This file is based on example provided by the IntelliJ Platform SDK DevGuide.
- * Copyright 2000-2020 JetBrains s.r.o. and other contributors.
- * Use of original example source code is governed by the Apache 2.0 license.
- *
  * Copyright 2020 TiePy Ltd. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -30,72 +26,60 @@
 
 package com.tiepy.nimatron;
 
-import com.intellij.ide.projectView.PresentationData;
+import com.google.common.collect.Lists;
 import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.smartTree.SortableTreeElement;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
+import com.intellij.psi.PsiElement;
+import com.tiepy.nimatron.psi.impl.NimStmtsImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class NimStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
-    private final NavigatablePsiElement myElement;
+public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
 
-    public NimStructureViewElement(NavigatablePsiElement element) {
-        this.myElement = element;
-    }
+    final PsiElement childrenBase;
+    private final PsiElement element;
 
-    @Override
-    public Object getValue() {
-        return myElement;
-    }
-
-    @Override
-    public void navigate(boolean requestFocus) {
-        myElement.navigate(requestFocus);
-    }
-
-    @Override
-    public boolean canNavigate() {
-        return myElement.canNavigate();
-    }
-
-    @Override
-    public boolean canNavigateToSource() {
-        return myElement.canNavigateToSource();
+    public NimStructureViewElement(PsiElement childrenBase, PsiElement psiElement) {
+        super(psiElement);
+        this.element = psiElement;
+        this.childrenBase = childrenBase;
     }
 
     @NotNull
     @Override
-    public String getAlphaSortKey() {
-        String name = myElement.getName();
-        return name != null ? name : "";
-    }
+    public Collection<StructureViewTreeElement> getChildrenBase() {
+        final List<StructureViewTreeElement> children = Lists.newArrayList();
 
-    @NotNull
-    @Override
-    public ItemPresentation getPresentation() {
-        ItemPresentation presentation = myElement.getPresentation();
-        return presentation != null ? presentation : new PresentationData();
-    }
-
-    @NotNull
-    @Override
-    public TreeElement[] getChildren() {
-/*
-        if (myElement instanceof NimFile) {
-            List<NimProperty> properties = PsiTreeUtil.getChildrenOfTypeAsList(myElement, NimProperty.class);
-            List<TreeElement> treeElements = new ArrayList<>(properties.size());
-            for (NimProperty property : properties) {
-                treeElements.add(new NimStructureViewElement((NimPropertyImpl) property));
-            }
-            return treeElements.toArray(new TreeElement[0]);
+        if (childrenBase instanceof NimFile) {
+            addFileChildren(children);
         }
-*/
-        return EMPTY_ARRAY;
+
+        return children;
+    }
+
+    private void addFileChildren(List<StructureViewTreeElement> children) {
+        for (PsiElement child : childrenBase.getChildren()) {
+            if (child instanceof NimStmtsImpl) {
+                for (PsiElement grandChild : child.getChildren()) {
+                    PsiElement nodeChildrenBase = grandChild;
+                    PsiElement nodeElement = grandChild;
+
+                    // TODO: Ignore comments.
+
+                    children.add(new NimStructureViewElement(nodeChildrenBase, nodeElement));
+                }
+            }
+        }
+    }
+
+    @Nullable
+    @Override
+    public String getPresentableText() {
+        // String name = ((NamedElement) element).getName();
+        // return element.getText();
+        return element.getClass().getName();
     }
 }

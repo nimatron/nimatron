@@ -3,7 +3,7 @@ package com.tiepy.nimatron.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.tiepy.nimatron.parser.NimTypes.*;
+import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;

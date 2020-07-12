@@ -1,8 +1,4 @@
 /*
- * This file is based on example provided by the IntelliJ Platform SDK DevGuide.
- * Copyright 2000-2020 JetBrains s.r.o. and other contributors.
- * Use of original example source code is governed by the Apache 2.0 license.
- *
  * Copyright 2020 TiePy Ltd. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -40,14 +36,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class NimStructureViewFactory implements PsiStructureViewFactory {
+
     @Nullable
     @Override
-    public StructureViewBuilder getStructureViewBuilder(@NotNull final PsiFile psiFile) {
+    public StructureViewBuilder getStructureViewBuilder(@NotNull PsiFile psiFile) {
         return new TreeBasedStructureViewBuilder() {
+
             @NotNull
-            @Override
             public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
-                return new NimStructureViewModel(psiFile);
+                return new NimStructureViewModel(psiFile, editor);
+            }
+
+            public boolean isRootNodeShown() {
+                return false;
             }
         };
     }

@@ -35,7 +35,7 @@ package com.tiepy.nimatron.parser;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
-import com.tiepy.nimatron.parser.NimTypes;
+import com.tiepy.nimatron.psi.NimElementTypes;
 import java.util.Stack;
 
 
@@ -829,7 +829,7 @@ private IElementType getIndenterToken() {
     // Return from INDENTER state with indent at same level, when length same.
     if (indentSpaces == lastIndentSpaces) {
         popState();
-        return NimTypes.IND_EQ;
+        return NimElementTypes.IND_EQ;
     }
 
     // Return from INDENTER state with indent at higher level, when length greater.
@@ -847,7 +847,7 @@ private IElementType getIndenterToken() {
         indentStack.push(indent);
 
         popState();
-        return NimTypes.INDENT;
+        return NimElementTypes.INDENT;
     }
 
     // Handle dedents.
@@ -862,7 +862,7 @@ private IElementType getIndenterToken() {
         return TokenType.BAD_CHARACTER;
     }
 
-    dedentStack.push(NimTypes.IND_EQ);
+    dedentStack.push(NimElementTypes.IND_EQ);
 
     // Add required dedents to stack to be returned.
     while (diff > lastIndent.Increment) {
@@ -876,14 +876,14 @@ private IElementType getIndenterToken() {
             return TokenType.BAD_CHARACTER;
         }
 
-        dedentStack.push(NimTypes.DEDENT);
+        dedentStack.push(NimElementTypes.DEDENT);
     }
 
     lastIndentSpaces = lastIndent.Column;
 
     popState();
     pushState(DEDENTER);
-    return NimTypes.DEDENT;
+    return NimElementTypes.DEDENT;
 }
 
 private IElementType getDedenterToken() {
@@ -1157,52 +1157,52 @@ private IElementType getDedenterToken() {
             // fall through
           case 60: break;
           case 2: 
-            { return NimTypes.OP8;
+            { return NimElementTypes.OP8;
             } 
             // fall through
           case 61: break;
           case 3: 
-            { return NimTypes.OP0;
+            { return NimElementTypes.OP0;
             } 
             // fall through
           case 62: break;
           case 4: 
-            { return NimTypes.OPR;
+            { return NimElementTypes.OPR;
             } 
             // fall through
           case 63: break;
           case 5: 
-            { return NimTypes.OP9;
+            { return NimElementTypes.OP9;
             } 
             // fall through
           case 64: break;
           case 6: 
-            { return NimTypes.OP2;
+            { return NimElementTypes.OP2;
             } 
             // fall through
           case 65: break;
           case 7: 
-            { return NimTypes.IDENT;
+            { return NimElementTypes.IDENT;
             } 
             // fall through
           case 66: break;
           case 8: 
-            { return NimTypes.OP5;
+            { return NimElementTypes.OP5;
             } 
             // fall through
           case 67: break;
           case 9: 
-            { return NimTypes.OP7;
+            { return NimElementTypes.OP7;
             } 
             // fall through
           case 68: break;
           case 10: 
-            { return NimTypes.OP10;
+            { return NimElementTypes.OP10;
             } 
             // fall through
           case 69: break;
           case 11: 
-            { return NimTypes.INT_LIT;
+            { return NimElementTypes.INT_LIT;
             } 
             // fall through
           case 70: break;
@@ -1212,7 +1212,7 @@ private IElementType getDedenterToken() {
             // fall through
           case 71: break;
           case 13: 
-            { return NimTypes.BRACKET;
+            { return NimElementTypes.BRACKET;
             } 
             // fall through
           case 72: break;
@@ -1232,17 +1232,17 @@ private IElementType getDedenterToken() {
             // fall through
           case 75: break;
           case 17: 
-            { return NimTypes.C_SEMICOLON;
+            { return NimElementTypes.C_SEMICOLON;
             } 
             // fall through
           case 76: break;
           case 18: 
-            { return NimTypes.C_COMMA;
+            { return NimElementTypes.C_COMMA;
             } 
             // fall through
           case 77: break;
           case 19: 
-            { return NimTypes.C_GRAVE_ACCENT;
+            { return NimElementTypes.C_GRAVE_ACCENT;
             } 
             // fall through
           case 78: break;
@@ -1272,7 +1272,7 @@ private IElementType getDedenterToken() {
             // fall through
           case 83: break;
           case 25: 
-            { popState(); return NimTypes.COMMENT;
+            { popState(); return NimElementTypes.COMMENT;
             } 
             // fall through
           case 84: break;
@@ -1282,32 +1282,32 @@ private IElementType getDedenterToken() {
             // fall through
           case 85: break;
           case 27: 
-            { popState(); return NimTypes.STR_LIT;
+            { popState(); return NimElementTypes.STR_LIT;
             } 
             // fall through
           case 86: break;
           case 28: 
-            { popState(); return NimTypes.RSTR_LIT;
+            { popState(); return NimElementTypes.RSTR_LIT;
             } 
             // fall through
           case 87: break;
           case 29: 
-            { popState(); return NimTypes.GENERALIZED_STR_LIT;
+            { popState(); return NimElementTypes.GENERALIZED_STR_LIT;
             } 
             // fall through
           case 88: break;
           case 30: 
-            { popState(); return NimTypes.CHAR_LIT;
+            { popState(); return NimElementTypes.CHAR_LIT;
             } 
             // fall through
           case 89: break;
           case 31: 
-            { return NimTypes.OP1;
+            { return NimElementTypes.OP1;
             } 
             // fall through
           case 90: break;
           case 32: 
-            { return NimTypes.OP3;
+            { return NimElementTypes.OP3;
             } 
             // fall through
           case 91: break;
@@ -1322,17 +1322,17 @@ private IElementType getDedenterToken() {
             // fall through
           case 93: break;
           case 35: 
-            { return NimTypes.KEYW;
+            { return NimElementTypes.KEYW;
             } 
             // fall through
           case 94: break;
           case 36: 
-            { return NimTypes.OP6;
+            { return NimElementTypes.OP6;
             } 
             // fall through
           case 95: break;
           case 37: 
-            { return NimTypes.UINT_LIT;
+            { return NimElementTypes.UINT_LIT;
             } 
             // fall through
           case 96: break;
@@ -1342,32 +1342,32 @@ private IElementType getDedenterToken() {
             // fall through
           case 97: break;
           case 39: 
-            { if (popState() == 0) return NimTypes.COMMENT;
+            { if (popState() == 0) return NimElementTypes.COMMENT;
             } 
             // fall through
           case 98: break;
           case 40: 
-            { return NimTypes.OP4;
+            { return NimElementTypes.OP4;
             } 
             // fall through
           case 99: break;
           case 41: 
-            { return NimTypes.NIL;
+            { return NimElementTypes.NIL;
             } 
             // fall through
           case 100: break;
           case 42: 
-            { return NimTypes.INT8_LIT;
+            { return NimElementTypes.INT8_LIT;
             } 
             // fall through
           case 101: break;
           case 43: 
-            { return NimTypes.FLOAT_LIT;
+            { return NimElementTypes.FLOAT_LIT;
             } 
             // fall through
           case 102: break;
           case 44: 
-            { return NimTypes.UINT8_LIT;
+            { return NimElementTypes.UINT8_LIT;
             } 
             // fall through
           case 103: break;
@@ -1382,12 +1382,12 @@ private IElementType getDedenterToken() {
             // fall through
           case 105: break;
           case 47: 
-            { popState(); return NimTypes.TRIPLESTR_LIT;
+            { popState(); return NimElementTypes.TRIPLESTR_LIT;
             } 
             // fall through
           case 106: break;
           case 48: 
-            { popState(); return NimTypes.GENERALIZED_TRIPLESTR_LIT;
+            { popState(); return NimElementTypes.GENERALIZED_TRIPLESTR_LIT;
             } 
             // fall through
           case 107: break;
@@ -1397,47 +1397,47 @@ private IElementType getDedenterToken() {
             // fall through
           case 108: break;
           case 50: 
-            { return NimTypes.BOOL_LIT;
+            { return NimElementTypes.BOOL_LIT;
             } 
             // fall through
           case 109: break;
           case 51: 
-            { return NimTypes.INT16_LIT;
+            { return NimElementTypes.INT16_LIT;
             } 
             // fall through
           case 110: break;
           case 52: 
-            { return NimTypes.INT64_LIT;
+            { return NimElementTypes.INT64_LIT;
             } 
             // fall through
           case 111: break;
           case 53: 
-            { return NimTypes.INT32_LIT;
+            { return NimElementTypes.INT32_LIT;
             } 
             // fall through
           case 112: break;
           case 54: 
-            { return NimTypes.FLOAT64_LIT;
+            { return NimElementTypes.FLOAT64_LIT;
             } 
             // fall through
           case 113: break;
           case 55: 
-            { return NimTypes.FLOAT32_LIT;
+            { return NimElementTypes.FLOAT32_LIT;
             } 
             // fall through
           case 114: break;
           case 56: 
-            { return NimTypes.UINT16_LIT;
+            { return NimElementTypes.UINT16_LIT;
             } 
             // fall through
           case 115: break;
           case 57: 
-            { return NimTypes.UINT64_LIT;
+            { return NimElementTypes.UINT64_LIT;
             } 
             // fall through
           case 116: break;
           case 58: 
-            { return NimTypes.UINT32_LIT;
+            { return NimElementTypes.UINT32_LIT;
             } 
             // fall through
           case 117: break;

@@ -31,14 +31,15 @@
 {
   parserClass="com.tiepy.nimatron.parser.NimParser"
 
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  implements="com.tiepy.nimatron.psi.NimElement"
+  extends="com.tiepy.nimatron.psi.impl.NimElementImpl"
 
   psiClassPrefix="Nim"
   psiImplClassSuffix="Impl"
-  psiPackage="com.tiepy.nimatron.parser"
-  psiImplPackage="com.tiepy.nimatron.parser.impl"
+  psiPackage="com.tiepy.nimatron.psi"
+  psiImplPackage="com.tiepy.nimatron.psi.impl"
 
-  elementTypeHolderClass="com.tiepy.nimatron.parser.NimTypes"
+  elementTypeHolderClass="com.tiepy.nimatron.psi.NimElementTypes"
   elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
@@ -48,8 +49,6 @@
     C_COMMA="C_COMMA"
     C_GRAVE_ACCENT="C_GRAVE_ACCENT"
   ]
-
-  psiImplUtilClass="com.tiepy.nimatron.parser.impl.NimPsiImplUtil"
 }
 
 //module = stmt ^* (';' / IND{=})
