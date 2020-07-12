@@ -19,10 +19,10 @@
                 extensions="nim"/>
         <lang.parserDefinition
                 language="Nim"
-                implementationClass="com.tiepy.nimatron.NimParserDefinition"/>
+                implementationClass="com.tiepy.nimatron.psi.parser.NimParserDefinition"/>
         <lang.syntaxHighlighterFactory
                 language="Nim"
-                implementationClass="com.tiepy.nimatron.NimSyntaxHighlighterFactory"/>
+                implementationClass="com.tiepy.nimatron.syntaxHighlighter.NimSyntaxHighlighterFactory"/>
         <colorSettingsPage
                 implementation="com.tiepy.nimatron.NimColorSettingsPage"/>
         <lang.commenter

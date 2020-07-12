@@ -28,13 +28,15 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.psi.parser;
 
 import com.intellij.lang.*;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.tree.*;
+import com.tiepy.nimatron.NimLanguage;
+import com.tiepy.nimatron.syntaxHighlighter.NimSyntaxLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import com.tiepy.nimatron.parser.NimParser;
 import com.tiepy.nimatron.psi.*;

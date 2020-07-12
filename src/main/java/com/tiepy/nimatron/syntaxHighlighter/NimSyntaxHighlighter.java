@@ -28,7 +28,7 @@
  * questions.
  */
 
-package com.tiepy.nimatron;
+package com.tiepy.nimatron.syntaxHighlighter;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.*;
