@@ -2,7 +2,7 @@
 
 ## 1.1.0-preview
 
-  * Adding lexer support for discard-style block comment.
+  * Added lexer support for discard-style block comment.
 
 ## 1.0.2
 
