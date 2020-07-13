@@ -315,7 +315,7 @@ private IElementType getDedenterToken() {
 <YYINITIAL> {
     {CRLF}                      { handleIndent(); }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
-    #                           { pushState(LINE_COMMENT); }
+    #                           { yypushback(1); pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
@@ -401,6 +401,7 @@ private IElementType getDedenterToken() {
 
 <LINE_COMMENT> {
     .+                          { popState(); return NimElementTypes.COMMENT; }
+    {CRLF}                      { popState(); return NimElementTypes.COMMENT; }
 }
 
 <BLOCK_COMMENT> {
