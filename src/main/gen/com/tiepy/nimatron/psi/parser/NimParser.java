@@ -3221,7 +3221,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '{' ((exprColonEqExpr comma)+ | ':') '}'
+  // '{' ((exprColonEqExpr comma)+ | ':' ) '}'
   public static boolean setOrTableConstr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "setOrTableConstr")) return false;
     boolean r;

@@ -47,7 +47,7 @@ import java.util.Stack;
 %eof}
 
 OP0A=->
-OP0B=~>
+OP0B=\~>
 OP0C==>
 //OP0={OP0A}|{OP0B}|{OP0C}
 
@@ -313,9 +313,9 @@ private IElementType getDedenterToken() {
 %%
 
 <YYINITIAL> {
-    {CRLF}                      { handleIndent(); }
+    {CRLF}                      { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
-    #                           { yypushback(1); pushState(LINE_COMMENT); }
+    #                           { pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
