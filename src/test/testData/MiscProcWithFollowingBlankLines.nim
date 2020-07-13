@@ -1,3 +1,2 @@
-getAlphabet()
-
+echo("Hello") #
 
