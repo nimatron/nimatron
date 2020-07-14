@@ -60,14 +60,16 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
         // Evaluate the collection.
         for (final NimStmtImpl statement : statements) {
 
-            String str = statement.getText();
-            int trim = str.length() - str.trim().length();
-
-            // Add a folding descriptor for the statement at this node.
             int start = statement.getTextRange().getStartOffset();
-            int end = statement.getTextRange().getEndOffset() - trim;
+            int end = statement.getTextRange().getEndOffset();
             if (end > start) {
-                list.add(new FoldingDescriptor(statement.getNode(), new TextRange(start, end)));
+                // Add a folding descriptor for the statement at this node.
+
+                // Don't include trailing newlines.
+                String str = statement.getText();
+                int trim = str.length() - str.trim().length();
+
+                list.add(new FoldingDescriptor(statement.getNode(), new TextRange(start, end - trim)));
             }
         }
 
