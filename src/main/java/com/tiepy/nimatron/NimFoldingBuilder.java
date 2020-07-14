@@ -59,15 +59,15 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
 
         // Evaluate the collection.
         for (final NimStmtImpl statement : statements) {
-            try {
 
-                // Add a folding descriptor for the statement at this node.
-                list.add(new FoldingDescriptor(statement.getNode(),
-                        new TextRange(statement.getTextRange().getStartOffset() + 1,
-                                statement.getTextRange().getEndOffset() - 1)));
+            String str = statement.getText();
+            int trim = str.length() - str.trim().length();
 
-            } catch (Exception ex) {
-                // Ignore
+            // Add a folding descriptor for the statement at this node.
+            int start = statement.getTextRange().getStartOffset();
+            int end = statement.getTextRange().getEndOffset() - trim;
+            if (end > start) {
+                list.add(new FoldingDescriptor(statement.getNode(), new TextRange(start, end)));
             }
         }
 
@@ -80,6 +80,8 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
     public String getPlaceholderText(@NotNull ASTNode node) {
         // TODO: Get name of routine.
 
+        return node.getPsi().getText().trim();
+
 /*
         final ASTNode first = node.getFirstChildNode();
         final ASTNode last = node.getLastChildNode();
@@ -89,7 +91,7 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
         }
 */
 
-        return "...";
+//        return "...";
     }
 
     @Override
