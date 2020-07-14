@@ -3,7 +3,13 @@
     <name>Nimatron</name>
     <vendor email="nimatron-support@tiepy.com" url="https://tiepy.com">TiePy Ltd</vendor>
     <description><![CDATA[
-    Syntax-highlighting for the Nim programming language. More to come.
+    <p>Language plugin for the Nim programming language.</p>
+    <p>Currently provides the following features:</p>
+    <ul>
+        <li>Syntax-highlighting.</li>
+        <li>Nim routines (funcs, procs, etc) listed in Structure View.</li>
+        <li>Folding of Nim statements.</li>
+    </ul>
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

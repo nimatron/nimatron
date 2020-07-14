@@ -1,9 +1,11 @@
 # Release notes
 
-## 1.1.0-preview
+## 1.1.0
 
   * Added initial structure view showing routines.
   * Added initial code-folding of statements.
+
+This is the first release with a fully-implemented Nim parser.
 
 ## 1.0.3
 
