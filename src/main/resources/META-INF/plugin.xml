@@ -33,6 +33,9 @@
                 implementationClass="com.tiepy.nimatron.structureView.NimStructureViewFactory"/>
         <iconProvider
                 implementation="com.tiepy.nimatron.NimIconProvider" />
+        <lang.foldingBuilder
+                language="Nim"
+                implementationClass="com.tiepy.nimatron.NimFoldingBuilder"/>
     </extensions>
 
     <actions>
