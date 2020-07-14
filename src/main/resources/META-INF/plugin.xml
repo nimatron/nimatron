@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.tiepy.nimatron</id>
     <name>Nimatron</name>
-    <vendor email="nimatron-support@tiepy.com" url="https://tiepy.com">TiePy Ltd</vendor>
+    <vendor email="nimatron-support@tiepy.com" url="https://tiepy.com">TiePy</vendor>
     <description><![CDATA[
     <p>Language plugin for the Nim programming language.</p>
     <p>Currently provides the following features:</p>
