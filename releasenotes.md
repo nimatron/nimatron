@@ -2,6 +2,12 @@
 
 ## 1.1.0-preview
 
+  * Added initial structure view showing routines.
+  * Added initial code-folding of statements.
+
+## 1.0.3
+
+  * Replaced PNG file icon with SVG icon.
   * Added lexer support for discard-style block comment.
 
 ## 1.0.2
