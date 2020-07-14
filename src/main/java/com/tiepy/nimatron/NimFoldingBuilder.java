@@ -80,20 +80,9 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
     @Nullable
     @Override
     public String getPlaceholderText(@NotNull ASTNode node) {
-        // TODO: Get name of routine.
-
-        return node.getPsi().getText().trim();
-
-/*
-        final ASTNode first = node.getFirstChildNode();
-        final ASTNode last = node.getLastChildNode();
-
-        if (first != null && last != null) {
-            return first.getText() + "..." + last.getText();
-        }
-*/
-
-//        return "...";
+        String str = node.getPsi().getText().trim();
+        if (str.length() > 80) str = str.substring(0, 77) + "...";
+        return str;
     }
 
     @Override
