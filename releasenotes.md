@@ -1,5 +1,9 @@
 # Release notes
 
+## 1.1.1
+
+  * Fix to grammar to parse multi-line arrays properly.
+
 ## 1.1.0
 
   * Added initial structure view showing routines.
