@@ -180,7 +180,7 @@ identOrLiteral ::= generalizedLit | symbol | literal
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
 //arrayConstr = '[' optInd (exprColonEqExpr comma?)* optPar ']'
-arrayConstr ::= '[' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd (']')>>
+arrayConstr ::= '[' (<<optInd (exprColonEqExpr comma?)>>)* <<optInd (']')>>
 
 //primarySuffix = '(' (exprColonEqExpr comma?)* ')'
 //      | '.' optInd symbol generalizedLit?

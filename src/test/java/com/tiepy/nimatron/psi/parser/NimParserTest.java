@@ -37,6 +37,10 @@ public class NimParserTest extends ParsingTestCase {
         super("", "nim", new NimParserDefinition());
     }
 
+    public void testMiscArrayIndented() {
+        doTest(true, true);
+    }
+
     public void testMiscBlock() {
         doTest(true, true);
     }

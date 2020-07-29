@@ -36,43 +36,48 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '[' <<optInd ((exprColonEqExpr comma?)*)>> <<optInd (']')>>
+  // '[' (<<optInd (exprColonEqExpr comma?)>>)* <<optInd (']')>>
   public static boolean arrayConstr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arrayConstr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ARRAY_CONSTR, "<array constr>");
     r = consumeToken(b, "[");
-    r = r && optInd(b, l + 1, arrayConstr_1_0_parser_);
+    r = r && arrayConstr_1(b, l + 1);
     r = r && optInd(b, l + 1, arrayConstr_2_0_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (exprColonEqExpr comma?)*
-  private static boolean arrayConstr_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "arrayConstr_1_0")) return false;
+  // (<<optInd (exprColonEqExpr comma?)>>)*
+  private static boolean arrayConstr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!arrayConstr_1_0_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "arrayConstr_1_0", c)) break;
+      if (!arrayConstr_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "arrayConstr_1", c)) break;
     }
     return true;
   }
 
+  // <<optInd (exprColonEqExpr comma?)>>
+  private static boolean arrayConstr_1_0(PsiBuilder b, int l) {
+    return optInd(b, l + 1, arrayConstr_1_0_0_0_parser_);
+  }
+
   // exprColonEqExpr comma?
-  private static boolean arrayConstr_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "arrayConstr_1_0_0")) return false;
+  private static boolean arrayConstr_1_0_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_1_0_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = exprColonEqExpr(b, l + 1);
-    r = r && arrayConstr_1_0_0_1(b, l + 1);
+    r = r && arrayConstr_1_0_0_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // comma?
-  private static boolean arrayConstr_1_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "arrayConstr_1_0_0_1")) return false;
+  private static boolean arrayConstr_1_0_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_1_0_0_0_1")) return false;
     comma(b, l + 1);
     return true;
   }
@@ -4738,9 +4743,9 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  static final Parser arrayConstr_1_0_parser_ = new Parser() {
+  static final Parser arrayConstr_1_0_0_0_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
-      return arrayConstr_1_0(b, l + 1);
+      return arrayConstr_1_0_0_0(b, l + 1);
     }
   };
   static final Parser arrayConstr_2_0_parser_ = new Parser() {
