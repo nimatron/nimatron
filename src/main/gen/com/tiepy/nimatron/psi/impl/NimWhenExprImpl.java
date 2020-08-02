@@ -26,9 +26,9 @@ public class NimWhenExprImpl extends NimElementImpl implements NimWhenExpr {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimCondExpr getCondExpr() {
-    return findNotNullChildByClass(NimCondExpr.class);
+    return findChildByClass(NimCondExpr.class);
   }
 
 }

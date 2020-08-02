@@ -10,10 +10,10 @@ public interface NimTemplateStmt extends NimNamedElement {
   @Nullable
   NimOprCombo getOprCombo();
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
-  @NotNull
+  @Nullable
   NimSymbol getNameIdentifier();
 
 }

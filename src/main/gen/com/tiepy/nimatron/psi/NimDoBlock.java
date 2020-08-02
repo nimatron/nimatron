@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimDoBlock extends NimElement {
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
-  @NotNull
+  @Nullable
   NimParamsArrow getParamsArrow();
 
   @Nullable

@@ -26,9 +26,9 @@ public class NimTypeClassParamImpl extends NimElementImpl implements NimTypeClas
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimSymbol getSymbol() {
-    return findNotNullChildByClass(NimSymbol.class);
+    return findChildByClass(NimSymbol.class);
   }
 
 }

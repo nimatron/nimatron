@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimColonBody extends NimElement {
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
   @Nullable

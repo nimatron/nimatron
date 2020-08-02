@@ -13,7 +13,7 @@ public interface NimCaseStmt extends NimElement {
   @Nullable
   NimCaseStmt2 getCaseStmt2();
 
-  @NotNull
+  @Nullable
   NimExpr getExpr();
 
 }

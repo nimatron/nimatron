@@ -13,7 +13,7 @@ public interface NimExportStmt extends NimElement {
   @NotNull
   List<NimExpr> getExprList();
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
 }

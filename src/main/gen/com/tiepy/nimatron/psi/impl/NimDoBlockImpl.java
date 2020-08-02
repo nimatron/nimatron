@@ -26,15 +26,15 @@ public class NimDoBlockImpl extends NimElementImpl implements NimDoBlock {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimParamsArrow getParamsArrow() {
-    return findNotNullChildByClass(NimParamsArrow.class);
+    return findChildByClass(NimParamsArrow.class);
   }
 
   @Override

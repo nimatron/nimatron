@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimConverterStmt extends NimNamedElement {
+public interface NimTypeDefAux1 extends NimElement {
 
   @Nullable
-  NimOprCombo getOprCombo();
-
-  @Nullable
-  NimOptInd getOptInd();
-
-  @Nullable
-  NimSymbol getNameIdentifier();
+  NimTypeClass getTypeClass();
 
 }

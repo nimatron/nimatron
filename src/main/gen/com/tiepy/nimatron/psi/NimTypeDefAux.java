@@ -14,6 +14,6 @@ public interface NimTypeDefAux extends NimElement {
   NimSimpleExpr getSimpleExpr();
 
   @Nullable
-  NimTypeClass getTypeClass();
+  NimTypeDefAux1 getTypeDefAux1();
 
 }

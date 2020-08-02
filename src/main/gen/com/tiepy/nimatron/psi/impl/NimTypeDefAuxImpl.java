@@ -39,8 +39,8 @@ public class NimTypeDefAuxImpl extends NimElementImpl implements NimTypeDefAux {
 
   @Override
   @Nullable
-  public NimTypeClass getTypeClass() {
-    return findChildByClass(NimTypeClass.class);
+  public NimTypeDefAux1 getTypeDefAux1() {
+    return findChildByClass(NimTypeDefAux1.class);
   }
 
 }

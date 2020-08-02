@@ -38,9 +38,9 @@ public class NimImportStmtImpl extends NimElementImpl implements NimImportStmt {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
 }

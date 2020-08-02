@@ -26,9 +26,9 @@ public class NimPrimary3Impl extends NimElementImpl implements NimPrimary3 {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimPrimary getPrimary() {
-    return findNotNullChildByClass(NimPrimary.class);
+    return findChildByClass(NimPrimary.class);
   }
 
 }

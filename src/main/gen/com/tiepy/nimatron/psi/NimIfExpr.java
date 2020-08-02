@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimIfExpr extends NimElement {
 
-  @NotNull
+  @Nullable
   NimCondExpr getCondExpr();
 
 }

@@ -38,9 +38,9 @@ public class NimCaseStmtImpl extends NimElementImpl implements NimCaseStmt {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
+    return findChildByClass(NimExpr.class);
   }
 
 }

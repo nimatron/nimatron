@@ -26,15 +26,15 @@ public class NimWhileStmtImpl extends NimElementImpl implements NimWhileStmt {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
+    return findChildByClass(NimExpr.class);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
 }

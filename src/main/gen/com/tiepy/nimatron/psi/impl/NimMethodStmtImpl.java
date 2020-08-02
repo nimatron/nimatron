@@ -32,15 +32,15 @@ public class NimMethodStmtImpl extends NimNamedElementImpl implements NimMethodS
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimSymbol getNameIdentifier() {
-    return findNotNullChildByClass(NimSymbol.class);
+    return findChildByClass(NimSymbol.class);
   }
 
 }

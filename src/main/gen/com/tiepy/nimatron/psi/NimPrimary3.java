@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimPrimary3 extends NimElement {
 
-  @NotNull
+  @Nullable
   NimPrimary getPrimary();
 
 }

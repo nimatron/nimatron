@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimMacroStmtImpl extends NimNamedElementImpl implements NimMacroStmt {
+public class NimTypeDefAux1Impl extends NimElementImpl implements NimTypeDefAux1 {
 
-  public NimMacroStmtImpl(@NotNull ASTNode node) {
+  public NimTypeDefAux1Impl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitMacroStmt(this);
+    visitor.visitTypeDefAux1(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,20 +27,8 @@ public class NimMacroStmtImpl extends NimNamedElementImpl implements NimMacroStm
 
   @Override
   @Nullable
-  public NimOprCombo getOprCombo() {
-    return findChildByClass(NimOprCombo.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
-  public NimSymbol getNameIdentifier() {
-    return findChildByClass(NimSymbol.class);
+  public NimTypeClass getTypeClass() {
+    return findChildByClass(NimTypeClass.class);
   }
 
 }

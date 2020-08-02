@@ -123,6 +123,7 @@ public interface NimElementTypes {
   IElementType TYPE_CLASS_PARAM = new NimElementType("TYPE_CLASS_PARAM");
   IElementType TYPE_DEF = new NimElementType("TYPE_DEF");
   IElementType TYPE_DEF_AUX = new NimElementType("TYPE_DEF_AUX");
+  IElementType TYPE_DEF_AUX_1 = new NimElementType("TYPE_DEF_AUX_1");
   IElementType TYPE_DESC = new NimElementType("TYPE_DESC");
   IElementType TYPE_KEYW = new NimElementType("TYPE_KEYW");
   IElementType TYPE_STMT = new NimElementType("TYPE_STMT");
@@ -553,6 +554,9 @@ public interface NimElementTypes {
       }
       else if (type == TYPE_DEF_AUX) {
         return new NimTypeDefAuxImpl(node);
+      }
+      else if (type == TYPE_DEF_AUX_1) {
+        return new NimTypeDefAux1Impl(node);
       }
       else if (type == TYPE_DESC) {
         return new NimTypeDescImpl(node);

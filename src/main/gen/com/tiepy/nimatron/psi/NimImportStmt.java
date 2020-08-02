@@ -13,7 +13,7 @@ public interface NimImportStmt extends NimElement {
   @Nullable
   NimImportStmt1 getImportStmt1();
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
 }
