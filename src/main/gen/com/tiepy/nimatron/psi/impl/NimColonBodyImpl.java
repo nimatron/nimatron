@@ -27,12 +27,6 @@ public class NimColonBodyImpl extends NimElementImpl implements NimColonBody {
 
   @Override
   @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
-  @NotNull
   public NimOptInd getOptInd() {
     return findNotNullChildByClass(NimOptInd.class);
   }

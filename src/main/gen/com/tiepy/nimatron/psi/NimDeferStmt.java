@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimDeferStmt extends NimElement {
 
   @NotNull
-  NimColcom getColcom();
-
-  @NotNull
   NimOptInd getOptInd();
 
 }

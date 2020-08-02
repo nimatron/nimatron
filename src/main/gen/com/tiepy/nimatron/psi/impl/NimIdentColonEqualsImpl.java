@@ -27,12 +27,6 @@ public class NimIdentColonEqualsImpl extends NimElementImpl implements NimIdentC
 
   @Override
   @NotNull
-  public List<NimComma> getCommaList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimOptInd> getOptIndList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }

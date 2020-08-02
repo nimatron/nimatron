@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimPrimarySuffix1 extends NimElement {
 
   @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
   List<NimExprColonEqExpr> getExprColonEqExprList();
 
 }

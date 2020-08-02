@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimDoBlock extends NimElement {
 
   @NotNull
-  NimColcom getColcom();
-
-  @NotNull
   NimOptInd getOptInd();
 
   @NotNull

@@ -42,19 +42,7 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
-  public void visitColcom(@NotNull NimColcom o) {
-    visitElement(o);
-  }
-
-  public void visitColon(@NotNull NimColon o) {
-    visitElement(o);
-  }
-
   public void visitColonBody(@NotNull NimColonBody o) {
-    visitElement(o);
-  }
-
-  public void visitComma(@NotNull NimComma o) {
     visitElement(o);
   }
 
@@ -419,10 +407,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitRoutine(@NotNull NimRoutine o) {
-    visitElement(o);
-  }
-
-  public void visitSemicolon(@NotNull NimSemicolon o) {
     visitElement(o);
   }
 

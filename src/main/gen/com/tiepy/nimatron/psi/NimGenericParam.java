@@ -8,12 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimGenericParam extends NimElement {
 
   @Nullable
-  NimColon getColon();
-
-  @NotNull
-  List<NimComma> getCommaList();
-
-  @Nullable
   NimExpr getExpr();
 
   @Nullable

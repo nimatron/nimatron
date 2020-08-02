@@ -27,12 +27,6 @@ public class NimStmtsImpl extends NimElementImpl implements NimStmts {
 
   @Override
   @NotNull
-  public List<NimSemicolon> getSemicolonList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSemicolon.class);
-  }
-
-  @Override
-  @NotNull
   public List<NimStmt> getStmtList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }

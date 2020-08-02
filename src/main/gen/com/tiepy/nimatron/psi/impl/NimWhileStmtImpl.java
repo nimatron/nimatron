@@ -27,12 +27,6 @@ public class NimWhileStmtImpl extends NimElementImpl implements NimWhileStmt {
 
   @Override
   @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
-  @NotNull
   public NimExpr getExpr() {
     return findNotNullChildByClass(NimExpr.class);
   }

@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimTryExpr extends NimElement {
 
   @NotNull
-  NimColcom getColcom();
-
-  @NotNull
   List<NimOptInd> getOptIndList();
 
 }
