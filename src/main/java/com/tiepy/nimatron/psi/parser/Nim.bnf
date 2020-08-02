@@ -47,6 +47,7 @@
     C_SEMICOLON="C_SEMICOLON"
     C_COMMA="C_COMMA"
     C_GRAVE_ACCENT="C_GRAVE_ACCENT"
+    COMMENT="COMMENT"
   ]
 }
 
@@ -55,16 +56,16 @@ module ::= IND_EQ* stmts? semicolon? IND_EQ*
 stmts ::= stmt ((semicolon | IND_EQ) stmt)*
 
 //comma = ',' COMMENT?
-comma ::= ',' COMMENT?
+comma ::= ','
 
 //semicolon = ';' COMMENT?
-semicolon ::= ';' COMMENT?
+semicolon ::= ';'
 
 //colon = ':' COMMENT?
-colon ::= ':' COMMENT?
+colon ::= ':'
 
 //colcom = ':' COMMENT?
-colcom ::= ':' COMMENT?
+colcom ::= ':'
 
 op0 ::= OP0A|OP0B|OP0C
 op1 ::= OP1A|OP1B|OP1C|OP1D
@@ -88,7 +89,7 @@ operator ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|'from'|'static'|'..'
 
 //optInd = COMMENT? IND?
 termInd ::= DEDENT | <<eof>>
-meta optInd ::= <<RULE>> | (INDENT <<RULE>>? COMMENT? (IND_EQ <<RULE>>? COMMENT?)* termInd)
+meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //optPar = (IND{>} | IND{=})?
 
@@ -371,7 +372,7 @@ continueStmt ::= 'break' <<optInd expr>>?
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
-condStmt ::= expr colcom <<optInd stmts>> COMMENT?
+condStmt ::= expr colcom <<optInd stmts>>
              (IND_EQ 'elif' expr colcom <<optInd stmts>>)*
              (IND_EQ 'else' colcom <<optInd stmts>>)?
 
@@ -397,7 +398,7 @@ ofBranches ::= ofBranch (IND_EQ ofBranch)*
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
 //            | IND{=} ofBranches)
-caseStmt ::= 'case' expr ':'? COMMENT? (caseStmt1 | caseStmt2)
+caseStmt ::= 'case' expr ':'? (caseStmt1 | caseStmt2)
 caseStmt1 ::= INDENT ofBranches DEDENT
 caseStmt2 ::= IND_EQ ofBranches
 
@@ -445,7 +446,7 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= pattern? genericParams? paramsColon pragma? ('=' COMMENT? <<optInd stmts>>)?
+routine ::= pattern? genericParams? paramsColon pragma? ('=' <<optInd stmts>>)?
 
 //commentStmt = COMMENT
 
@@ -502,7 +503,7 @@ bindStmt ::= 'bind' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>>
 mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>>
 
 //pragmaStmt = pragma (':' COMMENT? stmt)?
-pragmaStmt ::= pragma (':' COMMENT? <<optInd stmts>>)?
+pragmaStmt ::= pragma (':' <<optInd stmts>>)?
 
 //simpleStmt = ((returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //           | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
@@ -537,37 +538,36 @@ varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 
-stmt ::= ifStmt COMMENT?
-       | whenStmt COMMENT?
-       | whileStmt COMMENT?
-       | tryStmt COMMENT?
-       | forStmt COMMENT?
-       | blockStmt COMMENT?
-       | staticStmt COMMENT?
-       | deferStmt COMMENT?
-       | asmStmt COMMENT?
-       | procStmt COMMENT?
-       | funcStmt COMMENT?
-       | methodStmt COMMENT?
-       | iteratorStmt COMMENT?
-       | macroStmt COMMENT?
-       | templateStmt COMMENT?
-       | converterStmt COMMENT?
-       | typeStmt COMMENT?
-       | constStmt COMMENT?
-       | varStmt COMMENT?
-       | bindStmt COMMENT?
-       | mixinStmt COMMENT?
-       | returnStmt COMMENT?
-       | raiseStmt COMMENT?
-       | yieldStmt COMMENT?
-       | discardStmt COMMENT?
-       | breakStmt COMMENT?
-       | continueStmt COMMENT?
-       | pragmaStmt COMMENT?
-       | importStmt COMMENT?
-       | exportStmt COMMENT?
-       | fromStmt COMMENT?
-       | includeStmt COMMENT?
-       | exprStmt COMMENT?
-       | COMMENT
+stmt ::= ifStmt
+       | whenStmt
+       | whileStmt
+       | tryStmt
+       | forStmt
+       | blockStmt
+       | staticStmt
+       | deferStmt
+       | asmStmt
+       | procStmt
+       | funcStmt
+       | methodStmt
+       | iteratorStmt
+       | macroStmt
+       | templateStmt
+       | converterStmt
+       | typeStmt
+       | constStmt
+       | varStmt
+       | bindStmt
+       | mixinStmt
+       | returnStmt
+       | raiseStmt
+       | yieldStmt
+       | discardStmt
+       | breakStmt
+       | continueStmt
+       | pragmaStmt
+       | importStmt
+       | exportStmt
+       | fromStmt
+       | includeStmt
+       | exprStmt

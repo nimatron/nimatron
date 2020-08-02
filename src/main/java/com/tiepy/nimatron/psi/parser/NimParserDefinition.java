@@ -66,8 +66,7 @@ public class NimParserDefinition implements ParserDefinition {
     @NotNull
     @Override
     public TokenSet getCommentTokens() {
-        //return COMMENTS;
-        return TokenSet.EMPTY;
+        return COMMENTS;
     }
 
     @NotNull
