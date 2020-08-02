@@ -534,7 +534,10 @@ private simpleStmt1 ::= returnStmt | raiseStmt | yieldStmt | discardStmt | break
 //                    | ('let' | 'var' | 'using') section(variable)
 //                    | bindStmt | mixinStmt)
 //                    / simpleStmt
-complexOrSimpleStmt ::= complexStmt | simpleStmt
+
+//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
+
+stmt ::= complexStmt | simpleStmt
 private complexStmt ::= ifStmt
                       | whenStmt
                       | whileStmt
@@ -567,7 +570,3 @@ converterStmt ::= 'converter' symbol oprCombo? <<optInd routine>> {pin=1 methods
 typeStmt ::= 'type' <<optInd typeDef>> {pin=1}
 constStmt ::= 'const' <<optInd constant>> {pin=1}
 varStmt ::= ('let'|'var'|'using') <<optInd variable>> {pin=1}
-
-//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
-stmt ::= complexOrSimpleStmt | simpleStmt {recoverWhile=sequenceRecover}
-private sequenceRecover ::= !(';' | IND_EQ | DEDENT)

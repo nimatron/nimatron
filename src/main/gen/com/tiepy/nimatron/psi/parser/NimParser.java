@@ -332,18 +332,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // complexStmt | simpleStmt
-  public static boolean complexOrSimpleStmt(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "complexOrSimpleStmt")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, COMPLEX_OR_SIMPLE_STMT, "<complex or simple stmt>");
-    r = complexStmt(b, l + 1);
-    if (!r) r = simpleStmt(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // ifStmt
   //                       | whenStmt
   //                       | whileStmt
@@ -3261,27 +3249,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !(';' | IND_EQ | DEDENT)
-  static boolean sequenceRecover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "sequenceRecover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !sequenceRecover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ';' | IND_EQ | DEDENT
-  private static boolean sequenceRecover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "sequenceRecover_0")) return false;
-    boolean r;
-    r = consumeToken(b, ";");
-    if (!r) r = consumeToken(b, IND_EQ);
-    if (!r) r = consumeToken(b, DEDENT);
-    return r;
-  }
-
-  /* ********************************************************** */
   // '{' setOrTableConstr1 '}'
   public static boolean setOrTableConstr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "setOrTableConstr")) return false;
@@ -3422,14 +3389,14 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // complexOrSimpleStmt | simpleStmt
+  // complexStmt | simpleStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = complexOrSimpleStmt(b, l + 1);
+    r = complexStmt(b, l + 1);
     if (!r) r = simpleStmt(b, l + 1);
-    exit_section_(b, l, m, r, false, sequenceRecover_parser_);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -4346,11 +4313,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser routine_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return routine(b, l + 1);
-    }
-  };
-  static final Parser sequenceRecover_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return sequenceRecover(b, l + 1);
     }
   };
   static final Parser stmts_parser_ = new Parser() {

@@ -16,7 +16,6 @@ public interface NimElementTypes {
   IElementType CASE_STMT = new NimElementType("CASE_STMT");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
-  IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
   IElementType COND_STMT = new NimElementType("COND_STMT");
   IElementType CONSTANT = new NimElementType("CONSTANT");
@@ -198,9 +197,6 @@ public interface NimElementTypes {
       }
       else if (type == COLON_BODY) {
         return new NimColonBodyImpl(node);
-      }
-      else if (type == COMPLEX_OR_SIMPLE_STMT) {
-        return new NimComplexOrSimpleStmtImpl(node);
       }
       else if (type == COND_EXPR) {
         return new NimCondExprImpl(node);
