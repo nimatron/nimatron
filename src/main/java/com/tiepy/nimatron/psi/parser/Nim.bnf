@@ -137,10 +137,7 @@ castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>>
 //                       | (':' expr (',' exprColonEqExpr     ^+ ',' )? ) ) )
 //          optPar ')'
 par ::= '(' <<optInd par1>> <<optInd (')')>>
-par1 ::= par2
-       | par3
-       | pragmaStmt
-       | par4
+par1 ::= par2 | par3 | pragmaStmt | par4
 par2 ::= stmt (';' stmt)*
 par3 ::= ';' stmt (';' stmt)*
 par4 ::= simpleExpr (par5 | par6)
@@ -195,9 +192,9 @@ primarySuffix5 ::= <<optInd exprs>> // command syntax
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
 //         'else' colcom expr
-condExpr ::= expr ':' <<optInd expr>>
-          ('elif' expr ':' <<optInd expr>>)*
-           'else' ':' expr
+condExpr ::= expr ':' <<optInd expr>> condExpr1* condExpr2? // NOTE: Added '?' to condExpr2
+condExpr1 ::= 'elif' expr ':' <<optInd expr>>
+condExpr2 ::= 'else' ':' expr
 
 //ifExpr = 'if' condExpr
 ifExpr ::= 'if' condExpr {pin=1}
@@ -286,9 +283,7 @@ typeKeyw ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-primary ::= primary1
-          | primary2
-          | primary3
+primary ::= primary1 | primary2 | primary3
 primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
 primary2 ::= operator* identOrLiteral primarySuffix*
 primary3 ::= 'bind' primary {pin=1}
@@ -365,9 +360,9 @@ continueStmt ::= 'break' <<optInd expr>>? {pin=1}
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
-condStmt ::= expr ':' <<optInd stmts>>
-             (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-             (IND_EQ 'else' ':' <<optInd stmts>>)? {pin=2}
+condStmt ::= expr ':' <<optInd stmts>> condStmt1* condStmt2? {pin=2}
+condStmt1 ::= IND_EQ 'elif' expr ':' <<optInd stmts>> {pin=1}
+condStmt2 ::= IND_EQ 'else' ':' <<optInd stmts>> {pin=1}
 
 //ifStmt = 'if' condStmt
 ifStmt ::= 'if' condStmt {pin=1}
@@ -384,9 +379,9 @@ ofBranch ::= 'of' exprs ':' <<optInd stmts>> {pin=1}
 //ofBranches = ofBranch (IND{=} ofBranch)*
 //                      (IND{=} 'elif' expr colcom stmt)*
 //                      (IND{=} 'else' colcom stmt)?
-ofBranches ::= ofBranch (IND_EQ ofBranch)*
-                        (IND_EQ 'elif' expr ':' <<optInd stmts>>)*
-                        (IND_EQ 'else' ':' <<optInd stmts>>)?
+ofBranches ::= ofBranch (IND_EQ ofBranch)* ofBranches1* ofBranches2?
+ofBranches1 ::= IND_EQ 'elif' expr ':' <<optInd stmts>> {pin=2}
+ofBranches2 ::= IND_EQ 'else' ':' <<optInd stmts>> {pin=2}
 
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
@@ -398,16 +393,16 @@ caseStmt2 ::= IND_EQ ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':' <<optInd stmts>>
-             (IND_EQ? 'except' exprs ':' <<optInd stmts>>)*
-             (IND_EQ? 'finally' ':' <<optInd stmts>>)? {pin=1}
+tryStmt ::= 'try' ':' <<optInd stmts>> tryStmt1* tryStmt2? {pin=1}
+tryStmt1 ::= IND_EQ? 'except' exprs ':' <<optInd stmts>> {pin=2}
+tryStmt2 ::= IND_EQ? 'finally' ':' <<optInd stmts>> {pin=2}
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
-tryExpr ::= 'try' ':' <<optInd stmts>>
-             (<<optInd ('except' exprs ':' <<optInd stmts>>)>>)*
-             (<<optInd ('finally' ':' <<optInd stmts>>)>>)? {pin=1}
+tryExpr ::= 'try' ':' <<optInd stmts>> tryExpr1* tryExpr2? {pin=1}
+tryExpr1 ::= <<optInd ('except' exprs ':' <<optInd stmts>>)>>
+tryExpr2 ::= <<optInd ('finally' ':' <<optInd stmts>>)>>
 
 //exceptBlock = 'except' colcom stmt
 

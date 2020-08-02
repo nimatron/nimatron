@@ -19,7 +19,11 @@ public interface NimElementTypes {
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
+  IElementType COND_EXPR_1 = new NimElementType("COND_EXPR_1");
+  IElementType COND_EXPR_2 = new NimElementType("COND_EXPR_2");
   IElementType COND_STMT = new NimElementType("COND_STMT");
+  IElementType COND_STMT_1 = new NimElementType("COND_STMT_1");
+  IElementType COND_STMT_2 = new NimElementType("COND_STMT_2");
   IElementType CONSTANT = new NimElementType("CONSTANT");
   IElementType CONST_STMT = new NimElementType("CONST_STMT");
   IElementType CONTINUE_STMT = new NimElementType("CONTINUE_STMT");
@@ -60,6 +64,8 @@ public interface NimElementTypes {
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
+  IElementType OF_BRANCHES_1 = new NimElementType("OF_BRANCHES_1");
+  IElementType OF_BRANCHES_2 = new NimElementType("OF_BRANCHES_2");
   IElementType OP = new NimElementType("OP");
   IElementType OPERATOR = new NimElementType("OPERATOR");
   IElementType OPR_COMBO = new NimElementType("OPR_COMBO");
@@ -118,7 +124,11 @@ public interface NimElementTypes {
   IElementType TEMPLATE_STMT = new NimElementType("TEMPLATE_STMT");
   IElementType TERM_IND = new NimElementType("TERM_IND");
   IElementType TRY_EXPR = new NimElementType("TRY_EXPR");
+  IElementType TRY_EXPR_1 = new NimElementType("TRY_EXPR_1");
+  IElementType TRY_EXPR_2 = new NimElementType("TRY_EXPR_2");
   IElementType TRY_STMT = new NimElementType("TRY_STMT");
+  IElementType TRY_STMT_1 = new NimElementType("TRY_STMT_1");
+  IElementType TRY_STMT_2 = new NimElementType("TRY_STMT_2");
   IElementType TYPE_CLASS = new NimElementType("TYPE_CLASS");
   IElementType TYPE_CLASS_PARAM = new NimElementType("TYPE_CLASS_PARAM");
   IElementType TYPE_DEF = new NimElementType("TYPE_DEF");
@@ -243,8 +253,20 @@ public interface NimElementTypes {
       else if (type == COND_EXPR) {
         return new NimCondExprImpl(node);
       }
+      else if (type == COND_EXPR_1) {
+        return new NimCondExpr1Impl(node);
+      }
+      else if (type == COND_EXPR_2) {
+        return new NimCondExpr2Impl(node);
+      }
       else if (type == COND_STMT) {
         return new NimCondStmtImpl(node);
+      }
+      else if (type == COND_STMT_1) {
+        return new NimCondStmt1Impl(node);
+      }
+      else if (type == COND_STMT_2) {
+        return new NimCondStmt2Impl(node);
       }
       else if (type == CONSTANT) {
         return new NimConstantImpl(node);
@@ -365,6 +387,12 @@ public interface NimElementTypes {
       }
       else if (type == OF_BRANCHES) {
         return new NimOfBranchesImpl(node);
+      }
+      else if (type == OF_BRANCHES_1) {
+        return new NimOfBranches1Impl(node);
+      }
+      else if (type == OF_BRANCHES_2) {
+        return new NimOfBranches2Impl(node);
       }
       else if (type == OP) {
         return new NimOpImpl(node);
@@ -540,8 +568,20 @@ public interface NimElementTypes {
       else if (type == TRY_EXPR) {
         return new NimTryExprImpl(node);
       }
+      else if (type == TRY_EXPR_1) {
+        return new NimTryExpr1Impl(node);
+      }
+      else if (type == TRY_EXPR_2) {
+        return new NimTryExpr2Impl(node);
+      }
       else if (type == TRY_STMT) {
         return new NimTryStmtImpl(node);
+      }
+      else if (type == TRY_STMT_1) {
+        return new NimTryStmt1Impl(node);
+      }
+      else if (type == TRY_STMT_2) {
+        return new NimTryStmt2Impl(node);
       }
       else if (type == TYPE_CLASS) {
         return new NimTypeClassImpl(node);

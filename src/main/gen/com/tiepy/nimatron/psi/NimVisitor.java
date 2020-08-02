@@ -50,7 +50,23 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitCondExpr1(@NotNull NimCondExpr1 o) {
+    visitElement(o);
+  }
+
+  public void visitCondExpr2(@NotNull NimCondExpr2 o) {
+    visitElement(o);
+  }
+
   public void visitCondStmt(@NotNull NimCondStmt o) {
+    visitElement(o);
+  }
+
+  public void visitCondStmt1(@NotNull NimCondStmt1 o) {
+    visitElement(o);
+  }
+
+  public void visitCondStmt2(@NotNull NimCondStmt2 o) {
     visitElement(o);
   }
 
@@ -211,6 +227,14 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitOfBranches(@NotNull NimOfBranches o) {
+    visitElement(o);
+  }
+
+  public void visitOfBranches1(@NotNull NimOfBranches1 o) {
+    visitElement(o);
+  }
+
+  public void visitOfBranches2(@NotNull NimOfBranches2 o) {
     visitElement(o);
   }
 
@@ -446,7 +470,23 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitTryExpr1(@NotNull NimTryExpr1 o) {
+    visitElement(o);
+  }
+
+  public void visitTryExpr2(@NotNull NimTryExpr2 o) {
+    visitElement(o);
+  }
+
   public void visitTryStmt(@NotNull NimTryStmt o) {
+    visitElement(o);
+  }
+
+  public void visitTryStmt1(@NotNull NimTryStmt1 o) {
+    visitElement(o);
+  }
+
+  public void visitTryStmt2(@NotNull NimTryStmt2 o) {
     visitElement(o);
   }
 

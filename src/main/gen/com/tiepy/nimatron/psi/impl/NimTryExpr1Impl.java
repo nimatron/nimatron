@@ -10,37 +10,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimCondExprImpl extends NimElementImpl implements NimCondExpr {
+public class NimTryExpr1Impl extends NimElementImpl implements NimTryExpr1 {
 
-  public NimCondExprImpl(@NotNull ASTNode node) {
+  public NimTryExpr1Impl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitCondExpr(this);
+    visitor.visitTryExpr1(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof NimVisitor) accept((NimVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<NimCondExpr1> getCondExpr1List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimCondExpr1.class);
-  }
-
-  @Override
-  @Nullable
-  public NimCondExpr2 getCondExpr2() {
-    return findChildByClass(NimCondExpr2.class);
-  }
-
-  @Override
-  @NotNull
-  public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
   }
 
   @Override

@@ -26,15 +26,21 @@ public class NimTryStmtImpl extends NimElementImpl implements NimTryStmt {
   }
 
   @Override
-  @NotNull
-  public List<NimExprs> getExprsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprs.class);
+  @Nullable
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  public List<NimTryStmt1> getTryStmt1List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTryStmt1.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTryStmt2 getTryStmt2() {
+    return findChildByClass(NimTryStmt2.class);
   }
 
 }

@@ -26,9 +26,21 @@ public class NimTryExprImpl extends NimElementImpl implements NimTryExpr {
   }
 
   @Override
+  @Nullable
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
+  }
+
+  @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  public List<NimTryExpr1> getTryExpr1List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimTryExpr1.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTryExpr2 getTryExpr2() {
+    return findChildByClass(NimTryExpr2.class);
   }
 
 }
