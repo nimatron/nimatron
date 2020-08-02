@@ -27,20 +27,14 @@ public class NimCaseStmtImpl extends NimElementImpl implements NimCaseStmt {
 
   @Override
   @Nullable
-  public NimCaseStmt1 getCaseStmt1() {
-    return findChildByClass(NimCaseStmt1.class);
-  }
-
-  @Override
-  @Nullable
-  public NimCaseStmt2 getCaseStmt2() {
-    return findChildByClass(NimCaseStmt2.class);
-  }
-
-  @Override
-  @Nullable
   public NimExpr getExpr() {
     return findChildByClass(NimExpr.class);
+  }
+
+  @Override
+  @Nullable
+  public NimOfBranches getOfBranches() {
+    return findChildByClass(NimOfBranches.class);
   }
 
 }

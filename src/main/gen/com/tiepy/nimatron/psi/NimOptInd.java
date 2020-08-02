@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface NimOptInd extends NimElement {
 
-  @Nullable
-  NimTermInd getTermInd();
-
 }

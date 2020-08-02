@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimPrimarySuffix2Impl extends NimElementImpl implements NimPrimarySuffix2 {
+public class NimTypeDef2Impl extends NimElementImpl implements NimTypeDef2 {
 
-  public NimPrimarySuffix2Impl(@NotNull ASTNode node) {
+  public NimTypeDef2Impl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitPrimarySuffix2(this);
+    visitor.visitTypeDef2(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -26,9 +26,27 @@ public class NimPrimarySuffix2Impl extends NimElementImpl implements NimPrimaryS
   }
 
   @Override
+  @Nullable
+  public NimGenericParams getGenericParams() {
+    return findChildByClass(NimGenericParams.class);
+  }
+
+  @Override
+  @NotNull
+  public NimIdentVisDot getIdentVisDot() {
+    return findNotNullChildByClass(NimIdentVisDot.class);
+  }
+
+  @Override
   @NotNull
   public NimOptInd getOptInd() {
     return findNotNullChildByClass(NimOptInd.class);
+  }
+
+  @Override
+  @NotNull
+  public NimPragma getPragma() {
+    return findNotNullChildByClass(NimPragma.class);
   }
 
 }

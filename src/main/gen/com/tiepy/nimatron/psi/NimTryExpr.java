@@ -7,13 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimTryExpr extends NimElement {
 
-  @Nullable
-  NimOptInd getOptInd();
-
   @NotNull
-  List<NimTryExpr1> getTryExpr1List();
-
-  @Nullable
-  NimTryExpr2 getTryExpr2();
+  List<NimOptInd> getOptIndList();
 
 }

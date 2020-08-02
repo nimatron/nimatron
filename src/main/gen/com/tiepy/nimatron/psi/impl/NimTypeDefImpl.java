@@ -26,33 +26,15 @@ public class NimTypeDefImpl extends NimElementImpl implements NimTypeDef {
   }
 
   @Override
-  @NotNull
-  public List<NimGenericParams> getGenericParamsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimGenericParams.class);
+  @Nullable
+  public NimTypeDef1 getTypeDef1() {
+    return findChildByClass(NimTypeDef1.class);
   }
 
   @Override
-  @NotNull
-  public NimIdentVisDot getIdentVisDot() {
-    return findNotNullChildByClass(NimIdentVisDot.class);
-  }
-
-  @Override
-  @NotNull
-  public NimIdentWithPragmaDot getIdentWithPragmaDot() {
-    return findNotNullChildByClass(NimIdentWithPragmaDot.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
-  public NimPragma getPragma() {
-    return findNotNullChildByClass(NimPragma.class);
+  @Nullable
+  public NimTypeDef2 getTypeDef2() {
+    return findChildByClass(NimTypeDef2.class);
   }
 
 }

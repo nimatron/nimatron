@@ -25,10 +25,4 @@ public class NimOptIndImpl extends NimElementImpl implements NimOptInd {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public NimTermInd getTermInd() {
-    return findChildByClass(NimTermInd.class);
-  }
-
 }

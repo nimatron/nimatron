@@ -26,33 +26,15 @@ public class NimPrimarySuffixImpl extends NimElementImpl implements NimPrimarySu
   }
 
   @Override
-  @Nullable
-  public NimPrimarySuffix1 getPrimarySuffix1() {
-    return findChildByClass(NimPrimarySuffix1.class);
+  @NotNull
+  public List<NimExprColonEqExpr> getExprColonEqExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
   }
 
   @Override
   @Nullable
-  public NimPrimarySuffix2 getPrimarySuffix2() {
-    return findChildByClass(NimPrimarySuffix2.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPrimarySuffix3 getPrimarySuffix3() {
-    return findChildByClass(NimPrimarySuffix3.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPrimarySuffix4 getPrimarySuffix4() {
-    return findChildByClass(NimPrimarySuffix4.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPrimarySuffix5 getPrimarySuffix5() {
-    return findChildByClass(NimPrimarySuffix5.class);
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
 }

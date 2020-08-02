@@ -26,21 +26,15 @@ public class NimExportStmtImpl extends NimElementImpl implements NimExportStmt {
   }
 
   @Override
-  @Nullable
-  public NimExportStmt1 getExportStmt1() {
-    return findChildByClass(NimExportStmt1.class);
-  }
-
-  @Override
   @NotNull
   public List<NimExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  @NotNull
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

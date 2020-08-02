@@ -27,20 +27,38 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
 
   @Override
   @Nullable
-  public NimPrimary1 getPrimary1() {
-    return findChildByClass(NimPrimary1.class);
+  public NimIdentOrLiteral getIdentOrLiteral() {
+    return findChildByClass(NimIdentOrLiteral.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimOperator> getOperatorList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOperator.class);
   }
 
   @Override
   @Nullable
-  public NimPrimary2 getPrimary2() {
-    return findChildByClass(NimPrimary2.class);
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
   @Nullable
-  public NimPrimary3 getPrimary3() {
-    return findChildByClass(NimPrimary3.class);
+  public NimPrimary getPrimary() {
+    return findChildByClass(NimPrimary.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimPrimarySuffix> getPrimarySuffixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTypeKeyw getTypeKeyw() {
+    return findChildByClass(NimTypeKeyw.class);
   }
 
 }

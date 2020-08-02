@@ -27,26 +27,14 @@ public class NimCondExprImpl extends NimElementImpl implements NimCondExpr {
 
   @Override
   @NotNull
-  public List<NimCondExpr1> getCondExpr1List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimCondExpr1.class);
-  }
-
-  @Override
-  @Nullable
-  public NimCondExpr2 getCondExpr2() {
-    return findChildByClass(NimCondExpr2.class);
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
   @NotNull
-  public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

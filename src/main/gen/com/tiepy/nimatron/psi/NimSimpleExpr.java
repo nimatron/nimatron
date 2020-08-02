@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimSimpleExpr extends NimElement {
 
   @NotNull
-  List<NimOp> getOpList();
-
-  @NotNull
   List<NimOptInd> getOptIndList();
 
   @Nullable

@@ -10,10 +10,7 @@ public interface NimImportStmt extends NimElement {
   @NotNull
   List<NimExpr> getExprList();
 
-  @Nullable
-  NimImportStmt1 getImportStmt1();
-
-  @Nullable
-  NimOptInd getOptInd();
+  @NotNull
+  List<NimOptInd> getOptIndList();
 
 }

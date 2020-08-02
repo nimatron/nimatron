@@ -32,15 +32,9 @@ public class NimImportStmtImpl extends NimElementImpl implements NimImportStmt {
   }
 
   @Override
-  @Nullable
-  public NimImportStmt1 getImportStmt1() {
-    return findChildByClass(NimImportStmt1.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  @NotNull
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

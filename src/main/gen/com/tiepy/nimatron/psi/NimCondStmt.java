@@ -8,15 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimCondStmt extends NimElement {
 
   @NotNull
-  List<NimCondStmt1> getCondStmt1List();
-
-  @Nullable
-  NimCondStmt2 getCondStmt2();
+  List<NimExpr> getExprList();
 
   @NotNull
-  NimExpr getExpr();
-
-  @Nullable
-  NimOptInd getOptInd();
+  List<NimOptInd> getOptIndList();
 
 }

@@ -26,39 +26,27 @@ public class NimPostExprBlocksImpl extends NimElementImpl implements NimPostExpr
   }
 
   @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  @NotNull
+  public List<NimDoBlock> getDoBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimDoBlock.class);
   }
 
   @Override
   @NotNull
-  public List<NimPostExprBlocks1> getPostExprBlocks1List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks1.class);
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
   @NotNull
-  public List<NimPostExprBlocks2> getPostExprBlocks2List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks2.class);
+  public List<NimExprs> getExprsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprs.class);
   }
 
   @Override
   @NotNull
-  public List<NimPostExprBlocks3> getPostExprBlocks3List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks3.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimPostExprBlocks4> getPostExprBlocks4List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks4.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimPostExprBlocks5> getPostExprBlocks5List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPostExprBlocks5.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

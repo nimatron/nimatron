@@ -7,22 +7,16 @@ import com.intellij.psi.PsiElement;
 
 public interface NimPostExprBlocks extends NimElement {
 
-  @Nullable
-  NimOptInd getOptInd();
+  @NotNull
+  List<NimDoBlock> getDoBlockList();
 
   @NotNull
-  List<NimPostExprBlocks1> getPostExprBlocks1List();
+  List<NimExpr> getExprList();
 
   @NotNull
-  List<NimPostExprBlocks2> getPostExprBlocks2List();
+  List<NimExprs> getExprsList();
 
   @NotNull
-  List<NimPostExprBlocks3> getPostExprBlocks3List();
-
-  @NotNull
-  List<NimPostExprBlocks4> getPostExprBlocks4List();
-
-  @NotNull
-  List<NimPostExprBlocks5> getPostExprBlocks5List();
+  List<NimOptInd> getOptIndList();
 
 }

@@ -8,12 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface NimOfBranches extends NimElement {
 
   @NotNull
+  List<NimExpr> getExprList();
+
+  @NotNull
   List<NimOfBranch> getOfBranchList();
 
   @NotNull
-  List<NimOfBranches1> getOfBranches1List();
-
-  @Nullable
-  NimOfBranches2 getOfBranches2();
+  List<NimOptInd> getOptIndList();
 
 }

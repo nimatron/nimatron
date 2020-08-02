@@ -27,26 +27,14 @@ public class NimCondStmtImpl extends NimElementImpl implements NimCondStmt {
 
   @Override
   @NotNull
-  public List<NimCondStmt1> getCondStmt1List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimCondStmt1.class);
-  }
-
-  @Override
-  @Nullable
-  public NimCondStmt2 getCondStmt2() {
-    return findChildByClass(NimCondStmt2.class);
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
   @NotNull
-  public NimExpr getExpr() {
-    return findNotNullChildByClass(NimExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
 }

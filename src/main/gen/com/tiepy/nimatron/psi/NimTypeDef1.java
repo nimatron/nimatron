@@ -5,7 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimPrimarySuffix2 extends NimElement {
+public interface NimTypeDef1 extends NimElement {
+
+  @Nullable
+  NimGenericParams getGenericParams();
+
+  @NotNull
+  NimIdentWithPragmaDot getIdentWithPragmaDot();
 
   @NotNull
   NimOptInd getOptInd();

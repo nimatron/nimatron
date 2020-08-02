@@ -25,40 +25,4 @@ public class NimOprComboImpl extends NimElementImpl implements NimOprCombo {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public NimOp0 getOp0() {
-    return findChildByClass(NimOp0.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOp1 getOp1() {
-    return findChildByClass(NimOp1.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOp10 getOp10() {
-    return findChildByClass(NimOp10.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOp6 getOp6() {
-    return findChildByClass(NimOp6.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOp7 getOp7() {
-    return findChildByClass(NimOp7.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOp8 getOp8() {
-    return findChildByClass(NimOp8.class);
-  }
-
 }
