@@ -494,9 +494,9 @@ public class NimParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, IND_EQ);
-    p = r; // pin = 1
-    r = r && report_error_(b, consumeToken(b, "elif"));
-    r = p && report_error_(b, expr(b, l + 1)) && r;
+    r = r && consumeToken(b, "elif");
+    p = r; // pin = 2
+    r = r && report_error_(b, expr(b, l + 1));
     r = p && report_error_(b, consumeToken(b, ":")) && r;
     r = p && optInd(b, l + 1, stmts_parser_) && r;
     exit_section_(b, l, m, r, p, null);
@@ -511,9 +511,9 @@ public class NimParser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, IND_EQ);
-    p = r; // pin = 1
-    r = r && report_error_(b, consumeToken(b, "else"));
-    r = p && report_error_(b, consumeToken(b, ":")) && r;
+    r = r && consumeToken(b, "else");
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, ":"));
     r = p && optInd(b, l + 1, stmts_parser_) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -3883,14 +3883,15 @@ public class NimParser implements PsiParser, LightPsiParser {
   // identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
   public static boolean typeDef1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeDef1")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, TYPE_DEF_1, "<type def 1>");
     r = identWithPragmaDot(b, l + 1);
     r = r && typeDef1_1(b, l + 1);
     r = r && consumeToken(b, "=");
+    p = r; // pin = 3
     r = r && optInd(b, l + 1, typeDefAux_parser_);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // genericParams?
@@ -3904,15 +3905,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   // identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
   public static boolean typeDef2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeDef2")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, TYPE_DEF_2, "<type def 2>");
     r = identVisDot(b, l + 1);
     r = r && typeDef2_1(b, l + 1);
     r = r && pragma(b, l + 1);
     r = r && consumeToken(b, "=");
+    p = r; // pin = 4
     r = r && optInd(b, l + 1, typeDefAux_parser_);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // genericParams?

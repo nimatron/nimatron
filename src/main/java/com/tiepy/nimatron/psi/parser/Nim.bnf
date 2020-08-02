@@ -377,8 +377,8 @@ continueStmt ::= 'break' <<optInd expr>>? {pin=1}
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
 condStmt ::= expr ':' <<optInd stmts>> condStmt1* condStmt2? {pin=2}
-private condStmt1 ::= IND_EQ 'elif' expr ':' <<optInd stmts>> {pin=1}
-private condStmt2 ::= IND_EQ 'else' ':' <<optInd stmts>> {pin=1}
+private condStmt1 ::= IND_EQ 'elif' expr ':' <<optInd stmts>> {pin=2}
+private condStmt2 ::= IND_EQ 'else' ':' <<optInd stmts>> {pin=2}
 
 //ifStmt = 'if' condStmt
 ifStmt ::= 'if' condStmt {pin=1}
@@ -487,8 +487,8 @@ typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc ('
 //            indAndComment? / identVisDot genericParamList? pragma '=' optInd typeDefAux
 //            indAndComment?
 typeDef ::= typeDef1 | typeDef2
-typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
-typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
+typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>> {pin=3}
+typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>> {pin=4}
 
 //varTuple = '(' optInd identWithPragma ^+ comma optPar ')' '=' optInd expr
 varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>

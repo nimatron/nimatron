@@ -1217,7 +1217,7 @@ private IElementType getDedenterToken() {
             // fall through
           case 106: break;
           case 20: 
-            { handleIndent(); /*return TokenType.WHITE_SPACE;*/
+            { handleIndent(); return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 107: break;

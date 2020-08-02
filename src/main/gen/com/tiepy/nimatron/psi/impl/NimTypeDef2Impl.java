@@ -38,9 +38,9 @@ public class NimTypeDef2Impl extends NimElementImpl implements NimTypeDef2 {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
