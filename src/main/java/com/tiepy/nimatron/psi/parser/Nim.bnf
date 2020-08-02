@@ -104,7 +104,7 @@ private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
 symbol ::= symbol1
 private symbol1 ::= symbol2|IDENT|KEYW
-private symbol2 ::= '`' symbol3+ '`'
+private symbol2 ::= '`' symbol3+ '`' {pin=1}
 private symbol3 ::= KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'='
 
 //exprColonEqExpr = expr (':'|'=' expr)?
@@ -142,13 +142,13 @@ castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>>
 //          | simpleExpr ( ('=' expr (';' complexOrSimpleStmt ^+ ';' )? )
 //                       | (':' expr (',' exprColonEqExpr     ^+ ',' )? ) ) )
 //          optPar ')'
-par ::= '(' <<optInd par1>> <<optInd (')')>>
+par ::= '(' <<optInd par1>> <<optInd (')')>> {pin=1}
 private par1 ::= par2 | par3 | pragmaStmt | par4
 private par2 ::= stmt (';' stmt)*
 private par3 ::= ';' stmt (';' stmt)*
 private par4 ::= simpleExpr (par5 | par6)
-private par5 ::= '=' expr (';' stmt (';' stmt)*)?
-private par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
+private par5 ::= '=' expr (';' stmt (';' stmt)*)? {pin=1}
+private par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)? {pin=1}
 
 //literal = | INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
 //          | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
@@ -180,7 +180,7 @@ private identOrLiteral1 ::= generalizedLit | symbol | literal
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
 //arrayConstr = '[' optInd (exprColonEqExpr comma?)* optPar ']'
-arrayConstr ::= '[' (<<optInd (exprColonEqExpr ','?)>>)* <<optInd (']')>>
+arrayConstr ::= '[' (<<optInd (exprColonEqExpr ','?)>>)* <<optInd (']')>> {pin=1}
 
 //primarySuffix = '(' (exprColonEqExpr comma?)* ')'
 //      | '.' optInd symbol generalizedLit?
@@ -193,18 +193,18 @@ private primarySuffix0 ::= primarySuffix1
                          | primarySuffix3
                          | primarySuffix4
                          | primarySuffix5
-private primarySuffix1 ::= '(' (exprColonEqExpr ','?)* ')'
-private primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
-private primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
-private primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
+private primarySuffix1 ::= '(' (exprColonEqExpr ','?)* ')' {pin=1}
+private primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>> {pin=1}
+private primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>> {pin=1}
+private primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>> {pin=1}
 private primarySuffix5 ::= <<optInd exprs>> // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
 //         'else' colcom expr
-condExpr ::= expr ':' <<optInd expr>> condExpr1* condExpr2? // NOTE: Added '?' to condExpr2
-private condExpr1 ::= 'elif' expr ':' <<optInd expr>>
-private condExpr2 ::= 'else' ':' expr
+condExpr ::= expr ':' <<optInd expr>> condExpr1* condExpr2? {pin=2} // NOTE: Added '?' to condExpr2
+private condExpr1 ::= 'elif' expr ':' <<optInd expr>> {pin=1}
+private condExpr2 ::= 'else' ':' expr {pin=1}
 
 //ifExpr = 'if' condExpr
 ifExpr ::= 'if' condExpr {pin=1}
@@ -213,8 +213,8 @@ ifExpr ::= 'if' condExpr {pin=1}
 whenExpr ::= 'when' condExpr {pin=1}
 
 //pragma = '{.' optInd (exprColonEqExpr comma?)* optPar ('.}' | '}')
-pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd pragma1>>
-private pragma1 ::= '.}'|'}'
+pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd pragma1>> {pin=1}
+private pragma1 ::= '.}' | '}'
 
 //identVis = symbol OPR?  # postfix position
 
@@ -226,7 +226,7 @@ oprCombo ::= oprCombo1
 private oprCombo1 ::= OPR|op0|op1|OP2A|OP2C|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
 
 //identVisDot = symbol '.' optInd symbol OPR?
-identVisDot ::= symbol '.' <<optInd symbol>> oprCombo?
+identVisDot ::= symbol '.' <<optInd symbol>> oprCombo? {pin=2}
 
 //identWithPragma = identVis pragma?
 identWithPragma ::= symbol oprCombo? pragma?
@@ -253,7 +253,7 @@ identColonEquals ::= IDENT (',' IDENT)* ','?
 //tupleClass = 'tuple'
 
 //paramList = '(' declColonEquals ^* (comma/semicolon) ')'
-params ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')'
+params ::= '(' (declColonEquals ((','|';') declColonEquals)*)? ')' {pin=1}
 
 //paramListArrow = paramList? ('->' optInd typeDesc)?
 paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
@@ -334,7 +334,7 @@ private postExprBlocks5 ::= IND_EQ 'else' ':' <<optInd stmts>>
 //             postExprBlocks
 //           ))?
 exprStmt ::= simpleExpr (exprStmt1 | exprStmt2)?
-private exprStmt1 ::= '=' <<optInd expr>> colonBody?
+private exprStmt1 ::= '=' <<optInd expr>> colonBody? {pin=1}
 private exprStmt2 ::= expr (',' expr)* postExprBlocks
 
 //importStmt = 'import' optInd expr
@@ -442,10 +442,10 @@ genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?
 
 //genericParamList = '[' optInd
 //  genericParam ^* (comma/semicolon) optPar ']'
-genericParams ::= '[' <<optInd ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>>
+genericParams ::= '[' <<optInd ((genericParam ((','|';') genericParam)*)?)>> <<optInd (']')>> {pin=1}
 
 //pattern = '{' stmt '}'
-pattern ::= '{' <<optInd stmts>> '}'
+pattern ::= '{' <<optInd stmts>> '}' {pin=1}
 
 //indAndComment = (IND{>} COMMENT)? | COMMENT?
 
@@ -491,7 +491,7 @@ typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>> {pin=3}
 typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>> {pin=4}
 
 //varTuple = '(' optInd identWithPragma ^+ comma optPar ')' '=' optInd expr
-varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
+varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>> {pin=1}
 
 //colonBody = colcom stmt postExprBlocks?
 colonBody ::= ':' <<optInd stmts>> postExprBlocks? {pin=1}

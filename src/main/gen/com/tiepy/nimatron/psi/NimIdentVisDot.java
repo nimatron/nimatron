@@ -10,7 +10,7 @@ public interface NimIdentVisDot extends NimElement {
   @Nullable
   NimOprCombo getOprCombo();
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
   @NotNull

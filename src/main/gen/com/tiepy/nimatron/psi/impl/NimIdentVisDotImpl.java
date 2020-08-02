@@ -32,9 +32,9 @@ public class NimIdentVisDotImpl extends NimElementImpl implements NimIdentVisDot
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
   @Override
