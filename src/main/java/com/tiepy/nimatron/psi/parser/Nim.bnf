@@ -98,7 +98,7 @@ private termInd ::= DEDENT | <<eof>>
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-simpleExpr ::= primary /*(op <<optInd primary>>)* pragma?*/ // TODO: Re-add commented-out rule here.
+simpleExpr ::= primary /*(op <<optInd primary>>)* */ pragma? // TODO: Re-add commented-out rule here.
 private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW

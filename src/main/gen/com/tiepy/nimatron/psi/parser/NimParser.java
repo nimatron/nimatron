@@ -3305,14 +3305,22 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary
+  // primary /*(op <<optInd primary>>)* */ pragma?
   public static boolean simpleExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SIMPLE_EXPR, "<simple expr>");
     r = primary(b, l + 1);
+    r = r && simpleExpr_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // pragma?
+  private static boolean simpleExpr_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "simpleExpr_1")) return false;
+    pragma(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
