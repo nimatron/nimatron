@@ -10,6 +10,9 @@ public interface NimPrimary extends NimElement {
   @Nullable
   NimIdentOrLiteral getIdentOrLiteral();
 
+  @NotNull
+  List<NimOperator> getOperatorList();
+
   @Nullable
   NimOptInd getOptInd();
 

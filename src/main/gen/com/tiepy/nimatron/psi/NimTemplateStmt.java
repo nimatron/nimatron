@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimTemplateStmt extends NimNamedElement {
 
   @Nullable
-  NimOprCombo getOprCombo();
-
-  @Nullable
   NimOptInd getOptInd();
 
   @Nullable

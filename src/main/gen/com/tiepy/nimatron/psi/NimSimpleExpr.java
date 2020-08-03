@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface NimSimpleExpr extends NimElement {
 
+  @NotNull
+  List<NimOptInd> getOptIndList();
+
   @Nullable
   NimPragma getPragma();
 

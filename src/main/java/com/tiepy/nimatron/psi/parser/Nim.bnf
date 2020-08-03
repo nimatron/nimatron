@@ -43,11 +43,77 @@
   mixin(     "procStmt|funcStmt|methodStmt|iteratorStmt|macroStmt|templateStmt|converterStmt")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
 
   tokens = [
+    BOOL_LIT="BOOL_LIT"
     BRACKET="BRACKET"
-    C_SEMICOLON="C_SEMICOLON"
     C_COMMA="C_COMMA"
     C_GRAVE_ACCENT="C_GRAVE_ACCENT"
+    C_SEMICOLON="C_SEMICOLON"
+    CHAR_LIT="CHAR_LIT"
     COMMENT="COMMENT"
+    DEDENT="DEDENT"
+    FLOAT32_LIT="FLOAT32_LIT"
+    FLOAT64_LIT="FLOAT64_LIT"
+    FLOAT_LIT="FLOAT_LIT"
+    GENERALIZED_STR_LIT="GENERALIZED_STR_LIT"
+    GENERALIZED_TRIPLESTR_LIT="GENERALIZED_TRIPLESTR_LIT"
+    IDENT="IDENT"
+    IND_EQ="IND_EQ"
+    INDENT="INDENT"
+    INT16_LIT="INT16_LIT"
+    INT32_LIT="INT32_LIT"
+    INT64_LIT="INT64_LIT"
+    INT8_LIT="INT8_LIT"
+    INT_LIT="INT_LIT"
+    KEYW="KEYW"
+    NIL="NIL"
+    OP0A="OP0A"
+    OP0B="OP0B"
+    OP0C="OP0C"
+    OP10A="OP10A"
+    OP10B="OP10B"
+    OP1A="OP1A"
+    OP1B="OP1B"
+    OP1C="OP1C"
+    OP1D="OP1D"
+    OP2A="OP2A"
+    OP2B="OP2B"
+    OP2C="OP2C"
+    OP3A="OP3A"
+    OP3B="OP3B"
+    OP4A="OP4A"
+    OP5A="OP5A"
+    OP5B="OP5B"
+    OP5C="OP5C"
+    OP5D="OP5D"
+    OP5E="OP5E"
+    OP5F="OP5F"
+    OP5G="OP5G"
+    OP5H="OP5H"
+    OP5I="OP5I"
+    OP5J="OP5J"
+    OP5K="OP5K"
+    OP5L="OP5L"
+    OP5M="OP5M"
+    OP6A="OP6A"
+    OP7A="OP7A"
+    OP8A="OP8A"
+    OP8B="OP8B"
+    OP9A="OP9A"
+    OP9B="OP9B"
+    OP9C="OP9C"
+    OP9D="OP9D"
+    OP9E="OP9E"
+    OP9F="OP9F"
+    OP9G="OP9G"
+    OPR="OPR"
+    RSTR_LIT="RSTR_LIT"
+    STR_LIT="STR_LIT"
+    TRIPLESTR_LIT="TRIPLESTR_LIT"
+    UINT16_LIT="UINT16_LIT"
+    UINT32_LIT="UINT32_LIT"
+    UINT64_LIT="UINT64_LIT"
+    UINT8_LIT="UINT8_LIT"
+    UINT_LIT="UINT_LIT"
   ]
 }
 
@@ -69,7 +135,7 @@ operator ::= operator1
 private operator1 ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|'from'|'static'|'..'
 private op0 ::= OP0A|OP0B|OP0C
 private op1 ::= OP1A|OP1B|OP1C|OP1D
-private op2 ::= OP2A|OP2B|OP2C
+private op2 ::= OP2A|/*OP2B|*/OP2C // NOTE: OP2B has been commented-out here due to ambiguities in the grammar.
 private op3 ::= OP3A|OP3B
 private op4 ::= OP4A
 private op5 ::= OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|OP5G|OP5H|OP5I|OP5J|OP5K|OP5L|OP5M
@@ -98,7 +164,7 @@ private termInd ::= DEDENT | <<eof>>
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-simpleExpr ::= primary /*(op <<optInd primary>>)* */ pragma? // TODO: Re-add commented-out rule here.
+simpleExpr ::= primary (op <<optInd primary>>)* pragma?
 private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
@@ -218,15 +284,9 @@ private pragma1 ::= '.}' | '}'
 
 //identVis = symbol OPR?  # postfix position
 
-// NOTE: The following replaced OPR so that other OPX tokens are also matched.
-// NOTE: Intention was to include 'op2' however OP2B ':' seems to cause an unhelpful ambiguity.
-// TODO: Try re-adding OP2B as now using 'private' modifier.
-//oprCombo ::= OPR|op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
-oprCombo ::= oprCombo1
-private oprCombo1 ::= OPR|op0|op1|OP2A|OP2C|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
-
 //identVisDot = symbol '.' optInd symbol OPR?
 identVisDot ::= symbol '.' <<optInd symbol>> oprCombo? {pin=2}
+private oprCombo ::= OPR|op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
 
 //identWithPragma = identVis pragma?
 identWithPragma ::= symbol oprCombo? pragma?
@@ -299,7 +359,7 @@ private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //        / 'bind' primary
 primary ::= primary1 | primary2 | primary3
 private primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
-private primary2 ::= /*operator**/ identOrLiteral primarySuffix* // TODO: Re-add commented-out rule here.
+private primary2 ::= operator* identOrLiteral primarySuffix*
 private primary3 ::= 'bind' primary {pin=1}
 
 //typeDesc = simpleExpr ('not' expr)?

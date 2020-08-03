@@ -27,12 +27,6 @@ public class NimFuncStmtImpl extends NimNamedElementImpl implements NimFuncStmt 
 
   @Override
   @Nullable
-  public NimOprCombo getOprCombo() {
-    return findChildByClass(NimOprCombo.class);
-  }
-
-  @Override
-  @Nullable
   public NimOptInd getOptInd() {
     return findChildByClass(NimOptInd.class);
   }

@@ -55,7 +55,6 @@ public interface NimElementTypes {
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
-  IElementType OPR_COMBO = new NimElementType("OPR_COMBO");
   IElementType OPT_IND = new NimElementType("OPT_IND");
   IElementType PAR = new NimElementType("PAR");
   IElementType PARAMS = new NimElementType("PARAMS");
@@ -314,9 +313,6 @@ public interface NimElementTypes {
       }
       else if (type == OPERATOR) {
         return new NimOperatorImpl(node);
-      }
-      else if (type == OPR_COMBO) {
-        return new NimOprComboImpl(node);
       }
       else if (type == OPT_IND) {
         return new NimOptIndImpl(node);
