@@ -3985,21 +3985,10 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // typeKeyw1
-  public static boolean typeKeyw(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "typeKeyw")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_KEYW, "<type keyw>");
-    r = typeKeyw1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-  //                     | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
-  static boolean typeKeyw1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "typeKeyw1")) return false;
+  //                    | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
+  static boolean typeKeyw(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeKeyw")) return false;
     boolean r;
     r = consumeToken(b, "var");
     if (!r) r = consumeToken(b, "out");

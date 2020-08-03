@@ -88,7 +88,6 @@ public interface NimElementTypes {
   IElementType TYPE_DEF_2 = new NimElementType("TYPE_DEF_2");
   IElementType TYPE_DEF_AUX = new NimElementType("TYPE_DEF_AUX");
   IElementType TYPE_DESC = new NimElementType("TYPE_DESC");
-  IElementType TYPE_KEYW = new NimElementType("TYPE_KEYW");
   IElementType TYPE_STMT = new NimElementType("TYPE_STMT");
   IElementType VARIABLE = new NimElementType("VARIABLE");
   IElementType VAR_STMT = new NimElementType("VAR_STMT");
@@ -412,9 +411,6 @@ public interface NimElementTypes {
       }
       else if (type == TYPE_DESC) {
         return new NimTypeDescImpl(node);
-      }
-      else if (type == TYPE_KEYW) {
-        return new NimTypeKeywImpl(node);
       }
       else if (type == TYPE_STMT) {
         return new NimTypeStmtImpl(node);

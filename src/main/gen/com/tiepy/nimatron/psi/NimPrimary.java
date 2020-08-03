@@ -22,7 +22,4 @@ public interface NimPrimary extends NimElement {
   @Nullable
   NimPrimarySuffix getPrimarySuffix();
 
-  @Nullable
-  NimTypeKeyw getTypeKeyw();
-
 }
