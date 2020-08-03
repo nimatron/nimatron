@@ -586,25 +586,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'converter' symbol oprCombo? <<optInd routine>>
+  // 'converter' <<optInd namedRoutine>>
   public static boolean converterStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "converterStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, CONVERTER_STMT, "<converter stmt>");
     r = consumeToken(b, "converter");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, converterStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // oprCombo?
-  private static boolean converterStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "converterStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1162,25 +1153,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'func' symbol oprCombo? <<optInd routine>>
+  // 'func' <<optInd namedRoutine>>
   public static boolean funcStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "funcStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, FUNC_STMT, "<func stmt>");
     r = consumeToken(b, "func");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, funcStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // oprCombo?
-  private static boolean funcStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "funcStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1689,25 +1671,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'iterator' symbol oprCombo? <<optInd routine>>
+  // 'iterator' <<optInd namedRoutine>>
   public static boolean iteratorStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "iteratorStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, ITERATOR_STMT, "<iterator stmt>");
     r = consumeToken(b, "iterator");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, iteratorStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // oprCombo?
-  private static boolean iteratorStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "iteratorStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1755,47 +1728,29 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'macro' symbol oprCombo? <<optInd routine>>
+  // 'macro' <<optInd namedRoutine>>
   public static boolean macroStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "macroStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, MACRO_STMT, "<macro stmt>");
     r = consumeToken(b, "macro");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, macroStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
-  // oprCombo?
-  private static boolean macroStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "macroStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
-  }
-
   /* ********************************************************** */
-  // 'method' symbol oprCombo? <<optInd routine>>
+  // 'method' <<optInd namedRoutine>>
   public static boolean methodStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "methodStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, METHOD_STMT, "<method stmt>");
     r = consumeToken(b, "method");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, methodStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // oprCombo?
-  private static boolean methodStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "methodStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1891,6 +1846,26 @@ public class NimParser implements PsiParser, LightPsiParser {
       if (!consumeToken(b, IND_EQ)) break;
       if (!empty_element_parsed_guard_(b, "module_3", c)) break;
     }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // symbol oprCombo? routine
+  public static boolean namedRoutine(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namedRoutine")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, NAMED_ROUTINE, "<named routine>");
+    r = symbol(b, l + 1);
+    r = r && namedRoutine_1(b, l + 1);
+    r = r && routine(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // oprCombo?
+  private static boolean namedRoutine_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namedRoutine_1")) return false;
+    oprCombo(b, l + 1);
     return true;
   }
 
@@ -3073,25 +3048,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'proc' symbol oprCombo? <<optInd routine>>
+  // 'proc' <<optInd namedRoutine>>
   public static boolean procStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "procStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, PROC_STMT, "<proc stmt>");
     r = consumeToken(b, "proc");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, procStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // oprCombo?
-  private static boolean procStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "procStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -3502,25 +3468,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'template' symbol oprCombo? <<optInd routine>>
+  // 'template' <<optInd namedRoutine>>
   public static boolean templateStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "templateStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, TEMPLATE_STMT, "<template stmt>");
     r = consumeToken(b, "template");
     p = r; // pin = 1
-    r = r && report_error_(b, symbol(b, l + 1));
-    r = p && report_error_(b, templateStmt_2(b, l + 1)) && r;
-    r = p && optInd(b, l + 1, routine_parser_) && r;
+    r = r && optInd(b, l + 1, namedRoutine_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // oprCombo?
-  private static boolean templateStmt_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "templateStmt_2")) return false;
-    oprCombo(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -4269,6 +4226,11 @@ public class NimParser implements PsiParser, LightPsiParser {
       return mixinStmt_1_0(b, l + 1);
     }
   };
+  static final Parser namedRoutine_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return namedRoutine(b, l + 1);
+    }
+  };
   static final Parser par1_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return par1(b, l + 1);
@@ -4307,11 +4269,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser primary_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return primary(b, l + 1);
-    }
-  };
-  static final Parser routine_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return routine(b, l + 1);
     }
   };
   static final Parser stmts_parser_ = new Parser() {

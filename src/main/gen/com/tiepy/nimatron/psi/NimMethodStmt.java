@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimMethodStmt extends NimNamedElement {
+public interface NimMethodStmt extends NimElement {
 
   @Nullable
   NimOptInd getOptInd();
-
-  @Nullable
-  NimSymbol getNameIdentifier();
 
 }

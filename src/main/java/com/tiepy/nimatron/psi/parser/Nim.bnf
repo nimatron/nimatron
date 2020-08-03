@@ -39,8 +39,8 @@
   elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
   tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
 
-  implements("procStmt|funcStmt|methodStmt|iteratorStmt|macroStmt|templateStmt|converterStmt")="com.tiepy.nimatron.psi.NimNamedElement"
-  mixin(     "procStmt|funcStmt|methodStmt|iteratorStmt|macroStmt|templateStmt|converterStmt")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
+  implements("namedRoutine")="com.tiepy.nimatron.psi.NimNamedElement"
+  mixin("namedRoutine")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
 
   tokens = [
     BOOL_LIT="BOOL_LIT"
@@ -620,13 +620,15 @@ private complexStmt ::= ifStmt
                       | bindStmt
                       | mixinStmt
 
-procStmt ::= 'proc' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
-funcStmt ::= 'func' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
-methodStmt ::= 'method' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
-iteratorStmt ::= 'iterator' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
-macroStmt ::= 'macro' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
-templateStmt ::= 'template' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
-converterStmt ::= 'converter' symbol oprCombo? <<optInd routine>> {pin=1 methods=[nameIdentifier="symbol"]}
+procStmt ::= 'proc' <<optInd namedRoutine>> {pin=1}
+funcStmt ::= 'func' <<optInd namedRoutine>> {pin=1}
+methodStmt ::= 'method' <<optInd namedRoutine>> {pin=1}
+iteratorStmt ::= 'iterator' <<optInd namedRoutine>> {pin=1}
+macroStmt ::= 'macro' <<optInd namedRoutine>> {pin=1}
+templateStmt ::= 'template' <<optInd namedRoutine>> {pin=1}
+converterStmt ::= 'converter' <<optInd namedRoutine>> {pin=1}
 typeStmt ::= 'type' <<optInd typeDef>> {pin=1}
 constStmt ::= 'const' <<optInd constant>> {pin=1}
 varStmt ::= ('let'|'var'|'using') <<optInd variable>> {pin=1}
+
+namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}

@@ -59,7 +59,7 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitConverterStmt(@NotNull NimConverterStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitDeclColonEquals(@NotNull NimDeclColonEquals o) {
@@ -111,7 +111,7 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitFuncStmt(@NotNull NimFuncStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitGeneralizedLit(@NotNull NimGeneralizedLit o) {
@@ -163,7 +163,7 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitIteratorStmt(@NotNull NimIteratorStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitLiteral(@NotNull NimLiteral o) {
@@ -171,15 +171,19 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitMacroStmt(@NotNull NimMacroStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitMethodStmt(@NotNull NimMethodStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitMixinStmt(@NotNull NimMixinStmt o) {
     visitElement(o);
+  }
+
+  public void visitNamedRoutine(@NotNull NimNamedRoutine o) {
+    visitNamedElement(o);
   }
 
   public void visitOfBranch(@NotNull NimOfBranch o) {
@@ -239,7 +243,7 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitProcStmt(@NotNull NimProcStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitQualifiedIdent(@NotNull NimQualifiedIdent o) {
@@ -287,7 +291,7 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitTemplateStmt(@NotNull NimTemplateStmt o) {
-    visitNamedElement(o);
+    visitElement(o);
   }
 
   public void visitTryExpr(@NotNull NimTryExpr o) {

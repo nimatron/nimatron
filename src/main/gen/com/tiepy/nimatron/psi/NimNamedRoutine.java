@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimProcStmt extends NimElement {
+public interface NimNamedRoutine extends NimNamedElement {
 
-  @Nullable
-  NimOptInd getOptInd();
+  @NotNull
+  NimRoutine getRoutine();
+
+  @NotNull
+  NimSymbol getNameIdentifier();
 
 }

@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimFuncStmtImpl extends NimElementImpl implements NimFuncStmt {
+public class NimNamedRoutineImpl extends NimNamedElementImpl implements NimNamedRoutine {
 
-  public NimFuncStmtImpl(@NotNull ASTNode node) {
+  public NimNamedRoutineImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitFuncStmt(this);
+    visitor.visitNamedRoutine(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -26,9 +26,15 @@ public class NimFuncStmtImpl extends NimElementImpl implements NimFuncStmt {
   }
 
   @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  @NotNull
+  public NimRoutine getRoutine() {
+    return findNotNullChildByClass(NimRoutine.class);
+  }
+
+  @Override
+  @NotNull
+  public NimSymbol getNameIdentifier() {
+    return findNotNullChildByClass(NimSymbol.class);
   }
 
 }

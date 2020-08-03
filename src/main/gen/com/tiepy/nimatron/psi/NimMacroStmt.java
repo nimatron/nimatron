@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimMacroStmt extends NimNamedElement {
+public interface NimMacroStmt extends NimElement {
 
   @Nullable
   NimOptInd getOptInd();
-
-  @Nullable
-  NimSymbol getNameIdentifier();
 
 }

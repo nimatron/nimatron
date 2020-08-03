@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimConverterStmtImpl extends NimNamedElementImpl implements NimConverterStmt {
+public class NimConverterStmtImpl extends NimElementImpl implements NimConverterStmt {
 
   public NimConverterStmtImpl(@NotNull ASTNode node) {
     super(node);
@@ -29,12 +29,6 @@ public class NimConverterStmtImpl extends NimNamedElementImpl implements NimConv
   @Nullable
   public NimOptInd getOptInd() {
     return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @Nullable
-  public NimSymbol getNameIdentifier() {
-    return findChildByClass(NimSymbol.class);
   }
 
 }

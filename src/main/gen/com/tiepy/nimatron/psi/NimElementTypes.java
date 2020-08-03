@@ -52,6 +52,7 @@ public interface NimElementTypes {
   IElementType MACRO_STMT = new NimElementType("MACRO_STMT");
   IElementType METHOD_STMT = new NimElementType("METHOD_STMT");
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
+  IElementType NAMED_ROUTINE = new NimElementType("NAMED_ROUTINE");
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
@@ -304,6 +305,9 @@ public interface NimElementTypes {
       }
       else if (type == MIXIN_STMT) {
         return new NimMixinStmtImpl(node);
+      }
+      else if (type == NAMED_ROUTINE) {
+        return new NimNamedRoutineImpl(node);
       }
       else if (type == OF_BRANCH) {
         return new NimOfBranchImpl(node);
