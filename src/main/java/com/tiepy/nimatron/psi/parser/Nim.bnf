@@ -359,7 +359,7 @@ private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //        / 'bind' primary
 primary ::= primary1 | primary2 | primary3
 private primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
-private primary2 ::= operator* identOrLiteral primarySuffix*
+private primary2 ::= operator? identOrLiteral primarySuffix? // NOTE: Changed '*' to '?' on operator and primarySuffix.
 private primary3 ::= 'bind' primary {pin=1}
 
 //typeDesc = simpleExpr ('not' expr)?

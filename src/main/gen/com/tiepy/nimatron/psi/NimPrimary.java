@@ -10,8 +10,8 @@ public interface NimPrimary extends NimElement {
   @Nullable
   NimIdentOrLiteral getIdentOrLiteral();
 
-  @NotNull
-  List<NimOperator> getOperatorList();
+  @Nullable
+  NimOperator getOperator();
 
   @Nullable
   NimOptInd getOptInd();
@@ -19,8 +19,8 @@ public interface NimPrimary extends NimElement {
   @Nullable
   NimPrimary getPrimary();
 
-  @NotNull
-  List<NimPrimarySuffix> getPrimarySuffixList();
+  @Nullable
+  NimPrimarySuffix getPrimarySuffix();
 
   @Nullable
   NimTypeKeyw getTypeKeyw();

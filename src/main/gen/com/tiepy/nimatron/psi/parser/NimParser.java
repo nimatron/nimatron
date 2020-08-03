@@ -2877,7 +2877,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // operator* identOrLiteral primarySuffix*
+  // operator? identOrLiteral primarySuffix?
   static boolean primary2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2")) return false;
     boolean r;
@@ -2889,25 +2889,17 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // operator*
+  // operator?
   private static boolean primary2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2_0")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!operator(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primary2_0", c)) break;
-    }
+    operator(b, l + 1);
     return true;
   }
 
-  // primarySuffix*
+  // primarySuffix?
   private static boolean primary2_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2_2")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!primarySuffix(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primary2_2", c)) break;
-    }
+    primarySuffix(b, l + 1);
     return true;
   }
 

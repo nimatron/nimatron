@@ -32,9 +32,9 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
   }
 
   @Override
-  @NotNull
-  public List<NimOperator> getOperatorList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOperator.class);
+  @Nullable
+  public NimOperator getOperator() {
+    return findChildByClass(NimOperator.class);
   }
 
   @Override
@@ -50,9 +50,9 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
   }
 
   @Override
-  @NotNull
-  public List<NimPrimarySuffix> getPrimarySuffixList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
+  @Nullable
+  public NimPrimarySuffix getPrimarySuffix() {
+    return findChildByClass(NimPrimarySuffix.class);
   }
 
   @Override
