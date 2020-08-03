@@ -98,7 +98,7 @@ private termInd ::= DEDENT | <<eof>>
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-simpleExpr ::= primary (op <<optInd primary>>)* pragma?
+simpleExpr ::= primary /*(op <<optInd primary>>)* pragma?*/ // TODO: Re-add commented-out rule here.
 private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
@@ -299,7 +299,7 @@ private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //        / 'bind' primary
 primary ::= primary1 | primary2 | primary3
 private primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
-private primary2 ::= operator* identOrLiteral primarySuffix*
+private primary2 ::= /*operator**/ identOrLiteral primarySuffix* // TODO: Re-add commented-out rule here.
 private primary3 ::= 'bind' primary {pin=1}
 
 //typeDesc = simpleExpr ('not' expr)?
