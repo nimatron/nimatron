@@ -55,4 +55,10 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
     return findChildByClass(NimPrimarySuffix.class);
   }
 
+  @Override
+  @Nullable
+  public NimTypeKeyw getTypeKeyw() {
+    return findChildByClass(NimTypeKeyw.class);
+  }
+
 }
