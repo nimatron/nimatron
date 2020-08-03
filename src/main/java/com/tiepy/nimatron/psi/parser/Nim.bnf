@@ -512,7 +512,8 @@ pattern ::= '{' <<optInd stmts>> '}' {pin=1}
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
 routine ::= pattern? genericParams? paramsColon pragma? routine1?
-private routine1 ::= '=' <<optInd stmts>> {pin=1}
+private routine1 ::= '=' (stmt | routine2) {pin=1}
+private routine2 ::= INDENT stmts termInd
 
 //commentStmt = COMMENT
 

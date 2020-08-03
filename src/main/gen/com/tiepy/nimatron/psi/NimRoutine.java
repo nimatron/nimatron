@@ -10,9 +10,6 @@ public interface NimRoutine extends NimElement {
   @Nullable
   NimGenericParams getGenericParams();
 
-  @Nullable
-  NimOptInd getOptInd();
-
   @NotNull
   NimParamsColon getParamsColon();
 
@@ -21,5 +18,11 @@ public interface NimRoutine extends NimElement {
 
   @Nullable
   NimPragma getPragma();
+
+  @Nullable
+  NimStmt getStmt();
+
+  @Nullable
+  NimStmts getStmts();
 
 }

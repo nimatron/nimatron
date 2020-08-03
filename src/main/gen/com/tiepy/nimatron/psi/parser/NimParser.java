@@ -3174,16 +3174,39 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '=' <<optInd stmts>>
+  // '=' (stmt | routine2)
   static boolean routine1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine1")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, "=");
     p = r; // pin = 1
-    r = r && optInd(b, l + 1, stmts_parser_);
+    r = r && routine1_1(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // stmt | routine2
+  private static boolean routine1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "routine1_1")) return false;
+    boolean r;
+    r = stmt(b, l + 1);
+    if (!r) r = routine2(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // INDENT stmts termInd
+  static boolean routine2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "routine2")) return false;
+    if (!nextTokenIs(b, INDENT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INDENT);
+    r = r && stmts(b, l + 1);
+    r = r && termInd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

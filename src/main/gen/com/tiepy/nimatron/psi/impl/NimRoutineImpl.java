@@ -32,12 +32,6 @@ public class NimRoutineImpl extends NimElementImpl implements NimRoutine {
   }
 
   @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
   @NotNull
   public NimParamsColon getParamsColon() {
     return findNotNullChildByClass(NimParamsColon.class);
@@ -53,6 +47,18 @@ public class NimRoutineImpl extends NimElementImpl implements NimRoutine {
   @Nullable
   public NimPragma getPragma() {
     return findChildByClass(NimPragma.class);
+  }
+
+  @Override
+  @Nullable
+  public NimStmt getStmt() {
+    return findChildByClass(NimStmt.class);
+  }
+
+  @Override
+  @Nullable
+  public NimStmts getStmts() {
+    return findChildByClass(NimStmts.class);
   }
 
 }
