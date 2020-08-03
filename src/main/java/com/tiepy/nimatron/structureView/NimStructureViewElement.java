@@ -56,20 +56,27 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
         final List<StructureViewTreeElement> children = Lists.newArrayList();
 
         if (childrenBase instanceof NimFile) {
-            for (PsiElement expectedStmtsElement : childrenBase.getChildren()) {
-                if (expectedStmtsElement instanceof NimStmtsImpl) {
-                    for (PsiElement expectedStmtElement : expectedStmtsElement.getChildren()) {
-                        if (expectedStmtElement instanceof NimStmtImpl) {
-                            for (PsiElement child : expectedStmtElement.getChildren()) {
-                                if (       child instanceof NimProcStmtImpl
-                                        || child instanceof NimFuncStmtImpl
-                                        || child instanceof NimMethodStmtImpl
-                                        || child instanceof NimIteratorStmtImpl
-                                        || child instanceof NimMacroStmtImpl
-                                        || child instanceof NimTemplateStmtImpl
-                                        || child instanceof NimConverterStmtImpl) {
-
-                                    children.add(new NimStructureViewElement(child, child));
+            for (PsiElement testForStmtsElement : childrenBase.getChildren()) {
+                if (testForStmtsElement instanceof NimStmtsImpl) {
+                    for (PsiElement testForStmtElement : testForStmtsElement.getChildren()) {
+                        if (testForStmtElement instanceof NimStmtImpl) {
+                            for (PsiElement testForParentElement : testForStmtElement.getChildren()) {
+                                if (testForParentElement instanceof NimProcStmtImpl     ||
+                                    testForParentElement instanceof NimFuncStmtImpl     ||
+                                    testForParentElement instanceof NimMethodStmtImpl   ||
+                                    testForParentElement instanceof NimIteratorStmtImpl ||
+                                    testForParentElement instanceof NimMacroStmtImpl    ||
+                                    testForParentElement instanceof NimTemplateStmtImpl ||
+                                    testForParentElement instanceof NimConverterStmtImpl) {
+                                    for (PsiElement testForOptIndElement : testForParentElement.getChildren()) {
+                                        if (testForOptIndElement instanceof NimOptIndImpl) {
+                                            for (PsiElement child : testForOptIndElement.getChildren()) {
+                                                if (child instanceof NimNamedRoutineImpl) {
+                                                    children.add(new NimStructureViewElement(child, child));
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
