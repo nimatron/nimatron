@@ -3131,7 +3131,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // pattern? genericParams? paramsColon pragma? ('=' <<optInd stmts>>)?
+  // pattern? genericParams? paramsColon pragma? routine1?
   public static boolean routine(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine")) return false;
     boolean r;
@@ -3166,22 +3166,24 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ('=' <<optInd stmts>>)?
+  // routine1?
   private static boolean routine_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine_4")) return false;
-    routine_4_0(b, l + 1);
+    routine1(b, l + 1);
     return true;
   }
 
+  /* ********************************************************** */
   // '=' <<optInd stmts>>
-  private static boolean routine_4_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "routine_4_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+  static boolean routine1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "routine1")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, "=");
+    p = r; // pin = 1
     r = r && optInd(b, l + 1, stmts_parser_);
-    exit_section_(b, m, null, r);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -3953,19 +3955,15 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-  //                     | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
+  // 'ref' | 'ptr' | 'shared' | 'tuple'
+  //                     /*| 'proc' | 'iterator'*/ | 'distinct' | 'object' | 'enum'
   static boolean typeKeyw1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeKeyw1")) return false;
     boolean r;
-    r = consumeToken(b, "var");
-    if (!r) r = consumeToken(b, "out");
-    if (!r) r = consumeToken(b, "ref");
+    r = consumeToken(b, "ref");
     if (!r) r = consumeToken(b, "ptr");
     if (!r) r = consumeToken(b, "shared");
     if (!r) r = consumeToken(b, "tuple");
-    if (!r) r = consumeToken(b, "proc");
-    if (!r) r = consumeToken(b, "iterator");
     if (!r) r = consumeToken(b, "distinct");
     if (!r) r = consumeToken(b, "object");
     if (!r) r = consumeToken(b, "enum");

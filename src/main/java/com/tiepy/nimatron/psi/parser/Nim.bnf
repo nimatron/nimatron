@@ -350,9 +350,9 @@ private expr1 ::= blockStmt
 
 //typeKeyw = 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
-typeKeyw ::= typeKeyw1
-private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-                    | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
+typeKeyw ::= typeKeyw1 // NOTE: Commenting-out some keywords here that are used elsewhere in rules, to avoid ambiguity.
+private typeKeyw1 ::= /*'var' | 'out' |*/ 'ref' | 'ptr' | 'shared' | 'tuple'
+                    /*| 'proc' | 'iterator'*/ | 'distinct' | 'object' | 'enum'
 
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
@@ -511,7 +511,8 @@ pattern ::= '{' <<optInd stmts>> '}' {pin=1}
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= pattern? genericParams? paramsColon pragma? ('=' <<optInd stmts>>)?
+routine ::= pattern? genericParams? paramsColon pragma? routine1?
+private routine1 ::= '=' <<optInd stmts>> {pin=1}
 
 //commentStmt = COMMENT
 
