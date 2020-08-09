@@ -261,7 +261,7 @@ private primarySuffix0 ::= primarySuffix1
                          | primarySuffix5
 private primarySuffix1 ::= '(' (exprColonEqExpr ','?)* ')' {pin=1}
 private primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>> {pin=1}
-private primarySuffix3 ::= '[' <<optInd exprColonEqExprs>> <<optInd (']')>> {pin=1}
+private primarySuffix3 ::= '[' (<<optInd exprColonEqExprs>>)? <<optInd (']')>> {pin=1}
 private primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>> {pin=1}
 private primarySuffix5 ::= simpleExpr (',' simpleExpr)* // command syntax
 

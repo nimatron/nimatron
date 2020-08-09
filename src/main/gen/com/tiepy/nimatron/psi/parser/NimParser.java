@@ -3013,17 +3013,29 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '[' <<optInd exprColonEqExprs>> <<optInd (']')>>
+  // '[' (<<optInd exprColonEqExprs>>)? <<optInd (']')>>
   static boolean primarySuffix3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primarySuffix3")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, "[");
     p = r; // pin = 1
-    r = r && report_error_(b, optInd(b, l + 1, exprColonEqExprs_parser_));
+    r = r && report_error_(b, primarySuffix3_1(b, l + 1));
     r = p && optInd(b, l + 1, primarySuffix3_2_0_parser_) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // (<<optInd exprColonEqExprs>>)?
+  private static boolean primarySuffix3_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix3_1")) return false;
+    primarySuffix3_1_0(b, l + 1);
+    return true;
+  }
+
+  // <<optInd exprColonEqExprs>>
+  private static boolean primarySuffix3_1_0(PsiBuilder b, int l) {
+    return optInd(b, l + 1, exprColonEqExprs_parser_);
   }
 
   // (']')
