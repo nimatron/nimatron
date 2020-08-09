@@ -10,7 +10,10 @@ public interface NimTypeDesc extends NimElement {
   @Nullable
   NimExpr getExpr();
 
-  @NotNull
+  @Nullable
+  NimParamsColon getParamsColon();
+
+  @Nullable
   NimSimpleExpr getSimpleExpr();
 
 }

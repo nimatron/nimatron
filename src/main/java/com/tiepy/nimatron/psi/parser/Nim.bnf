@@ -354,7 +354,8 @@ private expr1 ::= blockStmt
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
 typeKeyw ::= typeKeyw1
 private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-                    | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
+                    /*| 'proc'*/ | 'iterator' | 'distinct' | 'object' | 'enum'
+// NOTE: The 'proc' keyword has been commented-out and handled explicitly in the 'primary' rule below.
 
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
@@ -365,7 +366,10 @@ private primary2 ::= operator? identOrLiteral primarySuffix*
 private primary3 ::= 'bind' primary
 
 //typeDesc = simpleExpr ('not' expr)?
-typeDesc ::= simpleExpr ('not' expr)?
+typeDesc ::= typeDesc0
+private typeDesc0 ::= typeDesc1 | typeDesc2
+private typeDesc1 ::= 'proc' paramsColon // NOTE: This is a new rule handle 'proc' typed parameters.
+private typeDesc2 ::= simpleExpr ('not' expr)?
 
 //typeDefAux = simpleExpr ('not' expr)?
 //           | 'concept' typeClass

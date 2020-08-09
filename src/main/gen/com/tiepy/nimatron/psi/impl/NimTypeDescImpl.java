@@ -32,9 +32,15 @@ public class NimTypeDescImpl extends NimElementImpl implements NimTypeDesc {
   }
 
   @Override
-  @NotNull
+  @Nullable
+  public NimParamsColon getParamsColon() {
+    return findChildByClass(NimParamsColon.class);
+  }
+
+  @Override
+  @Nullable
   public NimSimpleExpr getSimpleExpr() {
-    return findNotNullChildByClass(NimSimpleExpr.class);
+    return findChildByClass(NimSimpleExpr.class);
   }
 
 }
