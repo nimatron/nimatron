@@ -57,6 +57,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscFor() {
+        doTest(true, true);
+    }
+
     public void testMiscIfIndent() {
         doTest(true, true);
     }
@@ -74,6 +78,10 @@ public class NimParserTest extends ParsingTestCase {
     }
 
     public void testMiscIfTrueEchoOk() {
+        doTest(true, true);
+    }
+
+    public void testMiscMethodCall() {
         doTest(true, true);
     }
 

@@ -2144,12 +2144,11 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OPR|op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
+  // op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
   static boolean oprCombo(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "oprCombo")) return false;
     boolean r;
-    r = consumeToken(b, OPR);
-    if (!r) r = op0(b, l + 1);
+    r = op0(b, l + 1);
     if (!r) r = op1(b, l + 1);
     if (!r) r = op2(b, l + 1);
     if (!r) r = consumeToken(b, OP5A);
@@ -2852,7 +2851,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // operator? identOrLiteral primarySuffix?
+  // operator? identOrLiteral primarySuffix*
   static boolean primary2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2")) return false;
     boolean r;
@@ -2871,10 +2870,14 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // primarySuffix?
+  // primarySuffix*
   private static boolean primary2_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary2_2")) return false;
-    primarySuffix(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!primarySuffix(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primary2_2", c)) break;
+    }
     return true;
   }
 
@@ -3174,7 +3177,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '=' (stmt | routine2)
+  // '=' (stmt | (INDENT stmts termInd))
   static boolean routine1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine1")) return false;
     boolean r, p;
@@ -3186,20 +3189,20 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // stmt | routine2
+  // stmt | (INDENT stmts termInd)
   private static boolean routine1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "routine1_1")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = stmt(b, l + 1);
-    if (!r) r = routine2(b, l + 1);
+    if (!r) r = routine1_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
-  /* ********************************************************** */
   // INDENT stmts termInd
-  static boolean routine2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "routine2")) return false;
-    if (!nextTokenIs(b, INDENT)) return false;
+  private static boolean routine1_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "routine1_1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, INDENT);

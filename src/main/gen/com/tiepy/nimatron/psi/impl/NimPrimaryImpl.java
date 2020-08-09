@@ -50,9 +50,9 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
   }
 
   @Override
-  @Nullable
-  public NimPrimarySuffix getPrimarySuffix() {
-    return findChildByClass(NimPrimarySuffix.class);
+  @NotNull
+  public List<NimPrimarySuffix> getPrimarySuffixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimPrimarySuffix.class);
   }
 
   @Override
