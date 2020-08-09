@@ -36,6 +36,7 @@ import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.tiepy.nimatron.psi.impl.*;
@@ -53,28 +54,34 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
     public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
         List<FoldingDescriptor> list = new ArrayList<>();
 
-        // Get a collection of the statements in the document below root.
-        Collection<NimStmtImpl> statements =
-                PsiTreeUtil.findChildrenOfType(root, NimStmtImpl.class);
-
-        // Evaluate the collection.
+        // Add regions for statements.
+        Collection<NimStmtImpl> statements = PsiTreeUtil.findChildrenOfType(root, NimStmtImpl.class);
         for (final NimStmtImpl statement : statements) {
+            addRegion(statement, list);
+        }
 
-            int start = statement.getTextRange().getStartOffset();
-            int end = statement.getTextRange().getEndOffset();
-            if (end > start) {
-                // Add a folding descriptor for the statement at this node.
-
-                // Don't include trailing newlines.
-                String str = statement.getText();
-                int trim = str.length() - str.trim().length();
-
-                list.add(new FoldingDescriptor(statement.getNode(), new TextRange(start, end - trim)));
-            }
+        // Add regions for multi-line comments.
+        Collection<PsiComment> comments = PsiTreeUtil.findChildrenOfType(root, PsiComment.class);
+        for (final PsiComment comment : comments) {
+            addRegion(comment, list);
         }
 
         FoldingDescriptor[] descriptors = new FoldingDescriptor[list.size()];
         return list.toArray(descriptors);
+    }
+
+    private static void addRegion(PsiElement element, List<FoldingDescriptor> list) {
+        int start = element.getTextRange().getStartOffset();
+        int end = element.getTextRange().getEndOffset();
+        if (end > start) {
+            // Add a folding descriptor for the statement at this node.
+
+            // Don't include trailing newlines.
+            String str = element.getText();
+            int trim = str.length() - str.trim().length();
+
+            list.add(new FoldingDescriptor(element.getNode(), new TextRange(start, end - trim)));
+        }
     }
 
     @Nullable
