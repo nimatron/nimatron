@@ -3045,9 +3045,37 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // exprs
+  // simpleExpr (',' simpleExpr)*
   static boolean primarySuffix5(PsiBuilder b, int l) {
-    return exprs(b, l + 1);
+    if (!recursion_guard_(b, l, "primarySuffix5")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = simpleExpr(b, l + 1);
+    r = r && primarySuffix5_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' simpleExpr)*
+  private static boolean primarySuffix5_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix5_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!primarySuffix5_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "primarySuffix5_1", c)) break;
+    }
+    return true;
+  }
+
+  // ',' simpleExpr
+  private static boolean primarySuffix5_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix5_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ",");
+    r = r && simpleExpr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

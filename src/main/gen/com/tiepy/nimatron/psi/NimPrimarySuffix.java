@@ -11,9 +11,9 @@ public interface NimPrimarySuffix extends NimElement {
   List<NimExprColonEqExpr> getExprColonEqExprList();
 
   @Nullable
-  NimExprs getExprs();
-
-  @Nullable
   NimOptInd getOptInd();
+
+  @NotNull
+  List<NimSimpleExpr> getSimpleExprList();
 
 }
