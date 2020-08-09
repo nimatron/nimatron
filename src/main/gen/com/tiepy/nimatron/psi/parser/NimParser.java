@@ -2841,13 +2841,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary1 | primary2 | primary3
+  // primary2 | primary1 | primary3
   public static boolean primary(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PRIMARY, "<primary>");
-    r = primary1(b, l + 1);
-    if (!r) r = primary2(b, l + 1);
+    r = primary2(b, l + 1);
+    if (!r) r = primary1(b, l + 1);
     if (!r) r = primary3(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -2857,13 +2857,12 @@ public class NimParser implements PsiParser, LightPsiParser {
   // typeKeyw <<optInd typeDesc>>
   static boolean primary1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary1")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    boolean r;
+    Marker m = enter_section_(b);
     r = typeKeyw(b, l + 1);
-    p = r; // pin = 1
     r = r && optInd(b, l + 1, typeDesc_parser_);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -4037,15 +4036,19 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'ref' | 'ptr' | 'shared' | 'tuple'
-  //                     /*| 'proc' | 'iterator'*/ | 'distinct' | 'object' | 'enum'
+  // 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
+  //                     | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
   static boolean typeKeyw1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeKeyw1")) return false;
     boolean r;
-    r = consumeToken(b, "ref");
+    r = consumeToken(b, "var");
+    if (!r) r = consumeToken(b, "out");
+    if (!r) r = consumeToken(b, "ref");
     if (!r) r = consumeToken(b, "ptr");
     if (!r) r = consumeToken(b, "shared");
     if (!r) r = consumeToken(b, "tuple");
+    if (!r) r = consumeToken(b, "proc");
+    if (!r) r = consumeToken(b, "iterator");
     if (!r) r = consumeToken(b, "distinct");
     if (!r) r = consumeToken(b, "object");
     if (!r) r = consumeToken(b, "enum");

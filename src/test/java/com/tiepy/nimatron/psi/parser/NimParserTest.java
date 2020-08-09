@@ -93,6 +93,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscProcCall() {
+        doTest(true, true);
+    }
+
     // NOTE: The following test is OK, but shows error in PSI Viewer. Comments were re-introduced to fix this.
     public void testMiscProcWithFollowingBlankLines() {
         doTest(true, true);

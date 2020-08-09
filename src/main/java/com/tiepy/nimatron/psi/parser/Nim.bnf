@@ -352,15 +352,15 @@ private expr1 ::= blockStmt
 
 //typeKeyw = 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
-typeKeyw ::= typeKeyw1 // NOTE: Commenting-out some keywords here that are used elsewhere in rules, to avoid ambiguity.
-private typeKeyw1 ::= /*'var' | 'out' |*/ 'ref' | 'ptr' | 'shared' | 'tuple'
-                    /*| 'proc' | 'iterator'*/ | 'distinct' | 'object' | 'enum'
+typeKeyw ::= typeKeyw1
+private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
+                    | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
 
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
 primary ::= primary1 | primary2 | primary3
-private primary1 ::= typeKeyw <<optInd typeDesc>> {pin=1}
+private primary1 ::= typeKeyw <<optInd typeDesc>>
 private primary2 ::= operator? identOrLiteral primarySuffix*
 private primary3 ::= 'bind' primary {pin=1}
 
