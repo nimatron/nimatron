@@ -192,7 +192,7 @@ qualifiedIdent ::= symbol ('.' <<optInd symbol>>)?
 
 //setOrTableConstr = '{' ((exprColonEqExpr comma)* | ':' ) '}'
 setOrTableConstr ::= '{' setOrTableConstr1 '}'
-private setOrTableConstr1 ::= (exprColonEqExpr ',')+ | ':'  // NOTE: Changed '*' to '+'
+private setOrTableConstr1 ::= ((exprColonEqExpr ',')+ | ':')?  // NOTE: Changed '*' to '+' + '?'
 
 //castExpr = 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
 castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>> <<optInd (')')>>
