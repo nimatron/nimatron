@@ -1,5 +1,9 @@
 # Release notes
 
+## 1.2.0
+
+  * Significant re-working of grammar to fix parser issues.
+
 ## 1.1.1
 
   * Fix to grammar to parse multi-line arrays properly.
