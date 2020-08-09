@@ -3045,9 +3045,9 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<optInd exprs>>
+  // exprs
   static boolean primarySuffix5(PsiBuilder b, int l) {
-    return optInd(b, l + 1, exprs_parser_);
+    return exprs(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -4223,11 +4223,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser expr_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return expr(b, l + 1);
-    }
-  };
-  static final Parser exprs_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return exprs(b, l + 1);
     }
   };
   static final Parser genericParams_1_0_parser_ = new Parser() {
