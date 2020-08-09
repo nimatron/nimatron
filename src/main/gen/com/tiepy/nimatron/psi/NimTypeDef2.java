@@ -13,7 +13,7 @@ public interface NimTypeDef2 extends NimElement {
   @NotNull
   NimIdentVisDot getIdentVisDot();
 
-  @Nullable
+  @NotNull
   NimOptInd getOptInd();
 
   @NotNull

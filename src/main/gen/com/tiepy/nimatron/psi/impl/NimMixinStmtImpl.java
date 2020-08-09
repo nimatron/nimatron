@@ -26,9 +26,9 @@ public class NimMixinStmtImpl extends NimElementImpl implements NimMixinStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

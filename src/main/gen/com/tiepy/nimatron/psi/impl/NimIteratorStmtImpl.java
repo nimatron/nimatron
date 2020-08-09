@@ -26,9 +26,9 @@ public class NimIteratorStmtImpl extends NimElementImpl implements NimIteratorSt
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

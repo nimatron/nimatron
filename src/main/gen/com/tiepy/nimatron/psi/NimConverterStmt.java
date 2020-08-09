@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimConverterStmt extends NimElement {
 
-  @Nullable
+  @NotNull
   NimOptInd getOptInd();
 
 }

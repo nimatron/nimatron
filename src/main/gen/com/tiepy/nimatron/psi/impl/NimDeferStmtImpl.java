@@ -26,9 +26,9 @@ public class NimDeferStmtImpl extends NimElementImpl implements NimDeferStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

@@ -26,9 +26,9 @@ public class NimWhenStmtImpl extends NimElementImpl implements NimWhenStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimCondStmt getCondStmt() {
-    return findChildByClass(NimCondStmt.class);
+    return findNotNullChildByClass(NimCondStmt.class);
   }
 
 }

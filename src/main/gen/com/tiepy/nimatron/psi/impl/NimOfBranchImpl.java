@@ -26,15 +26,15 @@ public class NimOfBranchImpl extends NimElementImpl implements NimOfBranch {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimExprs getExprs() {
-    return findChildByClass(NimExprs.class);
+    return findNotNullChildByClass(NimExprs.class);
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

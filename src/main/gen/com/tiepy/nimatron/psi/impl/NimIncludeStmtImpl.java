@@ -32,9 +32,9 @@ public class NimIncludeStmtImpl extends NimElementImpl implements NimIncludeStmt
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

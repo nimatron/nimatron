@@ -26,9 +26,9 @@ public class NimBlockStmtImpl extends NimElementImpl implements NimBlockStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
   @Override

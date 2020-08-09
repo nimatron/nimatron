@@ -26,9 +26,9 @@ public class NimPatternImpl extends NimElementImpl implements NimPattern {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

@@ -26,9 +26,9 @@ public class NimForStmtImpl extends NimElementImpl implements NimForStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimExpr getExpr() {
-    return findChildByClass(NimExpr.class);
+    return findNotNullChildByClass(NimExpr.class);
   }
 
   @Override
@@ -38,9 +38,9 @@ public class NimForStmtImpl extends NimElementImpl implements NimForStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

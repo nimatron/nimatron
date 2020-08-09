@@ -26,9 +26,9 @@ public class NimProcStmtImpl extends NimElementImpl implements NimProcStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

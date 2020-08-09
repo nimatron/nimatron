@@ -26,9 +26,9 @@ public class NimFuncStmtImpl extends NimElementImpl implements NimFuncStmt {
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimWhileStmt extends NimElement {
 
-  @Nullable
+  @NotNull
   NimExpr getExpr();
 
-  @Nullable
+  @NotNull
   NimOptInd getOptInd();
 
 }

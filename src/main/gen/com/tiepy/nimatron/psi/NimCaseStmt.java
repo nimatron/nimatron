@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimCaseStmt extends NimElement {
 
-  @Nullable
+  @NotNull
   NimExpr getExpr();
 
-  @Nullable
+  @NotNull
   NimOfBranches getOfBranches();
 
 }

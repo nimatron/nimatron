@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimOfBranch extends NimElement {
 
-  @Nullable
+  @NotNull
   NimExprs getExprs();
 
-  @Nullable
+  @NotNull
   NimOptInd getOptInd();
 
 }

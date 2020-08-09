@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimTypeClassParam extends NimElement {
 
-  @Nullable
+  @NotNull
   NimSymbol getSymbol();
 
 }

@@ -10,7 +10,7 @@ public interface NimIncludeStmt extends NimElement {
   @NotNull
   List<NimExpr> getExprList();
 
-  @Nullable
+  @NotNull
   NimOptInd getOptInd();
 
 }

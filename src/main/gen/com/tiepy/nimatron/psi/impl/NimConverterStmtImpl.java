@@ -26,9 +26,9 @@ public class NimConverterStmtImpl extends NimElementImpl implements NimConverter
   }
 
   @Override
-  @Nullable
+  @NotNull
   public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

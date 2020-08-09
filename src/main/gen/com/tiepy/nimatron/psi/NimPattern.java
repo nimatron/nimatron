@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimPattern extends NimElement {
 
-  @Nullable
+  @NotNull
   NimOptInd getOptInd();
 
 }
