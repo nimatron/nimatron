@@ -98,6 +98,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscTypeDecl() {
+        doTest(true, true);
+    }
+
     public void testMiscTypeDef() {
         doTest(true, true);
     }

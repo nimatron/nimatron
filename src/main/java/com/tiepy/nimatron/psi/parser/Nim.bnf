@@ -283,9 +283,10 @@ pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd pragma1>> {pin=1}
 private pragma1 ::= '.}' | '}'
 
 //identVis = symbol OPR?  # postfix position
+//identVis ::= symbol oprCombo?  // postfix position
 
 //identVisDot = symbol '.' optInd symbol OPR?
-identVisDot ::= symbol '.' <<optInd symbol>> oprCombo? {pin=2}
+identVisDot ::= symbol ('.' <<optInd symbol>>)? oprCombo? // NOTE: '.' is now optional.
 private oprCombo ::= /*OPR|*/op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
 
 //identWithPragma = identVis pragma?

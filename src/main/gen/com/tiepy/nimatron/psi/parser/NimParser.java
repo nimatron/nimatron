@@ -1444,23 +1444,39 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // symbol '.' <<optInd symbol>> oprCombo?
+  // symbol ('.' <<optInd symbol>>)? oprCombo?
   public static boolean identVisDot(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "identVisDot")) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, IDENT_VIS_DOT, "<ident vis dot>");
     r = symbol(b, l + 1);
-    r = r && consumeToken(b, ".");
-    p = r; // pin = 2
-    r = r && report_error_(b, optInd(b, l + 1, symbol_parser_));
-    r = p && identVisDot_3(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && identVisDot_1(b, l + 1);
+    r = r && identVisDot_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ('.' <<optInd symbol>>)?
+  private static boolean identVisDot_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identVisDot_1")) return false;
+    identVisDot_1_0(b, l + 1);
+    return true;
+  }
+
+  // '.' <<optInd symbol>>
+  private static boolean identVisDot_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identVisDot_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ".");
+    r = r && optInd(b, l + 1, symbol_parser_);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   // oprCombo?
-  private static boolean identVisDot_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "identVisDot_3")) return false;
+  private static boolean identVisDot_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identVisDot_2")) return false;
     oprCombo(b, l + 1);
     return true;
   }
