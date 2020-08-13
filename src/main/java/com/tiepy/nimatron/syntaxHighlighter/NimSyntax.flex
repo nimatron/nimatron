@@ -45,19 +45,81 @@ import java.util.Stack;
 %eof{  return;
 %eof}
 
-CRLF=\n|\r|\r\n
-WHITE_SPACE=[\ \t\f]
+OP0A=->
+OP0B=\~>
+OP0C==>
+//OP0={OP0A}|{OP0B}|{OP0C}
+
+OP1A=\+=
+OP1B=\*=
+OP1C=-=
+OP1D=\/\*
+//OP1={OP1A}|{OP1B}|{OP1C}|{OP1D}
+
+OP2A=@
+OP2B=:
+OP2C=\?
+//OP2={OP2A}|{OP2B}|{OP2C}
+
+OP3A=or
+OP3B=xor
+//OP3={OP3A}|{OP3B}
+
+OP4A=and
+//OP4={OP4A}
+
+OP5A===
+OP5B=<=
+OP5C=<
+OP5D=>=
+OP5E=>
+OP5F=\!=
+OP5G=in
+OP5H=notin
+OP5I=is
+OP5J=isnot
+OP5K=not
+OP5L=of
+OP5M=as
+//OP5={OP5A}|{OP5B}|{OP5C}|{OP5D}|{OP5E}|{OP5F}|{OP5G}|{OP5H}|{OP5I}|{OP5J}|{OP5K}|{OP5L}|{OP5M}
+
+OP6A=\.\.
+//OP6={OP6A}
+
+OP7A=&
+//OP7={OP7A}
+
+OP8A=\+
+OP8B=-
+//OP8={OP8A}|{OP8B}
+
+OP9A=\*
+OP9B=\/
+OP9C=div
+OP9D=mod
+OP9E=shl
+OP9F=shr
+OP9G=%
+//OP9={OP9A}|{OP9B}|{OP9C}|{OP9D}|{OP9E}|{OP9F}|{OP9G}
+
+OP10A=\$
+OP10B=\^
+//OP10={OP10A}|{OP10B}
+
+OPR=[\=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
+
+DIGIT=[0-9]
+ALPHA=[A-Za-z\u0080-\u00ff]
+IDENT={ALPHA}(_|{ALPHA}|{DIGIT})*
+
 BLOCK_COMMENT_BEGIN=#\[
 BLOCK_COMMENT_END=\]#
 BLOCK_DOC_COMMENT_BEGIN=##\[
 BLOCK_DOC_COMMENT_END=\]##
-DIGIT=[0-9]
-ALPHA=[A-Za-z\u0080-\u00ff]
-IDENT={ALPHA}(_|{ALPHA}|{DIGIT})*
-KEYWORD=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
-|else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
-|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
-|when|while|xor|yield
+
+CRLF=\n|\r|\r\n
+WHITE_SPACE=[\ \t\f]
+
 HEX_DIGIT=[0-9A-Fa-f]
 OCT_DIGIT=[0-7]
 BIN_DIGIT=[01]
@@ -65,34 +127,43 @@ HEX_LIT=0(x|X){HEX_DIGIT}(_|{HEX_DIGIT})*
 DEC_LIT={DIGIT}(_|{DIGIT})*
 OCT_LIT=0o{OCT_DIGIT}(_|{OCT_DIGIT})*
 BIN_LIT=0(b|B){BIN_DIGIT}(_|{BIN_DIGIT})*
+
 INT_LIT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
 INT8_LIT={INT_LIT}'?(i|I)8
 INT16_LIT={INT_LIT}'?(i|I)16
 INT32_LIT={INT_LIT}'?(i|I)32
 INT64_LIT={INT_LIT}'?(i|I)64
+
 UINT_LIT={INT_LIT}'?(u|U)
 UINT8_LIT={INT_LIT}'?(u|U)8
 UINT16_LIT={INT_LIT}'?(u|U)16
 UINT32_LIT={INT_LIT}'?(u|U)32
 UINT64_LIT={INT_LIT}'?(u|U)64
+
 DIGITS={DEC_LIT}
 EXPONENT=(e|E)(\+|\-)?{DIGITS}
 FLOAT_LIT={DIGITS}((\.{DIGITS}{EXPONENT}?)|{EXPONENT})
-FLOAT32_SUFFIX=(f|F)32
+FLOAT32_SUFFIX=(f|F)(32)?
 FLOAT64_SUFFIX=(f|F)64
 FLOAT32_LIT=({HEX_LIT}'{FLOAT32_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT32_SUFFIX})
 FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT64_SUFFIX})
-NUMERICAL_CONSTANT={HEX_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT}
-|{INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
-|{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
-|{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
-BOOLEAN_CONSTANT=true|false
-OPERATOR=[\=\+\-\*/<>@$~&%\|!\?\^\.:\\]+
-BRACKET=[\{\}\[\]]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)
-PARENTHESIS=[\(\)]|(\(\.)|(\.\))
-SEMICOLON=;
-COMMA=,
-GRAVE_ACCENT=`
+
+BOOL_LIT=true|false
+
+NIL=nil
+
+BRACKET=\{|\}|\[|\]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
+PARENTHESIS=\(|\)
+
+C_SEMICOLON=;
+C_COMMA=,
+C_GRAVE_ACCENT=`
+
+KEYW=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
+|else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
+|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
+//|when|while|xor|yield
+
 BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|AssertionError|AtomType|auto|BackwardsIndex
 |BiggestFloat|BiggestInt|BiggestUInt|bool|byte|ByteAddress|CatchableError|cchar|cdouble|cfloat|char|cint|clong
 |clongdouble|clonglong|cschar|cshort|csize|csize_t|cstring|cstringArray|cuchar|cuint|culong|culonglong|cushort
@@ -105,6 +176,7 @@ BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|Asserti
 |SomeFloat|SomeInteger|SomeNumber|SomeOrdinal|SomeSignedInt|SomeUnsignedInt|StackOverflowError|StackTraceEntry|static
 |string|TaintedString|TFrame|TimeEffect|type|typed|typedesc|TypeOfMode|uint|uint16|uint32|uint64|uint8|UncheckedArray
 |untyped|ValueError|varargs|void|WriteIOEffect
+
 BUILT_IN_PROCS=abs|add|addAndFetch|addEscapedChar|addFloat|addInt|addQuitProc|addQuoted|addr|alignof|alloc0Impl
 |allocCStringArray|allocImpl|allocShared0Impl|allocSharedImpl|and|ashr|astToStr|atomicDec|atomicInc|card|cas|chr|clamp
 |cmp|compileOption|compiles|contains|copyMem|cpuRelax|create|createShared|createSharedU|createU|cstringArrayToSeq
@@ -151,50 +223,101 @@ public void popState() {
 %%
 
 <YYINITIAL> {
-    {CRLF}+                     { return TokenType.WHITE_SPACE; }
+    {CRLF}                      { return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
     #                           { pushState(LINE_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT; }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); return NimSyntaxTypes.COMMENT; }
-    {KEYWORD}                   { return NimSyntaxTypes.KEYWORD; }
+    {KEYW}                      { return NimSyntaxTypes.KEYW; }
     r\"                         { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     \"                          { pushState(STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     '                           { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    {NUMERICAL_CONSTANT}        { return NimSyntaxTypes.NUMERICAL_CONSTANT; }
-    {BOOLEAN_CONSTANT}          { return NimSyntaxTypes.NUMERICAL_CONSTANT; }
-    {OPERATOR}                  { return NimSyntaxTypes.OPERATOR; }
-    {BRACKET}                   { return NimSyntaxTypes.BRACKET; }
-    {PARENTHESIS}               { return NimSyntaxTypes.PARENTHESIS; }
-    {SEMICOLON}                 { return NimSyntaxTypes.SEMICOLON; }
-    {COMMA}                     { return NimSyntaxTypes.COMMA; }
-    {GRAVE_ACCENT}              { return NimSyntaxTypes.GRAVE_ACCENT; }
+    {INT_LIT}                   { return NimSyntaxTypes.NUM_LIT; }
+    {INT8_LIT}                  { return NimSyntaxTypes.NUM_LIT; }
+    {INT16_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
+    {INT32_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
+    {INT64_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
+    {UINT_LIT}                  { return NimSyntaxTypes.NUM_LIT; }
+    {UINT8_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
+    {UINT16_LIT}                { return NimSyntaxTypes.NUM_LIT; }
+    {UINT32_LIT}                { return NimSyntaxTypes.NUM_LIT; }
+    {UINT64_LIT}                { return NimSyntaxTypes.NUM_LIT; }
+    {FLOAT_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
+    {FLOAT32_LIT}               { return NimSyntaxTypes.NUM_LIT; }
+    {FLOAT64_LIT}               { return NimSyntaxTypes.NUM_LIT; }
+    {NIL}                       { return NimSyntaxTypes.NUM_LIT; }
+    {BOOL_LIT}                  { return NimSyntaxTypes.NUM_LIT; }
+    {OP0A}                      { return NimSyntaxTypes.OPR; }
+    {OP0B}                      { return NimSyntaxTypes.OPR; }
+    {OP0C}                      { return NimSyntaxTypes.OPR; }
+    {OP1A}                      { return NimSyntaxTypes.OPR; }
+    {OP1B}                      { return NimSyntaxTypes.OPR; }
+    {OP1C}                      { return NimSyntaxTypes.OPR; }
+    {OP1D}                      { return NimSyntaxTypes.OPR; }
+    {OP2A}                      { return NimSyntaxTypes.OPR; }
+    {OP2B}                      { return NimSyntaxTypes.OPR; }
+    {OP2C}                      { return NimSyntaxTypes.OPR; }
+    {OP3A}                      { return NimSyntaxTypes.OPR; }
+    {OP3B}                      { return NimSyntaxTypes.OPR; }
+    {OP4A}                      { return NimSyntaxTypes.OPR; }
+    {OP5A}                      { return NimSyntaxTypes.OPR; }
+    {OP5B}                      { return NimSyntaxTypes.OPR; }
+    {OP5C}                      { return NimSyntaxTypes.OPR; }
+    {OP5D}                      { return NimSyntaxTypes.OPR; }
+    {OP5E}                      { return NimSyntaxTypes.OPR; }
+    {OP5F}                      { return NimSyntaxTypes.OPR; }
+    {OP5G}                      { return NimSyntaxTypes.OPR; }
+    {OP5H}                      { return NimSyntaxTypes.OPR; }
+    {OP5I}                      { return NimSyntaxTypes.OPR; }
+    {OP5J}                      { return NimSyntaxTypes.OPR; }
+    {OP5K}                      { return NimSyntaxTypes.OPR; }
+    {OP5L}                      { return NimSyntaxTypes.OPR; }
+    {OP5M}                      { return NimSyntaxTypes.OPR; }
+    {OP6A}                      { return NimSyntaxTypes.OPR; }
+    {OP7A}                      { return NimSyntaxTypes.OPR; }
+    {OP8A}                      { return NimSyntaxTypes.OPR; }
+    {OP8B}                      { return NimSyntaxTypes.OPR; }
+    {OP9A}                      { return NimSyntaxTypes.OPR; }
+    {OP9B}                      { return NimSyntaxTypes.OPR; }
+    {OP9C}                      { return NimSyntaxTypes.OPR; }
+    {OP9D}                      { return NimSyntaxTypes.OPR; }
+    {OP9E}                      { return NimSyntaxTypes.OPR; }
+    {OP9F}                      { return NimSyntaxTypes.OPR; }
+    {OP9G}                      { return NimSyntaxTypes.OPR; }
+    {OP10A}                     { return NimSyntaxTypes.OPR; }
+    {OP10B}                     { return NimSyntaxTypes.OPR; }
+    {OPR}                       { return NimSyntaxTypes.OPR; }
     {BUILT_IN_TYPES}            { return NimSyntaxTypes.TYPES; }
     {BUILT_IN_PROCS}            { return NimSyntaxTypes.PROCS; }
-    {IDENT}+                    { return NimSyntaxTypes.IDENT; }
-    {ALPHA}+                    { return TokenType.WHITE_SPACE; }
+    {IDENT}                     { return NimSyntaxTypes.IDENT; }
+    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
+    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
+    {BRACKET}                   { return NimSyntaxTypes.BRACKET; }
+    {PARENTHESIS}               { return NimSyntaxTypes.PARENTHESIS; }
+    {C_SEMICOLON}               { return NimSyntaxTypes.C_SEMICOLON; }
+    {C_COMMA}                   { return NimSyntaxTypes.C_COMMA; }
+    {C_GRAVE_ACCENT}            { return NimSyntaxTypes.C_GRAVE_ACCENT; }
     .                           { return TokenType.WHITE_SPACE; }
 }
 
 <LINE_COMMENT> {
-    {CRLF}+                     { popState(); return NimSyntaxTypes.COMMENT; }
     .                           { return NimSyntaxTypes.COMMENT; }
+    {CRLF}                      { popState(); return NimSyntaxTypes.COMMENT; }
 }
 
 <BLOCK_COMMENT> {
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_COMMENT_END}         { popState(); return NimSyntaxTypes.COMMENT; }
-    {CRLF}+                     { return NimSyntaxTypes.COMMENT; }
+    {CRLF}                      { return NimSyntaxTypes.COMMENT; }
     .                           { return NimSyntaxTypes.COMMENT; }
 }
 
 <BLOCK_DOC_COMMENT> {
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_DOC_COMMENT_END}     { popState(); return NimSyntaxTypes.COMMENT; }
-    {CRLF}+                     { return NimSyntaxTypes.COMMENT; }
+    {CRLF}                      { return NimSyntaxTypes.COMMENT; }
     .                           { return NimSyntaxTypes.COMMENT; }
 }
 

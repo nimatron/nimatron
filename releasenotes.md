@@ -1,5 +1,9 @@
 # Release notes
 
+## 1.2.1
+
+  * Correction to syntax highlighting for floats.
+
 ## 1.2.0
 
   * Significant re-working of grammar to fix parser issues.

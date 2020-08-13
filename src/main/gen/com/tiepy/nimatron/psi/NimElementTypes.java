@@ -162,6 +162,7 @@ public interface NimElementTypes {
   IElementType OP9F = new NimTokenType("OP9F");
   IElementType OP9G = new NimTokenType("OP9G");
   IElementType OPR = new NimTokenType("OPR");
+  IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
   IElementType RSTR_LIT = new NimTokenType("RSTR_LIT");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
   IElementType TRIPLESTR_LIT = new NimTokenType("TRIPLESTR_LIT");

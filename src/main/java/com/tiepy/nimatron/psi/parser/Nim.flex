@@ -144,7 +144,7 @@ UINT64_LIT={INT_LIT}'?(u|U)64
 DIGITS={DEC_LIT}
 EXPONENT=(e|E)(\+|\-)?{DIGITS}
 FLOAT_LIT={DIGITS}((\.{DIGITS}{EXPONENT}?)|{EXPONENT})
-FLOAT32_SUFFIX=(f|F)32
+FLOAT32_SUFFIX=(f|F)(32)?
 FLOAT64_SUFFIX=(f|F)64
 FLOAT32_LIT=({HEX_LIT}'{FLOAT32_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT32_SUFFIX})
 FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT64_SUFFIX})
@@ -153,7 +153,9 @@ BOOL_LIT=true|false
 
 NIL=nil
 
-BRACKET=\{|\}|\[|\]|\(|\)|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
+BRACKET=\{|\}|\[|\]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
+PARENTHESIS=\(|\)
+
 C_SEMICOLON=;
 C_COMMA=,
 C_GRAVE_ACCENT=`
@@ -323,8 +325,6 @@ private IElementType getDedenterToken() {
     r\"                         { pushState(RAW_STRING_LITERAL); }
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); }
     \"                          { pushState(STRING_LITERAL); }
-    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }
-    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     '                           { pushState(CHARACTER_LITERAL); }
     {INT_LIT}                   { return NimElementTypes.INT_LIT; }
     {INT8_LIT}                  { return NimElementTypes.INT8_LIT; }
@@ -381,11 +381,14 @@ private IElementType getDedenterToken() {
     {OP10A}                     { return NimElementTypes.OP10A; }
     {OP10B}                     { return NimElementTypes.OP10B; }
     {OPR}                       { return NimElementTypes.OPR; }
+    {IDENT}                     { return NimElementTypes.IDENT; }
+    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }
+    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {BRACKET}                   { return NimElementTypes.BRACKET; }
+    {PARENTHESIS}               { return NimElementTypes.PARENTHESIS; }
     {C_SEMICOLON}               { return NimElementTypes.C_SEMICOLON; }
     {C_COMMA}                   { return NimElementTypes.C_COMMA; }
     {C_GRAVE_ACCENT}            { return NimElementTypes.C_GRAVE_ACCENT; }
-    {IDENT}                     { return NimElementTypes.IDENT; }
     .                           { return TokenType.BAD_CHARACTER; }
 }
 

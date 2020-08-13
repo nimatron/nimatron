@@ -86,10 +86,18 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testExportSyntax() {
         int tokenCount = parse("proc foo*(): int = 2");
         Assert.assertEquals(27, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMiscNumberValueHighlighting() throws Exception {
+        int tokenCount = parse("var i = 1'f\n");
+        Assert.assertEquals(8, tokenCount);
     }
 
     /**
@@ -97,8 +105,9 @@ public class NimLexerTest {
      * @param input String to be parsed.
      * @return Token count.
      */
-    private int parse(String input) {
+    private int parse(String input) throws Exception {
         int count = 0;
+        boolean badChars = false;
 
         NimLexerAdapter lexer = new NimLexerAdapter();
 
@@ -109,10 +118,20 @@ public class NimLexerTest {
         IElementType token = lexer.getTokenType();
         while (token != null) {
             count++;
+
             System.out.println(String.format("%s \"%s\"", token.toString(),
                     lexer.getTokenText().replace("\n", "\\n")));
+
+            if (token.toString().contains("BAD_CHARACTER")) {
+                badChars = true;
+            }
+
             lexer.advance();
             token = lexer.getTokenType();
+        }
+
+        if (badChars) {
+            throw new Exception("Contains bad character(s)");
         }
 
         return count;

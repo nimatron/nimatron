@@ -30,16 +30,16 @@ import com.intellij.psi.tree.IElementType;
 
 public interface NimSyntaxTypes {
     IElementType BRACKET = new NimSyntaxTokenType("BRACKET");
-    IElementType COMMA = new NimSyntaxTokenType("COMMA");
+    IElementType C_COMMA = new NimSyntaxTokenType("C_COMMA");
+    IElementType C_GRAVE_ACCENT = new NimSyntaxTokenType("C_GRAVE_ACCENT");
+    IElementType C_SEMICOLON = new NimSyntaxTokenType("C_SEMICOLON");
     IElementType COMMENT = new NimSyntaxTokenType("COMMENT");
-    IElementType GRAVE_ACCENT = new NimSyntaxTokenType("GRAVE_ACCENT");
     IElementType IDENT = new NimSyntaxTokenType("IDENT");
-    IElementType KEYWORD = new NimSyntaxTokenType("KEYWORD");
-    IElementType NUMERICAL_CONSTANT = new NimSyntaxTokenType("NUMERICAL_CONSTANT");
-    IElementType OPERATOR = new NimSyntaxTokenType("OPERATOR");
+    IElementType KEYW = new NimSyntaxTokenType("KEYW");
+    IElementType NUM_LIT = new NimSyntaxTokenType("NUM_LIT");
+    IElementType OPR = new NimSyntaxTokenType("OPR");
     IElementType PARENTHESIS = new NimSyntaxTokenType("PARENTHESIS");
     IElementType PROCS = new NimSyntaxTokenType("PROCS");
-    IElementType SEMICOLON = new NimSyntaxTokenType("SEMICOLON");
     IElementType STRING_LITERAL = new NimSyntaxTokenType("STRING_LITERAL");
     IElementType TYPES = new NimSyntaxTokenType("TYPES");
 }

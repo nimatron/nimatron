@@ -88,23 +88,23 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(NimSyntaxTypes.KEYWORD)) {
+        if (tokenType.equals(NimSyntaxTypes.KEYW)) {
             return KEYWORD_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.COMMENT)) {
             return COMMENT_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.STRING_LITERAL)) {
             return LITERAL_STRING_KEYS;
-        } else if (tokenType.equals(NimSyntaxTypes.NUMERICAL_CONSTANT)) {
+        } else if (tokenType.equals(NimSyntaxTypes.NUM_LIT)) {
             return NUMERICAL_CONSTANT_KEYS;
-        } else if (tokenType.equals(NimSyntaxTypes.OPERATOR)) {
+        } else if (tokenType.equals(NimSyntaxTypes.OPR)) {
             return OPERATOR_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.BRACKET)) {
             return BRACKET_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.PARENTHESIS)) {
             return PARENTHESIS_KEYS;
-        } else if (tokenType.equals(NimSyntaxTypes.SEMICOLON)) {
+        } else if (tokenType.equals(NimSyntaxTypes.C_SEMICOLON)) {
             return SEMICOLON_KEYS;
-        } else if (tokenType.equals(NimSyntaxTypes.COMMA)) {
+        } else if (tokenType.equals(NimSyntaxTypes.C_COMMA)) {
             return COMMA_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.TYPES)) {
             return TYPES_KEYS;
