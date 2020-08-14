@@ -89,6 +89,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscMultiLineArgs() {
+        doTest(true, true);
+    }
+
     public void testMiscNumberValueHighlighting() {
         doTest(true, true);
     }
