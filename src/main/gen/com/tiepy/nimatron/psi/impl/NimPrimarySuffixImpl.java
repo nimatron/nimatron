@@ -33,14 +33,14 @@ public class NimPrimarySuffixImpl extends NimElementImpl implements NimPrimarySu
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  public NimExprs getExprs() {
+    return findChildByClass(NimExprs.class);
   }
 
   @Override
-  @NotNull
-  public List<NimSimpleExpr> getSimpleExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSimpleExpr.class);
+  @Nullable
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
 }

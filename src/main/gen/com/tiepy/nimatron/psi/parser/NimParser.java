@@ -4,7 +4,7 @@ package com.tiepy.nimatron.psi.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static com.tiepy.nimatron.manualParsing.NimParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
@@ -3068,37 +3068,9 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // simpleExpr (',' simpleExpr)*
+  // exprs
   static boolean primarySuffix5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix5")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = simpleExpr(b, l + 1);
-    r = r && primarySuffix5_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (',' simpleExpr)*
-  private static boolean primarySuffix5_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix5_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!primarySuffix5_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primarySuffix5_1", c)) break;
-    }
-    return true;
-  }
-
-  // ',' simpleExpr
-  private static boolean primarySuffix5_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix5_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, ",");
-    r = r && simpleExpr(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    return exprs(b, l + 1);
   }
 
   /* ********************************************************** */

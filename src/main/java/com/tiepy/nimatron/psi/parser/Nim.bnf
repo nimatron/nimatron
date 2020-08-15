@@ -266,7 +266,7 @@ private primarySuffix1 ::= '(' (indents* exprColonEqExpr indents* ','? indents* 
 private primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 private primarySuffix3 ::= '[' (<<optInd exprColonEqExprs>>)? <<optInd (']')>>
 private primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
-private primarySuffix5 ::= simpleExpr (',' simpleExpr)* // command syntax
+private primarySuffix5 ::= exprs // command syntax
 
 private indents ::= INDENT|IND_EQ|DEDENT
 
