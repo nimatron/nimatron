@@ -107,7 +107,7 @@ public class NimLexerTest {
         int tokenCount = parse("echo(2, 3, 1,\n" +
                 "        4, 3, 1,\n" +
                 "     6, 3, 1)\n");
-        Assert.assertEquals(8, tokenCount);
+        Assert.assertEquals(32, tokenCount);
     }
 
     /**

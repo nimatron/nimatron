@@ -827,11 +827,6 @@ private IElementType getIndenterToken() {
     Indent lastIndent = indentStack.pop();
     int diff = lastIndent.Column - indentSpaces;
 
-    // Handle error case where dedent is smaller than last indent.
-    if (diff < lastIndent.Increment) {
-        return TokenType.BAD_CHARACTER;
-    }
-
     dedentStack.push(NimElementTypes.IND_EQ);
 
     // Add required dedents to stack to be returned.
@@ -840,11 +835,6 @@ private IElementType getIndenterToken() {
         // Determine difference with previous indentation level.
         lastIndent = indentStack.pop();
         diff = lastIndent.Column - indentSpaces;
-
-        // Handle error case where dedent is smaller than last indent.
-        if (diff < lastIndent.Increment) {
-            return TokenType.BAD_CHARACTER;
-        }
 
         dedentStack.push(NimElementTypes.DEDENT);
     }

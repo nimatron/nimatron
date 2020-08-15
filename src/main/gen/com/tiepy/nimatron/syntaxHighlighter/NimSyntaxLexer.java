@@ -2696,15 +2696,30 @@ class NimSyntaxLexer implements FlexLexer {
 
   /* user code: */
 
-private Stack<Integer> stack = new Stack<Integer>();
+// -----------------------------------------------------------------------------
+// State stack
+// -----------------------------------------------------------------------------
 
-public void pushState(int newState) {
-    stack.push(yystate());
+private final Stack<Integer> stateStack = new Stack<Integer>();
+
+/**
+ * Pushes new state onto stack and sets parser to begin new state.
+ * @param newState New parser state.
+ * @return New stack size.
+ */
+private int pushState(int newState) {
+    stateStack.push(yystate());
     yybegin(newState);
+    return stateStack.size();
 }
 
-public void popState() {
-    yybegin(stack.pop());
+/**
+ * Pops previous state from stack.
+ * @return Previous state.
+ */
+private int popState() {
+    yybegin(stateStack.pop());
+    return stateStack.size();
 }
 
 
