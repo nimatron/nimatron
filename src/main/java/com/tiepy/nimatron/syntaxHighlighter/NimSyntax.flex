@@ -159,10 +159,11 @@ C_SEMICOLON=;
 C_COMMA=,
 C_GRAVE_ACCENT=`
 
+// TODO: Consider removing some of the following keywords which are declared in operations above.
+// NOTE: The following keywords have already been removed: when|while|xor|yield
 KEYW=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
 |mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
-//|when|while|xor|yield
 
 BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|AssertionError|AtomType|auto|BackwardsIndex
 |BiggestFloat|BiggestInt|BiggestUInt|bool|byte|ByteAddress|CatchableError|cchar|cdouble|cfloat|char|cint|clong
