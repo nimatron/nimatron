@@ -94,9 +94,19 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMiscNumberValueHighlighting() throws Exception {
         int tokenCount = parse("var i = 1'f\n");
+        Assert.assertEquals(8, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMiscMultiLineArgs() throws Exception {
+        int tokenCount = parse("echo(2, 3, 1,\n" +
+                "        4, 3, 1,\n" +
+                "     6, 3, 1)\n");
         Assert.assertEquals(8, tokenCount);
     }
 
