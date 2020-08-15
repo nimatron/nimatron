@@ -35,6 +35,8 @@
     psiPackage="com.tiepy.nimatron.psi"
     psiImplPackage="com.tiepy.nimatron.psi.impl"
 
+    parserUtilClass="com.tiepy.nimatron.manualParsing.NimParserUtil"
+
     elementTypeHolderClass="com.tiepy.nimatron.psi.NimElementTypes"
     elementTypeClass="com.tiepy.nimatron.psi.NimElementType"
     tokenTypeClass="com.tiepy.nimatron.psi.NimTokenType"
