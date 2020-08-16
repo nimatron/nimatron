@@ -203,10 +203,10 @@ castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>>
 //parKeyw = 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
 //        | 'finally' | 'except' | 'for' | 'block' | 'const' | 'let'
 //        | 'when' | 'var' | 'mixin'
-parKeyw ::= parKeyw1
-private parKeyw1 ::= 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
-          | 'finally' | 'except' | 'for' | 'block' | 'const' | 'let'
-          | 'when' | 'var' | 'mixin'
+//parKeyw ::= parKeyw1
+//private parKeyw1 ::= 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
+//          | 'finally' | 'except' | 'for' | 'block' | 'const' | 'let'
+//          | 'when' | 'var' | 'mixin'
 
 //par = '(' optInd
 //          ( &parKeyw complexOrSimpleStmt ^+ ';'
@@ -217,7 +217,7 @@ private parKeyw1 ::= 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
 //          optPar ')'
 par ::= '(' par1 ')'
 private par1 ::= par2 | par3 | pragmaStmt | par4
-private par2 ::= &parKeyw stmt (';' stmt)*
+private par2 ::= /*&parKeyw*/ stmt (';' stmt)*
 private par3 ::= ';' stmt (';' stmt)*
 private par4 ::= simpleExpr (par5 | par6)
 private par5 ::= '=' expr (';' stmt (';' stmt)*)?
