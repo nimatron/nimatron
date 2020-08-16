@@ -152,8 +152,13 @@ BOOL_LIT=true|false
 
 NIL=nil
 
-BRACKET=\{|\}|\[|\]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
-PARENTHESIS=\(|\)
+OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
+CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
+BRACKET={OPEN_BRACKET}|{CLOSE_BRACKET}
+
+OPEN_PARENTHESIS=\(
+CLOSE_PARENTHESIS=\)
+PARENTHESIS={OPEN_PARENTHESIS}|{CLOSE_PARENTHESIS}
 
 C_SEMICOLON=;
 C_COMMA=,
