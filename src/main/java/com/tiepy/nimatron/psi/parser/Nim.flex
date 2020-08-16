@@ -153,8 +153,13 @@ BOOL_LIT=true|false
 
 NIL=nil
 
-BRACKET=\{|\}|\[|\]|(\[\.)|(\.\])|(\{\.)|(\.\})|(\[:)|(\(\.)|(\.\))
-PARENTHESIS=\(|\)
+OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
+CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
+BRACKET={OPEN_BRACKET}|{CLOSE_BRACKET}
+
+OPEN_PARENTHESIS=\(
+CLOSE_PARENTHESIS=\)
+PARENTHESIS={OPEN_PARENTHESIS}|{CLOSE_PARENTHESIS}
 
 C_SEMICOLON=;
 C_COMMA=,
@@ -201,14 +206,17 @@ private int popState() {
 
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
+private boolean suspendIndent = false;
 
 /**
  * Records last indent spaces and pushes the INDENTER state onto stack.
  */
 private void handleIndent() {
-    lastIndentSpaces = indentSpaces;
-    indentSpaces = 0;
-    pushState(INDENTER);
+    if (!suspendIndent) {
+        lastIndentSpaces = indentSpaces;
+        indentSpaces = 0;
+        pushState(INDENTER);
+    }
 }
 
 // -----------------------------------------------------------------------------
@@ -378,7 +386,8 @@ private IElementType getDedenterToken() {
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }
     {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {BRACKET}                   { return NimElementTypes.BRACKET; }
-    {PARENTHESIS}               { return NimElementTypes.PARENTHESIS; }
+    {OPEN_PARENTHESIS}          { suspendIndent = true; return NimElementTypes.PARENTHESIS; }
+    {CLOSE_PARENTHESIS}         { suspendIndent = false; return NimElementTypes.PARENTHESIS; }
     {C_SEMICOLON}               { return NimElementTypes.C_SEMICOLON; }
     {C_COMMA}                   { return NimElementTypes.C_COMMA; }
     {C_GRAVE_ACCENT}            { return NimElementTypes.C_GRAVE_ACCENT; }

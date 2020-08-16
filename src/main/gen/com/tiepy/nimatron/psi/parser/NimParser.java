@@ -1655,17 +1655,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // INDENT|IND_EQ|DEDENT
-  static boolean indents(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "indents")) return false;
-    boolean r;
-    r = consumeToken(b, INDENT);
-    if (!r) r = consumeToken(b, IND_EQ);
-    if (!r) r = consumeToken(b, DEDENT);
-    return r;
-  }
-
-  /* ********************************************************** */
   // 'iterator' <<optInd namedRoutine>>
   public static boolean iteratorStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "iteratorStmt")) return false;
@@ -2902,7 +2891,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '(' (indents* exprColonEqExpr indents* ','? indents* )* ')'
+  // '(' (exprColonEqExpr ','?)* ')'
   static boolean primarySuffix1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primarySuffix1")) return false;
     boolean r;
@@ -2914,7 +2903,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (indents* exprColonEqExpr indents* ','? indents* )*
+  // (exprColonEqExpr ','?)*
   private static boolean primarySuffix1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primarySuffix1_1")) return false;
     while (true) {
@@ -2925,57 +2914,21 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // indents* exprColonEqExpr indents* ','? indents*
+  // exprColonEqExpr ','?
   private static boolean primarySuffix1_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primarySuffix1_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = primarySuffix1_1_0_0(b, l + 1);
-    r = r && exprColonEqExpr(b, l + 1);
-    r = r && primarySuffix1_1_0_2(b, l + 1);
-    r = r && primarySuffix1_1_0_3(b, l + 1);
-    r = r && primarySuffix1_1_0_4(b, l + 1);
+    r = exprColonEqExpr(b, l + 1);
+    r = r && primarySuffix1_1_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // indents*
-  private static boolean primarySuffix1_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0_0")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!indents(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primarySuffix1_1_0_0", c)) break;
-    }
-    return true;
-  }
-
-  // indents*
-  private static boolean primarySuffix1_1_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0_2")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!indents(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primarySuffix1_1_0_2", c)) break;
-    }
-    return true;
-  }
-
   // ','?
-  private static boolean primarySuffix1_1_0_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0_3")) return false;
+  private static boolean primarySuffix1_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix1_1_0_1")) return false;
     consumeToken(b, ",");
-    return true;
-  }
-
-  // indents*
-  private static boolean primarySuffix1_1_0_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primarySuffix1_1_0_4")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!indents(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primarySuffix1_1_0_4", c)) break;
-    }
     return true;
   }
 
