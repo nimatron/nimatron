@@ -97,6 +97,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscMultiLineCommentAtFileEnd() {
+        doTest(true, true);
+    }
+
     public void testMiscMultipleVarStatements() {
         doTest(true, true);
     }
