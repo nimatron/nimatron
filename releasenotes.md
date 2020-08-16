@@ -2,7 +2,7 @@
 
 ## 1.2.2
 
-  * Grammar modified to allow newlines in routine arguments.
+  * Lexer modified to ignore newlines in routine arguments.
 
 ## 1.2.1
 
