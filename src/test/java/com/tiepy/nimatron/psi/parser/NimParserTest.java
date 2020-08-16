@@ -85,6 +85,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscImportFromParentPath() {
+        doTest(true, true);
+    }
+
     public void testMiscMethodCall() {
         doTest(true, true);
     }
