@@ -120,6 +120,7 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMiscForwardSlashFuncName() throws Exception {
         int tokenCount = parse("func `*=`*(a: var Vector3, b: Vector3) =\n" +
@@ -128,6 +129,14 @@ public class NimLexerTest {
                 "func `/=`*(a: var Vector3, b: Vector3) =\n" +
                 "  a = a / b\n");
         Assert.assertEquals(70, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMiscObjType() throws Exception {
+        int tokenCount = parse("type Object = object\n" +
+                "  member: string\n");
+        Assert.assertEquals(14, tokenCount);
     }
 
     /**
