@@ -61,6 +61,7 @@ public interface NimElementTypes {
   IElementType PARAMS = new NimElementType("PARAMS");
   IElementType PARAMS_ARROW = new NimElementType("PARAMS_ARROW");
   IElementType PARAMS_COLON = new NimElementType("PARAMS_COLON");
+  IElementType PAR_KEYW = new NimElementType("PAR_KEYW");
   IElementType PATTERN = new NimElementType("PATTERN");
   IElementType POST_EXPR_BLOCKS = new NimElementType("POST_EXPR_BLOCKS");
   IElementType PRAGMA = new NimElementType("PRAGMA");
@@ -333,6 +334,9 @@ public interface NimElementTypes {
       }
       else if (type == PARAMS_COLON) {
         return new NimParamsColonImpl(node);
+      }
+      else if (type == PAR_KEYW) {
+        return new NimParKeywImpl(node);
       }
       else if (type == PATTERN) {
         return new NimPatternImpl(node);

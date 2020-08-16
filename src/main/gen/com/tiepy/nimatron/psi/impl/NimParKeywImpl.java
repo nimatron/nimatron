@@ -10,31 +10,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimTryStmtImpl extends NimElementImpl implements NimTryStmt {
+public class NimParKeywImpl extends NimElementImpl implements NimParKeyw {
 
-  public NimTryStmtImpl(@NotNull ASTNode node) {
+  public NimParKeywImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitTryStmt(this);
+    visitor.visitParKeyw(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof NimVisitor) accept((NimVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<NimExprs> getExprsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprs.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimStmt> getStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
 }

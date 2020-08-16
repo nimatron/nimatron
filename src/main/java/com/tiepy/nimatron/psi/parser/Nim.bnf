@@ -203,6 +203,10 @@ castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>>
 //parKeyw = 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
 //        | 'finally' | 'except' | 'for' | 'block' | 'const' | 'let'
 //        | 'when' | 'var' | 'mixin'
+parKeyw ::= parKeyw1
+private parKeyw1 ::= 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
+          | 'finally' | 'except' | 'for' | 'block' | 'const' | 'let'
+          | 'when' | 'var' | 'mixin'
 
 //par = '(' optInd
 //          ( &parKeyw complexOrSimpleStmt ^+ ';'
@@ -211,9 +215,9 @@ castExpr ::= 'cast' '[' <<optInd typeDesc>> <<optInd (']')>> '(' <<optInd expr>>
 //          | simpleExpr ( ('=' expr (';' complexOrSimpleStmt ^+ ';' )? )
 //                       | (':' expr (',' exprColonEqExpr     ^+ ',' )? ) ) )
 //          optPar ')'
-par ::= '(' <<optInd par1>> <<optInd (')')>>
+par ::= '(' par1 ')'
 private par1 ::= par2 | par3 | pragmaStmt | par4
-private par2 ::= stmt (';' stmt)*
+private par2 ::= /*&parKeyw*/ stmt (';' stmt)*
 private par3 ::= ';' stmt (';' stmt)*
 private par4 ::= simpleExpr (par5 | par6)
 private par5 ::= '=' expr (';' stmt (';' stmt)*)?
@@ -479,14 +483,14 @@ private caseStmt2 ::= IND_EQ ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':' <<optInd stmts>> tryStmt1* tryStmt2?
-private tryStmt1 ::= IND_EQ? 'except' exprs ':' <<optInd stmts>>
-private tryStmt2 ::= IND_EQ? 'finally' ':' <<optInd stmts>>
+tryStmt ::= 'try' ':'stmt &(IND_EQ? 'except'|'finally') tryStmt1* tryStmt2?
+private tryStmt1 ::= IND_EQ? 'except' exprs ':' stmt
+private tryStmt2 ::= IND_EQ? 'finally' ':' stmt
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
-tryExpr ::= 'try' ':' <<optInd stmts>> tryExpr1* tryExpr2?
+tryExpr ::= 'try' ':' <<optInd stmts>> &(<<optInd ('except'|'finally')>>) tryExpr1* tryExpr2?
 private tryExpr1 ::= <<optInd ('except' exprs ':' <<optInd stmts>>)>>
 private tryExpr2 ::= <<optInd ('finally' ':' <<optInd stmts>>)>>
 
