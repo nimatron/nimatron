@@ -4,9 +4,10 @@
 
   * Lexer modified to ignore newlines in routine arguments.
   * Added support for d|D suffix for 64-bit floats in parser.
-  * Grammar lookahead adjustments improves 'primarySuffix' rule.
-  * Grammar adjustment to allow import path expressions.
-  * Resolved an issue with an operator function name.
+  * Grammar lookahead rules added, improves 'primarySuffix' rule.
+  * Grammar workaround to allow import path expressions.
+  * Grammar workaround to allow slash in operator function name.
+  * Grammar workaround for object type member definition.
 
 ## 1.2.1
 
