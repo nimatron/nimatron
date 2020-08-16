@@ -6,6 +6,7 @@
   * Added support for d|D suffix for 64-bit floats in parser.
   * Grammar lookahead adjustments improves 'primarySuffix' rule.
   * Grammar adjustment to allow import path expressions.
+  * Resolved an issue with an operator function name.
 
 ## 1.2.1
 

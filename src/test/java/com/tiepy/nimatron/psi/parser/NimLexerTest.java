@@ -112,10 +112,22 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMiscImportFromParentPath() throws Exception {
         int tokenCount = parse("import ../base");
         Assert.assertEquals(4, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMiscForwardSlashFuncName() throws Exception {
+        int tokenCount = parse("func `*=`*(a: var Vector3, b: Vector3) =\n" +
+                "  a = a * b\n" +
+                "\n" +
+                "func `/=`*(a: var Vector3, b: Vector3) =\n" +
+                "  a = a / b\n");
+        Assert.assertEquals(70, tokenCount);
     }
 
     /**

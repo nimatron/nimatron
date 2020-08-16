@@ -175,7 +175,7 @@ private path ::= ('./'|'../')+ // NOTE: Used in import expressions.
 symbol ::= symbol1
 private symbol1 ::= symbol2|IDENT|KEYW
 private symbol2 ::= '`' symbol3+ '`'
-private symbol3 ::= KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+
+private symbol3 ::= KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'='|OPR)+ // NOTE: Added 'OPR' here.
 
 //exprColonEqExpr = expr (':'|'=' expr)?
 exprColonEqExpr ::= expr (exprColonEqExpr1 expr)?
