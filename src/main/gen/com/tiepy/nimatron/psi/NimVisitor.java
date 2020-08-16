@@ -262,6 +262,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitSection(@NotNull NimSection o) {
+    visitElement(o);
+  }
+
   public void visitSetOrTableConstr(@NotNull NimSetOrTableConstr o) {
     visitElement(o);
   }

@@ -307,7 +307,7 @@ identWithPragmaDot ::= identVisDot pragma?
 //declColonEquals = identWithPragma (comma identWithPragma)* comma?
 //                  (':' optInd typeDesc)? ('=' optInd expr)?
 declColonEquals ::= identWithPragma (',' identWithPragma)* ','?
-                    (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
+                    ( ':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
 
 //identColonEquals = IDENT (comma IDENT)* comma?
 //     (':' optInd typeDesc)? ('=' optInd expr)?)
@@ -531,7 +531,7 @@ private routine1 ::= '=' (stmt | (INDENT stmts termInd))
 //commentStmt = COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-//meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
+meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -642,8 +642,8 @@ iteratorStmt ::= 'iterator' <<optInd namedRoutine>>
 macroStmt ::= 'macro' <<optInd namedRoutine>>
 templateStmt ::= 'template' <<optInd namedRoutine>>
 converterStmt ::= 'converter' <<optInd namedRoutine>>
-typeStmt ::= 'type' <<optInd typeDef>>
-constStmt ::= 'const' <<optInd constant>>
+typeStmt ::= 'type' <<section typeDef>>
+constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}

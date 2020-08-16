@@ -498,13 +498,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'const' <<optInd constant>>
+  // 'const' <<section constant>>
   public static boolean constStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "constStmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CONST_STMT, "<const stmt>");
     r = consumeToken(b, "const");
-    r = r && optInd(b, l + 1, constant_parser_);
+    r = r && section(b, l + 1, constant_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -583,7 +583,7 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // identWithPragma (',' identWithPragma)* ','?
-  //                     (':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
+  //                     ( ':' <<optInd typeDesc>>)? ('=' <<optInd expr>>)?
   public static boolean declColonEquals(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declColonEquals")) return false;
     boolean r;
@@ -626,7 +626,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (':' <<optInd typeDesc>>)?
+  // ( ':' <<optInd typeDesc>>)?
   private static boolean declColonEquals_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declColonEquals_3")) return false;
     declColonEquals_3_0(b, l + 1);
@@ -3230,6 +3230,67 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
+  public static boolean section(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = _RULE.parse(b, l);
+    if (!r) r = section_1(b, l + 1, _RULE);
+    exit_section_(b, m, SECTION, r);
+    return r;
+  }
+
+  // INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd
+  private static boolean section_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INDENT);
+    r = r && section_1_1(b, l + 1, _RULE);
+    r = r && section_1_2(b, l + 1, _RULE);
+    r = r && termInd(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<RULE>>?
+  private static boolean section_1_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1")) return false;
+    _RULE.parse(b, l);
+    return true;
+  }
+
+  // (IND_EQ <<RULE>>?)*
+  private static boolean section_1_2(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!section_1_2_0(b, l + 1, _RULE)) break;
+      if (!empty_element_parsed_guard_(b, "section_1_2", c)) break;
+    }
+    return true;
+  }
+
+  // IND_EQ <<RULE>>?
+  private static boolean section_1_2_0(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && section_1_2_0_1(b, l + 1, _RULE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // <<RULE>>?
+  private static boolean section_1_2_0_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_2_0_1")) return false;
+    _RULE.parse(b, l);
+    return true;
+  }
+
+  /* ********************************************************** */
   // ';' | IND_EQ+
   static boolean sep(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "sep")) return false;
@@ -4137,13 +4198,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'type' <<optInd typeDef>>
+  // 'type' <<section typeDef>>
   public static boolean typeStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeStmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYPE_STMT, "<type stmt>");
     r = consumeToken(b, "type");
-    r = r && optInd(b, l + 1, typeDef_parser_);
+    r = r && section(b, l + 1, typeDef_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
