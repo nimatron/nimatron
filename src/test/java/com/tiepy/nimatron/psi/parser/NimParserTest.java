@@ -153,6 +153,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testNimByExampleOOP() {
+        doTest(true, true);
+    }
+
     public void testNimByExampleProc() {
         doTest(true, true);
     }
