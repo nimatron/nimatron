@@ -4,6 +4,7 @@
 
   * Lexer modified to ignore newlines in routine arguments.
   * Added support for d|D suffix for 64-bit floats in parser.
+  * Grammar lookahead adjustment for 'primarySuffix' rule.
 
 ## 1.2.1
 
