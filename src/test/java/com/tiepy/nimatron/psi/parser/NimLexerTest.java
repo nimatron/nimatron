@@ -102,12 +102,20 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMiscMultiLineArgs() throws Exception {
         int tokenCount = parse("echo(2, 3, 1,\n" +
                 "        4, 3, 1,\n" +
                 "     6, 3, 1)\n");
         Assert.assertEquals(32, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMiscImportFromParentPath() throws Exception {
+        int tokenCount = parse("import ../base");
+        Assert.assertEquals(4, tokenCount);
     }
 
     /**

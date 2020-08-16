@@ -1949,7 +1949,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
+  // op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10|path
   static boolean op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op")) return false;
     boolean r;
@@ -1964,6 +1964,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = op8(b, l + 1);
     if (!r) r = op9(b, l + 1);
     if (!r) r = op10(b, l + 1);
+    if (!r) r = path(b, l + 1);
     return r;
   }
 
@@ -2561,6 +2562,31 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ":");
     r = r && optInd(b, l + 1, typeDesc_parser_);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ('./'|'../')+
+  static boolean path(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "path")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = path_0(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!path_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "path", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // './'|'../'
+  private static boolean path_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "path_0")) return false;
+    boolean r;
+    r = consumeToken(b, "./");
+    if (!r) r = consumeToken(b, "../");
     return r;
   }
 
