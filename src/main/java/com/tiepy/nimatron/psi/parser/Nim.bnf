@@ -135,7 +135,10 @@ private sep ::= ';' | IND_EQ+
 //         | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from' |
 //         | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
 operator ::= operator1
-private operator1 ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|'from'|'static'|'..'
+private operator1 ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9
+           | 'or' | 'xor' | 'and'
+           | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from'
+           | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
 private op0 ::= OP0A|OP0B|OP0C
 private op1 ::= OP1A|OP1B|OP1C|OP1D
 private op2 ::= OP2A|/*OP2B|*/OP2C // NOTE: OP2B has been commented-out here due to ambiguities in the grammar.
