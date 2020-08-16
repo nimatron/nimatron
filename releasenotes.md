@@ -3,6 +3,7 @@
 ## 1.2.2
 
   * Lexer modified to ignore newlines in routine arguments.
+  * Added support for d|D suffix for 64-bit floats in parser.
 
 ## 1.2.1
 
