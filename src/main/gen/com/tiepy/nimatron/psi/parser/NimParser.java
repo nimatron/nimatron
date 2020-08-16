@@ -3499,14 +3499,39 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEYW|IDENT|literal|operator|'('|')'|'['|']'|'{'|'}'|'='
+  // KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+
   static boolean symbol3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol3")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, KEYW);
     if (!r) r = consumeToken(b, IDENT);
     if (!r) r = literal(b, l + 1);
-    if (!r) r = operator(b, l + 1);
+    if (!r) r = symbol3_3(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (operator|'('|')'|'['|']'|'{'|'}'|'=')+
+  private static boolean symbol3_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "symbol3_3")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = symbol3_3_0(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!symbol3_3_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "symbol3_3", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // operator|'('|')'|'['|']'|'{'|'}'|'='
+  private static boolean symbol3_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "symbol3_3_0")) return false;
+    boolean r;
+    r = operator(b, l + 1);
     if (!r) r = consumeToken(b, "(");
     if (!r) r = consumeToken(b, ")");
     if (!r) r = consumeToken(b, "[");
