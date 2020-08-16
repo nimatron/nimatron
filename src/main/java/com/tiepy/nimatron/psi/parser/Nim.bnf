@@ -266,7 +266,7 @@ private primarySuffix1 ::= '(' (exprColonEqExpr ','?)* ')'
 private primarySuffix2 ::= '.' <<optInd (symbol generalizedLit?)>>
 private primarySuffix3 ::= '[' (<<optInd exprColonEqExprs>>)? <<optInd (']')>>
 private primarySuffix4 ::= '{' <<optInd exprColonEqExprs>> <<optInd ('}')>>
-private primarySuffix5 ::= exprs // command syntax
+private primarySuffix5 ::= &('`'|IDENT|literal|'cast'|'addr'|'type') exprs // command syntax
 
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*

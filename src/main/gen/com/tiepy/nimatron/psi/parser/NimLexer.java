@@ -767,6 +767,8 @@ private int popState() {
 
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
+
+// NOTE: Indent handler is suspended within parenthesis.
 private boolean suspendIndent = false;
 
 /**

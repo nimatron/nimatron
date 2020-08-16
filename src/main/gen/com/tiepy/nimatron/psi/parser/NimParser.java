@@ -3021,9 +3021,38 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // exprs
+  // &('`'|IDENT|literal|'cast'|'addr'|'type') exprs
   static boolean primarySuffix5(PsiBuilder b, int l) {
-    return exprs(b, l + 1);
+    if (!recursion_guard_(b, l, "primarySuffix5")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = primarySuffix5_0(b, l + 1);
+    r = r && exprs(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // &('`'|IDENT|literal|'cast'|'addr'|'type')
+  private static boolean primarySuffix5_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix5_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_);
+    r = primarySuffix5_0_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // '`'|IDENT|literal|'cast'|'addr'|'type'
+  private static boolean primarySuffix5_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primarySuffix5_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, "`");
+    if (!r) r = consumeToken(b, IDENT);
+    if (!r) r = literal(b, l + 1);
+    if (!r) r = consumeToken(b, "cast");
+    if (!r) r = consumeToken(b, "addr");
+    if (!r) r = consumeToken(b, "type");
+    return r;
   }
 
   /* ********************************************************** */
