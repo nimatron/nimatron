@@ -432,6 +432,7 @@ private IElementType getDedenterToken() {
 }
 
 <STRING_LITERAL> {
+    \\\\                        { }
     \\\"                        { }
     \"                          { popState(); return NimElementTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
@@ -465,6 +466,8 @@ private IElementType getDedenterToken() {
 }
 
 <CHARACTER_LITERAL> {
+    \\\\                        { }
+    \\\'                        { }
     '                           { popState(); return NimElementTypes.CHAR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }

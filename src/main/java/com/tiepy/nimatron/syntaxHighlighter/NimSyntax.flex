@@ -349,6 +349,7 @@ private int popState() {
 }
 
 <STRING_LITERAL> {
+    \\\\                        { return NimSyntaxTypes.STRING_LITERAL; }
     \\\"                        { return NimSyntaxTypes.STRING_LITERAL; }
     \"                          { popState(); return NimSyntaxTypes.STRING_LITERAL; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
@@ -382,6 +383,8 @@ private int popState() {
 }
 
 <CHARACTER_LITERAL> {
+    \\\\                        { return NimSyntaxTypes.STRING_LITERAL; }
+    \\\'                        { return NimSyntaxTypes.STRING_LITERAL; }
     '                           { popState(); return NimSyntaxTypes.STRING_LITERAL; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { return NimSyntaxTypes.STRING_LITERAL; }

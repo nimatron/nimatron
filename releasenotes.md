@@ -2,7 +2,7 @@
 
 ## 1.2.3
 
-  * New items
+  * Fixed problem with escaping character and string literals.
 
 ## 1.2.2
 
