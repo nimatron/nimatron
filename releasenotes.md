@@ -1,5 +1,9 @@
 # Release notes
 
+## 1.2.3
+
+  * New items
+
 ## 1.2.2
 
   * Lexer modified to ignore newlines in routine arguments.
