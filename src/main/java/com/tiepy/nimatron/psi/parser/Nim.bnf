@@ -417,8 +417,10 @@ private exprStmt2 ::= expr (',' expr)* postExprBlocks
 //importStmt = 'import' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-importStmt ::= 'import' <<optInd expr>> ((',' expr)+ | importStmt1)
-private importStmt1 ::= 'except' <<optInd (expr (',' expr)*)>>
+importStmt ::= 'import' (importStmt1 | importStmt2)
+private importStmt1 ::= <<optInd (expr (',' IND_EQ* expr)+) >>
+private importStmt2 ::= <<optInd (expr importStmt3) >>
+private importStmt3 ::= 'except' <<optInd (expr (',' IND_EQ* expr)*)>>
 
 //exportStmt = 'export' optInd expr
 //              ((comma expr)*
