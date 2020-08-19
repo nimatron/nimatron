@@ -164,11 +164,9 @@ C_SEMICOLON=;
 C_COMMA=,
 C_GRAVE_ACCENT=`
 
-// TODO: Consider removing some of the following keywords which are declared in operations above.
-// NOTE: The following keywords have already been removed: when|while|xor|yield
-KEYW=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif
-|else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method
-|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var
+KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|do|elif
+|else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
+|mixin|object|out|proc|ptr|raise|ref|return|static|template|try|tuple|type|using|var|when|while|yield
 
 BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|AssertionError|AtomType|auto|BackwardsIndex
 |BiggestFloat|BiggestInt|BiggestUInt|bool|byte|ByteAddress|CatchableError|cchar|cdouble|cfloat|char|cint|clong
@@ -177,13 +175,13 @@ BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|Asserti
 |float64|FloatDivByZeroError|FloatInexactError|FloatingPointError|FloatInvalidOpError|FloatOverflowError
 |FloatUnderflowError|ForeignCell|ForLoopStmt|GC_Strategy|HSlice|IndexError|int|int16|int32|int64|int8|IOEffect|IOError
 |JsRoot|KeyError|lent|LibraryError|Natural|NilAccessError|NimNode|ObjectAssignmentError|ObjectConversionError|openArray
-|Ordinal|OSError|OutOfMemError|OverflowError|owned|PFloat32|PFloat64|PFrame|PInt32|PInt64|pointer|Positive|ptr|range
-|RangeError|ReadIOEffect|ref|ReraiseError|ResourceExhaustedError|RootEffect|RootObj|RootRef|seq|set|sink|Slice
-|SomeFloat|SomeInteger|SomeNumber|SomeOrdinal|SomeSignedInt|SomeUnsignedInt|StackOverflowError|StackTraceEntry|static
-|string|TaintedString|TFrame|TimeEffect|type|typed|typedesc|TypeOfMode|uint|uint16|uint32|uint64|uint8|UncheckedArray
+|Ordinal|OSError|OutOfMemError|OverflowError|owned|PFloat32|PFloat64|PFrame|PInt32|PInt64|pointer|Positive|range
+|RangeError|ReadIOEffect|ReraiseError|ResourceExhaustedError|RootEffect|RootObj|RootRef|seq|set|sink|Slice
+|SomeFloat|SomeInteger|SomeNumber|SomeOrdinal|SomeSignedInt|SomeUnsignedInt|StackOverflowError|StackTraceEntry
+|string|TaintedString|TFrame|TimeEffect|typed|typedesc|TypeOfMode|uint|uint16|uint32|uint64|uint8|UncheckedArray
 |untyped|ValueError|varargs|void|WriteIOEffect
 
-BUILT_IN_PROCS=abs|add|addAndFetch|addEscapedChar|addFloat|addInt|addQuitProc|addQuoted|addr|alignof|alloc0Impl
+BUILT_IN_PROCS=abs|add|addAndFetch|addEscapedChar|addFloat|addInt|addQuitProc|addQuoted|alignof|alloc0Impl
 |allocCStringArray|allocImpl|allocShared0Impl|allocSharedImpl|and|ashr|astToStr|atomicDec|atomicInc|card|cas|chr|clamp
 |cmp|compileOption|compiles|contains|copyMem|cpuRelax|create|createShared|createSharedU|createU|cstringArrayToSeq
 |deallocCStringArray|deallocHeap|deallocImpl|deallocShared|deallocSharedImpl|debugEcho|dec|declared|declaredInScope

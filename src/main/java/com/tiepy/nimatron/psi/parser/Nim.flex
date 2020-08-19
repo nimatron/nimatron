@@ -165,9 +165,6 @@ C_SEMICOLON=;
 C_COMMA=,
 C_GRAVE_ACCENT=`
 
-// TODO: Consider removing some of the following keywords which are declared in operations above.
-// NOTE: The following keywords have already been removed: when|while|xor|yield
-// TODO: Consider if removed keywords from the list need to be handled in parser rules where KEYW is used.
 KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
 |mixin|object|out|proc|ptr|raise|ref|return|static|template|try|tuple|type|using|var|when|while|yield
