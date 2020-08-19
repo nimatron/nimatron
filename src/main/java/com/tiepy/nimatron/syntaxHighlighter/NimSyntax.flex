@@ -167,6 +167,7 @@ C_GRAVE_ACCENT=`
 KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|do|elif
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
 |mixin|object|out|proc|ptr|raise|ref|return|static|template|try|tuple|type|using|var|when|while|yield
+|in|notin|is|isnot|not|of|as
 
 BUILT_IN_TYPES=AccessViolationError|AllocStats|any|ArithmeticError|array|AssertionError|AtomType|auto|BackwardsIndex
 |BiggestFloat|BiggestInt|BiggestUInt|bool|byte|ByteAddress|CatchableError|cchar|cdouble|cfloat|char|cint|clong
@@ -249,6 +250,8 @@ private int popState() {
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT; }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); return NimSyntaxTypes.COMMENT; }
     {KEYW}                      { return NimSyntaxTypes.KEYW; }
+    {BUILT_IN_TYPES}            { return NimSyntaxTypes.TYPES; }
+    {BUILT_IN_PROCS}            { return NimSyntaxTypes.PROCS; }
     r\"                         { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     \"                          { pushState(STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
@@ -308,8 +311,6 @@ private int popState() {
     {OP10A}                     { return NimSyntaxTypes.OPR; }
     {OP10B}                     { return NimSyntaxTypes.OPR; }
     {OPR}                       { return NimSyntaxTypes.OPR; }
-    {BUILT_IN_TYPES}            { return NimSyntaxTypes.TYPES; }
-    {BUILT_IN_PROCS}            { return NimSyntaxTypes.PROCS; }
     {IDENT}                     { return NimSyntaxTypes.IDENT; }
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
     {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
