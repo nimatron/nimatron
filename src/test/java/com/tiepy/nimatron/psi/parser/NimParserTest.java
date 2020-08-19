@@ -133,6 +133,18 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscParseOptBlock1() {
+        doTest(true, true);
+    }
+
+    public void testMiscParseOptBlock2() {
+        doTest(true, true);
+    }
+
+    public void testMiscParseOptBlock3() {
+        doTest(true, true);
+    }
+
     public void testMiscProc() {
         doTest(true, true);
     }
