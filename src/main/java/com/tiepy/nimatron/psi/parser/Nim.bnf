@@ -418,21 +418,23 @@ private exprStmt2 ::= expr (',' expr)* postExprBlocks
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
 importStmt ::= 'import' (importStmt1 | importStmt2)
-private importStmt1 ::= <<optInd (expr (',' IND_EQ* expr)+) >>
-private importStmt2 ::= <<optInd (expr importStmt3) >>
+private importStmt1 ::= <<optInd (expr (',' IND_EQ* expr)*)>>
+private importStmt2 ::= <<optInd (expr importStmt3)>>
 private importStmt3 ::= 'except' <<optInd (expr (',' IND_EQ* expr)*)>>
 
 //exportStmt = 'export' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-exportStmt ::= 'export' <<optInd expr>> ((',' expr)+ | exportStmt1)
-private exportStmt1 ::= 'except' <<optInd (expr (',' expr)*)>>
+exportStmt ::= 'export' (exportStmt1 | exportStmt2)
+private exportStmt1 ::= <<optInd (expr (',' IND_EQ* expr)*)>>
+private exportStmt2 ::= <<optInd (expr exportStmt3)>>
+private exportStmt3 ::= 'except' <<optInd (expr (',' IND_EQ* expr)*)>>
 
 //includeStmt = 'include' optInd expr ^+ comma
-includeStmt ::= 'include' <<optInd expr>> (',' expr)*
+includeStmt ::= 'include' <<optInd (expr (',' IND_EQ* expr)*)>>
 
 //fromStmt = 'from' expr 'import' optInd expr (comma expr)*
-fromStmt ::= 'from' expr 'import' <<optInd expr>> (',' expr)*
+fromStmt ::= 'from' expr 'import' <<optInd (expr (',' IND_EQ* expr)*)>>
 
 //returnStmt = 'return' optInd expr?
 returnStmt ::= 'return' <<optInd expr>>?

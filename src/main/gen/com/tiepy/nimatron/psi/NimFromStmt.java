@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimFromStmt extends NimElement {
 
   @NotNull
-  List<NimExpr> getExprList();
+  NimExpr getExpr();
 
   @NotNull
   NimOptInd getOptInd();
