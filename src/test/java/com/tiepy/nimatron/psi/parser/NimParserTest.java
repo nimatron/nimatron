@@ -93,6 +93,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscImportsComma() {
+        doTest(true, true);
+    }
+
     public void testMiscMethodCall() {
         doTest(true, true);
     }
