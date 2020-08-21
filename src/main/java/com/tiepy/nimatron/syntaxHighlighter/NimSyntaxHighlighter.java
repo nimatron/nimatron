@@ -92,7 +92,7 @@ public class NimSyntaxHighlighter extends SyntaxHighlighterBase {
             return KEYWORD_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.COMMENT)) {
             return COMMENT_KEYS;
-        } else if (tokenType.equals(NimSyntaxTypes.STRING_LITERAL)) {
+        } else if (tokenType.equals(NimSyntaxTypes.STR_LIT)) {
             return LITERAL_STRING_KEYS;
         } else if (tokenType.equals(NimSyntaxTypes.NUM_LIT)) {
             return NUMERICAL_CONSTANT_KEYS;

@@ -44,80 +44,7 @@
     implements("namedRoutine")="com.tiepy.nimatron.psi.NimNamedElement"
     mixin("namedRoutine")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
 
-    tokens = [
-        BOOL_LIT="BOOL_LIT"
-        BRACKET="BRACKET"
-        C_COMMA="C_COMMA"
-        C_GRAVE_ACCENT="C_GRAVE_ACCENT"
-        C_SEMICOLON="C_SEMICOLON"
-        CHAR_LIT="CHAR_LIT"
-        COMMENT="COMMENT"
-        DEDENT="DEDENT"
-        FLOAT32_LIT="FLOAT32_LIT"
-        FLOAT64_LIT="FLOAT64_LIT"
-        FLOAT_LIT="FLOAT_LIT"
-        GENERALIZED_STR_LIT="GENERALIZED_STR_LIT"
-        GENERALIZED_TRIPLESTR_LIT="GENERALIZED_TRIPLESTR_LIT"
-        IDENT="IDENT"
-        IND_EQ="IND_EQ"
-        INDENT="INDENT"
-        INT16_LIT="INT16_LIT"
-        INT32_LIT="INT32_LIT"
-        INT64_LIT="INT64_LIT"
-        INT8_LIT="INT8_LIT"
-        INT_LIT="INT_LIT"
-        KEYW="KEYW"
-        NIL="NIL"
-        OP0A="OP0A"
-        OP0B="OP0B"
-        OP0C="OP0C"
-        OP10A="OP10A"
-        OP10B="OP10B"
-        OP1A="OP1A"
-        OP1B="OP1B"
-        OP1C="OP1C"
-        OP1D="OP1D"
-        OP2A="OP2A"
-        OP2B="OP2B"
-        OP2C="OP2C"
-        OP3A="OP3A"
-        OP3B="OP3B"
-        OP4A="OP4A"
-        OP5A="OP5A"
-        OP5B="OP5B"
-        OP5C="OP5C"
-        OP5D="OP5D"
-        OP5E="OP5E"
-        OP5F="OP5F"
-        OP5G="OP5G"
-        OP5H="OP5H"
-        OP5I="OP5I"
-        OP5J="OP5J"
-        OP5K="OP5K"
-        OP5L="OP5L"
-        OP5M="OP5M"
-        OP6A="OP6A"
-        OP7A="OP7A"
-        OP8A="OP8A"
-        OP8B="OP8B"
-        OP9A="OP9A"
-        OP9B="OP9B"
-        OP9C="OP9C"
-        OP9D="OP9D"
-        OP9E="OP9E"
-        OP9F="OP9F"
-        OP9G="OP9G"
-        OPR="OPR"
-        PARENTHESIS="PARENTHESIS"
-        RSTR_LIT="RSTR_LIT"
-        STR_LIT="STR_LIT"
-        TRIPLESTR_LIT="TRIPLESTR_LIT"
-        UINT16_LIT="UINT16_LIT"
-        UINT32_LIT="UINT32_LIT"
-        UINT64_LIT="UINT64_LIT"
-        UINT8_LIT="UINT8_LIT"
-        UINT_LIT="UINT_LIT"
-    ]
+    tokens = []
 }
 
 //module = stmt ^* (';' / IND{=})
@@ -233,17 +160,10 @@ private par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
 //          | CHAR_LIT
 //          | NIL
 literal ::= literal1
-private literal1 ::= INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
-                   | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
-                   | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
-                   | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
-                   | CHAR_LIT
-                   | BOOL_LIT // NOTE: BOOL_LIT was added here.
-                   | NIL
+private literal1 ::= NUM_LIT | STR_LIT
 
 //generalizedLit = GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
-generalizedLit ::= generalizedLit1
-private generalizedLit1 ::= GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
+generalizedLit ::= GENERALIZED_STR_LIT
 
 //identOrLiteral = generalizedLit | symbol | literal
 //               | par | arrayConstr | setOrTableConstr

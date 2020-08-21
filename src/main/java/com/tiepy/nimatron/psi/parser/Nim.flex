@@ -153,13 +153,16 @@ BOOL_LIT=true|false
 
 NIL=nil
 
+NUM_LIT={INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}|{UINT_LIT}
+|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}|{FLOAT_LIT}|{FLOAT32_LIT}
+|{FLOAT64_LIT}|{BOOL_LIT}|{NIL}
+
 OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
 CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
 BRACKET={OPEN_BRACKET}|{CLOSE_BRACKET}
 
 OPEN_PARENTHESIS=\(
 CLOSE_PARENTHESIS=\)
-PARENTHESIS={OPEN_PARENTHESIS}|{CLOSE_PARENTHESIS}
 
 C_SEMICOLON=;
 C_COMMA=,
@@ -328,21 +331,7 @@ private IElementType getDedenterToken() {
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); }
     \"                          { pushState(STRING_LITERAL); }
     '                           { pushState(CHARACTER_LITERAL); }
-    {INT_LIT}                   { return NimElementTypes.INT_LIT; }
-    {INT8_LIT}                  { return NimElementTypes.INT8_LIT; }
-    {INT16_LIT}                 { return NimElementTypes.INT16_LIT; }
-    {INT32_LIT}                 { return NimElementTypes.INT32_LIT; }
-    {INT64_LIT}                 { return NimElementTypes.INT64_LIT; }
-    {UINT_LIT}                  { return NimElementTypes.UINT_LIT; }
-    {UINT8_LIT}                 { return NimElementTypes.UINT8_LIT; }
-    {UINT16_LIT}                { return NimElementTypes.UINT16_LIT; }
-    {UINT32_LIT}                { return NimElementTypes.UINT32_LIT; }
-    {UINT64_LIT}                { return NimElementTypes.UINT64_LIT; }
-    {FLOAT_LIT}                 { return NimElementTypes.FLOAT_LIT; }
-    {FLOAT32_LIT}               { return NimElementTypes.FLOAT32_LIT; }
-    {FLOAT64_LIT}               { return NimElementTypes.FLOAT64_LIT; }
-    {NIL}                       { return NimElementTypes.NIL; }
-    {BOOL_LIT}                  { return NimElementTypes.BOOL_LIT; }
+    {NUM_LIT}                   { return NimElementTypes.NUM_LIT; }
     {OP0A}                      { return NimElementTypes.OP0A; }
     {OP0B}                      { return NimElementTypes.OP0B; }
     {OP0C}                      { return NimElementTypes.OP0C; }
@@ -438,14 +427,14 @@ private IElementType getDedenterToken() {
 }
 
 <TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimElementTypes.TRIPLESTR_LIT; }
+    \"\"\"                      { popState(); return NimElementTypes.STR_LIT; }
     {CRLF}                      { }
     .                           { }
 }
 
 <RAW_STRING_LITERAL> {
     \"\"                        { }
-    \"                          { popState(); return NimElementTypes.RSTR_LIT; }
+    \"                          { popState(); return NimElementTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }
@@ -458,7 +447,7 @@ private IElementType getDedenterToken() {
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimElementTypes.GENERALIZED_TRIPLESTR_LIT; }
+    \"\"\"                      { popState(); return NimElementTypes.GENERALIZED_STR_LIT; }
     {CRLF}                      { }
     .                           { }
 }
@@ -466,7 +455,7 @@ private IElementType getDedenterToken() {
 <CHARACTER_LITERAL> {
     \\\\                        { }
     \\\'                        { }
-    '                           { popState(); return NimElementTypes.CHAR_LIT; }
+    '                           { popState(); return NimElementTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }

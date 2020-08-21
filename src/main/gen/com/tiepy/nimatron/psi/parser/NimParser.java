@@ -1213,25 +1213,14 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // generalizedLit1
+  // GENERALIZED_STR_LIT
   public static boolean generalizedLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "generalizedLit")) return false;
-    if (!nextTokenIs(b, "<generalized lit>", GENERALIZED_STR_LIT, GENERALIZED_TRIPLESTR_LIT)) return false;
+    if (!nextTokenIs(b, GENERALIZED_STR_LIT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, GENERALIZED_LIT, "<generalized lit>");
-    r = generalizedLit1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
-  static boolean generalizedLit1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "generalizedLit1")) return false;
-    if (!nextTokenIs(b, "", GENERALIZED_STR_LIT, GENERALIZED_TRIPLESTR_LIT)) return false;
-    boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, GENERALIZED_STR_LIT);
-    if (!r) r = consumeToken(b, GENERALIZED_TRIPLESTR_LIT);
+    exit_section_(b, m, GENERALIZED_LIT, r);
     return r;
   }
 
@@ -1816,6 +1805,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   // literal1
   public static boolean literal(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "literal")) return false;
+    if (!nextTokenIs(b, "<literal>", NUM_LIT, STR_LIT)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LITERAL, "<literal>");
     r = literal1(b, l + 1);
@@ -1824,35 +1814,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
-  //                    | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
-  //                    | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
-  //                    | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
-  //                    | CHAR_LIT
-  //                    | BOOL_LIT // NOTE: BOOL_LIT was added here.
-  //                    | NIL
+  // NUM_LIT | STR_LIT
   static boolean literal1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "literal1")) return false;
+    if (!nextTokenIs(b, "", NUM_LIT, STR_LIT)) return false;
     boolean r;
-    r = consumeToken(b, INT_LIT);
-    if (!r) r = consumeToken(b, INT8_LIT);
-    if (!r) r = consumeToken(b, INT16_LIT);
-    if (!r) r = consumeToken(b, INT32_LIT);
-    if (!r) r = consumeToken(b, INT64_LIT);
-    if (!r) r = consumeToken(b, UINT_LIT);
-    if (!r) r = consumeToken(b, UINT8_LIT);
-    if (!r) r = consumeToken(b, UINT16_LIT);
-    if (!r) r = consumeToken(b, UINT32_LIT);
-    if (!r) r = consumeToken(b, UINT64_LIT);
-    if (!r) r = consumeToken(b, FLOAT_LIT);
-    if (!r) r = consumeToken(b, FLOAT32_LIT);
-    if (!r) r = consumeToken(b, FLOAT64_LIT);
+    r = consumeToken(b, NUM_LIT);
     if (!r) r = consumeToken(b, STR_LIT);
-    if (!r) r = consumeToken(b, RSTR_LIT);
-    if (!r) r = consumeToken(b, TRIPLESTR_LIT);
-    if (!r) r = consumeToken(b, CHAR_LIT);
-    if (!r) r = consumeToken(b, BOOL_LIT);
-    if (!r) r = consumeToken(b, NIL);
     return r;
   }
 

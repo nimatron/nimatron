@@ -40,6 +40,6 @@ public interface NimSyntaxTypes {
     IElementType OPR = new NimSyntaxTokenType("OPR");
     IElementType PARENTHESIS = new NimSyntaxTokenType("PARENTHESIS");
     IElementType PROCS = new NimSyntaxTokenType("PROCS");
-    IElementType STRING_LITERAL = new NimSyntaxTokenType("STRING_LITERAL");
+    IElementType STR_LIT = new NimSyntaxTokenType("STR_LIT");
     IElementType TYPES = new NimSyntaxTokenType("TYPES");
 }

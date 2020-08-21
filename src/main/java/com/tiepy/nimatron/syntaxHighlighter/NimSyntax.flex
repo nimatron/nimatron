@@ -152,6 +152,10 @@ BOOL_LIT=true|false
 
 NIL=nil
 
+NUM_LIT={INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}|{UINT_LIT}
+|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}|{FLOAT_LIT}|{FLOAT32_LIT}
+|{FLOAT64_LIT}|{BOOL_LIT}|{NIL}
+
 OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
 CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
 BRACKET={OPEN_BRACKET}|{CLOSE_BRACKET}
@@ -220,25 +224,11 @@ private int popState() {
     {CRLF}                      { return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
     {KEYW}                      { return NimSyntaxTypes.KEYW; }
-    r\"                         { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    \"                          { pushState(STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    '                           { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    {INT_LIT}                   { return NimSyntaxTypes.NUM_LIT; }
-    {INT8_LIT}                  { return NimSyntaxTypes.NUM_LIT; }
-    {INT16_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
-    {INT32_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
-    {INT64_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
-    {UINT_LIT}                  { return NimSyntaxTypes.NUM_LIT; }
-    {UINT8_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
-    {UINT16_LIT}                { return NimSyntaxTypes.NUM_LIT; }
-    {UINT32_LIT}                { return NimSyntaxTypes.NUM_LIT; }
-    {UINT64_LIT}                { return NimSyntaxTypes.NUM_LIT; }
-    {FLOAT_LIT}                 { return NimSyntaxTypes.NUM_LIT; }
-    {FLOAT32_LIT}               { return NimSyntaxTypes.NUM_LIT; }
-    {FLOAT64_LIT}               { return NimSyntaxTypes.NUM_LIT; }
-    {NIL}                       { return NimSyntaxTypes.NUM_LIT; }
-    {BOOL_LIT}                  { return NimSyntaxTypes.NUM_LIT; }
+    r\"                         { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }
+    \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }
+    \"                          { pushState(STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }
+    '                           { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STR_LIT; }
+    {NUM_LIT}                   { return NimSyntaxTypes.NUM_LIT; }
     {OP0A}                      { return NimSyntaxTypes.OPR; }
     {OP0B}                      { return NimSyntaxTypes.OPR; }
     {OP0C}                      { return NimSyntaxTypes.OPR; }
@@ -280,8 +270,8 @@ private int popState() {
     {OP10B}                     { return NimSyntaxTypes.OPR; }
     {OPR}                       { return NimSyntaxTypes.OPR; }
     {IDENT}                     { return NimSyntaxTypes.IDENT; }
-    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
-    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL; }
+    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }
+    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }
     {BRACKET}                   { return NimSyntaxTypes.BRACKET; }
     {PARENTHESIS}               { return NimSyntaxTypes.PARENTHESIS; }
     {C_SEMICOLON}               { return NimSyntaxTypes.C_SEMICOLON; }
@@ -316,43 +306,43 @@ private int popState() {
 }
 
 <STRING_LITERAL> {
-    \\\\                        { return NimSyntaxTypes.STRING_LITERAL; }
-    \\\"                        { return NimSyntaxTypes.STRING_LITERAL; }
-    \"                          { popState(); return NimSyntaxTypes.STRING_LITERAL; }
+    \\\\                        { return NimSyntaxTypes.STR_LIT; }
+    \\\"                        { return NimSyntaxTypes.STR_LIT; }
+    \"                          { popState(); return NimSyntaxTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
-    .                           { return NimSyntaxTypes.STRING_LITERAL; }
+    .                           { return NimSyntaxTypes.STR_LIT; }
 }
 
 <TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimSyntaxTypes.STRING_LITERAL; }
-    {CRLF}                      { return NimSyntaxTypes.STRING_LITERAL; }
-    .                           { return NimSyntaxTypes.STRING_LITERAL; }
+    \"\"\"                      { popState(); return NimSyntaxTypes.STR_LIT; }
+    {CRLF}                      { return NimSyntaxTypes.STR_LIT; }
+    .                           { return NimSyntaxTypes.STR_LIT; }
 }
 
 <RAW_STRING_LITERAL> {
-    \"\"                        { return NimSyntaxTypes.STRING_LITERAL; }
-    \"                          { popState(); return NimSyntaxTypes.STRING_LITERAL; }
+    \"\"                        { return NimSyntaxTypes.STR_LIT; }
+    \"                          { popState(); return NimSyntaxTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
-    .                           { return NimSyntaxTypes.STRING_LITERAL; }
+    .                           { return NimSyntaxTypes.STR_LIT; }
 }
 
 <GENERALIZED_STRING_LITERAL> {
-    \"\"                        { return NimSyntaxTypes.STRING_LITERAL; }
-    \"                          { popState(); return NimSyntaxTypes.STRING_LITERAL; }
+    \"\"                        { return NimSyntaxTypes.STR_LIT; }
+    \"                          { popState(); return NimSyntaxTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
-    .                           { return NimSyntaxTypes.STRING_LITERAL; }
+    .                           { return NimSyntaxTypes.STR_LIT; }
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimSyntaxTypes.STRING_LITERAL; }
-    {CRLF}                      { return NimSyntaxTypes.STRING_LITERAL; }
-    .                           { return NimSyntaxTypes.STRING_LITERAL; }
+    \"\"\"                      { popState(); return NimSyntaxTypes.STR_LIT; }
+    {CRLF}                      { return NimSyntaxTypes.STR_LIT; }
+    .                           { return NimSyntaxTypes.STR_LIT; }
 }
 
 <CHARACTER_LITERAL> {
-    \\\\                        { return NimSyntaxTypes.STRING_LITERAL; }
-    \\\'                        { return NimSyntaxTypes.STRING_LITERAL; }
-    '                           { popState(); return NimSyntaxTypes.STRING_LITERAL; }
+    \\\\                        { return NimSyntaxTypes.STR_LIT; }
+    \\\'                        { return NimSyntaxTypes.STR_LIT; }
+    '                           { popState(); return NimSyntaxTypes.STR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
-    .                           { return NimSyntaxTypes.STRING_LITERAL; }
+    .                           { return NimSyntaxTypes.STR_LIT; }
 }

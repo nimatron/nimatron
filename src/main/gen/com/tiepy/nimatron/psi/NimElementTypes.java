@@ -100,29 +100,13 @@ public interface NimElementTypes {
   IElementType WHILE_STMT = new NimElementType("WHILE_STMT");
   IElementType YIELD_STMT = new NimElementType("YIELD_STMT");
 
-  IElementType BOOL_LIT = new NimTokenType("BOOL_LIT");
-  IElementType BRACKET = new NimTokenType("BRACKET");
-  IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
-  IElementType COMMENT = new NimTokenType("COMMENT");
-  IElementType C_COMMA = new NimTokenType("C_COMMA");
-  IElementType C_GRAVE_ACCENT = new NimTokenType("C_GRAVE_ACCENT");
-  IElementType C_SEMICOLON = new NimTokenType("C_SEMICOLON");
   IElementType DEDENT = new NimTokenType("DEDENT");
-  IElementType FLOAT32_LIT = new NimTokenType("FLOAT32_LIT");
-  IElementType FLOAT64_LIT = new NimTokenType("FLOAT64_LIT");
-  IElementType FLOAT_LIT = new NimTokenType("FLOAT_LIT");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
-  IElementType GENERALIZED_TRIPLESTR_LIT = new NimTokenType("GENERALIZED_TRIPLESTR_LIT");
   IElementType IDENT = new NimTokenType("IDENT");
   IElementType INDENT = new NimTokenType("INDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
-  IElementType INT16_LIT = new NimTokenType("INT16_LIT");
-  IElementType INT32_LIT = new NimTokenType("INT32_LIT");
-  IElementType INT64_LIT = new NimTokenType("INT64_LIT");
-  IElementType INT8_LIT = new NimTokenType("INT8_LIT");
-  IElementType INT_LIT = new NimTokenType("INT_LIT");
   IElementType KEYW = new NimTokenType("KEYW");
-  IElementType NIL = new NimTokenType("NIL");
+  IElementType NUM_LIT = new NimTokenType("NUM_LIT");
   IElementType OP0A = new NimTokenType("OP0A");
   IElementType OP0B = new NimTokenType("OP0B");
   IElementType OP0C = new NimTokenType("OP0C");
@@ -133,7 +117,6 @@ public interface NimElementTypes {
   IElementType OP1C = new NimTokenType("OP1C");
   IElementType OP1D = new NimTokenType("OP1D");
   IElementType OP2A = new NimTokenType("OP2A");
-  IElementType OP2B = new NimTokenType("OP2B");
   IElementType OP2C = new NimTokenType("OP2C");
   IElementType OP3A = new NimTokenType("OP3A");
   IElementType OP3B = new NimTokenType("OP3B");
@@ -163,15 +146,9 @@ public interface NimElementTypes {
   IElementType OP9F = new NimTokenType("OP9F");
   IElementType OP9G = new NimTokenType("OP9G");
   IElementType OPR = new NimTokenType("OPR");
-  IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
   IElementType RSTR_LIT = new NimTokenType("RSTR_LIT");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
   IElementType TRIPLESTR_LIT = new NimTokenType("TRIPLESTR_LIT");
-  IElementType UINT16_LIT = new NimTokenType("UINT16_LIT");
-  IElementType UINT32_LIT = new NimTokenType("UINT32_LIT");
-  IElementType UINT64_LIT = new NimTokenType("UINT64_LIT");
-  IElementType UINT8_LIT = new NimTokenType("UINT8_LIT");
-  IElementType UINT_LIT = new NimTokenType("UINT_LIT");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {

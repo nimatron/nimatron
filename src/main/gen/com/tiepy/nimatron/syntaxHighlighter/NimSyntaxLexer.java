@@ -943,7 +943,7 @@ private int popState() {
             // fall through
           case 31: break;
           case 7: 
-            { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 32: break;
@@ -968,7 +968,7 @@ private int popState() {
             // fall through
           case 36: break;
           case 12: 
-            { pushState(STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(STRING_LITERAL); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 37: break;
@@ -983,7 +983,7 @@ private int popState() {
             // fall through
           case 39: break;
           case 15: 
-            { return NimSyntaxTypes.STRING_LITERAL;
+            { return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 40: break;
@@ -993,17 +993,17 @@ private int popState() {
             // fall through
           case 41: break;
           case 17: 
-            { popState(); return NimSyntaxTypes.STRING_LITERAL;
+            { popState(); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 42: break;
           case 18: 
-            { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 43: break;
           case 19: 
-            { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(RAW_STRING_LITERAL); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 44: break;
@@ -1023,12 +1023,12 @@ private int popState() {
             // fall through
           case 47: break;
           case 23: 
-            { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 48: break;
           case 24: 
-            { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STRING_LITERAL;
+            { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); return NimSyntaxTypes.STR_LIT;
             } 
             // fall through
           case 49: break;
