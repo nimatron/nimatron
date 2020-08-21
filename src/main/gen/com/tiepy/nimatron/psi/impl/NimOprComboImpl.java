@@ -10,37 +10,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimIdentVisDotImpl extends NimElementImpl implements NimIdentVisDot {
+public class NimOprComboImpl extends NimElementImpl implements NimOprCombo {
 
-  public NimIdentVisDotImpl(@NotNull ASTNode node) {
+  public NimOprComboImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitIdentVisDot(this);
+    visitor.visitOprCombo(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof NimVisitor) accept((NimVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public NimOprCombo getOprCombo() {
-    return findChildByClass(NimOprCombo.class);
-  }
-
-  @Override
-  @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
-  public NimSymbol getSymbol() {
-    return findNotNullChildByClass(NimSymbol.class);
   }
 
 }

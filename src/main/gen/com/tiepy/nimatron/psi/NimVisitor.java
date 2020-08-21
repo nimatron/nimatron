@@ -202,6 +202,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitOprCombo(@NotNull NimOprCombo o) {
+    visitElement(o);
+  }
+
   public void visitOptInd(@NotNull NimOptInd o) {
     visitElement(o);
   }

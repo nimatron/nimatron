@@ -26,6 +26,12 @@ public class NimNamedRoutineImpl extends NimNamedElementImpl implements NimNamed
   }
 
   @Override
+  @Nullable
+  public NimOprCombo getOprCombo() {
+    return findChildByClass(NimOprCombo.class);
+  }
+
+  @Override
   @NotNull
   public NimRoutine getRoutine() {
     return findNotNullChildByClass(NimRoutine.class);

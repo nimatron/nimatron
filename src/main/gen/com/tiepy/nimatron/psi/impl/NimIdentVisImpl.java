@@ -26,6 +26,12 @@ public class NimIdentVisImpl extends NimElementImpl implements NimIdentVis {
   }
 
   @Override
+  @Nullable
+  public NimOprCombo getOprCombo() {
+    return findChildByClass(NimOprCombo.class);
+  }
+
+  @Override
   @NotNull
   public NimSymbol getSymbol() {
     return findNotNullChildByClass(NimSymbol.class);

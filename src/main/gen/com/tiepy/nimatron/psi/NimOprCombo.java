@@ -5,15 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimIdentVisDot extends NimElement {
-
-  @Nullable
-  NimOprCombo getOprCombo();
-
-  @Nullable
-  NimOptInd getOptInd();
-
-  @NotNull
-  NimSymbol getSymbol();
+public interface NimOprCombo extends NimElement {
 
 }

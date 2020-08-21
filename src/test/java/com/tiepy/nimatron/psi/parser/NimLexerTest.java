@@ -112,11 +112,13 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMiscImportFromParentPath() throws Exception {
         int tokenCount = parse("import ../base");
         Assert.assertEquals(4, tokenCount);
     }
+*/
 
 /*
     @Test
@@ -157,6 +159,12 @@ public class NimLexerTest {
         Assert.assertEquals(10, tokenCount);
     }
 */
+
+    @Test
+    public void testMisc() throws Exception {
+        int tokenCount = parse("func `*=`*(a: int)");
+        Assert.assertEquals(10, tokenCount);
+    }
 
     /**
      * Parses the string into tokens using the lexer to be tested.

@@ -37,6 +37,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import com.tiepy.nimatron.psi.NimElementType;import com.tiepy.nimatron.psi.NimElementTypes;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -727,12 +729,96 @@ private IElementType getDedenterToken() {
 private final StringBuffer buffer = new StringBuffer();
 
 private IElementType getOperatorToken() {
-    assert buffer.length() > 0;
     popState();
+
+    assert buffer.length() > 0;
     String s = buffer.toString();
+
+    // NOTE: The following from the Nim Manual, section on Operators.
+    // . =, :, :: are not available as general operators; they are used for other notational purposes.
     if (s.equals(".") || s.equals("=") || s.equals(":") || s.equals("::")) {
         return NimElementTypes.NOTATION;
     } else {
+
+        if (s.equals("->") || s.equals("=>") || s.equals("~>")) {
+            return NimElementTypes.OP0;
+        }
+
+        if (s.equals("+=") || s.equals("*=") || s.equals("-=") || s.equals("/=")) {
+            return NimElementTypes.OP1;
+        }
+
+        if (s.startsWith("@") || s.startsWith(":") || s.startsWith("?")) {
+            return NimElementTypes.OP2;
+        }
+
+        // TODO: Handle keywords.
+        // if (s.equals("or") || s.equals("xor")) {
+        //     return NimElementTypes.OP3;
+        // }
+
+        // TODO: Handle keywords.
+        // if (s.equals("and")) {
+        //     return NimElementTypes.OP4;
+        // }
+
+        if (s.equals("==") ||
+            s.equals("<=") ||
+            s.equals("<") ||
+            s.equals(">=") ||
+            s.equals(">") ||
+            s.equals("!=") ||
+            // TODO: Handle the following keywords.
+            // TODO: s.equals("in") ||
+            // TODO: s.equals("notin") ||
+            // TODO: s.equals("is") ||
+            // TODO: s.equals("isnot") ||
+            // TODO: s.equals("not") ||
+            // TODO: s.equals("of") ||
+            // TODO: s.equals("as") ||
+            s.startsWith("=") ||
+            s.startsWith("<") ||
+            s.startsWith(">") ||
+            s.startsWith("!")) {
+            return NimElementTypes.OP5;
+        }
+
+        if (/*s.equals("..") ||*/ s.startsWith(".")) {
+            return NimElementTypes.OP6;
+        }
+
+        if (s.startsWith("&")) {
+            return NimElementTypes.OP7;
+        }
+
+        if (s.equals("+") ||
+            s.equals("-") ||
+            s.startsWith("+") ||
+            s.startsWith("-") ||
+            s.startsWith("~") ||
+            s.startsWith("|")) {
+            return NimElementTypes.OP8;
+        }
+
+        if (s.equals("*") ||
+            s.equals("/") ||
+            // TODO: Handle the following keywords.
+            // TODO: s.equals("div") ||
+            // TODO: s.equals("mod") ||
+            // TODO: s.equals("shl") ||
+            // TODO: s.equals("shr") ||
+            s.equals("%") ||
+            s.startsWith("*") ||
+            s.startsWith("%") ||
+            s.startsWith("\\") ||
+            s.startsWith("/")) {
+            return NimElementTypes.OP9;
+        }
+
+        if (s.startsWith("$") || s.startsWith("^")) {
+            return NimElementTypes.OP10;
+        }
+
         return NimElementTypes.OPR;
     }
 }

@@ -60,25 +60,12 @@ private sep ::= ';' | IND_EQ+
 //colon = ':' COMMENT?
 //colcom = ':' COMMENT?
 
-private opChars ::= '='|'+'|'-'|'*'|'/'|'<'|'>'|'@'|'$'|'~'|'&'|'%'|'|'|'!'|'?'|'^'|'.'|':'|'\\'
-private op0 ::= '->'|'=>'|'~>'
-private op1 ::= '+='|'*='|'-='|'/='
-private op2 ::= ('@'|':'|'?') opChars+
-private op3 ::= 'or'|'xor'
-private op4 ::= 'and'
-private op5 ::= '=='|'<='|'<'|'>='|'>'|'!='|'in'|'notin'|'is'|'isnot'|'not'|'of'|'as'|(('='|'<'|'>'|'!') opChars+)
-private op6 ::= '..' | ('.' opChars+) | ('..' '/')
-private op7 ::= '&' opChars*
-private op8 ::= '+'|'-'| (('+'|'-'|'~'|'|') opChars+)
-private op9 ::= '*'|'/'|'div'|'mod'|'shl'|'shr'|'%'| (('*'|'%'|'\'|'/') opChars+)
-private op10 ::= ('$'|'^') opChars+
-
 //operator =  OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
 //         | 'or' | 'xor' | 'and'
 //         | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from' |
 //         | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
 operator ::= operator1
-private operator1 ::= op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 /*| OPR*/
+private operator1 ::= OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
            | 'or' | 'xor' | 'and'
            | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from'
            | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
@@ -103,7 +90,7 @@ private termInd ::= DEDENT | <<eof>>
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
 simpleExpr ::= primary (op <<optInd primary>>)* pragma?
-private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
+private op ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
 symbol ::= symbol1
@@ -218,10 +205,10 @@ pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd pragma1>>
 private pragma1 ::= '.}' | '}'
 
 //identVis = symbol OPR?  # postfix position
-identVis ::= symbol OPR?  // postfix position
+identVis ::= symbol oprCombo?  // postfix position
 
 //identVisDot = symbol '.' optInd symbol OPR?
-identVisDot ::= symbol ('.' <<optInd symbol>>)? OPR? // NOTE: '.' is now optional.
+identVisDot ::= symbol ('.' <<optInd symbol>>)? oprCombo? // NOTE: '.' is now optional.
 
 //identWithPragma = identVis pragma?
 identWithPragma ::= identVis pragma?
@@ -454,7 +441,7 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= OPR? pattern? genericParams? paramsColon pragma? routine1?
+routine ::= pattern? genericParams? paramsColon pragma? routine1?
 private routine1 ::= '=' (stmt | (INDENT stmts termInd))
 // NOTE: identVis is 'symbol OPR?' while symbol is now provided by namedRoutine.
 
@@ -576,4 +563,5 @@ typeStmt ::= 'type' <<section typeDef>>
 constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
-namedRoutine ::= symbol routine {methods=[nameIdentifier="symbol"]}
+namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
+oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR

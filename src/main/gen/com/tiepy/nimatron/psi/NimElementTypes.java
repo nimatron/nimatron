@@ -57,6 +57,7 @@ public interface NimElementTypes {
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
+  IElementType OPR_COMBO = new NimElementType("OPR_COMBO");
   IElementType OPT_IND = new NimElementType("OPT_IND");
   IElementType PAR = new NimElementType("PAR");
   IElementType PARAMS = new NimElementType("PARAMS");
@@ -111,6 +112,17 @@ public interface NimElementTypes {
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NOTATION = new NimTokenType("NOTATION");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
+  IElementType OP0 = new NimTokenType("OP0");
+  IElementType OP1 = new NimTokenType("OP1");
+  IElementType OP10 = new NimTokenType("OP10");
+  IElementType OP2 = new NimTokenType("OP2");
+  IElementType OP3 = new NimTokenType("OP3");
+  IElementType OP4 = new NimTokenType("OP4");
+  IElementType OP5 = new NimTokenType("OP5");
+  IElementType OP6 = new NimTokenType("OP6");
+  IElementType OP7 = new NimTokenType("OP7");
+  IElementType OP8 = new NimTokenType("OP8");
+  IElementType OP9 = new NimTokenType("OP9");
   IElementType OPR = new NimTokenType("OPR");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
 
@@ -263,6 +275,9 @@ public interface NimElementTypes {
       }
       else if (type == OPERATOR) {
         return new NimOperatorImpl(node);
+      }
+      else if (type == OPR_COMBO) {
+        return new NimOprComboImpl(node);
       }
       else if (type == OPT_IND) {
         return new NimOptIndImpl(node);
