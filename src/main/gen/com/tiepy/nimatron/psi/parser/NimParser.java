@@ -1091,16 +1091,17 @@ public class NimParser implements PsiParser, LightPsiParser {
   // 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optInd stmts>>
   public static boolean forStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "forStmt")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, FOR_STMT, "<for stmt>");
     r = consumeToken(b, "for");
-    r = r && forStmt_1(b, l + 1);
-    r = r && consumeToken(b, "in");
-    r = r && expr(b, l + 1);
-    r = r && consumeToken(b, ":");
-    r = r && optInd(b, l + 1, stmts_parser_);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, forStmt_1(b, l + 1));
+    r = p && report_error_(b, consumeToken(b, "in")) && r;
+    r = p && report_error_(b, expr(b, l + 1)) && r;
+    r = p && report_error_(b, consumeToken(b, ":")) && r;
+    r = p && optInd(b, l + 1, stmts_parser_) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // identWithPragma (',' identWithPragma)*
@@ -2211,21 +2212,21 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10|OPR
+  // OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
   static boolean oprCombo(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "oprCombo")) return false;
     boolean r;
-    r = op0(b, l + 1);
-    if (!r) r = op1(b, l + 1);
-    if (!r) r = op2(b, l + 1);
-    if (!r) r = op3(b, l + 1);
-    if (!r) r = op4(b, l + 1);
-    if (!r) r = op5(b, l + 1);
-    if (!r) r = op6(b, l + 1);
-    if (!r) r = op7(b, l + 1);
-    if (!r) r = op8(b, l + 1);
-    if (!r) r = op9(b, l + 1);
-    if (!r) r = op10(b, l + 1);
+    r = consumeToken(b, OP0);
+    if (!r) r = consumeToken(b, OP1);
+    if (!r) r = consumeToken(b, OP2);
+    if (!r) r = consumeToken(b, OP3);
+    if (!r) r = consumeToken(b, OP4);
+    if (!r) r = consumeToken(b, OP5);
+    if (!r) r = consumeToken(b, OP6);
+    if (!r) r = consumeToken(b, OP7);
+    if (!r) r = consumeToken(b, OP8);
+    if (!r) r = consumeToken(b, OP9);
+    if (!r) r = consumeToken(b, OP10);
     if (!r) r = consumeToken(b, OPR);
     return r;
   }

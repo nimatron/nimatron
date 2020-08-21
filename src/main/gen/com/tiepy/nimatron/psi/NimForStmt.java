@@ -7,13 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface NimForStmt extends NimElement {
 
-  @NotNull
+  @Nullable
   NimExpr getExpr();
 
   @NotNull
   List<NimIdentWithPragma> getIdentWithPragmaList();
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
 }

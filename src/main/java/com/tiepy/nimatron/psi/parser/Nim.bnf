@@ -80,7 +80,7 @@ private op8 ::= OP8
 private op9 ::= OP9 | 'div' | 'mod' | 'shl' | 'shr'
 private op10 ::= OP10
 
-private oprCombo ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10|OPR
+private oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
 
 //prefixOperator = operator
 
@@ -263,7 +263,7 @@ doBlock ::= 'do' paramsArrow pragma? ':' <<optInd stmts>>
 //distinct = 'distinct' optInd typeDesc
 
 //forStmt = 'for' (identWithPragma ^+ comma) 'in' expr colcom stmt
-forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optInd stmts>>
+forStmt ::= 'for' (identWithPragma (',' identWithPragma)*) 'in' expr ':' <<optInd stmts>> {pin=1}
 
 //forExpr = forStmt
 
