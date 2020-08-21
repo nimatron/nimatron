@@ -213,7 +213,7 @@ private int popState() {
 %%
 
 <YYINITIAL> {
-    {WHITE_SPACE}* #            { pushState(LINE_COMMENT); return NimSyntaxTypes.COMMENT; }
+    #                           { pushState(LINE_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); return NimSyntaxTypes.COMMENT; }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); return NimSyntaxTypes.COMMENT; }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); return NimSyntaxTypes.COMMENT; }
