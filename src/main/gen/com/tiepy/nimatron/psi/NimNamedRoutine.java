@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface NimNamedRoutine extends NimNamedElement {
 
-  @Nullable
-  NimOprCombo getOprCombo();
-
   @NotNull
   NimRoutine getRoutine();
 

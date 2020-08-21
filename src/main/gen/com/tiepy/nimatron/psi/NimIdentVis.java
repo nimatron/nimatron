@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface NimIdentVis extends NimElement {
 
-  @Nullable
-  NimOprCombo getOprCombo();
-
   @NotNull
   NimSymbol getSymbol();
 

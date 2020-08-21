@@ -37,8 +37,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import com.tiepy.nimatron.psi.NimElementType;import com.tiepy.nimatron.psi.NimElementTypes;
 import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**

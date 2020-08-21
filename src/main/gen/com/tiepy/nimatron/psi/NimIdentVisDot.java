@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimIdentVisDot extends NimElement {
 
   @Nullable
-  NimOprCombo getOprCombo();
-
-  @Nullable
   NimOptInd getOptInd();
 
   @NotNull

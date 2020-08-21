@@ -65,10 +65,22 @@ private sep ::= ';' | IND_EQ+
 //         | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from' |
 //         | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
 operator ::= operator1
-private operator1 ::= OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
-           | 'or' | 'xor' | 'and'
-           | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from'
-           | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
+private operator1 ::= op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9
+           | 'from' | 'static'
+
+private op0 ::= OP0
+private op1 ::= OP1
+private op2 ::= OP2
+private op3 ::= OP3 | 'or' | 'xor'
+private op4 ::= OP4 | 'and'
+private op5 ::= OP5 | 'in' | 'notin' | 'is' | 'isnot' | 'not' | 'of' | 'as'
+private op6 ::= OP6
+private op7 ::= OP7
+private op8 ::= OP8
+private op9 ::= OP9 | 'div' | 'mod' | 'shl' | 'shr'
+private op10 ::= OP10
+
+private oprCombo ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10|OPR
 
 //prefixOperator = operator
 
@@ -90,7 +102,7 @@ private termInd ::= DEDENT | <<eof>>
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
 simpleExpr ::= primary (op <<optInd primary>>)* pragma?
-private op ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10
+private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
 symbol ::= symbol1
@@ -564,4 +576,3 @@ constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
-oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
