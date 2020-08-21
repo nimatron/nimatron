@@ -65,26 +65,26 @@ private sep ::= ';' | IND_EQ+
 //colon = ':' COMMENT?
 //colcom = ':' COMMENT?
 
+private op0 ::= '->' | '=>' | '~>'
+private op1 ::= '+=' | '*=' | '-=' | '/='
+private op2 ::= ('@'|':'|'?') OPR
+private op3 ::= 'or' | 'xor'
+private op4 ::= 'and'
+private op5 ::= '==' | '<=' | '<' | '>=' | '>' | '!=' | 'in' | 'notin' | 'is' | 'isnot' | 'not' | 'of' | 'as' | (('='|'<'|'>'|'!') OPR)
+private op6 ::= '..' | ('.' OPR)
+private op7 ::= '&' OPR?
+private op8 ::= '+' | '-' | (('+' | '-' | '~' | '|') OPR)
+private op9 ::= '*' | '/' | 'div' | 'mod' | 'shl' | 'shr' | '%' | (('*'|'%'|'\'|'/') OPR)
+private op10 ::= ('$'|'^') OPR
+
 //operator =  OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP9
 //         | 'or' | 'xor' | 'and'
 //         | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from' |
 //         | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
 operator ::= operator1
-private operator1 ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9
-           | 'or' | 'xor' | 'and'
-           | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from'
-           | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
-private op0 ::= OP0A|OP0B|OP0C
-private op1 ::= OP1A|OP1B|OP1C|OP1D
-private op2 ::= OP2A|/*OP2B|*/OP2C // NOTE: OP2B has been commented-out here due to ambiguities in the grammar.
-private op3 ::= OP3A|OP3B
-private op4 ::= OP4A
-private op5 ::= OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|OP5G|OP5H|OP5I|OP5J|OP5K|OP5L|OP5M
-private op6 ::= OP6A
-private op7 ::= OP7A
-private op8 ::= OP8A|OP8B
-private op9 ::= OP9A|OP9B|OP9C|OP9D|OP9E|OP9F|OP9G
-private op10 ::= OP10A|OP10B
+private operator1 ::= op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9
+           | 'and' | 'or' | 'not' | 'xor' | 'shl' | 'shr' | 'div' | 'mod'
+           | 'in' | 'notin' | 'is' | 'isnot' | 'of' | 'as'
 
 //prefixOperator = operator
 
@@ -221,15 +221,15 @@ pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd pragma1>>
 private pragma1 ::= '.}' | '}'
 
 //identVis = symbol OPR?  # postfix position
-//identVis ::= symbol oprCombo?  // postfix position
+identVis ::= symbol OPR?  // postfix position
 
 //identVisDot = symbol '.' optInd symbol OPR?
-identVisDot ::= symbol ('.' <<optInd symbol>>)? oprCombo? // NOTE: '.' is now optional.
+identVisDot ::= symbol ('.' <<optInd symbol>>)? OPR? // NOTE: '.' is now optional.
 private oprCombo ::= /*OPR|*/op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
 // NOTE: OPR above has been commented-out to remove ambiguity.
 
 //identWithPragma = identVis pragma?
-identWithPragma ::= symbol oprCombo? pragma?
+identWithPragma ::= identVis pragma?
 
 //identWithPragmaDot = identVisDot pragma?
 identWithPragmaDot ::= identVisDot pragma?
@@ -459,8 +459,9 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
-routine ::= pattern? genericParams? paramsColon pragma? routine1?
+routine ::= OPR? pattern? genericParams? paramsColon pragma? routine1?
 private routine1 ::= '=' (stmt | (INDENT stmts termInd))
+// NOTE: identVis is 'symbol OPR?' while symbol is now provided by namedRoutine.
 
 //commentStmt = COMMENT
 
@@ -580,4 +581,4 @@ typeStmt ::= 'type' <<section typeDef>>
 constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
-namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
+namedRoutine ::= symbol routine {methods=[nameIdentifier="symbol"]}

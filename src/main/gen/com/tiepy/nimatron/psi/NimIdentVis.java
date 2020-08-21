@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimIdentWithPragma extends NimElement {
+public interface NimIdentVis extends NimElement {
 
   @NotNull
-  NimIdentVis getIdentVis();
-
-  @Nullable
-  NimPragma getPragma();
+  NimSymbol getSymbol();
 
 }

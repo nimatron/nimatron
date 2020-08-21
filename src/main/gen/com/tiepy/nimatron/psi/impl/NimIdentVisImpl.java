@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimIdentWithPragmaImpl extends NimElementImpl implements NimIdentWithPragma {
+public class NimIdentVisImpl extends NimElementImpl implements NimIdentVis {
 
-  public NimIdentWithPragmaImpl(@NotNull ASTNode node) {
+  public NimIdentVisImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitIdentWithPragma(this);
+    visitor.visitIdentVis(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,14 +27,8 @@ public class NimIdentWithPragmaImpl extends NimElementImpl implements NimIdentWi
 
   @Override
   @NotNull
-  public NimIdentVis getIdentVis() {
-    return findNotNullChildByClass(NimIdentVis.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPragma getPragma() {
-    return findChildByClass(NimPragma.class);
+  public NimSymbol getSymbol() {
+    return findNotNullChildByClass(NimSymbol.class);
   }
 
 }

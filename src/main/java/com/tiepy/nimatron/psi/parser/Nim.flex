@@ -46,68 +46,7 @@ import java.util.Stack;
 %eof{  return;
 %eof}
 
-OP0A=->
-OP0B=\~>
-OP0C==>
-//OP0={OP0A}|{OP0B}|{OP0C}
-
-OP1A=\+=
-OP1B=\*=
-OP1C=-=
-OP1D=\/\*
-//OP1={OP1A}|{OP1B}|{OP1C}|{OP1D}
-
-OP2A=@
-OP2B=:
-OP2C=\?
-//OP2={OP2A}|{OP2B}|{OP2C}
-
-OP3A=or
-OP3B=xor
-//OP3={OP3A}|{OP3B}
-
-OP4A=and
-//OP4={OP4A}
-
-OP5A===
-OP5B=<=
-OP5C=<
-OP5D=>=
-OP5E=>
-OP5F=\!=
-OP5G=in
-OP5H=notin
-OP5I=is
-OP5J=isnot
-OP5K=not
-OP5L=of
-OP5M=as
-//OP5={OP5A}|{OP5B}|{OP5C}|{OP5D}|{OP5E}|{OP5F}|{OP5G}|{OP5H}|{OP5I}|{OP5J}|{OP5K}|{OP5L}|{OP5M}
-
-OP6A=\.\.
-//OP6={OP6A}
-
-OP7A=&
-//OP7={OP7A}
-
-OP8A=\+
-OP8B=-
-//OP8={OP8A}|{OP8B}
-
-OP9A=\*
-OP9B=\/
-OP9C=div
-OP9D=mod
-OP9E=shl
-OP9F=shr
-OP9G=%
-//OP9={OP9A}|{OP9B}|{OP9C}|{OP9D}|{OP9E}|{OP9F}|{OP9G}
-
-OP10A=\$
-OP10B=\^
-//OP10={OP10A}|{OP10B}
-
-OPR=[\=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
+OPR=[=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
 
 DIGIT=[0-9]
 ALPHA=[A-Za-z\u0080-\u00ff]
@@ -333,45 +272,6 @@ private IElementType getDedenterToken() {
     \"                          { pushState(STRING_LITERAL); }
     '                           { pushState(CHARACTER_LITERAL); }
     {NUM_LIT}                   { return NimElementTypes.NUM_LIT; }
-    {OP0A}                      { return NimElementTypes.OP0A; }
-    {OP0B}                      { return NimElementTypes.OP0B; }
-    {OP0C}                      { return NimElementTypes.OP0C; }
-    {OP1A}                      { return NimElementTypes.OP1A; }
-    {OP1B}                      { return NimElementTypes.OP1B; }
-    {OP1C}                      { return NimElementTypes.OP1C; }
-    {OP1D}                      { return NimElementTypes.OP1D; }
-    {OP2A}                      { return NimElementTypes.OP2A; }
-    {OP2B}                      { return NimElementTypes.OP2B; }
-    {OP2C}                      { return NimElementTypes.OP2C; }
-    {OP3A}                      { return NimElementTypes.OP3A; }
-    {OP3B}                      { return NimElementTypes.OP3B; }
-    {OP4A}                      { return NimElementTypes.OP4A; }
-    {OP5A}                      { return NimElementTypes.OP5A; }
-    {OP5B}                      { return NimElementTypes.OP5B; }
-    {OP5C}                      { return NimElementTypes.OP5C; }
-    {OP5D}                      { return NimElementTypes.OP5D; }
-    {OP5E}                      { return NimElementTypes.OP5E; }
-    {OP5F}                      { return NimElementTypes.OP5F; }
-    {OP5G}                      { return NimElementTypes.OP5G; }
-    {OP5H}                      { return NimElementTypes.OP5H; }
-    {OP5I}                      { return NimElementTypes.OP5I; }
-    {OP5J}                      { return NimElementTypes.OP5J; }
-    {OP5K}                      { return NimElementTypes.OP5K; }
-    {OP5L}                      { return NimElementTypes.OP5L; }
-    {OP5M}                      { return NimElementTypes.OP5M; }
-    {OP6A}                      { return NimElementTypes.OP6A; }
-    {OP7A}                      { return NimElementTypes.OP7A; }
-    {OP8A}                      { return NimElementTypes.OP8A; }
-    {OP8B}                      { return NimElementTypes.OP8B; }
-    {OP9A}                      { return NimElementTypes.OP9A; }
-    {OP9B}                      { return NimElementTypes.OP9B; }
-    {OP9C}                      { return NimElementTypes.OP9C; }
-    {OP9D}                      { return NimElementTypes.OP9D; }
-    {OP9E}                      { return NimElementTypes.OP9E; }
-    {OP9F}                      { return NimElementTypes.OP9F; }
-    {OP9G}                      { return NimElementTypes.OP9G; }
-    {OP10A}                     { return NimElementTypes.OP10A; }
-    {OP10B}                     { return NimElementTypes.OP10B; }
     {OPR}                       { return NimElementTypes.OPR; }
     {IDENT}                     { return NimElementTypes.IDENT; }
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }

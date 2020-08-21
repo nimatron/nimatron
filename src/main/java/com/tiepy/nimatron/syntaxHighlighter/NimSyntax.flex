@@ -45,68 +45,7 @@ import java.util.Stack;
 %eof{  return;
 %eof}
 
-OP0A=->
-OP0B=\~>
-OP0C==>
-//OP0={OP0A}|{OP0B}|{OP0C}
-
-OP1A=\+=
-OP1B=\*=
-OP1C=-=
-OP1D=\/\*
-//OP1={OP1A}|{OP1B}|{OP1C}|{OP1D}
-
-OP2A=@
-OP2B=:
-OP2C=\?
-//OP2={OP2A}|{OP2B}|{OP2C}
-
-OP3A=or
-OP3B=xor
-//OP3={OP3A}|{OP3B}
-
-OP4A=and
-//OP4={OP4A}
-
-OP5A===
-OP5B=<=
-OP5C=<
-OP5D=>=
-OP5E=>
-OP5F=\!=
-OP5G=in
-OP5H=notin
-OP5I=is
-OP5J=isnot
-OP5K=not
-OP5L=of
-OP5M=as
-//OP5={OP5A}|{OP5B}|{OP5C}|{OP5D}|{OP5E}|{OP5F}|{OP5G}|{OP5H}|{OP5I}|{OP5J}|{OP5K}|{OP5L}|{OP5M}
-
-OP6A=\.\.
-//OP6={OP6A}
-
-OP7A=&
-//OP7={OP7A}
-
-OP8A=\+
-OP8B=-
-//OP8={OP8A}|{OP8B}
-
-OP9A=\*
-OP9B=\/
-OP9C=div
-OP9D=mod
-OP9E=shl
-OP9F=shr
-OP9G=%
-//OP9={OP9A}|{OP9B}|{OP9C}|{OP9D}|{OP9E}|{OP9F}|{OP9G}
-
-OP10A=\$
-OP10B=\^
-//OP10={OP10A}|{OP10B}
-
-OPR=[\=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
+OPR=[=\+\-\*/<>@$~&%\|\!\?\^\.\:\\]+
 
 DIGIT=[0-9]
 ALPHA=[A-Za-z\u0080-\u00ff]
@@ -231,45 +170,6 @@ private int popState() {
     \"                          { pushState(STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }
     '                           { pushState(CHARACTER_LITERAL); return NimSyntaxTypes.STR_LIT; }
     {NUM_LIT}                   { return NimSyntaxTypes.NUM_LIT; }
-    {OP0A}                      { return NimSyntaxTypes.OPR; }
-    {OP0B}                      { return NimSyntaxTypes.OPR; }
-    {OP0C}                      { return NimSyntaxTypes.OPR; }
-    {OP1A}                      { return NimSyntaxTypes.OPR; }
-    {OP1B}                      { return NimSyntaxTypes.OPR; }
-    {OP1C}                      { return NimSyntaxTypes.OPR; }
-    {OP1D}                      { return NimSyntaxTypes.OPR; }
-    {OP2A}                      { return NimSyntaxTypes.OPR; }
-    {OP2B}                      { return NimSyntaxTypes.OPR; }
-    {OP2C}                      { return NimSyntaxTypes.OPR; }
-    {OP3A}                      { return NimSyntaxTypes.OPR; }
-    {OP3B}                      { return NimSyntaxTypes.OPR; }
-    {OP4A}                      { return NimSyntaxTypes.OPR; }
-    {OP5A}                      { return NimSyntaxTypes.OPR; }
-    {OP5B}                      { return NimSyntaxTypes.OPR; }
-    {OP5C}                      { return NimSyntaxTypes.OPR; }
-    {OP5D}                      { return NimSyntaxTypes.OPR; }
-    {OP5E}                      { return NimSyntaxTypes.OPR; }
-    {OP5F}                      { return NimSyntaxTypes.OPR; }
-    {OP5G}                      { return NimSyntaxTypes.OPR; }
-    {OP5H}                      { return NimSyntaxTypes.OPR; }
-    {OP5I}                      { return NimSyntaxTypes.OPR; }
-    {OP5J}                      { return NimSyntaxTypes.OPR; }
-    {OP5K}                      { return NimSyntaxTypes.OPR; }
-    {OP5L}                      { return NimSyntaxTypes.OPR; }
-    {OP5M}                      { return NimSyntaxTypes.OPR; }
-    {OP6A}                      { return NimSyntaxTypes.OPR; }
-    {OP7A}                      { return NimSyntaxTypes.OPR; }
-    {OP8A}                      { return NimSyntaxTypes.OPR; }
-    {OP8B}                      { return NimSyntaxTypes.OPR; }
-    {OP9A}                      { return NimSyntaxTypes.OPR; }
-    {OP9B}                      { return NimSyntaxTypes.OPR; }
-    {OP9C}                      { return NimSyntaxTypes.OPR; }
-    {OP9D}                      { return NimSyntaxTypes.OPR; }
-    {OP9E}                      { return NimSyntaxTypes.OPR; }
-    {OP9F}                      { return NimSyntaxTypes.OPR; }
-    {OP9G}                      { return NimSyntaxTypes.OPR; }
-    {OP10A}                     { return NimSyntaxTypes.OPR; }
-    {OP10B}                     { return NimSyntaxTypes.OPR; }
     {OPR}                       { return NimSyntaxTypes.OPR; }
     {IDENT}                     { return NimSyntaxTypes.IDENT; }
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); return NimSyntaxTypes.STR_LIT; }

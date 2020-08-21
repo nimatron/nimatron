@@ -40,6 +40,7 @@ public interface NimElementTypes {
   IElementType GENERIC_PARAMS = new NimElementType("GENERIC_PARAMS");
   IElementType IDENT_COLON_EQUALS = new NimElementType("IDENT_COLON_EQUALS");
   IElementType IDENT_OR_LITERAL = new NimElementType("IDENT_OR_LITERAL");
+  IElementType IDENT_VIS = new NimElementType("IDENT_VIS");
   IElementType IDENT_VIS_DOT = new NimElementType("IDENT_VIS_DOT");
   IElementType IDENT_WITH_PRAGMA = new NimElementType("IDENT_WITH_PRAGMA");
   IElementType IDENT_WITH_PRAGMA_DOT = new NimElementType("IDENT_WITH_PRAGMA_DOT");
@@ -113,44 +114,15 @@ public interface NimElementTypes {
   IElementType IND_EQ = new NimTokenType("IND_EQ");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
-  IElementType OP0A = new NimTokenType("OP0A");
-  IElementType OP0B = new NimTokenType("OP0B");
-  IElementType OP0C = new NimTokenType("OP0C");
-  IElementType OP10A = new NimTokenType("OP10A");
-  IElementType OP10B = new NimTokenType("OP10B");
-  IElementType OP1A = new NimTokenType("OP1A");
-  IElementType OP1B = new NimTokenType("OP1B");
-  IElementType OP1C = new NimTokenType("OP1C");
-  IElementType OP1D = new NimTokenType("OP1D");
-  IElementType OP2A = new NimTokenType("OP2A");
   IElementType OP2B = new NimTokenType("OP2B");
-  IElementType OP2C = new NimTokenType("OP2C");
-  IElementType OP3A = new NimTokenType("OP3A");
-  IElementType OP3B = new NimTokenType("OP3B");
-  IElementType OP4A = new NimTokenType("OP4A");
   IElementType OP5A = new NimTokenType("OP5A");
   IElementType OP5B = new NimTokenType("OP5B");
   IElementType OP5C = new NimTokenType("OP5C");
   IElementType OP5D = new NimTokenType("OP5D");
   IElementType OP5E = new NimTokenType("OP5E");
   IElementType OP5F = new NimTokenType("OP5F");
-  IElementType OP5G = new NimTokenType("OP5G");
-  IElementType OP5H = new NimTokenType("OP5H");
-  IElementType OP5I = new NimTokenType("OP5I");
-  IElementType OP5J = new NimTokenType("OP5J");
-  IElementType OP5K = new NimTokenType("OP5K");
-  IElementType OP5L = new NimTokenType("OP5L");
-  IElementType OP5M = new NimTokenType("OP5M");
-  IElementType OP6A = new NimTokenType("OP6A");
-  IElementType OP7A = new NimTokenType("OP7A");
-  IElementType OP8A = new NimTokenType("OP8A");
-  IElementType OP8B = new NimTokenType("OP8B");
   IElementType OP9A = new NimTokenType("OP9A");
   IElementType OP9B = new NimTokenType("OP9B");
-  IElementType OP9C = new NimTokenType("OP9C");
-  IElementType OP9D = new NimTokenType("OP9D");
-  IElementType OP9E = new NimTokenType("OP9E");
-  IElementType OP9F = new NimTokenType("OP9F");
   IElementType OP9G = new NimTokenType("OP9G");
   IElementType OPR = new NimTokenType("OPR");
   IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
@@ -254,6 +226,9 @@ public interface NimElementTypes {
       }
       else if (type == IDENT_OR_LITERAL) {
         return new NimIdentOrLiteralImpl(node);
+      }
+      else if (type == IDENT_VIS) {
+        return new NimIdentVisImpl(node);
       }
       else if (type == IDENT_VIS_DOT) {
         return new NimIdentVisDotImpl(node);
