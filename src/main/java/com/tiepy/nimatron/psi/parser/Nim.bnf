@@ -46,11 +46,7 @@
 
     tokens = [
         COMMENT="COMMENT"
-        BRACKET="BRACKET"
-        PARENTHESIS="PARENTHESIS"
-        C_SEMICOLON="C_SEMICOLON"
-        C_COMMA="C_COMMA"
-        C_GRAVE_ACCENT="C_GRAVE_ACCENT"
+        NOTATION="NOTATION"
     ]
 }
 

@@ -141,12 +141,21 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testLineComment() throws Exception {
         int tokenCount = parse("const\n" +
                 "  EndOfFile* = '\\0'           # end of file marker\n" +
                 "                              # A little picture makes everything clear :-)\n");
         Assert.assertEquals(11, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMiscBlock() throws Exception {
+        int tokenCount = parse("block a:\n" +
+                "  echo \"OK\"\n");
+        Assert.assertEquals(10, tokenCount);
     }
 
     /**

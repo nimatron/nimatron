@@ -101,21 +101,17 @@ public interface NimElementTypes {
   IElementType WHILE_STMT = new NimElementType("WHILE_STMT");
   IElementType YIELD_STMT = new NimElementType("YIELD_STMT");
 
-  IElementType BRACKET = new NimTokenType("BRACKET");
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
   IElementType COMMENT = new NimTokenType("COMMENT");
-  IElementType C_COMMA = new NimTokenType("C_COMMA");
-  IElementType C_GRAVE_ACCENT = new NimTokenType("C_GRAVE_ACCENT");
-  IElementType C_SEMICOLON = new NimTokenType("C_SEMICOLON");
   IElementType DEDENT = new NimTokenType("DEDENT");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
   IElementType IDENT = new NimTokenType("IDENT");
   IElementType INDENT = new NimTokenType("INDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
   IElementType KEYW = new NimTokenType("KEYW");
+  IElementType NOTATION = new NimTokenType("NOTATION");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
   IElementType OPR = new NimTokenType("OPR");
-  IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
 
   class Factory {

@@ -65,6 +65,14 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscFuncArg() {
+        doTest(true, true);
+    }
+
+    public void testMiscFuncVarArg() {
+        doTest(true, true);
+    }
+
     public void testMiscForwardSlashFuncName() {
         doTest(true, true);
     }
