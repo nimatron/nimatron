@@ -491,8 +491,8 @@ typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc ('
 //            indAndComment? / identVisDot genericParamList? pragma '=' optInd typeDefAux
 //            indAndComment?
 typeDef ::= typeDef1 | typeDef2
-typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
-typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
+private typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
+private typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
 
 //varTuple = '(' optInd identWithPragma ^+ comma optPar ')' '=' optInd expr
 varTuple ::= '(' <<optInd (identWithPragma (',' identWithPragma)*)>> <<optInd (')')>> '=' <<optInd expr>>
