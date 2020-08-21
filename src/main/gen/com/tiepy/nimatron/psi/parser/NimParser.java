@@ -2079,7 +2079,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '->' | '=>' | '~>'
+  // '->'|'=>'|'~>'
   static boolean op0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op0")) return false;
     boolean r;
@@ -2090,7 +2090,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '+=' | '*=' | '-=' | '/='
+  // '+='|'*='|'-='|'/='
   static boolean op1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op1")) return false;
     boolean r;
@@ -2102,13 +2102,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ('$'|'^') OPR
+  // ('$'|'^') opChars+
   static boolean op10(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op10")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = op10_0(b, l + 1);
-    r = r && consumeToken(b, OPR);
+    r = r && op10_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2122,14 +2122,29 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // opChars+
+  private static boolean op10_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op10_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = opChars(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op10_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   /* ********************************************************** */
-  // ('@'|':'|'?') OPR
+  // ('@'|':'|'?') opChars+
   static boolean op2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = op2_0(b, l + 1);
-    r = r && consumeToken(b, OPR);
+    r = r && op2_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2144,8 +2159,23 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // opChars+
+  private static boolean op2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op2_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = opChars(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op2_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   /* ********************************************************** */
-  // 'or' | 'xor'
+  // 'or'|'xor'
   static boolean op3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op3")) return false;
     boolean r;
@@ -2161,7 +2191,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '==' | '<=' | '<' | '>=' | '>' | '!=' | 'in' | 'notin' | 'is' | 'isnot' | 'not' | 'of' | 'as' | (('='|'<'|'>'|'!') OPR)
+  // '=='|'<='|'<'|'>='|'>'|'!='|'in'|'notin'|'is'|'isnot'|'not'|'of'|'as'|(('='|'<'|'>'|'!') opChars+)
   static boolean op5(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op5")) return false;
     boolean r;
@@ -2184,13 +2214,13 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ('='|'<'|'>'|'!') OPR
+  // ('='|'<'|'>'|'!') opChars+
   private static boolean op5_13(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op5_13")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = op5_13_0(b, l + 1);
-    r = r && consumeToken(b, OPR);
+    r = r && op5_13_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2206,31 +2236,73 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // opChars+
+  private static boolean op5_13_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op5_13_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = opChars(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op5_13_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   /* ********************************************************** */
-  // '..' | ('.' OPR)
+  // '..' | ('.' opChars+) | ('..' '/')
   static boolean op6(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op6")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, "..");
     if (!r) r = op6_1(b, l + 1);
+    if (!r) r = op6_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // '.' OPR
+  // '.' opChars+
   private static boolean op6_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op6_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ".");
-    r = r && consumeToken(b, OPR);
+    r = r && op6_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // opChars+
+  private static boolean op6_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op6_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = opChars(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op6_1_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '..' '/'
+  private static boolean op6_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op6_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "..");
+    r = r && consumeToken(b, "/");
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // '&' OPR?
+  // '&' opChars*
   static boolean op7(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op7")) return false;
     boolean r;
@@ -2241,15 +2313,19 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // OPR?
+  // opChars*
   private static boolean op7_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op7_1")) return false;
-    consumeToken(b, OPR);
+    while (true) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op7_1", c)) break;
+    }
     return true;
   }
 
   /* ********************************************************** */
-  // '+' | '-' | (('+' | '-' | '~' | '|') OPR)
+  // '+'|'-'| (('+'|'-'|'~'|'|') opChars+)
   static boolean op8(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op8")) return false;
     boolean r;
@@ -2261,18 +2337,18 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ('+' | '-' | '~' | '|') OPR
+  // ('+'|'-'|'~'|'|') opChars+
   private static boolean op8_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op8_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = op8_2_0(b, l + 1);
-    r = r && consumeToken(b, OPR);
+    r = r && op8_2_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // '+' | '-' | '~' | '|'
+  // '+'|'-'|'~'|'|'
   private static boolean op8_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op8_2_0")) return false;
     boolean r;
@@ -2283,8 +2359,23 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // opChars+
+  private static boolean op8_2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op8_2_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = opChars(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op8_2_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   /* ********************************************************** */
-  // '*' | '/' | 'div' | 'mod' | 'shl' | 'shr' | '%' | (('*'|'%'|'\'|'/') OPR)
+  // '*'|'/'|'div'|'mod'|'shl'|'shr'|'%'| (('*'|'%'|'\'|'/') opChars+)
   static boolean op9(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op9")) return false;
     boolean r;
@@ -2301,13 +2392,13 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ('*'|'%'|'\'|'/') OPR
+  // ('*'|'%'|'\'|'/') opChars+
   private static boolean op9_7(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "op9_7")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = op9_7_0(b, l + 1);
-    r = r && consumeToken(b, OPR);
+    r = r && op9_7_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2323,6 +2414,48 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // opChars+
+  private static boolean op9_7_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op9_7_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = opChars(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!opChars(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "op9_7_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '='|'+'|'-'|'*'|'/'|'<'|'>'|'@'|'$'|'~'|'&'|'%'|'|'|'!'|'?'|'^'|'.'|':'|'\\'
+  static boolean opChars(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "opChars")) return false;
+    boolean r;
+    r = consumeToken(b, "=");
+    if (!r) r = consumeToken(b, "+");
+    if (!r) r = consumeToken(b, "-");
+    if (!r) r = consumeToken(b, "*");
+    if (!r) r = consumeToken(b, "/");
+    if (!r) r = consumeToken(b, "<");
+    if (!r) r = consumeToken(b, ">");
+    if (!r) r = consumeToken(b, "@");
+    if (!r) r = consumeToken(b, "$");
+    if (!r) r = consumeToken(b, "~");
+    if (!r) r = consumeToken(b, "&");
+    if (!r) r = consumeToken(b, "%");
+    if (!r) r = consumeToken(b, "|");
+    if (!r) r = consumeToken(b, "!");
+    if (!r) r = consumeToken(b, "?");
+    if (!r) r = consumeToken(b, "^");
+    if (!r) r = consumeToken(b, ".");
+    if (!r) r = consumeToken(b, ":");
+    if (!r) r = consumeToken(b, "\\\\");
+    return r;
+  }
+
   /* ********************************************************** */
   // operator1
   public static boolean operator(PsiBuilder b, int l) {
@@ -2335,7 +2468,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9
+  // op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 /*| OPR*/
   //            | 'or' | 'xor' | 'and'
   //            | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from'
   //            | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
