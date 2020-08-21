@@ -5,15 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimTypeDef1 extends NimElement {
-
-  @Nullable
-  NimGenericParams getGenericParams();
+public interface NimObjectCase extends NimElement {
 
   @NotNull
-  NimIdentWithPragmaDot getIdentWithPragmaDot();
+  NimIdentWithPragma getIdentWithPragma();
 
   @NotNull
-  NimOptInd getOptInd();
+  NimObjectBranches getObjectBranches();
+
+  @NotNull
+  NimTypeDesc getTypeDesc();
 
 }

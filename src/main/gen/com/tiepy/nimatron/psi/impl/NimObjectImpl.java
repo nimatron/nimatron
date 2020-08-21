@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimTypeDefImpl extends NimElementImpl implements NimTypeDef {
+public class NimObjectImpl extends NimElementImpl implements NimObject {
 
-  public NimTypeDefImpl(@NotNull ASTNode node) {
+  public NimObjectImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitTypeDef(this);
+    visitor.visitObject(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -26,33 +26,21 @@ public class NimTypeDefImpl extends NimElementImpl implements NimTypeDef {
   }
 
   @Override
-  @Nullable
-  public NimGenericParams getGenericParams() {
-    return findChildByClass(NimGenericParams.class);
-  }
-
-  @Override
-  @Nullable
-  public NimIdentVisDot getIdentVisDot() {
-    return findChildByClass(NimIdentVisDot.class);
-  }
-
-  @Override
-  @Nullable
-  public NimIdentWithPragmaDot getIdentWithPragmaDot() {
-    return findChildByClass(NimIdentWithPragmaDot.class);
-  }
-
-  @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimObjectPart getObjectPart() {
+    return findNotNullChildByClass(NimObjectPart.class);
   }
 
   @Override
   @Nullable
   public NimPragma getPragma() {
     return findChildByClass(NimPragma.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTypeDesc getTypeDesc() {
+    return findChildByClass(NimTypeDesc.class);
   }
 
 }

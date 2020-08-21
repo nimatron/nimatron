@@ -54,6 +54,12 @@ public interface NimElementTypes {
   IElementType METHOD_STMT = new NimElementType("METHOD_STMT");
   IElementType MIXIN_STMT = new NimElementType("MIXIN_STMT");
   IElementType NAMED_ROUTINE = new NimElementType("NAMED_ROUTINE");
+  IElementType OBJECT = new NimElementType("OBJECT");
+  IElementType OBJECT_BRANCH = new NimElementType("OBJECT_BRANCH");
+  IElementType OBJECT_BRANCHES = new NimElementType("OBJECT_BRANCHES");
+  IElementType OBJECT_CASE = new NimElementType("OBJECT_CASE");
+  IElementType OBJECT_PART = new NimElementType("OBJECT_PART");
+  IElementType OBJECT_WHEN = new NimElementType("OBJECT_WHEN");
   IElementType OF_BRANCH = new NimElementType("OF_BRANCH");
   IElementType OF_BRANCHES = new NimElementType("OF_BRANCHES");
   IElementType OPERATOR = new NimElementType("OPERATOR");
@@ -87,8 +93,6 @@ public interface NimElementTypes {
   IElementType TYPE_CLASS = new NimElementType("TYPE_CLASS");
   IElementType TYPE_CLASS_PARAM = new NimElementType("TYPE_CLASS_PARAM");
   IElementType TYPE_DEF = new NimElementType("TYPE_DEF");
-  IElementType TYPE_DEF_1 = new NimElementType("TYPE_DEF_1");
-  IElementType TYPE_DEF_2 = new NimElementType("TYPE_DEF_2");
   IElementType TYPE_DEF_AUX = new NimElementType("TYPE_DEF_AUX");
   IElementType TYPE_DESC = new NimElementType("TYPE_DESC");
   IElementType TYPE_KEYW = new NimElementType("TYPE_KEYW");
@@ -102,12 +106,14 @@ public interface NimElementTypes {
   IElementType YIELD_STMT = new NimElementType("YIELD_STMT");
 
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
+  IElementType COLCOM = new NimTokenType("colcom");
   IElementType COMMENT = new NimTokenType("COMMENT");
   IElementType DEDENT = new NimTokenType("DEDENT");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
   IElementType IDENT = new NimTokenType("IDENT");
   IElementType INDENT = new NimTokenType("INDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
+  IElementType IND_GT = new NimTokenType("IND_GT");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NOTATION = new NimTokenType("NOTATION");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
@@ -266,6 +272,24 @@ public interface NimElementTypes {
       else if (type == NAMED_ROUTINE) {
         return new NimNamedRoutineImpl(node);
       }
+      else if (type == OBJECT) {
+        return new NimObjectImpl(node);
+      }
+      else if (type == OBJECT_BRANCH) {
+        return new NimObjectBranchImpl(node);
+      }
+      else if (type == OBJECT_BRANCHES) {
+        return new NimObjectBranchesImpl(node);
+      }
+      else if (type == OBJECT_CASE) {
+        return new NimObjectCaseImpl(node);
+      }
+      else if (type == OBJECT_PART) {
+        return new NimObjectPartImpl(node);
+      }
+      else if (type == OBJECT_WHEN) {
+        return new NimObjectWhenImpl(node);
+      }
       else if (type == OF_BRANCH) {
         return new NimOfBranchImpl(node);
       }
@@ -364,12 +388,6 @@ public interface NimElementTypes {
       }
       else if (type == TYPE_DEF) {
         return new NimTypeDefImpl(node);
-      }
-      else if (type == TYPE_DEF_1) {
-        return new NimTypeDef1Impl(node);
-      }
-      else if (type == TYPE_DEF_2) {
-        return new NimTypeDef2Impl(node);
       }
       else if (type == TYPE_DEF_AUX) {
         return new NimTypeDefAuxImpl(node);

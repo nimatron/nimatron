@@ -292,10 +292,11 @@ private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-primary ::= primary1 | primary2 | primary3
-private primary1 ::= typeKeyw <<optInd typeDesc>>
-private primary2 ::= operator? identOrLiteral primarySuffix*
-private primary3 ::= 'bind' primary
+primary ::= primary1 | primary2 | primary3 | primary4
+private primary1 ::= object
+private primary2 ::= typeKeyw <<optInd typeDesc>>
+private primary3 ::= operator? identOrLiteral primarySuffix*
+private primary4 ::= 'bind' primary
 
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= typeDesc0
@@ -465,21 +466,34 @@ meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
 //            ('else' colcom objectPart COMMENT?)?
+objectWhen ::= 'when' expr ':' objectPart
+              ('elif' expr ':' objectPart)*
+              ('else' ':' objectPart)?
 
 //objectBranch = 'of' exprList colcom objectPart
+objectBranch ::= 'of' exprs ':' objectPart
 
 //objectBranches = objectBranch (IND{=} objectBranch)*
 //                      (IND{=} 'elif' expr colcom objectPart)*
 //                      (IND{=} 'else' colcom objectPart)?
+objectBranches ::= objectBranch (IND_EQ objectBranch)*
+                        (IND_EQ 'elif' expr colcom objectPart)*
+                        (IND_EQ 'else' colcom objectPart)?
 
 //objectCase = 'case' identWithPragma ':' typeDesc ':'? COMMENT?
 //            (IND{>} objectBranches DED
 //            | IND{=} objectBranches)
+objectCase ::= 'case' identWithPragma ':' typeDesc ':'?
+            (IND_GT objectBranches DEDENT
+            | IND_EQ objectBranches)
 
 //objectPart = IND{>} objectPart^+IND{=} DED
 //           / objectWhen / objectCase / 'nil' / 'discard' / declColonEquals
+objectPart ::= IND_GT objectPart (IND_EQ objectPart)* DEDENT
+             | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
+object ::= 'object' pragma? ('of' typeDesc)? objectPart
 
 //typeClassParam = ('var' | 'out')? symbol
 typeClassParam ::= ('var'|'out')? symbol

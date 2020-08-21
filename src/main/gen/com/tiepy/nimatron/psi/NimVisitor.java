@@ -190,6 +190,30 @@ public class NimVisitor extends PsiElementVisitor {
     visitNamedElement(o);
   }
 
+  public void visitObject(@NotNull NimObject o) {
+    visitElement(o);
+  }
+
+  public void visitObjectBranch(@NotNull NimObjectBranch o) {
+    visitElement(o);
+  }
+
+  public void visitObjectBranches(@NotNull NimObjectBranches o) {
+    visitElement(o);
+  }
+
+  public void visitObjectCase(@NotNull NimObjectCase o) {
+    visitElement(o);
+  }
+
+  public void visitObjectPart(@NotNull NimObjectPart o) {
+    visitElement(o);
+  }
+
+  public void visitObjectWhen(@NotNull NimObjectWhen o) {
+    visitElement(o);
+  }
+
   public void visitOfBranch(@NotNull NimOfBranch o) {
     visitElement(o);
   }
@@ -319,14 +343,6 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitTypeDef(@NotNull NimTypeDef o) {
-    visitElement(o);
-  }
-
-  public void visitTypeDef1(@NotNull NimTypeDef1 o) {
-    visitElement(o);
-  }
-
-  public void visitTypeDef2(@NotNull NimTypeDef2 o) {
     visitElement(o);
   }
 

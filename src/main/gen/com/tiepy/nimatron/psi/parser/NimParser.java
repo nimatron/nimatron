@@ -1970,6 +1970,315 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // 'object' pragma? ('of' typeDesc)? objectPart
+  public static boolean object(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT, "<object>");
+    r = consumeToken(b, "object");
+    r = r && object_1(b, l + 1);
+    r = r && object_2(b, l + 1);
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // pragma?
+  private static boolean object_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object_1")) return false;
+    pragma(b, l + 1);
+    return true;
+  }
+
+  // ('of' typeDesc)?
+  private static boolean object_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object_2")) return false;
+    object_2_0(b, l + 1);
+    return true;
+  }
+
+  // 'of' typeDesc
+  private static boolean object_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "of");
+    r = r && typeDesc(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'of' exprs ':' objectPart
+  public static boolean objectBranch(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranch")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT_BRANCH, "<object branch>");
+    r = consumeToken(b, "of");
+    r = r && exprs(b, l + 1);
+    r = r && consumeToken(b, ":");
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // objectBranch (IND_EQ objectBranch)*
+  //                         (IND_EQ 'elif' expr colcom objectPart)*
+  //                         (IND_EQ 'else' colcom objectPart)?
+  public static boolean objectBranches(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT_BRANCHES, "<object branches>");
+    r = objectBranch(b, l + 1);
+    r = r && objectBranches_1(b, l + 1);
+    r = r && objectBranches_2(b, l + 1);
+    r = r && objectBranches_3(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (IND_EQ objectBranch)*
+  private static boolean objectBranches_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!objectBranches_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "objectBranches_1", c)) break;
+    }
+    return true;
+  }
+
+  // IND_EQ objectBranch
+  private static boolean objectBranches_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && objectBranch(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (IND_EQ 'elif' expr colcom objectPart)*
+  private static boolean objectBranches_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!objectBranches_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "objectBranches_2", c)) break;
+    }
+    return true;
+  }
+
+  // IND_EQ 'elif' expr colcom objectPart
+  private static boolean objectBranches_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && consumeToken(b, "elif");
+    r = r && expr(b, l + 1);
+    r = r && consumeToken(b, COLCOM);
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (IND_EQ 'else' colcom objectPart)?
+  private static boolean objectBranches_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches_3")) return false;
+    objectBranches_3_0(b, l + 1);
+    return true;
+  }
+
+  // IND_EQ 'else' colcom objectPart
+  private static boolean objectBranches_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectBranches_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && consumeToken(b, "else");
+    r = r && consumeToken(b, COLCOM);
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'case' identWithPragma ':' typeDesc ':'?
+  //             (IND_GT objectBranches DEDENT
+  //             | IND_EQ objectBranches)
+  public static boolean objectCase(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectCase")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT_CASE, "<object case>");
+    r = consumeToken(b, "case");
+    r = r && identWithPragma(b, l + 1);
+    r = r && consumeToken(b, ":");
+    r = r && typeDesc(b, l + 1);
+    r = r && objectCase_4(b, l + 1);
+    r = r && objectCase_5(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ':'?
+  private static boolean objectCase_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectCase_4")) return false;
+    consumeToken(b, ":");
+    return true;
+  }
+
+  // IND_GT objectBranches DEDENT
+  //             | IND_EQ objectBranches
+  private static boolean objectCase_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectCase_5")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = objectCase_5_0(b, l + 1);
+    if (!r) r = objectCase_5_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // IND_GT objectBranches DEDENT
+  private static boolean objectCase_5_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectCase_5_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_GT);
+    r = r && objectBranches(b, l + 1);
+    r = r && consumeToken(b, DEDENT);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // IND_EQ objectBranches
+  private static boolean objectCase_5_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectCase_5_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && objectBranches(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IND_GT objectPart (IND_EQ objectPart)* DEDENT
+  //              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
+  public static boolean objectPart(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT_PART, "<object part>");
+    r = objectPart_0(b, l + 1);
+    if (!r) r = objectWhen(b, l + 1);
+    if (!r) r = objectCase(b, l + 1);
+    if (!r) r = consumeToken(b, "nil");
+    if (!r) r = consumeToken(b, "discard");
+    if (!r) r = declColonEquals(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // IND_GT objectPart (IND_EQ objectPart)* DEDENT
+  private static boolean objectPart_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_GT);
+    r = r && objectPart(b, l + 1);
+    r = r && objectPart_0_2(b, l + 1);
+    r = r && consumeToken(b, DEDENT);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (IND_EQ objectPart)*
+  private static boolean objectPart_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!objectPart_0_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "objectPart_0_2", c)) break;
+    }
+    return true;
+  }
+
+  // IND_EQ objectPart
+  private static boolean objectPart_0_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IND_EQ);
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'when' expr ':' objectPart
+  //               ('elif' expr ':' objectPart)*
+  //               ('else' ':' objectPart)?
+  public static boolean objectWhen(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectWhen")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT_WHEN, "<object when>");
+    r = consumeToken(b, "when");
+    r = r && expr(b, l + 1);
+    r = r && consumeToken(b, ":");
+    r = r && objectPart(b, l + 1);
+    r = r && objectWhen_4(b, l + 1);
+    r = r && objectWhen_5(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ('elif' expr ':' objectPart)*
+  private static boolean objectWhen_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectWhen_4")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!objectWhen_4_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "objectWhen_4", c)) break;
+    }
+    return true;
+  }
+
+  // 'elif' expr ':' objectPart
+  private static boolean objectWhen_4_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectWhen_4_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "elif");
+    r = r && expr(b, l + 1);
+    r = r && consumeToken(b, ":");
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ('else' ':' objectPart)?
+  private static boolean objectWhen_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectWhen_5")) return false;
+    objectWhen_5_0(b, l + 1);
+    return true;
+  }
+
+  // 'else' ':' objectPart
+  private static boolean objectWhen_5_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectWhen_5_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "else");
+    r = r && consumeToken(b, ":");
+    r = r && objectPart(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // 'of' exprs ':' <<optInd stmts>>
   public static boolean ofBranch(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ofBranch")) return false;
@@ -2872,7 +3181,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primary1 | primary2 | primary3
+  // primary1 | primary2 | primary3 | primary4
   public static boolean primary(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primary")) return false;
     boolean r;
@@ -2880,14 +3189,21 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = primary1(b, l + 1);
     if (!r) r = primary2(b, l + 1);
     if (!r) r = primary3(b, l + 1);
+    if (!r) r = primary4(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // typeKeyw <<optInd typeDesc>>
+  // object
   static boolean primary1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary1")) return false;
+    return object(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // typeKeyw <<optInd typeDesc>>
+  static boolean primary2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = typeKeyw(b, l + 1);
@@ -2898,39 +3214,39 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // operator? identOrLiteral primarySuffix*
-  static boolean primary2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary2")) return false;
+  static boolean primary3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary3")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = primary2_0(b, l + 1);
+    r = primary3_0(b, l + 1);
     r = r && identOrLiteral(b, l + 1);
-    r = r && primary2_2(b, l + 1);
+    r = r && primary3_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // operator?
-  private static boolean primary2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary2_0")) return false;
+  private static boolean primary3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary3_0")) return false;
     operator(b, l + 1);
     return true;
   }
 
   // primarySuffix*
-  private static boolean primary2_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary2_2")) return false;
+  private static boolean primary3_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary3_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!primarySuffix(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "primary2_2", c)) break;
+      if (!empty_element_parsed_guard_(b, "primary3_2", c)) break;
     }
     return true;
   }
 
   /* ********************************************************** */
   // 'bind' primary
-  static boolean primary3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "primary3")) return false;
+  static boolean primary4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary4")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, "bind");
@@ -4059,15 +4375,15 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
-  public static boolean typeDef1(PsiBuilder b, int l) {
+  static boolean typeDef1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeDef1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_DEF_1, "<type def 1>");
+    Marker m = enter_section_(b);
     r = identWithPragmaDot(b, l + 1);
     r = r && typeDef1_1(b, l + 1);
     r = r && consumeToken(b, "=");
     r = r && optInd(b, l + 1, typeDefAux_parser_);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -4080,16 +4396,16 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
-  public static boolean typeDef2(PsiBuilder b, int l) {
+  static boolean typeDef2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeDef2")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_DEF_2, "<type def 2>");
+    Marker m = enter_section_(b);
     r = identVisDot(b, l + 1);
     r = r && typeDef2_1(b, l + 1);
     r = r && pragma(b, l + 1);
     r = r && consumeToken(b, "=");
     r = r && optInd(b, l + 1, typeDefAux_parser_);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, null, r);
     return r;
   }
 

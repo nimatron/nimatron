@@ -33,6 +33,12 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
 
   @Override
   @Nullable
+  public NimObject getObject() {
+    return findChildByClass(NimObject.class);
+  }
+
+  @Override
+  @Nullable
   public NimOperator getOperator() {
     return findChildByClass(NimOperator.class);
   }

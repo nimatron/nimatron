@@ -11,6 +11,9 @@ public interface NimPrimary extends NimElement {
   NimIdentOrLiteral getIdentOrLiteral();
 
   @Nullable
+  NimObject getObject();
+
+  @Nullable
   NimOperator getOperator();
 
   @Nullable

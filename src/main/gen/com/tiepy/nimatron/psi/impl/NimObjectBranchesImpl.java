@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimTypeDef1Impl extends NimElementImpl implements NimTypeDef1 {
+public class NimObjectBranchesImpl extends NimElementImpl implements NimObjectBranches {
 
-  public NimTypeDef1Impl(@NotNull ASTNode node) {
+  public NimObjectBranchesImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitTypeDef1(this);
+    visitor.visitObjectBranches(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -26,21 +26,21 @@ public class NimTypeDef1Impl extends NimElementImpl implements NimTypeDef1 {
   }
 
   @Override
-  @Nullable
-  public NimGenericParams getGenericParams() {
-    return findChildByClass(NimGenericParams.class);
+  @NotNull
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }
 
   @Override
   @NotNull
-  public NimIdentWithPragmaDot getIdentWithPragmaDot() {
-    return findNotNullChildByClass(NimIdentWithPragmaDot.class);
+  public List<NimObjectBranch> getObjectBranchList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimObjectBranch.class);
   }
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public List<NimObjectPart> getObjectPartList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimObjectPart.class);
   }
 
 }

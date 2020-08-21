@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimTypeDef2Impl extends NimElementImpl implements NimTypeDef2 {
+public class NimObjectPartImpl extends NimElementImpl implements NimObjectPart {
 
-  public NimTypeDef2Impl(@NotNull ASTNode node) {
+  public NimObjectPartImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitTypeDef2(this);
+    visitor.visitObjectPart(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,26 +27,26 @@ public class NimTypeDef2Impl extends NimElementImpl implements NimTypeDef2 {
 
   @Override
   @Nullable
-  public NimGenericParams getGenericParams() {
-    return findChildByClass(NimGenericParams.class);
+  public NimDeclColonEquals getDeclColonEquals() {
+    return findChildByClass(NimDeclColonEquals.class);
+  }
+
+  @Override
+  @Nullable
+  public NimObjectCase getObjectCase() {
+    return findChildByClass(NimObjectCase.class);
   }
 
   @Override
   @NotNull
-  public NimIdentVisDot getIdentVisDot() {
-    return findNotNullChildByClass(NimIdentVisDot.class);
+  public List<NimObjectPart> getObjectPartList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimObjectPart.class);
   }
 
   @Override
-  @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
-  }
-
-  @Override
-  @NotNull
-  public NimPragma getPragma() {
-    return findNotNullChildByClass(NimPragma.class);
+  @Nullable
+  public NimObjectWhen getObjectWhen() {
+    return findChildByClass(NimObjectWhen.class);
   }
 
 }
