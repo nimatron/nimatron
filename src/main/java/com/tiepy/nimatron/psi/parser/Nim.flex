@@ -169,6 +169,8 @@ KEYW=addr|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|
 |else|end|enum|except|export|finally|for|from|func|if|import|include|interface|iterator|let|macro|method
 |mixin|object|out|proc|ptr|raise|ref|return|static|template|try|tuple|type|using|var|when|while|yield
 
+LINE_COMMENTS=(({WHITE_SPACE}|{CRLF})* # .* {CRLF})* {WHITE_SPACE}*
+
 %{
 
 // -----------------------------------------------------------------------------
@@ -315,12 +317,12 @@ private IElementType getDedenterToken() {
 %%
 
 <YYINITIAL> {
-    {CRLF}                      { handleIndent(); return TokenType.WHITE_SPACE; }
-    {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
-    #                           { pushState(LINE_COMMENT); }
+    {LINE_COMMENTS} #           { pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
+    {CRLF}                      { handleIndent(); return TokenType.WHITE_SPACE; }
+    {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
     {KEYW}                      { return NimElementTypes.KEYW; }
     r\"                         { pushState(RAW_STRING_LITERAL); }
     \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); }
@@ -404,8 +406,7 @@ private IElementType getDedenterToken() {
 }
 
 <LINE_COMMENT> {
-    .+                          { popState(); return NimElementTypes.COMMENT; }
-    {CRLF}                      { popState(); return NimElementTypes.COMMENT; }
+    .*                          { popState(); return NimElementTypes.COMMENT; }
 }
 
 <BLOCK_COMMENT> {

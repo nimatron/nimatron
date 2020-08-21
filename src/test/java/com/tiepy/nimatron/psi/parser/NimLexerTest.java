@@ -132,11 +132,21 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMiscObjType() throws Exception {
         int tokenCount = parse("type Object = object\n" +
                 "  member: string\n");
         Assert.assertEquals(14, tokenCount);
+    }
+*/
+
+    @Test
+    public void testLineComment() throws Exception {
+        int tokenCount = parse("const\n" +
+                "  EndOfFile* = '\\0'           # end of file marker\n" +
+                "                              # A little picture makes everything clear :-)\n");
+        Assert.assertEquals(11, tokenCount);
     }
 
     /**
