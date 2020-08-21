@@ -44,7 +44,15 @@
     implements("namedRoutine")="com.tiepy.nimatron.psi.NimNamedElement"
     mixin("namedRoutine")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
 
-    tokens = []
+    tokens = [
+        COMMENT="COMMENT"
+        OP2B="OP2B"
+        BRACKET="BRACKET"
+        PARENTHESIS="PARENTHESIS"
+        C_SEMICOLON="C_SEMICOLON"
+        C_COMMA="C_COMMA"
+        C_GRAVE_ACCENT="C_GRAVE_ACCENT"
+    ]
 }
 
 //module = stmt ^* (';' / IND{=})
@@ -160,7 +168,7 @@ private par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
 //          | CHAR_LIT
 //          | NIL
 literal ::= literal1
-private literal1 ::= NUM_LIT | STR_LIT
+private literal1 ::= NUM_LIT | STR_LIT | CHAR_LIT
 
 //generalizedLit = GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
 generalizedLit ::= GENERALIZED_STR_LIT
@@ -435,7 +443,7 @@ deferStmt ::= 'defer' ':' <<optInd stmts>>
 
 //asmStmt = 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
 asmStmt ::= 'asm' pragma? asmStmt1
-private asmStmt1 ::= STR_LIT|RSTR_LIT|TRIPLESTR_LIT
+private asmStmt1 ::= STR_LIT
 
 //genericParam = symbol (comma symbol)* (colon expr)? ('=' optInd expr)?
 genericParam ::= symbol (',' symbol)* (':' expr)? ('=' <<optInd expr>>)?

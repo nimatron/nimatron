@@ -306,7 +306,6 @@ private IElementType getDedenterToken() {
 %state YYINITIAL
 %state INDENTER
 %state DEDENTER
-%state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
 %state DISCARD_COMMENT
@@ -320,9 +319,9 @@ private IElementType getDedenterToken() {
 %%
 
 <YYINITIAL> {
-    {LINE_COMMENTS} #           { pushState(LINE_COMMENT); }
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
+    {LINE_COMMENTS} # .*        { return NimElementTypes.COMMENT; }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
     {CRLF}                      { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
@@ -394,10 +393,6 @@ private IElementType getDedenterToken() {
     .                           { yypushback(1); return getDedenterToken(); }
 }
 
-<LINE_COMMENT> {
-    .*                          { popState(); return NimElementTypes.COMMENT; }
-}
-
 <BLOCK_COMMENT> {
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_COMMENT_END}         { if (popState() == 0) return NimElementTypes.COMMENT; }
@@ -455,7 +450,7 @@ private IElementType getDedenterToken() {
 <CHARACTER_LITERAL> {
     \\\\                        { }
     \\\'                        { }
-    '                           { popState(); return NimElementTypes.STR_LIT; }
+    '                           { popState(); return NimElementTypes.CHAR_LIT; }
     {CRLF}                      { return TokenType.BAD_CHARACTER; }
     .                           { }
 }
