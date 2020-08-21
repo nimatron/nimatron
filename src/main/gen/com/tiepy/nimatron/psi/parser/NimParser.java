@@ -2369,30 +2369,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // op0|op1|op2|OP5A|OP5B|OP5C|OP5D|OP5E|OP5F|op6|op7|op8|OP9A|OP9B|OP9G|op10
-  static boolean oprCombo(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "oprCombo")) return false;
-    boolean r;
-    r = op0(b, l + 1);
-    if (!r) r = op1(b, l + 1);
-    if (!r) r = op2(b, l + 1);
-    if (!r) r = consumeToken(b, OP5A);
-    if (!r) r = consumeToken(b, OP5B);
-    if (!r) r = consumeToken(b, OP5C);
-    if (!r) r = consumeToken(b, OP5D);
-    if (!r) r = consumeToken(b, OP5E);
-    if (!r) r = consumeToken(b, OP5F);
-    if (!r) r = op6(b, l + 1);
-    if (!r) r = op7(b, l + 1);
-    if (!r) r = op8(b, l + 1);
-    if (!r) r = consumeToken(b, OP9A);
-    if (!r) r = consumeToken(b, OP9B);
-    if (!r) r = consumeToken(b, OP9G);
-    if (!r) r = op10(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
   // <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
   public static boolean optInd(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "optInd")) return false;
@@ -3790,7 +3766,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'='|OPR)+
+  // KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+
   static boolean symbol3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol3")) return false;
     boolean r;
@@ -3803,7 +3779,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (operator|'('|')'|'['|']'|'{'|'}'|'='|OPR)+
+  // (operator|'('|')'|'['|']'|'{'|'}'|'=')+
   private static boolean symbol3_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol3_3")) return false;
     boolean r;
@@ -3818,7 +3794,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // operator|'('|')'|'['|']'|'{'|'}'|'='|OPR
+  // operator|'('|')'|'['|']'|'{'|'}'|'='
   private static boolean symbol3_3_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "symbol3_3_0")) return false;
     boolean r;
@@ -3830,7 +3806,6 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "{");
     if (!r) r = consumeToken(b, "}");
     if (!r) r = consumeToken(b, "=");
-    if (!r) r = consumeToken(b, OPR);
     return r;
   }
 

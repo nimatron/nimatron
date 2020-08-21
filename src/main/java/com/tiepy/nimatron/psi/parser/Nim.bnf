@@ -46,7 +46,6 @@
 
     tokens = [
         COMMENT="COMMENT"
-        OP2B="OP2B"
         BRACKET="BRACKET"
         PARENTHESIS="PARENTHESIS"
         C_SEMICOLON="C_SEMICOLON"

@@ -114,16 +114,6 @@ public interface NimElementTypes {
   IElementType IND_EQ = new NimTokenType("IND_EQ");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
-  IElementType OP2B = new NimTokenType("OP2B");
-  IElementType OP5A = new NimTokenType("OP5A");
-  IElementType OP5B = new NimTokenType("OP5B");
-  IElementType OP5C = new NimTokenType("OP5C");
-  IElementType OP5D = new NimTokenType("OP5D");
-  IElementType OP5E = new NimTokenType("OP5E");
-  IElementType OP5F = new NimTokenType("OP5F");
-  IElementType OP9A = new NimTokenType("OP9A");
-  IElementType OP9B = new NimTokenType("OP9B");
-  IElementType OP9G = new NimTokenType("OP9G");
   IElementType OPR = new NimTokenType("OPR");
   IElementType PARENTHESIS = new NimTokenType("PARENTHESIS");
   IElementType STR_LIT = new NimTokenType("STR_LIT");
