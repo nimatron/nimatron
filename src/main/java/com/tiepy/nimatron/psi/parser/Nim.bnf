@@ -112,7 +112,7 @@ private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
 symbol ::= symbol1
 private symbol1 ::= symbol2|IDENT|KEYW
 private symbol2 ::= '`' symbol3+ '`'
-private symbol3 ::= KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'='|OPR)+ // NOTE: Added 'OPR' here.
+private symbol3 ::= KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+
 
 //exprColonEqExpr = expr (':'|'=' expr)?
 exprColonEqExpr ::= expr (exprColonEqExpr1 expr)?
