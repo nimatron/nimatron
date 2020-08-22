@@ -16,6 +16,7 @@ public interface NimElementTypes {
   IElementType CASE_STMT = new NimElementType("CASE_STMT");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
+  IElementType COMPLEX_OR_SIMPLE_STMT = new NimElementType("COMPLEX_OR_SIMPLE_STMT");
   IElementType COND_EXPR = new NimElementType("COND_EXPR");
   IElementType COND_STMT = new NimElementType("COND_STMT");
   IElementType CONSTANT = new NimElementType("CONSTANT");
@@ -118,6 +119,7 @@ public interface NimElementTypes {
   IElementType WHILE_STMT = new NimElementType("WHILE_STMT");
   IElementType YIELD_STMT = new NimElementType("YIELD_STMT");
 
+  IElementType BOOL_LIT = new NimTokenType("BOOL_LIT");
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
   IElementType COLCOM = new NimTokenType("colcom");
   IElementType COMMENT = new NimTokenType("COMMENT");
@@ -127,7 +129,6 @@ public interface NimElementTypes {
   IElementType INDENT = new NimTokenType("INDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
   IElementType KEYW = new NimTokenType("KEYW");
-  IElementType NIL = new NimTokenType("NIL");
   IElementType NOTATION = new NimTokenType("NOTATION");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
   IElementType OP0 = new NimTokenType("OP0");
@@ -170,6 +171,9 @@ public interface NimElementTypes {
       }
       else if (type == COLON_BODY) {
         return new NimColonBodyImpl(node);
+      }
+      else if (type == COMPLEX_OR_SIMPLE_STMT) {
+        return new NimComplexOrSimpleStmtImpl(node);
       }
       else if (type == COND_EXPR) {
         return new NimCondExprImpl(node);

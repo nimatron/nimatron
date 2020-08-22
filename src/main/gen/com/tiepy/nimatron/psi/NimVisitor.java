@@ -38,6 +38,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitComplexOrSimpleStmt(@NotNull NimComplexOrSimpleStmt o) {
+    visitElement(o);
+  }
+
   public void visitCondExpr(@NotNull NimCondExpr o) {
     visitElement(o);
   }
