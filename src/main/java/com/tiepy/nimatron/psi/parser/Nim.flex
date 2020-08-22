@@ -274,8 +274,23 @@ private IElementType getDedenterToken() {
 
 private final StringBuffer buffer = new StringBuffer();
 
-private IElementType getOperatorToken() {
+private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength) {
     popState();
+
+    if (isSpecialCase) {
+        if (buffer.length() > 0) {
+            // NOTE: Not special case.
+            buffer.append("*:");
+            yypushback(pushbackLength);
+        } else {
+            // NOTE: This is the special case. We want two tokens from "*:"
+            // and here we return the first token.
+            yypushback(pushbackLength + 1); // Pushes the ':' char back for next token to be generated.
+            return NimElementTypes.OP9;
+        }
+    } else {
+        yypushback(pushbackLength);
+    }
 
     assert buffer.length() > 0;
     String s = buffer.toString();
@@ -285,93 +300,92 @@ private IElementType getOperatorToken() {
     // . =, :, :: are not available as general operators; they are used for other notational purposes.
     if (s.equals(".") || s.equals("=") || s.equals(":") || s.equals("::")) {
         return NimElementTypes.NOTATION;
-    } else {
+    }
 
-        if (s.equals("->") || s.equals("=>") || s.equals("~>")) {
-            return NimElementTypes.OP0;
+    if (s.equals("->") || s.equals("=>") || s.equals("~>")) {
+        return NimElementTypes.OP0;
+    }
+
+    if (s.equals("+=") || s.equals("*=") || s.equals("-=") || s.equals("/=")) {
+        return NimElementTypes.OP1;
+    }
+
+    if (len > 1) {
+        if (s.startsWith("@") || s.startsWith(":") || s.startsWith("?")) {
+            return NimElementTypes.OP2;
         }
+    }
 
-        if (s.equals("+=") || s.equals("*=") || s.equals("-=") || s.equals("/=")) {
-            return NimElementTypes.OP1;
-        }
+    if (s.equals("==") ||
+        s.equals("<=") ||
+        s.equals("<") ||
+        s.equals(">=") ||
+        s.equals(">") ||
+        s.equals("!=")) {
+        return NimElementTypes.OP5;
+    }
 
-        if (len > 1) {
-            if (s.startsWith("@") || s.startsWith(":") || s.startsWith("?")) {
-                return NimElementTypes.OP2;
-            }
-        }
-
-        if (s.equals("==") ||
-            s.equals("<=") ||
-            s.equals("<") ||
-            s.equals(">=") ||
-            s.equals(">") ||
-            s.equals("!=")) {
+    if (len > 1) {
+        if (s.startsWith("=") ||
+            s.startsWith("<") ||
+            s.startsWith(">") ||
+            s.startsWith("!")) {
             return NimElementTypes.OP5;
         }
+    }
 
-        if (len > 1) {
-            if (s.startsWith("=") ||
-                s.startsWith("<") ||
-                s.startsWith(">") ||
-                s.startsWith("!")) {
-                return NimElementTypes.OP5;
-            }
-        }
+    if (s.equals("..")) {
+        return NimElementTypes.OP6;
+    }
 
-        if (s.equals("..")) {
+    if (len > 1) {
+        if (s.startsWith(".")) {
             return NimElementTypes.OP6;
         }
+    }
 
-        if (len > 1) {
-            if (s.startsWith(".")) {
-                return NimElementTypes.OP6;
-            }
+    if (len > 1) {
+        if (s.startsWith("&")) {
+            return NimElementTypes.OP7;
         }
+    }
 
-        if (len > 1) {
-            if (s.startsWith("&")) {
-                return NimElementTypes.OP7;
-            }
-        }
+    if (s.equals("+") ||
+        s.equals("-")) {
+        return NimElementTypes.OP8;
+    }
 
-        if (s.equals("+") ||
-            s.equals("-")) {
+    if (len > 1) {
+        if (s.startsWith("+") ||
+            s.startsWith("-") ||
+            s.startsWith("~") ||
+            s.startsWith("|")) {
             return NimElementTypes.OP8;
         }
+    }
 
-        if (len > 1) {
-            if (s.startsWith("+") ||
-                s.startsWith("-") ||
-                s.startsWith("~") ||
-                s.startsWith("|")) {
-                return NimElementTypes.OP8;
-            }
-        }
+    if (s.equals("*") ||
+        s.equals("/") ||
+        s.equals("%")) {
+        return NimElementTypes.OP9;
+    }
 
-        if (s.equals("*") ||
-            s.equals("/") ||
-            s.equals("%")) {
+    if (len > 1) {
+        if (s.startsWith("*") ||
+            s.startsWith("%") ||
+            s.startsWith("\\") ||
+            s.startsWith("/")) {
             return NimElementTypes.OP9;
         }
-
-        if (len > 1) {
-            if (s.startsWith("*") ||
-                s.startsWith("%") ||
-                s.startsWith("\\") ||
-                s.startsWith("/")) {
-                return NimElementTypes.OP9;
-            }
-        }
-
-        if (len > 1) {
-            if (s.startsWith("$") || s.startsWith("^")) {
-                return NimElementTypes.OP10;
-            }
-        }
-
-        return NimElementTypes.OPR;
     }
+
+    if (len > 1) {
+        if (s.startsWith("$") || s.startsWith("^")) {
+            return NimElementTypes.OP10;
+        }
+    }
+
+    return NimElementTypes.OPR;
 }
 
 %}
@@ -429,6 +443,8 @@ private IElementType getOperatorToken() {
 }
 
 <OPERATOR> {
+    \*:({CR}|{LF}|.)            { return getOperatorToken(true, 1); }
+    \*:({CRLF}|.)               { return getOperatorToken(true, 2); }
     {OPR_EQUALS}                { buffer.append('='); }
     {OPR_PLUS}                  { buffer.append('+'); }
     {OPR_MINUS}                 { buffer.append('-'); }
@@ -448,8 +464,8 @@ private IElementType getOperatorToken() {
     {OPR_DOT}                   { buffer.append('.'); }
     {OPR_COLON}                 { buffer.append(':'); }
     {OPR_BACK_SLASH}            { buffer.append('\\'); }
-    {CR}|{LF}|.                 { yypushback(1); return getOperatorToken(); }
-    {CRLF}                      { yypushback(2); return getOperatorToken(); }
+    {CR}|{LF}|.                 { return getOperatorToken(false, 1); }
+    {CRLF}                      { return getOperatorToken(false, 2); }
 }
 
 <BLOCK_COMMENT> {

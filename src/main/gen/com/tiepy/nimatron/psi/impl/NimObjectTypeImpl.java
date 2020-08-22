@@ -26,9 +26,9 @@ public class NimObjectTypeImpl extends NimElementImpl implements NimObjectType {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimObject getObject() {
-    return findNotNullChildByClass(NimObject.class);
+    return findChildByClass(NimObject.class);
   }
 
 }

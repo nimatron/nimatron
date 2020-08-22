@@ -2257,12 +2257,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   // &'object' object
   public static boolean objectType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectType")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, OBJECT_TYPE, "<object type>");
     r = objectType_0(b, l + 1);
+    p = r; // pin = 1
     r = r && object(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // &'object'

@@ -217,7 +217,7 @@ pragma ::= '{.' <<optInd ((exprColonEqExpr ','?)*)>> <<optInd pragma1>>
 private pragma1 ::= '.}' | '}'
 
 //identVis = symbol OPR?  # postfix position
-identVis ::= symbol oprCombo?  // postfix position
+identVis ::= symbol oprCombo? // postfix position
 
 //identVisDot = symbol '.' optInd symbol OPR?
 identVisDot ::= symbol ('.' <<optInd symbol>>)? oprCombo? // NOTE: '.' is now optional.
@@ -313,7 +313,7 @@ tupleType ::= 'tuple' <<optInd typeDesc>>
 procType ::= 'proc' <<optInd typeDesc>>
 iteratorType ::= 'iterator' <<optInd typeDesc>>
 distinctType ::= 'distinct' <<optInd typeDesc>>
-objectType ::= &'object' object
+objectType ::= &'object' object {pin=1}
 enumType ::= 'enum' <<optInd typeDesc>>
 
 //typeDesc = simpleExpr ('not' expr)?

@@ -1,2 +1,2 @@
-type Matrix3* {.raw.} = object
-  data*: array[9, float32]
+type a = object
+  b*: int

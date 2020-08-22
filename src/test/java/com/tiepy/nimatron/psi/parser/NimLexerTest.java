@@ -168,10 +168,19 @@ public class NimLexerTest {
     }
 */
 
+/*
     @Test
     public void testMisc() throws Exception {
         int tokenCount = parse("type Object = object\n" +
                 "  member: string\n");
+        Assert.assertEquals(14, tokenCount);
+    }
+*/
+
+    @Test
+    public void testMisc() throws Exception {
+        int tokenCount = parse("type a = object\n" +
+                "  b*: int\n");
         Assert.assertEquals(14, tokenCount);
     }
 
