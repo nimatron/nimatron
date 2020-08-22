@@ -173,6 +173,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscRecruit707Example() {
+        doTest(true, true);
+    }
+
     public void testMiscSimpleIf() {
         doTest(true, true);
     }
