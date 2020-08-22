@@ -27,8 +27,14 @@ public class NimInlineStmtImpl extends NimElementImpl implements NimInlineStmt {
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimSimpleStmt> getSimpleStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSimpleStmt.class);
   }
 
 }

@@ -1783,71 +1783,107 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<optInd (complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)*)>>
+  // (INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* DEDENT) | (simpleStmt (';' simpleStmt)*)
   public static boolean inlineStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "inlineStmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, INLINE_STMT, "<inline stmt>");
-    r = optInd(b, l + 1, inlineStmt_0_0_parser_);
+    r = inlineStmt_0(b, l + 1);
+    if (!r) r = inlineStmt_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)*
-  private static boolean inlineStmt_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_0")) return false;
+  // INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* DEDENT
+  private static boolean inlineStmt_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = complexOrSimpleStmt(b, l + 1);
-    r = r && inlineStmt_0_0_1(b, l + 1);
+    r = consumeToken(b, INDENT);
+    r = r && complexOrSimpleStmt(b, l + 1);
+    r = r && inlineStmt_0_2(b, l + 1);
+    r = r && consumeToken(b, DEDENT);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ((';' | IND_EQ+) complexOrSimpleStmt)*
-  private static boolean inlineStmt_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_0_1")) return false;
+  private static boolean inlineStmt_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_0_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!inlineStmt_0_0_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "inlineStmt_0_0_1", c)) break;
+      if (!inlineStmt_0_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "inlineStmt_0_2", c)) break;
     }
     return true;
   }
 
   // (';' | IND_EQ+) complexOrSimpleStmt
-  private static boolean inlineStmt_0_0_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_0_1_0")) return false;
+  private static boolean inlineStmt_0_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_0_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = inlineStmt_0_0_1_0_0(b, l + 1);
+    r = inlineStmt_0_2_0_0(b, l + 1);
     r = r && complexOrSimpleStmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ';' | IND_EQ+
-  private static boolean inlineStmt_0_0_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_0_1_0_0")) return false;
+  private static boolean inlineStmt_0_2_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_0_2_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    if (!r) r = inlineStmt_0_0_1_0_0_1(b, l + 1);
+    if (!r) r = inlineStmt_0_2_0_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // IND_EQ+
-  private static boolean inlineStmt_0_0_1_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_0_1_0_0_1")) return false;
+  private static boolean inlineStmt_0_2_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_0_2_0_0_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IND_EQ);
     while (r) {
       int c = current_position_(b);
       if (!consumeToken(b, IND_EQ)) break;
-      if (!empty_element_parsed_guard_(b, "inlineStmt_0_0_1_0_0_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "inlineStmt_0_2_0_0_1", c)) break;
     }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // simpleStmt (';' simpleStmt)*
+  private static boolean inlineStmt_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = simpleStmt(b, l + 1);
+    r = r && inlineStmt_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (';' simpleStmt)*
+  private static boolean inlineStmt_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_1_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!inlineStmt_1_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "inlineStmt_1_1", c)) break;
+    }
+    return true;
+  }
+
+  // ';' simpleStmt
+  private static boolean inlineStmt_1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt_1_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ";");
+    r = r && simpleStmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -5006,11 +5042,6 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser includeStmt_1_0_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return includeStmt_1_0(b, l + 1);
-    }
-  };
-  static final Parser inlineStmt_0_0_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return inlineStmt_0_0(b, l + 1);
     }
   };
   static final Parser mixinStmt_1_0_parser_ = new Parser() {

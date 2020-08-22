@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimInlineStmt extends NimElement {
 
   @NotNull
-  NimOptInd getOptInd();
+  List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
+
+  @NotNull
+  List<NimSimpleStmt> getSimpleStmtList();
 
 }
