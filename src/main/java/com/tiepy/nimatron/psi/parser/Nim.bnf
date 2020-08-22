@@ -393,8 +393,8 @@ discardStmt ::= 'discard' <<optInd expr>>?
 //breakStmt = 'break' optInd expr?
 breakStmt ::= 'break' <<optInd expr>>?
 
-//continueStmt = 'break' optInd expr?
-continueStmt ::= 'break' <<optInd expr>>?
+//continueStmt = 'continue' optInd expr?
+continueStmt ::= 'continue' <<optInd expr>>?
 
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*

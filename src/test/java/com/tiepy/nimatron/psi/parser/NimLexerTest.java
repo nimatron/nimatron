@@ -34,13 +34,8 @@ public class NimLexerTest {
 
     @Test
     public void testMisc() throws Exception {
-        int tokenCount = parse("# module1:\n" +
-                "proc foo*(): int = 2\n" +
-                "proc bar(): int = 3\n" +
-                "\n" +
-                "# module2:\n" +
-                "echo foo()  # Valid\n" +
-                "echo bar()  # will not compile");
+        int tokenCount = parse("case cmd_p.kind\n" +
+                "of cmdEnd: break\n");
         Assert.assertEquals(14, tokenCount);
     }
 

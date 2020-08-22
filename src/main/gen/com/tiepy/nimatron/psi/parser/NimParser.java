@@ -517,12 +517,12 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'break' <<optInd expr>>?
+  // 'continue' <<optInd expr>>?
   public static boolean continueStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "continueStmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CONTINUE_STMT, "<continue stmt>");
-    r = consumeToken(b, "break");
+    r = consumeToken(b, "continue");
     r = r && continueStmt_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
