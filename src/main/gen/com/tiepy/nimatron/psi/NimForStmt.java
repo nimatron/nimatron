@@ -14,6 +14,6 @@ public interface NimForStmt extends NimElement {
   List<NimIdentWithPragma> getIdentWithPragmaList();
 
   @Nullable
-  NimOptInd getOptInd();
+  NimInlineStmt getInlineStmt();
 
 }

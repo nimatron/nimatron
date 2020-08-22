@@ -39,8 +39,8 @@ public class NimForStmtImpl extends NimElementImpl implements NimForStmt {
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  public NimInlineStmt getInlineStmt() {
+    return findChildByClass(NimInlineStmt.class);
   }
 
 }

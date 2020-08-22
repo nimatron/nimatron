@@ -11,9 +11,9 @@ public interface NimOfBranches extends NimElement {
   List<NimExpr> getExprList();
 
   @NotNull
-  List<NimOfBranch> getOfBranchList();
+  List<NimInlineStmt> getInlineStmtList();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  List<NimOfBranch> getOfBranchList();
 
 }

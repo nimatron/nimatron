@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimCondStmtImpl extends NimElementImpl implements NimCondStmt {
+public class NimInlineStmtImpl extends NimElementImpl implements NimInlineStmt {
 
-  public NimCondStmtImpl(@NotNull ASTNode node) {
+  public NimInlineStmtImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitCondStmt(this);
+    visitor.visitInlineStmt(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,14 +27,8 @@ public class NimCondStmtImpl extends NimElementImpl implements NimCondStmt {
 
   @Override
   @NotNull
-  public List<NimExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimInlineStmt> getInlineStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimInlineStmt.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

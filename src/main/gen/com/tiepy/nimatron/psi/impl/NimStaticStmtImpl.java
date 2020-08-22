@@ -27,8 +27,8 @@ public class NimStaticStmtImpl extends NimElementImpl implements NimStaticStmt {
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimInlineStmt getInlineStmt() {
+    return findNotNullChildByClass(NimInlineStmt.class);
   }
 
 }

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimPattern extends NimElement {
 
   @NotNull
-  NimOptInd getOptInd();
+  NimInlineStmt getInlineStmt();
 
 }

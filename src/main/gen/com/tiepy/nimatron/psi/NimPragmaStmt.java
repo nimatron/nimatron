@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimPragmaStmt extends NimElement {
 
   @Nullable
-  NimOptInd getOptInd();
+  NimInlineStmt getInlineStmt();
 
   @NotNull
   NimPragma getPragma();

@@ -11,6 +11,6 @@ public interface NimCondStmt extends NimElement {
   List<NimExpr> getExprList();
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  List<NimInlineStmt> getInlineStmtList();
 
 }

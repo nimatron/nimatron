@@ -51,6 +51,7 @@ public interface NimElementTypes {
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType IMPORT_STMT = new NimElementType("IMPORT_STMT");
   IElementType INCLUDE_STMT = new NimElementType("INCLUDE_STMT");
+  IElementType INLINE_STMT = new NimElementType("INLINE_STMT");
   IElementType ITERATOR_STMT = new NimElementType("ITERATOR_STMT");
   IElementType ITERATOR_TYPE = new NimElementType("ITERATOR_TYPE");
   IElementType LITERAL = new NimElementType("LITERAL");
@@ -275,6 +276,9 @@ public interface NimElementTypes {
       }
       else if (type == INCLUDE_STMT) {
         return new NimIncludeStmtImpl(node);
+      }
+      else if (type == INLINE_STMT) {
+        return new NimInlineStmtImpl(node);
       }
       else if (type == ITERATOR_STMT) {
         return new NimIteratorStmtImpl(node);

@@ -11,6 +11,6 @@ public interface NimOfBranch extends NimElement {
   NimExprs getExprs();
 
   @NotNull
-  NimOptInd getOptInd();
+  NimInlineStmt getInlineStmt();
 
 }

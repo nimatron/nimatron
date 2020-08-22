@@ -27,8 +27,8 @@ public class NimDoBlockImpl extends NimElementImpl implements NimDoBlock {
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimInlineStmt getInlineStmt() {
+    return findNotNullChildByClass(NimInlineStmt.class);
   }
 
   @Override

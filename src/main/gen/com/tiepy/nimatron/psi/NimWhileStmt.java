@@ -11,6 +11,6 @@ public interface NimWhileStmt extends NimElement {
   NimExpr getExpr();
 
   @NotNull
-  NimOptInd getOptInd();
+  NimInlineStmt getInlineStmt();
 
 }

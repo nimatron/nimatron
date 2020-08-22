@@ -178,6 +178,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitInlineStmt(@NotNull NimInlineStmt o) {
+    visitElement(o);
+  }
+
   public void visitIteratorStmt(@NotNull NimIteratorStmt o) {
     visitElement(o);
   }

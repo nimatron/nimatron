@@ -33,8 +33,8 @@ public class NimWhileStmtImpl extends NimElementImpl implements NimWhileStmt {
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimInlineStmt getInlineStmt() {
+    return findNotNullChildByClass(NimInlineStmt.class);
   }
 
 }

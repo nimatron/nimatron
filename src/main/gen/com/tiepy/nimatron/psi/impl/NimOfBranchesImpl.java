@@ -33,14 +33,14 @@ public class NimOfBranchesImpl extends NimElementImpl implements NimOfBranches {
 
   @Override
   @NotNull
-  public List<NimOfBranch> getOfBranchList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOfBranch.class);
+  public List<NimInlineStmt> getInlineStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimInlineStmt.class);
   }
 
   @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  public List<NimOfBranch> getOfBranchList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOfBranch.class);
   }
 
 }

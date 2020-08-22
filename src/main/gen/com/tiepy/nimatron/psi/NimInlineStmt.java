@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimTryStmt extends NimElement {
+public interface NimInlineStmt extends NimElement {
 
   @NotNull
-  List<NimExprs> getExprsList();
-
-  @NotNull
-  List<NimInlineStmt> getInlineStmtList();
+  NimOptInd getOptInd();
 
 }

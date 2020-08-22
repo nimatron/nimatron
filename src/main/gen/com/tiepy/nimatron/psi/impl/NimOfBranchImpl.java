@@ -33,8 +33,8 @@ public class NimOfBranchImpl extends NimElementImpl implements NimOfBranch {
 
   @Override
   @NotNull
-  public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+  public NimInlineStmt getInlineStmt() {
+    return findNotNullChildByClass(NimInlineStmt.class);
   }
 
 }

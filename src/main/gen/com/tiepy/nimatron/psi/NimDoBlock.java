@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimDoBlock extends NimElement {
 
   @NotNull
-  NimOptInd getOptInd();
+  NimInlineStmt getInlineStmt();
 
   @NotNull
   NimParamsArrow getParamsArrow();
