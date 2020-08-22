@@ -114,13 +114,13 @@ FLOAT64_SUFFIX=((f|F)64)|d|D
 FLOAT32_LIT=({HEX_LIT}'{FLOAT32_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT32_SUFFIX})
 FLOAT64_LIT=({HEX_LIT}'{FLOAT64_SUFFIX})|(({FLOAT_LIT}|{DEC_LIT}|{OCT_LIT}|{BIN_LIT})'?{FLOAT64_SUFFIX})
 
+NUM_LIT={INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
+|{UINT_LIT}|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}
+|{FLOAT_LIT}|{FLOAT32_LIT}|{FLOAT64_LIT}
+
 BOOL_LIT=true|false
 
 NIL=nil
-
-NUM_LIT={INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}|{UINT_LIT}
-|{UINT8_LIT}|{UINT16_LIT}|{UINT32_LIT}|{UINT64_LIT}|{FLOAT_LIT}|{FLOAT32_LIT}
-|{FLOAT64_LIT}|{BOOL_LIT}|{NIL}
 
 OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
 CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
@@ -419,6 +419,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     \"                          { pushState(STRING_LITERAL); }
     '                           { pushState(CHARACTER_LITERAL); }
     {NUM_LIT}                   { return NimElementTypes.NUM_LIT; }
+    {BOOL_LIT}                  { return NimElementTypes.BOOL_LIT; }
     {NIL}                       { return NimElementTypes.NIL; }
     {OPR_CHARS}                 { yypushback(1); buffer.setLength(0); pushState(OPERATOR); }
     {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
