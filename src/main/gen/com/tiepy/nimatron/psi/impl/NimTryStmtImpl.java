@@ -33,8 +33,8 @@ public class NimTryStmtImpl extends NimElementImpl implements NimTryStmt {
 
   @Override
   @NotNull
-  public List<NimStmts> getStmtsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmts.class);
+  public List<NimStmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
   }
 
 }
