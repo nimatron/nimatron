@@ -120,8 +120,6 @@ NUM_LIT={INT_LIT}|{INT8_LIT}|{INT16_LIT}|{INT32_LIT}|{INT64_LIT}
 
 BOOL_LIT=true|false
 
-NIL=nil
-
 OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
 CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
 BRACKET={OPEN_BRACKET}|{CLOSE_BRACKET}
@@ -420,7 +418,6 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     '                           { pushState(CHARACTER_LITERAL); }
     {NUM_LIT}                   { return NimElementTypes.NUM_LIT; }
     {BOOL_LIT}                  { return NimElementTypes.BOOL_LIT; }
-    {NIL}                       { return NimElementTypes.NIL; }
     {OPR_CHARS}                 { yypushback(1); buffer.setLength(0); pushState(OPERATOR); }
     {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }
