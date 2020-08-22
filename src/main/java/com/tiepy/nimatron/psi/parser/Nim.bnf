@@ -352,9 +352,9 @@ private postExprBlocks5 ::= IND_EQ 'else' ':' inlineStmt
 //         / ( expr ^+ comma
 //             postExprBlocks
 //           ))?
-exprStmt ::= simpleExpr /*(exprStmt1 | exprStmt2)? exprStmt1?*/ simpleExpr?
-//private exprStmt1 ::= '=' <<optInd (expr colonBody?)>>
-//private exprStmt2 ::= expr (',' expr)* postExprBlocks
+exprStmt ::= simpleExpr (exprStmt1 | exprStmt2)? exprStmt1?
+private exprStmt1 ::= '=' <<optInd (expr colonBody?)>>
+private exprStmt2 ::= expr (',' expr)* postExprBlocks
 
 //importStmt = 'import' optInd expr
 //              ((comma expr)*

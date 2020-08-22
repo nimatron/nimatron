@@ -27,8 +27,26 @@ public class NimExprStmtImpl extends NimElementImpl implements NimExprStmt {
 
   @Override
   @NotNull
-  public List<NimSimpleExpr> getSimpleExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSimpleExpr.class);
+  public List<NimExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimOptInd> getOptIndList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  }
+
+  @Override
+  @Nullable
+  public NimPostExprBlocks getPostExprBlocks() {
+    return findChildByClass(NimPostExprBlocks.class);
+  }
+
+  @Override
+  @NotNull
+  public NimSimpleExpr getSimpleExpr() {
+    return findNotNullChildByClass(NimSimpleExpr.class);
   }
 
 }
