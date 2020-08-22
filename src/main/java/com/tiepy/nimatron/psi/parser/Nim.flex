@@ -419,6 +419,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     \"                          { pushState(STRING_LITERAL); }
     '                           { pushState(CHARACTER_LITERAL); }
     {NUM_LIT}                   { return NimElementTypes.NUM_LIT; }
+    {NIL}                       { return NimElementTypes.NIL; }
     {OPR_CHARS}                 { yypushback(1); buffer.setLength(0); pushState(OPERATOR); }
     {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }

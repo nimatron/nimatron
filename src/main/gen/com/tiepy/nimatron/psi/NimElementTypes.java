@@ -127,6 +127,7 @@ public interface NimElementTypes {
   IElementType INDENT = new NimTokenType("INDENT");
   IElementType IND_EQ = new NimTokenType("IND_EQ");
   IElementType KEYW = new NimTokenType("KEYW");
+  IElementType NIL = new NimTokenType("NIL");
   IElementType NOTATION = new NimTokenType("NOTATION");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
   IElementType OP0 = new NimTokenType("OP0");

@@ -1820,13 +1820,14 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NUM_LIT | STR_LIT | CHAR_LIT
+  // NUM_LIT | STR_LIT | CHAR_LIT | NIL
   static boolean literal1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "literal1")) return false;
     boolean r;
     r = consumeToken(b, NUM_LIT);
     if (!r) r = consumeToken(b, STR_LIT);
     if (!r) r = consumeToken(b, CHAR_LIT);
+    if (!r) r = consumeToken(b, NIL);
     return r;
   }
 

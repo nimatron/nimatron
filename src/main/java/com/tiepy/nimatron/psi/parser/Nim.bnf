@@ -166,10 +166,10 @@ private par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
 //          | CHAR_LIT
 //          | NIL
 literal ::= literal1
-private literal1 ::= NUM_LIT | STR_LIT | CHAR_LIT
+private literal1 ::= NUM_LIT | STR_LIT | CHAR_LIT | NIL // NOTE: Reduced number of tokens.
 
 //generalizedLit = GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT
-generalizedLit ::= GENERALIZED_STR_LIT
+generalizedLit ::= GENERALIZED_STR_LIT // NOTE: Reduced number of tokens.
 
 //identOrLiteral = generalizedLit | symbol | literal
 //               | par | arrayConstr | setOrTableConstr
