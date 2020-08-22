@@ -83,6 +83,7 @@ private op10 ::= OP10
 private oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
 
 //prefixOperator = operator
+prefixOperator ::= operator
 
 //optInd = COMMENT? IND?
 meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
@@ -289,7 +290,7 @@ private expr1 ::= blockStmt
 //        / 'bind' primary
 primary ::= primary1 | primary2 | primary3
 private primary1 ::= type // NOTE: This is a new rule to handle type definitions.
-private primary2 ::= operator? identOrLiteral primarySuffix*
+private primary2 ::= prefixOperator? identOrLiteral primarySuffix*
 private primary3 ::= 'bind' primary
 
 private type ::= varType
