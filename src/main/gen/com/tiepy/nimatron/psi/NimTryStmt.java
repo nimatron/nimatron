@@ -11,6 +11,6 @@ public interface NimTryStmt extends NimElement {
   List<NimExprs> getExprsList();
 
   @NotNull
-  List<NimStmt> getStmtList();
+  List<NimStmts> getStmtsList();
 
 }

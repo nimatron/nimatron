@@ -20,9 +20,6 @@ public interface NimRoutine extends NimElement {
   NimPragma getPragma();
 
   @Nullable
-  NimStmt getStmt();
-
-  @Nullable
   NimStmts getStmts();
 
 }

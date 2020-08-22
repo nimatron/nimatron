@@ -153,10 +153,10 @@ private parKeyw1 ::= 'discard' | 'include' | 'if' | 'while' | 'case' | 'try'
 //          optPar ')'
 par ::= '(' <<optInd par1>> optPar ')'
 private par1 ::= par2 | par3 | pragmaStmt | par4
-private par2 ::= &parKeyw stmt (';' stmt)*
-private par3 ::= ';' stmt (';' stmt)*
+private par2 ::= &parKeyw complexOrSimpleStmt (';' complexOrSimpleStmt)*
+private par3 ::= ';' complexOrSimpleStmt (';' complexOrSimpleStmt)*
 private par4 ::= simpleExpr (par5 | par6)
-private par5 ::= '=' expr (';' stmt (';' stmt)*)?
+private par5 ::= '=' expr (';' complexOrSimpleStmt (';' complexOrSimpleStmt)*)?
 private par6 ::= ':' expr (',' exprColonEqExpr (',' exprColonEqExpr)*)?
 
 //literal = | INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
@@ -435,9 +435,9 @@ private caseStmt2 ::= IND_EQ ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':'stmt &(IND_EQ? 'except'|'finally') tryStmt1* tryStmt2?
-private tryStmt1 ::= IND_EQ? 'except' exprs ':' stmt
-private tryStmt2 ::= IND_EQ? 'finally' ':' stmt
+tryStmt ::= 'try' ':' stmts &(IND_EQ? 'except'|'finally') tryStmt1* tryStmt2?
+private tryStmt1 ::= IND_EQ? 'except' exprs ':' stmts
+private tryStmt2 ::= IND_EQ? 'finally' ':' stmts
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
@@ -478,7 +478,7 @@ pattern ::= '{' <<optInd stmts>> '}'
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
 namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
 routine ::= pattern? genericParams? paramsColon pragma? routine1?
-private routine1 ::= '=' (stmt | (INDENT stmts termInd))
+private routine1 ::= '=' (stmts | (INDENT stmts termInd))
 
 //commentStmt = COMMENT
 
