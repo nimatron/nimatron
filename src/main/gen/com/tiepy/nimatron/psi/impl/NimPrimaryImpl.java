@@ -27,14 +27,32 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
 
   @Override
   @Nullable
+  public NimDistinctType getDistinctType() {
+    return findChildByClass(NimDistinctType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimEnumType getEnumType() {
+    return findChildByClass(NimEnumType.class);
+  }
+
+  @Override
+  @Nullable
   public NimIdentOrLiteral getIdentOrLiteral() {
     return findChildByClass(NimIdentOrLiteral.class);
   }
 
   @Override
   @Nullable
-  public NimObject getObject() {
-    return findChildByClass(NimObject.class);
+  public NimIteratorType getIteratorType() {
+    return findChildByClass(NimIteratorType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimObjectType getObjectType() {
+    return findChildByClass(NimObjectType.class);
   }
 
   @Override
@@ -45,8 +63,8 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  public NimOutType getOutType() {
+    return findChildByClass(NimOutType.class);
   }
 
   @Override
@@ -63,8 +81,38 @@ public class NimPrimaryImpl extends NimElementImpl implements NimPrimary {
 
   @Override
   @Nullable
-  public NimTypeKeyw getTypeKeyw() {
-    return findChildByClass(NimTypeKeyw.class);
+  public NimProcType getProcType() {
+    return findChildByClass(NimProcType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimPtrType getPtrType() {
+    return findChildByClass(NimPtrType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimRefType getRefType() {
+    return findChildByClass(NimRefType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimSharedType getSharedType() {
+    return findChildByClass(NimSharedType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimTupleType getTupleType() {
+    return findChildByClass(NimTupleType.class);
+  }
+
+  @Override
+  @Nullable
+  public NimVarType getVarType() {
+    return findChildByClass(NimVarType.class);
   }
 
 }

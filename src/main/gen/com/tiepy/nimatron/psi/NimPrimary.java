@@ -8,16 +8,25 @@ import com.intellij.psi.PsiElement;
 public interface NimPrimary extends NimElement {
 
   @Nullable
+  NimDistinctType getDistinctType();
+
+  @Nullable
+  NimEnumType getEnumType();
+
+  @Nullable
   NimIdentOrLiteral getIdentOrLiteral();
 
   @Nullable
-  NimObject getObject();
+  NimIteratorType getIteratorType();
+
+  @Nullable
+  NimObjectType getObjectType();
 
   @Nullable
   NimOperator getOperator();
 
   @Nullable
-  NimOptInd getOptInd();
+  NimOutType getOutType();
 
   @Nullable
   NimPrimary getPrimary();
@@ -26,6 +35,21 @@ public interface NimPrimary extends NimElement {
   List<NimPrimarySuffix> getPrimarySuffixList();
 
   @Nullable
-  NimTypeKeyw getTypeKeyw();
+  NimProcType getProcType();
+
+  @Nullable
+  NimPtrType getPtrType();
+
+  @Nullable
+  NimRefType getRefType();
+
+  @Nullable
+  NimSharedType getSharedType();
+
+  @Nullable
+  NimTupleType getTupleType();
+
+  @Nullable
+  NimVarType getVarType();
 
 }

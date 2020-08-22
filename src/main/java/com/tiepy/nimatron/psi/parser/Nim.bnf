@@ -284,19 +284,37 @@ private expr1 ::= blockStmt
 
 //typeKeyw = 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
-typeKeyw ::= typeKeyw1
-private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-                    /*| 'proc'*/ | 'iterator' | 'distinct' | /*'object' |*/ 'enum'
-// NOTE: The 'proc' keyword has been commented-out and handled explicitly in the 'primary' rule below.
-
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
-primary ::= primary1 | primary2 | primary3 | primary4
-private primary1 ::= &'object' object // NOTE: This is a new rule to handle 'object' definitions.
-private primary2 ::= typeKeyw <<optInd typeDesc>>
-private primary3 ::= operator? identOrLiteral primarySuffix*
-private primary4 ::= 'bind' primary
+primary ::= primary1 | primary2 | primary3
+private primary1 ::= type // NOTE: This is a new rule to handle type definitions.
+private primary2 ::= operator? identOrLiteral primarySuffix*
+private primary3 ::= 'bind' primary
+
+private type ::= varType
+               | outType
+               | refType
+               | ptrType
+               | sharedType
+               | tupleType
+               | procType
+               | iteratorType
+               | distinctType
+               | objectType
+               | enumType
+
+varType ::= 'var' <<optInd typeDesc>>
+outType ::= 'out' <<optInd typeDesc>>
+refType ::= 'ref' <<optInd typeDesc>>
+ptrType ::= 'ptr' <<optInd typeDesc>>
+sharedType ::= 'shared' <<optInd typeDesc>>
+tupleType ::= 'tuple' <<optInd typeDesc>>
+procType ::= 'proc' <<optInd typeDesc>>
+iteratorType ::= 'iterator' <<optInd typeDesc>>
+distinctType ::= 'distinct' <<optInd typeDesc>>
+objectType ::= &'object' object
+enumType ::= 'enum' <<optInd typeDesc>>
 
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= typeDesc0

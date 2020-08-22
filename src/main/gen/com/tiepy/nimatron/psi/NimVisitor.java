@@ -74,7 +74,15 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitDistinctType(@NotNull NimDistinctType o) {
+    visitElement(o);
+  }
+
   public void visitDoBlock(@NotNull NimDoBlock o) {
+    visitElement(o);
+  }
+
+  public void visitEnumType(@NotNull NimEnumType o) {
     visitElement(o);
   }
 
@@ -170,6 +178,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitIteratorType(@NotNull NimIteratorType o) {
+    visitElement(o);
+  }
+
   public void visitLiteral(@NotNull NimLiteral o) {
     visitElement(o);
   }
@@ -210,6 +222,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitObjectType(@NotNull NimObjectType o) {
+    visitElement(o);
+  }
+
   public void visitObjectWhen(@NotNull NimObjectWhen o) {
     visitElement(o);
   }
@@ -227,6 +243,10 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitOptInd(@NotNull NimOptInd o) {
+    visitElement(o);
+  }
+
+  public void visitOutType(@NotNull NimOutType o) {
     visitElement(o);
   }
 
@@ -274,11 +294,23 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitProcType(@NotNull NimProcType o) {
+    visitElement(o);
+  }
+
+  public void visitPtrType(@NotNull NimPtrType o) {
+    visitElement(o);
+  }
+
   public void visitQualifiedIdent(@NotNull NimQualifiedIdent o) {
     visitElement(o);
   }
 
   public void visitRaiseStmt(@NotNull NimRaiseStmt o) {
+    visitElement(o);
+  }
+
+  public void visitRefType(@NotNull NimRefType o) {
     visitElement(o);
   }
 
@@ -295,6 +327,10 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitSetOrTableConstr(@NotNull NimSetOrTableConstr o) {
+    visitElement(o);
+  }
+
+  public void visitSharedType(@NotNull NimSharedType o) {
     visitElement(o);
   }
 
@@ -334,6 +370,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitTupleType(@NotNull NimTupleType o) {
+    visitElement(o);
+  }
+
   public void visitTypeClass(@NotNull NimTypeClass o) {
     visitElement(o);
   }
@@ -354,10 +394,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
-  public void visitTypeKeyw(@NotNull NimTypeKeyw o) {
-    visitElement(o);
-  }
-
   public void visitTypeStmt(@NotNull NimTypeStmt o) {
     visitElement(o);
   }
@@ -367,6 +403,10 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitVarTuple(@NotNull NimVarTuple o) {
+    visitElement(o);
+  }
+
+  public void visitVarType(@NotNull NimVarType o) {
     visitElement(o);
   }
 

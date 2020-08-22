@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimTypeKeyw extends NimElement {
+public interface NimProcType extends NimElement {
+
+  @NotNull
+  NimOptInd getOptInd();
 
 }
