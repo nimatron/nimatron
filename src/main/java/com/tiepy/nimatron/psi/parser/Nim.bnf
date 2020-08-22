@@ -51,7 +51,7 @@
 }
 
 //module = stmt ^* (';' / IND{=})
-module ::= IND_EQ* (stmts ';'?)? IND_EQ*
+module ::= IND_EQ* stmts? ';'? IND_EQ*
 stmts ::= stmt (sep stmt)*
 private sep ::= ';' | IND_EQ+
 
@@ -574,10 +574,19 @@ private simpleStmt1 ::= returnStmt | raiseStmt | yieldStmt | discardStmt | break
 //                    | ('let' | 'var' | 'using') section(variable)
 //                    | bindStmt | mixinStmt)
 //                    / simpleStmt
-complexOrSimpleStmt ::= complexStmt | simpleStmt
-private complexStmt ::= ifStmt | whenStmt | whileStmt
-                      | tryStmt | forStmt
-                      | blockStmt | staticStmt | deferStmt | asmStmt
+
+//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
+
+stmt ::= complexStmt | simpleStmt
+private complexStmt ::= ifStmt
+                      | whenStmt
+                      | whileStmt
+                      | tryStmt
+                      | forStmt
+                      | blockStmt
+                      | staticStmt
+                      | deferStmt
+                      | asmStmt
                       | procStmt
                       | funcStmt
                       | methodStmt
@@ -588,7 +597,8 @@ private complexStmt ::= ifStmt | whenStmt | whileStmt
                       | typeStmt
                       | constStmt
                       | varStmt
-                      | bindStmt | mixinStmt
+                      | bindStmt
+                      | mixinStmt
 
 procStmt ::= 'proc' <<optInd namedRoutine>>
 funcStmt ::= 'func' <<optInd namedRoutine>>
@@ -600,6 +610,3 @@ converterStmt ::= 'converter' <<optInd namedRoutine>>
 typeStmt ::= 'type' <<section typeDef>>
 constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
-
-//stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
-stmt ::= complexOrSimpleStmt
