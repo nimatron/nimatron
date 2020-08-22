@@ -280,9 +280,10 @@ expr ::= expr1 | simpleExpr
 private expr1 ::= blockStmt
                 | ifExpr
                 | whenExpr
-                | caseStmt
+//              | caseStmt
                 | forStmt
                 | tryExpr
+// NOTE: Moved caseStmt from here to complexStmt.
 
 //typeKeyw = 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
@@ -586,6 +587,8 @@ private complexStmt ::= ifStmt | whenStmt | whileStmt
                       | constStmt
                       | varStmt
                       | bindStmt | mixinStmt
+                      | caseStmt
+// NOTE: Moved caseStmt to here from expr.
 
 procStmt ::= 'proc' <<optInd namedRoutine>>
 funcStmt ::= 'func' <<optInd namedRoutine>>

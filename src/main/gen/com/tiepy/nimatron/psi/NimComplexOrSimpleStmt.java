@@ -17,6 +17,9 @@ public interface NimComplexOrSimpleStmt extends NimElement {
   NimBlockStmt getBlockStmt();
 
   @Nullable
+  NimCaseStmt getCaseStmt();
+
+  @Nullable
   NimConstStmt getConstStmt();
 
   @Nullable

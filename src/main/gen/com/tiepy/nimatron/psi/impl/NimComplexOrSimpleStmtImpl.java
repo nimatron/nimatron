@@ -45,6 +45,12 @@ public class NimComplexOrSimpleStmtImpl extends NimElementImpl implements NimCom
 
   @Override
   @Nullable
+  public NimCaseStmt getCaseStmt() {
+    return findChildByClass(NimCaseStmt.class);
+  }
+
+  @Override
+  @Nullable
   public NimConstStmt getConstStmt() {
     return findChildByClass(NimConstStmt.class);
   }

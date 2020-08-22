@@ -11,9 +11,6 @@ public interface NimExpr extends NimElement {
   NimBlockStmt getBlockStmt();
 
   @Nullable
-  NimCaseStmt getCaseStmt();
-
-  @Nullable
   NimForStmt getForStmt();
 
   @Nullable

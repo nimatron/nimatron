@@ -319,6 +319,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   //                       | constStmt
   //                       | varStmt
   //                       | bindStmt | mixinStmt
+  //                       | caseStmt
   static boolean complexStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "complexStmt")) return false;
     boolean r;
@@ -343,6 +344,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = varStmt(b, l + 1);
     if (!r) r = bindStmt(b, l + 1);
     if (!r) r = mixinStmt(b, l + 1);
+    if (!r) r = caseStmt(b, l + 1);
     return r;
   }
 
@@ -868,7 +870,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   // blockStmt
   //                 | ifExpr
   //                 | whenExpr
-  //                 | caseStmt
+  // //              | caseStmt
   //                 | forStmt
   //                 | tryExpr
   static boolean expr1(PsiBuilder b, int l) {
@@ -877,7 +879,6 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = blockStmt(b, l + 1);
     if (!r) r = ifExpr(b, l + 1);
     if (!r) r = whenExpr(b, l + 1);
-    if (!r) r = caseStmt(b, l + 1);
     if (!r) r = forStmt(b, l + 1);
     if (!r) r = tryExpr(b, l + 1);
     return r;

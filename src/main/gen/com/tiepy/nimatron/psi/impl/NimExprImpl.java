@@ -33,12 +33,6 @@ public class NimExprImpl extends NimElementImpl implements NimExpr {
 
   @Override
   @Nullable
-  public NimCaseStmt getCaseStmt() {
-    return findChildByClass(NimCaseStmt.class);
-  }
-
-  @Override
-  @Nullable
   public NimForStmt getForStmt() {
     return findChildByClass(NimForStmt.class);
   }
