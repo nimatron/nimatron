@@ -10,7 +10,4 @@ public interface NimCondExpr extends NimElement {
   @NotNull
   List<NimExpr> getExprList();
 
-  @NotNull
-  List<NimOptInd> getOptIndList();
-
 }

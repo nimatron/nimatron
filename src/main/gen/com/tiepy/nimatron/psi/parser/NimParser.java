@@ -342,16 +342,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr ':' <<optInd expr>> condExpr1* condExpr2?
+  // expr ':' expr condExpr1* condExpr2
   public static boolean condExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "condExpr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, COND_EXPR, "<cond expr>");
     r = expr(b, l + 1);
     r = r && consumeToken(b, ":");
-    r = r && optInd(b, l + 1, expr_parser_);
+    r = r && expr(b, l + 1);
     r = r && condExpr_3(b, l + 1);
-    r = r && condExpr_4(b, l + 1);
+    r = r && condExpr2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -367,15 +367,8 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // condExpr2?
-  private static boolean condExpr_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "condExpr_4")) return false;
-    condExpr2(b, l + 1);
-    return true;
-  }
-
   /* ********************************************************** */
-  // 'elif' expr ':' <<optInd expr>>
+  // 'elif' expr ':' expr
   static boolean condExpr1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "condExpr1")) return false;
     boolean r;
@@ -383,7 +376,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, "elif");
     r = r && expr(b, l + 1);
     r = r && consumeToken(b, ":");
-    r = r && optInd(b, l + 1, expr_parser_);
+    r = r && expr(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

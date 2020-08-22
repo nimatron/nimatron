@@ -204,8 +204,9 @@ private primarySuffix5 ::= &('`'|IDENT|literal|'cast'|'addr'|'type') exprs // co
 //condExpr = expr colcom expr optInd
 //        ('elif' expr colcom expr optInd)*
 //         'else' colcom expr
-condExpr ::= expr ':' <<optInd expr>> condExpr1* condExpr2? // NOTE: Added '?' to condExpr2
-private condExpr1 ::= 'elif' expr ':' <<optInd expr>>
+// TODO: Consider how to apply optInd in this rule.
+condExpr ::= expr ':' expr condExpr1* condExpr2
+private condExpr1 ::= 'elif' expr ':' expr
 private condExpr2 ::= 'else' ':' expr
 
 //ifExpr = 'if' condExpr
