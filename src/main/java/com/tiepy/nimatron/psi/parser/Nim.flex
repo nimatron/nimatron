@@ -409,7 +409,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
     {LINE_COMMENTS} # .*        { return NimElementTypes.COMMENT; }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
-    {NEWLINE}                   { handleIndent(); /*return TokenType.WHITE_SPACE;*/ }
+    {NEWLINE}                   { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
     {KEYW}                      { return NimElementTypes.KEYW; }
     r\"                         { pushState(RAW_STRING_LITERAL); }

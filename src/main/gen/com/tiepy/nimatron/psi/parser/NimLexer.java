@@ -1130,7 +1130,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
             // fall through
           case 59: break;
           case 7: 
-            { handleIndent(); /*return TokenType.WHITE_SPACE;*/
+            { handleIndent(); return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 60: break;
