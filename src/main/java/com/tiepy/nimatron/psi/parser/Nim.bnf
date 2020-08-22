@@ -475,9 +475,9 @@ pattern ::= '{' <<optInd stmts>> '}'
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
+namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
 routine ::= pattern? genericParams? paramsColon pragma? routine1?
 private routine1 ::= '=' (stmt | (INDENT stmts termInd))
-// NOTE: identVis is 'symbol OPR?' while symbol is now provided by namedRoutine.
 
 //commentStmt = COMMENT
 
@@ -609,5 +609,3 @@ converterStmt ::= 'converter' <<optInd namedRoutine>>
 typeStmt ::= 'type' <<section typeDef>>
 constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
-
-namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
