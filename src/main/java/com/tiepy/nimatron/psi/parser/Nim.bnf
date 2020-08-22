@@ -286,14 +286,14 @@ private expr1 ::= blockStmt
 //         | 'proc' | 'iterator' | 'distinct' | 'object' | 'enum'
 typeKeyw ::= typeKeyw1
 private typeKeyw1 ::= 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-                    /*| 'proc'*/ | 'iterator' | 'distinct' | 'object' | 'enum'
+                    /*| 'proc'*/ | 'iterator' | 'distinct' | /*'object' |*/ 'enum'
 // NOTE: The 'proc' keyword has been commented-out and handled explicitly in the 'primary' rule below.
 
 //primary = typeKeyw optInd typeDesc
 //        /  prefixOperator* identOrLiteral primarySuffix*
 //        / 'bind' primary
 primary ::= primary1 | primary2 | primary3 | primary4
-private primary1 ::= object
+private primary1 ::= &'object' object // NOTE: This is a new rule to handle 'object' definitions.
 private primary2 ::= typeKeyw <<optInd typeDesc>>
 private primary3 ::= operator? identOrLiteral primarySuffix*
 private primary4 ::= 'bind' primary
@@ -301,7 +301,7 @@ private primary4 ::= 'bind' primary
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= typeDesc0
 private typeDesc0 ::= typeDesc1 | typeDesc2
-private typeDesc1 ::= 'proc' paramsColon // NOTE: This is a new rule handle 'proc' typed parameters.
+private typeDesc1 ::= 'proc' paramsColon // NOTE: This is a new rule to handle 'proc' typed parameters.
 private typeDesc2 ::= simpleExpr ('not' expr)?
 
 //typeDefAux = simpleExpr ('not' expr)?
@@ -407,7 +407,7 @@ private ofBranches2 ::= IND_EQ 'else' ':' <<optInd stmts>>
 //            | IND{=} ofBranches)
 caseStmt ::= 'case' expr ':'? caseStmt0
 private caseStmt0 ::= caseStmt1 | caseStmt2
-private caseStmt1 ::= INDENT ofBranches DEDENT
+private caseStmt1 ::= INDENT ofBranches termInd
 private caseStmt2 ::= IND_EQ ofBranches
 
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
@@ -484,12 +484,12 @@ objectBranches ::= objectBranch (IND_EQ objectBranch)*
 //            (IND{>} objectBranches DED
 //            | IND{=} objectBranches)
 objectCase ::= 'case' identWithPragma ':' typeDesc ':'?
-            (IND_GT objectBranches DEDENT
+            (INDENT objectBranches termInd
             | IND_EQ objectBranches)
 
 //objectPart = IND{>} objectPart^+IND{=} DED
 //           / objectWhen / objectCase / 'nil' / 'discard' / declColonEquals
-objectPart ::= IND_GT objectPart (IND_EQ objectPart)* DEDENT
+objectPart ::= (INDENT objectPart (IND_EQ objectPart)* termInd)
              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart

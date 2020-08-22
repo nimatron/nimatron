@@ -236,7 +236,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // INDENT ofBranches DEDENT
+  // INDENT ofBranches termInd
   static boolean caseStmt1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "caseStmt1")) return false;
     if (!nextTokenIs(b, INDENT)) return false;
@@ -244,7 +244,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, INDENT);
     r = r && ofBranches(b, l + 1);
-    r = r && consumeToken(b, DEDENT);
+    r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2107,7 +2107,7 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // 'case' identWithPragma ':' typeDesc ':'?
-  //             (IND_GT objectBranches DEDENT
+  //             (INDENT objectBranches termInd
   //             | IND_EQ objectBranches)
   public static boolean objectCase(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectCase")) return false;
@@ -2130,7 +2130,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // IND_GT objectBranches DEDENT
+  // INDENT objectBranches termInd
   //             | IND_EQ objectBranches
   private static boolean objectCase_5(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectCase_5")) return false;
@@ -2142,14 +2142,14 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // IND_GT objectBranches DEDENT
+  // INDENT objectBranches termInd
   private static boolean objectCase_5_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectCase_5_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IND_GT);
+    r = consumeToken(b, INDENT);
     r = r && objectBranches(b, l + 1);
-    r = r && consumeToken(b, DEDENT);
+    r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2166,7 +2166,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IND_GT objectPart (IND_EQ objectPart)* DEDENT
+  // (INDENT objectPart (IND_EQ objectPart)* termInd)
   //              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
   public static boolean objectPart(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectPart")) return false;
@@ -2182,15 +2182,15 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // IND_GT objectPart (IND_EQ objectPart)* DEDENT
+  // INDENT objectPart (IND_EQ objectPart)* termInd
   private static boolean objectPart_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectPart_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IND_GT);
+    r = consumeToken(b, INDENT);
     r = r && objectPart(b, l + 1);
     r = r && objectPart_0_2(b, l + 1);
-    r = r && consumeToken(b, DEDENT);
+    r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -3195,9 +3195,25 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // object
+  // &'object' object
   static boolean primary1(PsiBuilder b, int l) {
-    return object(b, l + 1);
+    if (!recursion_guard_(b, l, "primary1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = primary1_0(b, l + 1);
+    r = r && object(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // &'object'
+  private static boolean primary1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "primary1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_);
+    r = consumeToken(b, "object");
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -4556,7 +4572,7 @@ public class NimParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // 'var' | 'out' | 'ref' | 'ptr' | 'shared' | 'tuple'
-  //                     /*| 'proc'*/ | 'iterator' | 'distinct' | 'object' | 'enum'
+  //                     /*| 'proc'*/ | 'iterator' | 'distinct' | /*'object' |*/ 'enum'
   static boolean typeKeyw1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typeKeyw1")) return false;
     boolean r;
@@ -4568,7 +4584,6 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, "tuple");
     if (!r) r = consumeToken(b, "iterator");
     if (!r) r = consumeToken(b, "distinct");
-    if (!r) r = consumeToken(b, "object");
     if (!r) r = consumeToken(b, "enum");
     return r;
   }
