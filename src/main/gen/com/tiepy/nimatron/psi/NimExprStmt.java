@@ -7,19 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimExprStmt extends NimElement {
 
-  @Nullable
-  NimColonBody getColonBody();
-
   @NotNull
-  List<NimExpr> getExprList();
-
-  @Nullable
-  NimOptInd getOptInd();
-
-  @Nullable
-  NimPostExprBlocks getPostExprBlocks();
-
-  @NotNull
-  NimSimpleExpr getSimpleExpr();
+  List<NimSimpleExpr> getSimpleExprList();
 
 }

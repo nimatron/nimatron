@@ -146,5 +146,5 @@ Nim File(0,198)
   PsiElement(NimTokenType.NOTATION)(',')(193,194)
   PsiWhiteSpace(' ')(194,195)
   PsiElement(NimTokenType.STR_LIT)('"!"')(195,198)
-  PsiErrorElement:',', ';', <expr>, <primary suffix>, '=', NimTokenType.DEDENT, NimTokenType.IND_EQ, NimTokenType.OP0, NimTokenType.OP1, NimTokenType.OP10, NimTokenType.OP2, NimTokenType.OP3, NimTokenType.OP4, NimTokenType.OP5, NimTokenType.OP6, NimTokenType.OP7, NimTokenType.OP8, NimTokenType.OP9, and, as, div, in, is, isnot, mod, not, notin, of, or, shl, shr, xor or '{.' expected(198,198)
+  PsiErrorElement:',', ';', <primary suffix>, <primary>, NimTokenType.DEDENT, NimTokenType.IND_EQ, NimTokenType.OP0, NimTokenType.OP1, NimTokenType.OP10, NimTokenType.OP2, NimTokenType.OP3, NimTokenType.OP4, NimTokenType.OP5, NimTokenType.OP6, NimTokenType.OP7, NimTokenType.OP8, NimTokenType.OP9, and, as, div, in, is, isnot, mod, not, notin, of, or, shl, shr, xor or '{.' expected(198,198)
     <empty list>

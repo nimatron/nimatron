@@ -966,7 +966,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // simpleExpr (exprStmt1 | exprStmt2)?
+  // simpleExpr /*(exprStmt1 | exprStmt2)? exprStmt1?*/ simpleExpr?
   public static boolean exprStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exprStmt")) return false;
     boolean r;
@@ -977,75 +977,11 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (exprStmt1 | exprStmt2)?
+  // simpleExpr?
   private static boolean exprStmt_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exprStmt_1")) return false;
-    exprStmt_1_0(b, l + 1);
+    simpleExpr(b, l + 1);
     return true;
-  }
-
-  // exprStmt1 | exprStmt2
-  private static boolean exprStmt_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprStmt_1_0")) return false;
-    boolean r;
-    r = exprStmt1(b, l + 1);
-    if (!r) r = exprStmt2(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // '=' <<optInd expr>> colonBody?
-  static boolean exprStmt1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprStmt1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, "=");
-    r = r && optInd(b, l + 1, expr_parser_);
-    r = r && exprStmt1_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // colonBody?
-  private static boolean exprStmt1_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprStmt1_2")) return false;
-    colonBody(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // expr (',' expr)* postExprBlocks
-  static boolean exprStmt2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprStmt2")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = expr(b, l + 1);
-    r = r && exprStmt2_1(b, l + 1);
-    r = r && postExprBlocks(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (',' expr)*
-  private static boolean exprStmt2_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprStmt2_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!exprStmt2_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "exprStmt2_1", c)) break;
-    }
-    return true;
-  }
-
-  // ',' expr
-  private static boolean exprStmt2_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprStmt2_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, ",");
-    r = r && expr(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
