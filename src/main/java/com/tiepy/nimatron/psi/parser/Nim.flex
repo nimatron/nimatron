@@ -442,8 +442,8 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 }
 
 <OPERATOR> {
+    \*:({CRLF})                 { return getOperatorToken(true, 2); }
     \*:({CR}|{LF}|.)            { return getOperatorToken(true, 1); }
-    \*:({CRLF}|.)               { return getOperatorToken(true, 2); }
     {OPR_EQUALS}                { buffer.append('='); }
     {OPR_PLUS}                  { buffer.append('+'); }
     {OPR_MINUS}                 { buffer.append('-'); }
@@ -463,8 +463,8 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {OPR_DOT}                   { buffer.append('.'); }
     {OPR_COLON}                 { buffer.append(':'); }
     {OPR_BACK_SLASH}            { buffer.append('\\'); }
-    {CR}|{LF}|.                 { return getOperatorToken(false, 1); }
     {CRLF}                      { return getOperatorToken(false, 2); }
+    {CR}|{LF}|.                 { return getOperatorToken(false, 1); }
 }
 
 <BLOCK_COMMENT> {
