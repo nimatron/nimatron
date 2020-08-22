@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface NimStmt extends NimElement {
 
   @NotNull
-  NimComplexOrSimpleStmt getComplexOrSimpleStmt();
+  List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
 
 }

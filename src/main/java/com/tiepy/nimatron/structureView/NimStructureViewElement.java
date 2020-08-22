@@ -56,11 +56,11 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
         final List<StructureViewTreeElement> children = Lists.newArrayList();
 
         if (childrenBase instanceof NimFile) {
-            for (PsiElement testForStmtsElement : childrenBase.getChildren()) {
-                if (testForStmtsElement instanceof NimStmtsImpl) {
-                    for (PsiElement testForStmtElement : testForStmtsElement.getChildren()) {
-                        if (testForStmtElement instanceof NimStmtImpl) {
-                            for (PsiElement testForParentElement : testForStmtElement.getChildren()) {
+            for (PsiElement testForStmtElement : childrenBase.getChildren()) {
+                if (testForStmtElement instanceof NimStmtImpl) {
+                    for (PsiElement testForComplexOrSimpleStmt : testForStmtElement.getChildren()) {
+                        if (testForComplexOrSimpleStmt instanceof NimComplexOrSimpleStmtImpl) {
+                            for (PsiElement testForParentElement : testForComplexOrSimpleStmt.getChildren()) {
                                 if (testForParentElement instanceof NimProcStmtImpl     ||
                                     testForParentElement instanceof NimFuncStmtImpl     ||
                                     testForParentElement instanceof NimMethodStmtImpl   ||
@@ -68,9 +68,10 @@ public class NimStructureViewElement extends PsiTreeElementBase<PsiElement> {
                                     testForParentElement instanceof NimMacroStmtImpl    ||
                                     testForParentElement instanceof NimTemplateStmtImpl ||
                                     testForParentElement instanceof NimConverterStmtImpl) {
-                                    for (PsiElement testForOptIndElement : testForParentElement.getChildren()) {
-                                        if (testForOptIndElement instanceof NimOptIndImpl) {
-                                            for (PsiElement child : testForOptIndElement.getChildren()) {
+                                    for (PsiElement testForOptIndOrSectionElement : testForParentElement.getChildren()) {
+                                        if (testForOptIndOrSectionElement instanceof NimOptIndImpl ||
+                                            testForOptIndOrSectionElement instanceof NimSectionImpl) {
+                                            for (PsiElement child : testForOptIndOrSectionElement.getChildren()) {
                                                 if (child instanceof NimNamedRoutineImpl) {
                                                     children.add(new NimStructureViewElement(child, child));
                                                 }

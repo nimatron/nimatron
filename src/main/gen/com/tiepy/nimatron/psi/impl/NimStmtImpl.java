@@ -27,8 +27,8 @@ public class NimStmtImpl extends NimElementImpl implements NimStmt {
 
   @Override
   @NotNull
-  public NimComplexOrSimpleStmt getComplexOrSimpleStmt() {
-    return findNotNullChildByClass(NimComplexOrSimpleStmt.class);
+  public List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
   }
 
 }

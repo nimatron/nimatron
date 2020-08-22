@@ -55,8 +55,8 @@ public class NimFoldingBuilder extends FoldingBuilderEx implements DumbAware {
         List<FoldingDescriptor> list = new ArrayList<>();
 
         // Add regions for statements.
-        Collection<NimStmtImpl> statements = PsiTreeUtil.findChildrenOfType(root, NimStmtImpl.class);
-        for (final NimStmtImpl statement : statements) {
+        Collection<NimComplexOrSimpleStmtImpl> statements = PsiTreeUtil.findChildrenOfType(root, NimComplexOrSimpleStmtImpl.class);
+        for (final NimComplexOrSimpleStmtImpl statement : statements) {
             addRegion(statement, list);
         }
 

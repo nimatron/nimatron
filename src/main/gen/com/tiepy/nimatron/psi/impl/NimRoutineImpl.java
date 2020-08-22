@@ -51,8 +51,8 @@ public class NimRoutineImpl extends NimElementImpl implements NimRoutine {
 
   @Override
   @Nullable
-  public NimStmts getStmts() {
-    return findChildByClass(NimStmts.class);
+  public NimStmt getStmt() {
+    return findChildByClass(NimStmt.class);
   }
 
 }

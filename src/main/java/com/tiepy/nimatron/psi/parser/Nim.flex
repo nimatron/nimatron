@@ -137,7 +137,7 @@ KEYW=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue
 |macro|method|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref
 |return|shl|shr|static|template|try|tuple|type|using|var|when|while|xor|yield
 
-LINE_COMMENTS=(({WHITE_SPACE}|{NEWLINE})* # .* {NEWLINE})* {WHITE_SPACE}*
+LINE_COMMENTS=({WHITE_SPACE}* # .* {NEWLINE}*)* {WHITE_SPACE}*
 
 %{
 

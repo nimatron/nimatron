@@ -98,7 +98,6 @@ public interface NimElementTypes {
   IElementType SIMPLE_STMT = new NimElementType("SIMPLE_STMT");
   IElementType STATIC_STMT = new NimElementType("STATIC_STMT");
   IElementType STMT = new NimElementType("STMT");
-  IElementType STMTS = new NimElementType("STMTS");
   IElementType SYMBOL = new NimElementType("SYMBOL");
   IElementType TEMPLATE_STMT = new NimElementType("TEMPLATE_STMT");
   IElementType TRY_EXPR = new NimElementType("TRY_EXPR");
@@ -417,9 +416,6 @@ public interface NimElementTypes {
       }
       else if (type == STMT) {
         return new NimStmtImpl(node);
-      }
-      else if (type == STMTS) {
-        return new NimStmtsImpl(node);
       }
       else if (type == SYMBOL) {
         return new NimSymbolImpl(node);
