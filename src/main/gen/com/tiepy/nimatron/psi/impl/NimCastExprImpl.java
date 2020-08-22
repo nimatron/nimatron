@@ -31,4 +31,10 @@ public class NimCastExprImpl extends NimElementImpl implements NimCastExpr {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
+  @Override
+  @NotNull
+  public List<NimOptPar> getOptParList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptPar.class);
+  }
+
 }

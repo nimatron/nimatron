@@ -43,4 +43,10 @@ public class NimPrimarySuffixImpl extends NimElementImpl implements NimPrimarySu
     return findChildByClass(NimOptInd.class);
   }
 
+  @Override
+  @Nullable
+  public NimOptPar getOptPar() {
+    return findChildByClass(NimOptPar.class);
+  }
+
 }

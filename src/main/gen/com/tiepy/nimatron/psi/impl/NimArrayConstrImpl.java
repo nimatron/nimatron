@@ -31,4 +31,10 @@ public class NimArrayConstrImpl extends NimElementImpl implements NimArrayConstr
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
   }
 
+  @Override
+  @NotNull
+  public NimOptPar getOptPar() {
+    return findNotNullChildByClass(NimOptPar.class);
+  }
+
 }

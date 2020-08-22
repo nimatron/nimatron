@@ -16,4 +16,7 @@ public interface NimPrimarySuffix extends NimElement {
   @Nullable
   NimOptInd getOptInd();
 
+  @Nullable
+  NimOptPar getOptPar();
+
 }

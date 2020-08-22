@@ -10,4 +10,7 @@ public interface NimArrayConstr extends NimElement {
   @NotNull
   List<NimOptInd> getOptIndList();
 
+  @NotNull
+  NimOptPar getOptPar();
+
 }

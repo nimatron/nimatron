@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimPar extends NimElement {
-
-  @NotNull
-  NimOptInd getOptInd();
-
-  @NotNull
-  NimOptPar getOptPar();
+public interface NimOptPar extends NimElement {
 
 }

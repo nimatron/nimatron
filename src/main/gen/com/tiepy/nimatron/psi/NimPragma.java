@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimPragma extends NimElement {
 
   @NotNull
-  List<NimOptInd> getOptIndList();
+  NimOptInd getOptInd();
+
+  @NotNull
+  NimOptPar getOptPar();
 
 }

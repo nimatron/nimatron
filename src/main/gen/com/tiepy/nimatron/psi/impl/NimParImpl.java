@@ -26,33 +26,15 @@ public class NimParImpl extends NimElementImpl implements NimPar {
   }
 
   @Override
-  @Nullable
-  public NimExpr getExpr() {
-    return findChildByClass(NimExpr.class);
+  @NotNull
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
   @Override
   @NotNull
-  public List<NimExprColonEqExpr> getExprColonEqExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPragmaStmt getPragmaStmt() {
-    return findChildByClass(NimPragmaStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public NimSimpleExpr getSimpleExpr() {
-    return findChildByClass(NimSimpleExpr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<NimStmt> getStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimStmt.class);
+  public NimOptPar getOptPar() {
+    return findNotNullChildByClass(NimOptPar.class);
   }
 
 }

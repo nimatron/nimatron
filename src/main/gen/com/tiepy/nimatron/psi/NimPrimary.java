@@ -23,10 +23,10 @@ public interface NimPrimary extends NimElement {
   NimObjectType getObjectType();
 
   @Nullable
-  NimOperator getOperator();
+  NimOutType getOutType();
 
   @Nullable
-  NimOutType getOutType();
+  NimPrefixOperator getPrefixOperator();
 
   @Nullable
   NimPrimary getPrimary();

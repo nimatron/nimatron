@@ -10,4 +10,7 @@ public interface NimCastExpr extends NimElement {
   @NotNull
   List<NimOptInd> getOptIndList();
 
+  @NotNull
+  List<NimOptPar> getOptParList();
+
 }

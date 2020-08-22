@@ -27,8 +27,14 @@ public class NimPragmaImpl extends NimElementImpl implements NimPragma {
 
   @Override
   @NotNull
-  public List<NimOptInd> getOptIndList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimOptInd.class);
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
+  }
+
+  @Override
+  @NotNull
+  public NimOptPar getOptPar() {
+    return findNotNullChildByClass(NimOptPar.class);
   }
 
 }
