@@ -600,5 +600,5 @@ varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 stmt ::= complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)*
-inlineStmt ::= (INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* DEDENT) | (simpleStmt (';' simpleStmt)*)
+inlineStmt ::= (INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* termInd) | (simpleStmt (';' simpleStmt)*)
 //inlineStmt ::= <<optInd (complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)*)>>

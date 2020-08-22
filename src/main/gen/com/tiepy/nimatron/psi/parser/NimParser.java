@@ -1801,7 +1801,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* DEDENT) | (simpleStmt (';' simpleStmt)*)
+  // (INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* termInd) | (simpleStmt (';' simpleStmt)*)
   public static boolean inlineStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "inlineStmt")) return false;
     boolean r;
@@ -1812,7 +1812,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* DEDENT
+  // INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* termInd
   private static boolean inlineStmt_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "inlineStmt_0")) return false;
     boolean r;
@@ -1820,7 +1820,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, INDENT);
     r = r && complexOrSimpleStmt(b, l + 1);
     r = r && inlineStmt_0_2(b, l + 1);
-    r = r && consumeToken(b, DEDENT);
+    r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
