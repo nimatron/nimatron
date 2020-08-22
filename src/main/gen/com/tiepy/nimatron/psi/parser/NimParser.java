@@ -1801,108 +1801,111 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* termInd) | (simpleStmt (';' simpleStmt)*)
-  public static boolean inlineStmt(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, INLINE_STMT, "<inline stmt>");
-    r = inlineStmt_0(b, l + 1);
-    if (!r) r = inlineStmt_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
   // INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* termInd
-  private static boolean inlineStmt_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0")) return false;
+  static boolean inlineComplex(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineComplex")) return false;
+    if (!nextTokenIs(b, INDENT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, INDENT);
     r = r && complexOrSimpleStmt(b, l + 1);
-    r = r && inlineStmt_0_2(b, l + 1);
+    r = r && inlineComplex_2(b, l + 1);
     r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ((';' | IND_EQ+) complexOrSimpleStmt)*
-  private static boolean inlineStmt_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_2")) return false;
+  private static boolean inlineComplex_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineComplex_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!inlineStmt_0_2_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "inlineStmt_0_2", c)) break;
+      if (!inlineComplex_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "inlineComplex_2", c)) break;
     }
     return true;
   }
 
   // (';' | IND_EQ+) complexOrSimpleStmt
-  private static boolean inlineStmt_0_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_2_0")) return false;
+  private static boolean inlineComplex_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineComplex_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = inlineStmt_0_2_0_0(b, l + 1);
+    r = inlineComplex_2_0_0(b, l + 1);
     r = r && complexOrSimpleStmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ';' | IND_EQ+
-  private static boolean inlineStmt_0_2_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_2_0_0")) return false;
+  private static boolean inlineComplex_2_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineComplex_2_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    if (!r) r = inlineStmt_0_2_0_0_1(b, l + 1);
+    if (!r) r = inlineComplex_2_0_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // IND_EQ+
-  private static boolean inlineStmt_0_2_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_0_2_0_0_1")) return false;
+  private static boolean inlineComplex_2_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineComplex_2_0_0_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IND_EQ);
     while (r) {
       int c = current_position_(b);
       if (!consumeToken(b, IND_EQ)) break;
-      if (!empty_element_parsed_guard_(b, "inlineStmt_0_2_0_0_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "inlineComplex_2_0_0_1", c)) break;
     }
     exit_section_(b, m, null, r);
     return r;
   }
 
+  /* ********************************************************** */
   // simpleStmt (';' simpleStmt)*
-  private static boolean inlineStmt_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_1")) return false;
+  static boolean inlineSimple(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineSimple")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = simpleStmt(b, l + 1);
-    r = r && inlineStmt_1_1(b, l + 1);
+    r = r && inlineSimple_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // (';' simpleStmt)*
-  private static boolean inlineStmt_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_1_1")) return false;
+  private static boolean inlineSimple_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineSimple_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!inlineStmt_1_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "inlineStmt_1_1", c)) break;
+      if (!inlineSimple_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "inlineSimple_1", c)) break;
     }
     return true;
   }
 
   // ';' simpleStmt
-  private static boolean inlineStmt_1_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "inlineStmt_1_1_0")) return false;
+  private static boolean inlineSimple_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineSimple_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
     r = r && simpleStmt(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // inlineComplex | inlineSimple
+  public static boolean inlineStmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "inlineStmt")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, INLINE_STMT, "<inline stmt>");
+    r = inlineComplex(b, l + 1);
+    if (!r) r = inlineSimple(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
