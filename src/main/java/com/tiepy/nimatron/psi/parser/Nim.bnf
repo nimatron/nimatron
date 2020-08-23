@@ -45,7 +45,6 @@
     mixin("namedRoutine")="com.tiepy.nimatron.psi.impl.NimNamedElementImpl"
 
     tokens = [
-        COMMENT="COMMENT"
         NOTATION="NOTATION"
     ]
 }
