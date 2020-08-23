@@ -638,7 +638,7 @@ varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
 stmt ::= stmt1 | complexOrSimpleStmt
 private stmt1 ::= stmt2+ complexOrSimpleStmt
 private stmt2 ::= stmt3 (';' | (IND_EQ0 ind_eq*))
-private stmt3 ::= complexOrSimpleStmt &(';' | (IND_EQ0)) {recoverWhile=stmtRecover}
+private stmt3 ::= complexOrSimpleStmt &(';' | IND_EQ0) {recoverWhile=stmtRecover}
 private stmtRecover ::= !(';' | IND_EQ0)
 
 inlineStmt ::= inlineComplex | inlineSimple
