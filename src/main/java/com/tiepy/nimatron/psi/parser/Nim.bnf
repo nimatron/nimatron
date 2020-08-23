@@ -87,7 +87,7 @@ private op6 ::= OP6
 private op7 ::= OP7
 private op8 ::= OP8
 private op9 ::= OP9 | 'div' | 'mod' | 'shl' | 'shr'
-//private op10 ::= OP10
+private op10 ::= OP10
 
 private oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
 
@@ -111,17 +111,17 @@ optPar ::= (INDENT | ind_eq)?
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* /*pragma?*/
-private arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
-private assignExpr ::= orExpr (OP2 <<optInd orExpr>>)*
-private orExpr ::= andExpr (OP3 <<optInd andExpr>>)*
-private andExpr ::= cmpExpr (OP4 <<optInd cmpExpr>>)*
-private cmpExpr ::= sliceExpr (OP5 <<optInd sliceExpr>>)*
-private sliceExpr ::= ampExpr (OP6 <<optInd ampExpr>>)*
-private ampExpr ::= plusExpr (OP7 <<optInd plusExpr>>)*
-private plusExpr ::= mulExpr (OP8 <<optInd mulExpr>>)*
-private mulExpr ::= dollarExpr (OP9 <<optInd dollarExpr>>)*
-private dollarExpr ::= primary (OP10 <<optInd primary>>)*
+simpleExpr ::= arrowExpr (op0 <<optInd arrowExpr>>)* /*pragma?*/
+private arrowExpr ::= assignExpr (op1 <<optInd assignExpr>>)*
+private assignExpr ::= orExpr (op2 <<optInd orExpr>>)*
+private orExpr ::= andExpr (op3 <<optInd andExpr>>)*
+private andExpr ::= cmpExpr (op4 <<optInd cmpExpr>>)*
+private cmpExpr ::= sliceExpr (op5 <<optInd sliceExpr>>)*
+private sliceExpr ::= ampExpr (op6 <<optInd ampExpr>>)*
+private ampExpr ::= plusExpr (op7 <<optInd plusExpr>>)*
+private plusExpr ::= mulExpr (op8 <<optInd mulExpr>>)*
+private mulExpr ::= dollarExpr (op9 <<optInd dollarExpr>>)*
+private dollarExpr ::= primary (op10 <<optInd primary>>)*
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
 symbol ::= symbol1

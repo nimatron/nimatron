@@ -36,7 +36,7 @@ public class NimLexerTest {
     public void testMisc() throws Exception {
         /*int tokenCount =*/
 
-        parse("const a = {'a'}");
+        parse("template t(x): bool = x or x");
 
         // Assert.assertEquals(14, tokenCount);
     }
