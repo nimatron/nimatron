@@ -76,7 +76,7 @@ private op6 ::= OP6
 private op7 ::= OP7
 private op8 ::= OP8
 private op9 ::= OP9 | 'div' | 'mod' | 'shl' | 'shr'
-private op10 ::= OP10
+//private op10 ::= OP10
 
 private oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
 
