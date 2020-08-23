@@ -137,8 +137,6 @@ KEYW=addr|and|as|asm|bind|block|break|case|cast|concept|const|continue
 |macro|method|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref
 |return|shl|shr|static|template|try|tuple|type|using|var|when|while|xor|yield
 
-LINE_COMMENTS=({WHITE_SPACE}* # .* {NEWLINE}*)* {WHITE_SPACE}*
-
 %{
 
 // -----------------------------------------------------------------------------
@@ -392,6 +390,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 %state INDENTER
 %state DEDENTER
 %state OPERATOR
+%state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
 %state DISCARD_COMMENT
@@ -407,7 +406,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 <YYINITIAL> {
     {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
     {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
-    {LINE_COMMENTS} # .*        { return NimElementTypes.COMMENT; }
+    #                           { pushState(LINE_COMMENT); }
     discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
     {NEWLINE}                   { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
@@ -465,6 +464,12 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {OPR_BACK_SLASH}            { buffer.append('\\'); }
     {CRLF}                      { return getOperatorToken(false, 2); }
     {CR}|{LF}|.                 { return getOperatorToken(false, 1); }
+}
+
+<LINE_COMMENT> {
+    {CRLF}                      { yypushback(2); popState(); return NimElementTypes.COMMENT; }
+    {CR}|{LF}                   { yypushback(1); popState(); return NimElementTypes.COMMENT; }
+    .+                          { }
 }
 
 <BLOCK_COMMENT> {
