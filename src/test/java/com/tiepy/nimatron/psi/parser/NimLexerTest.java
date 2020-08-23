@@ -34,10 +34,13 @@ public class NimLexerTest {
 
     @Test
     public void testMisc() throws Exception {
-        int tokenCount = parse("func `*=`*(a: var Matrix3, s: float32) =\n" +
-                "  a = a * s\n" +
-                "{.pop.}\n");
-        Assert.assertEquals(14, tokenCount);
+        /*int tokenCount =*/
+
+        parse("let r = new(string)\n" +
+                "r[] = \"Hello\"\n" +
+                "echo r[]");
+
+        // Assert.assertEquals(14, tokenCount);
     }
 
     /**
