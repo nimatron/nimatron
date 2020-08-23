@@ -27,6 +27,12 @@ public class NimTryExprImpl extends NimElementImpl implements NimTryExpr {
 
   @Override
   @NotNull
+  public NimColcom getColcom() {
+    return findNotNullChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @NotNull
   public NimInlineStmt getInlineStmt() {
     return findNotNullChildByClass(NimInlineStmt.class);
   }

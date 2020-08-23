@@ -27,6 +27,18 @@ public class NimForStmtImpl extends NimElementImpl implements NimForStmt {
 
   @Override
   @Nullable
+  public NimColcom getColcom() {
+    return findChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimComma> getCommaList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
+  }
+
+  @Override
+  @Nullable
   public NimExpr getExpr() {
     return findChildByClass(NimExpr.class);
   }

@@ -27,6 +27,12 @@ public class NimObjectWhenImpl extends NimElementImpl implements NimObjectWhen {
 
   @Override
   @NotNull
+  public List<NimColcom> getColcomList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimColcom.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExpr.class);
   }

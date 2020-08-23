@@ -8,6 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface NimForStmt extends NimElement {
 
   @Nullable
+  NimColcom getColcom();
+
+  @NotNull
+  List<NimComma> getCommaList();
+
+  @Nullable
   NimExpr getExpr();
 
   @NotNull

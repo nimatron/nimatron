@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimSetOrTableConstr extends NimElement {
-
-  @NotNull
-  List<NimComma> getCommaList();
-
-  @NotNull
-  List<NimExprColonEqExpr> getExprColonEqExprList();
+public interface NimComma extends NimElement {
 
 }

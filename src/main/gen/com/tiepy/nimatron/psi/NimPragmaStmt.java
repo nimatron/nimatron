@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimPragmaStmt extends NimElement {
 
   @Nullable
+  NimColon getColon();
+
+  @Nullable
   NimInlineStmt getInlineStmt();
 
   @NotNull

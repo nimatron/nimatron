@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimDeclColonEquals extends NimElement {
 
   @NotNull
+  List<NimComma> getCommaList();
+
+  @NotNull
   List<NimIdentWithPragma> getIdentWithPragmaList();
 
   @NotNull

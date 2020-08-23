@@ -27,6 +27,12 @@ public class NimPrimarySuffixImpl extends NimElementImpl implements NimPrimarySu
 
   @Override
   @NotNull
+  public List<NimComma> getCommaList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimExprColonEqExpr> getExprColonEqExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimExprColonEqExpr.class);
   }

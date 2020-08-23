@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimBlockStmt extends NimElement {
 
   @Nullable
+  NimColcom getColcom();
+
+  @Nullable
   NimInlineStmt getInlineStmt();
 
   @Nullable

@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface NimExprs extends NimElement {
 
   @NotNull
+  List<NimComma> getCommaList();
+
+  @NotNull
   List<NimExpr> getExprList();
 
 }

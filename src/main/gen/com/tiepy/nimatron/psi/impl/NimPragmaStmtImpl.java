@@ -27,6 +27,12 @@ public class NimPragmaStmtImpl extends NimElementImpl implements NimPragmaStmt {
 
   @Override
   @Nullable
+  public NimColon getColon() {
+    return findChildByClass(NimColon.class);
+  }
+
+  @Override
+  @Nullable
   public NimInlineStmt getInlineStmt() {
     return findChildByClass(NimInlineStmt.class);
   }

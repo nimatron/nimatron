@@ -27,6 +27,12 @@ public class NimDeferStmtImpl extends NimElementImpl implements NimDeferStmt {
 
   @Override
   @Nullable
+  public NimColcom getColcom() {
+    return findChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @Nullable
   public NimInlineStmt getInlineStmt() {
     return findChildByClass(NimInlineStmt.class);
   }

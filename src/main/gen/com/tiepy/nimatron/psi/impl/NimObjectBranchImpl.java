@@ -27,6 +27,12 @@ public class NimObjectBranchImpl extends NimElementImpl implements NimObjectBran
 
   @Override
   @NotNull
+  public NimColcom getColcom() {
+    return findNotNullChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @NotNull
   public NimExprs getExprs() {
     return findNotNullChildByClass(NimExprs.class);
   }

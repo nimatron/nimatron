@@ -27,6 +27,12 @@ public class NimDeclColonEqualsImpl extends NimElementImpl implements NimDeclCol
 
   @Override
   @NotNull
+  public List<NimComma> getCommaList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComma.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimIdentWithPragma> getIdentWithPragmaList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIdentWithPragma.class);
   }

@@ -10,43 +10,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimDoBlockImpl extends NimElementImpl implements NimDoBlock {
+public class NimColcomImpl extends NimElementImpl implements NimColcom {
 
-  public NimDoBlockImpl(@NotNull ASTNode node) {
+  public NimColcomImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitDoBlock(this);
+    visitor.visitColcom(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof NimVisitor) accept((NimVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
-  }
-
-  @Override
-  @NotNull
-  public NimInlineStmt getInlineStmt() {
-    return findNotNullChildByClass(NimInlineStmt.class);
-  }
-
-  @Override
-  @NotNull
-  public NimParamsArrow getParamsArrow() {
-    return findNotNullChildByClass(NimParamsArrow.class);
-  }
-
-  @Override
-  @Nullable
-  public NimPragma getPragma() {
-    return findChildByClass(NimPragma.class);
   }
 
 }

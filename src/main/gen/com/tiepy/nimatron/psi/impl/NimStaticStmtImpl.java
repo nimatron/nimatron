@@ -27,6 +27,12 @@ public class NimStaticStmtImpl extends NimElementImpl implements NimStaticStmt {
 
   @Override
   @Nullable
+  public NimColcom getColcom() {
+    return findChildByClass(NimColcom.class);
+  }
+
+  @Override
+  @Nullable
   public NimInlineStmt getInlineStmt() {
     return findChildByClass(NimInlineStmt.class);
   }
