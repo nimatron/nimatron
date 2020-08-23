@@ -1,1 +1,1 @@
-const numChars*: set[char] = {'0'..'9', 'a'..'z', 'A'..'Z'}
+const a = {'a'}
