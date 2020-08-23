@@ -1,6 +1,6 @@
 # Release notes
 
-## 1.2.3
+## 1.3.0
 
   * Extensive work testing and improving parser.
   * Initial parse error recovery implemented.
@@ -9,7 +9,7 @@
 
 More work needs to be done on developing the parser. The current implementation
 is significantly different from the way the Nim compiler handles indentation.
-Most of the Nim grammar otherwise seems to be nearly there.
+Most of the Nim grammar otherwise is fairly complete.
 
 ## 1.2.2
 
