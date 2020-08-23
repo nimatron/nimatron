@@ -10,13 +10,13 @@ public interface NimCaseStmt extends NimElement {
   @Nullable
   NimDedent getDedent();
 
-  @NotNull
+  @Nullable
   NimExpr getExpr();
 
   @Nullable
   NimIndEq getIndEq();
 
-  @NotNull
+  @Nullable
   NimOfBranches getOfBranches();
 
 }

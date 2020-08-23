@@ -26,9 +26,9 @@ public class NimMacroStmtImpl extends NimElementImpl implements NimMacroStmt {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public NimOptInd getOptInd() {
-    return findNotNullChildByClass(NimOptInd.class);
+    return findChildByClass(NimOptInd.class);
   }
 
 }

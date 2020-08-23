@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimProcStmt extends NimElement {
 
-  @NotNull
+  @Nullable
   NimOptInd getOptInd();
 
 }

@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface NimBlockStmt extends NimElement {
 
-  @NotNull
+  @Nullable
   NimInlineStmt getInlineStmt();
 
   @Nullable

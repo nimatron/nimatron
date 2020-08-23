@@ -373,7 +373,7 @@ private exprStmt2 ::= expr (',' expr)* postExprBlocks
 //importStmt = 'import' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-importStmt ::= 'import' (importStmt1 | importStmt2)
+importStmt ::= 'import' (importStmt1 | importStmt2) {pin=1}
 private importStmt1 ::= <<optInd (expr (',' ind_eq* expr)*)>>
 private importStmt2 ::= <<optInd (expr importStmt3)>>
 private importStmt3 ::= 'except' <<optInd (expr (',' ind_eq* expr)*)>>
@@ -381,34 +381,34 @@ private importStmt3 ::= 'except' <<optInd (expr (',' ind_eq* expr)*)>>
 //exportStmt = 'export' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
-exportStmt ::= 'export' (exportStmt1 | exportStmt2)
+exportStmt ::= 'export' (exportStmt1 | exportStmt2) {pin=1}
 private exportStmt1 ::= <<optInd (expr (',' ind_eq* expr)*)>>
 private exportStmt2 ::= <<optInd (expr exportStmt3)>>
 private exportStmt3 ::= 'except' <<optInd (expr (',' ind_eq* expr)*)>>
 
 //includeStmt = 'include' optInd expr ^+ comma
-includeStmt ::= 'include' <<optInd (expr (',' ind_eq* expr)*)>>
+includeStmt ::= 'include' <<optInd (expr (',' ind_eq* expr)*)>> {pin=1}
 
 //fromStmt = 'from' expr 'import' optInd expr (comma expr)*
-fromStmt ::= 'from' expr 'import' <<optInd (expr (',' ind_eq* expr)*)>>
+fromStmt ::= 'from' expr 'import' <<optInd (expr (',' ind_eq* expr)*)>> {pin=1}
 
 //returnStmt = 'return' optInd expr?
-returnStmt ::= 'return' <<optInd expr>>?
+returnStmt ::= 'return' <<optInd expr>>? {pin=1}
 
 //raiseStmt = 'raise' optInd expr?
-raiseStmt ::= 'raise' <<optInd expr>>?
+raiseStmt ::= 'raise' <<optInd expr>>? {pin=1}
 
 //yieldStmt = 'yield' optInd expr?
-yieldStmt ::= 'yield' <<optInd expr>>?
+yieldStmt ::= 'yield' <<optInd expr>>? {pin=1}
 
 //discardStmt = 'discard' optInd expr?
-discardStmt ::= 'discard' <<optInd expr>>?
+discardStmt ::= 'discard' <<optInd expr>>? {pin=1}
 
 //breakStmt = 'break' optInd expr?
-breakStmt ::= 'break' <<optInd expr>>?
+breakStmt ::= 'break' <<optInd expr>>? {pin=1}
 
 //continueStmt = 'continue' optInd expr?
-continueStmt ::= 'continue' <<optInd expr>>?
+continueStmt ::= 'continue' <<optInd expr>>? {pin=1}
 
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
@@ -418,13 +418,13 @@ private condStmt1 ::= ind_eq 'elif' expr ':' inlineStmt
 private condStmt2 ::= ind_eq 'else' ':' inlineStmt
 
 //ifStmt = 'if' condStmt
-ifStmt ::= 'if' condStmt
+ifStmt ::= 'if' condStmt {pin=1}
 
 //whenStmt = 'when' condStmt
-whenStmt ::= 'when' condStmt
+whenStmt ::= 'when' condStmt {pin=1}
 
 //whileStmt = 'while' expr colcom stmt
-whileStmt ::= 'while' expr ':' inlineStmt
+whileStmt ::= 'while' expr ':' inlineStmt {pin=1}
 
 //ofBranch = 'of' exprList colcom stmt
 ofBranch ::= 'of' exprs ':' inlineStmt
@@ -439,7 +439,7 @@ private ofBranches2 ::= ind_eq 'else' ':' inlineStmt
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
 //            | IND{=} ofBranches)
-caseStmt ::= 'case' expr ':'? caseStmt0
+caseStmt ::= 'case' expr ':'? caseStmt0 {pin=1}
 private caseStmt0 ::= caseStmt1 | caseStmt2
 private caseStmt1 ::= INDENT ofBranches termInd
 private caseStmt2 ::= ind_eq ofBranches
@@ -447,9 +447,9 @@ private caseStmt2 ::= ind_eq ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':' inlineStmt &(ind_eq? 'except'|'finally') tryStmt1* tryStmt2?
-private tryStmt1 ::= ind_eq? 'except' exprs ':' inlineStmt
-private tryStmt2 ::= ind_eq? 'finally' ':' inlineStmt
+tryStmt ::= 'try' ':' inlineStmt &(ind_eq? 'except'|'finally') tryStmt1* tryStmt2? {pin=1}
+private tryStmt1 ::= ind_eq? 'except' exprs ':' inlineStmt {pin=2}
+private tryStmt2 ::= ind_eq? 'finally' ':' inlineStmt {pin=2}
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
@@ -462,16 +462,16 @@ private tryExpr2 ::= <<optInd ('finally' ':' inlineStmt)>>
 
 //blockStmt = 'block' symbol? colcom stmt
 //blockExpr = 'block' symbol? colcom stmt
-blockStmt ::= 'block' symbol? ':' inlineStmt
+blockStmt ::= 'block' symbol? ':' inlineStmt {pin=1}
 
 //staticStmt = 'static' colcom stmt
-staticStmt ::= 'static' ':' inlineStmt
+staticStmt ::= 'static' ':' inlineStmt {pin=1}
 
 //deferStmt = 'defer' colcom stmt
-deferStmt ::= 'defer' ':' inlineStmt
+deferStmt ::= 'defer' ':' inlineStmt {pin=1}
 
 //asmStmt = 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
-asmStmt ::= 'asm' pragma? asmStmt1
+asmStmt ::= 'asm' pragma? asmStmt1 {pin=1}
 private asmStmt1 ::= STR_LIT
 
 //genericParam = symbol (comma symbol)* (colon expr)? ('=' optInd expr)?
@@ -554,10 +554,10 @@ variable ::= (varTuple | identColonEquals) colonBody?
 constant ::= (varTuple | identWithPragma) (':' typeDesc)? '=' <<optInd expr>>
 
 //bindStmt = 'bind' optInd qualifiedIdent ^+ comma
-bindStmt ::= 'bind' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
+bindStmt ::= 'bind' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>> {pin=1}
 
 //mixinStmt = 'mixin' optInd qualifiedIdent ^+ comma
-mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>>
+mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (',' qualifiedIdent)*)>> {pin=1}
 
 //pragmaStmt = pragma (':' COMMENT? stmt)?
 pragmaStmt ::= pragma (':' inlineStmt)?
@@ -602,16 +602,16 @@ private complexStmt ::= ifStmt | whenStmt | whileStmt
                       | bindStmt | mixinStmt
                       | caseStmt // NOTE: Moved caseStmt to here from expr.
 
-procStmt ::= 'proc' <<optInd namedRoutine>>
-funcStmt ::= 'func' <<optInd namedRoutine>>
-methodStmt ::= 'method' <<optInd namedRoutine>>
-iteratorStmt ::= 'iterator' <<optInd namedRoutine>>
-macroStmt ::= 'macro' <<optInd namedRoutine>>
-templateStmt ::= 'template' <<optInd namedRoutine>>
-converterStmt ::= 'converter' <<optInd namedRoutine>>
-typeStmt ::= 'type' <<section typeDef>>
-constStmt ::= 'const' <<section constant>>
-varStmt ::= ('let'|'var'|'using') <<optInd variable>>
+procStmt ::= 'proc' <<optInd namedRoutine>> {pin=1}
+funcStmt ::= 'func' <<optInd namedRoutine>> {pin=1}
+methodStmt ::= 'method' <<optInd namedRoutine>> {pin=1}
+iteratorStmt ::= 'iterator' <<optInd namedRoutine>> {pin=1}
+macroStmt ::= 'macro' <<optInd namedRoutine>> {pin=1}
+templateStmt ::= 'template' <<optInd namedRoutine>> {pin=1}
+converterStmt ::= 'converter' <<optInd namedRoutine>> {pin=1}
+typeStmt ::= 'type' <<section typeDef>> {pin=1}
+constStmt ::= 'const' <<section constant>> {pin=1}
+varStmt ::= ('let'|'var'|'using') <<optInd variable>> {pin=1}
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 stmt ::= complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*
