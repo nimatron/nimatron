@@ -503,7 +503,7 @@ routine ::= pattern? genericParams? paramsColon pragma? ('=' COMMENT? inlineStmt
 commentStmt ::= COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-meta section ::= COMMENT? <<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd)
+meta section ::= COMMENT? (<<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd))
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*

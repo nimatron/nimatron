@@ -4317,51 +4317,51 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COMMENT? <<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd)
+  // COMMENT? (<<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd))
   public static boolean section(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "section")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = section_0(b, l + 1, _RULE);
-    if (!r) r = section_1(b, l + 1, _RULE);
+    r = section_0(b, l + 1);
+    r = r && section_1(b, l + 1, _RULE);
     exit_section_(b, m, SECTION, r);
     return r;
   }
 
-  // COMMENT? <<RULE>>
-  private static boolean section_0(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "section_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = section_0_0(b, l + 1);
-    r = r && _RULE.parse(b, l);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
   // COMMENT?
-  private static boolean section_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "section_0_0")) return false;
+  private static boolean section_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "section_0")) return false;
     consumeToken(b, COMMENT);
     return true;
   }
 
-  // INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd
+  // <<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd)
   private static boolean section_1(PsiBuilder b, int l, Parser _RULE) {
     if (!recursion_guard_(b, l, "section_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
+    r = _RULE.parse(b, l);
+    if (!r) r = section_1_1(b, l + 1, _RULE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd
+  private static boolean section_1_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, INDENT);
-    r = r && section_1_1(b, l + 1, _RULE);
-    r = r && section_1_2(b, l + 1, _RULE);
+    r = r && section_1_1_1(b, l + 1, _RULE);
+    r = r && section_1_1_2(b, l + 1, _RULE);
     r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // <<RULE>> | COMMENT
-  private static boolean section_1_1(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "section_1_1")) return false;
+  private static boolean section_1_1_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = _RULE.parse(b, l);
@@ -4371,30 +4371,30 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   // (ind_eq (<<RULE>> | COMMENT))*
-  private static boolean section_1_2(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "section_1_2")) return false;
+  private static boolean section_1_1_2(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!section_1_2_0(b, l + 1, _RULE)) break;
-      if (!empty_element_parsed_guard_(b, "section_1_2", c)) break;
+      if (!section_1_1_2_0(b, l + 1, _RULE)) break;
+      if (!empty_element_parsed_guard_(b, "section_1_1_2", c)) break;
     }
     return true;
   }
 
   // ind_eq (<<RULE>> | COMMENT)
-  private static boolean section_1_2_0(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "section_1_2_0")) return false;
+  private static boolean section_1_1_2_0(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ind_eq(b, l + 1);
-    r = r && section_1_2_0_1(b, l + 1, _RULE);
+    r = r && section_1_1_2_0_1(b, l + 1, _RULE);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // <<RULE>> | COMMENT
-  private static boolean section_1_2_0_1(PsiBuilder b, int l, Parser _RULE) {
-    if (!recursion_guard_(b, l, "section_1_2_0_1")) return false;
+  private static boolean section_1_1_2_0_1(PsiBuilder b, int l, Parser _RULE) {
+    if (!recursion_guard_(b, l, "section_1_1_2_0_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = _RULE.parse(b, l);
