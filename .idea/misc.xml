@@ -5,7 +5,7 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="idea.plugin.psiviewer.controller.project.PsiViewerProjectService">
-    <option name="HIGHLIGHT" value="true" />
+    <option name="HIGHLIGHT" value="false" />
     <option name="FILTER_WHITESPACE" value="false" />
     <option name="SHOW_PROPERTIES" value="false" />
     <option name="SPLIT_DIVIDER_POSITION" value="641" />
