@@ -510,8 +510,8 @@ objectBranch ::= 'of' exprs ':' objectPart
 //                      (IND{=} 'elif' expr colcom objectPart)*
 //                      (IND{=} 'else' colcom objectPart)?
 objectBranches ::= objectBranch (ind_eq objectBranch)*
-                        (ind_eq 'elif' expr colcom objectPart)*
-                        (ind_eq 'else' colcom objectPart)?
+                        (ind_eq 'elif' expr ':' objectPart)*
+                        (ind_eq 'else' ':' objectPart)?
 
 //objectCase = 'case' identWithPragma ':' typeDesc ':'? COMMENT?
 //            (IND{>} objectBranches DED
