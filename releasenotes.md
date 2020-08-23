@@ -2,7 +2,14 @@
 
 ## 1.2.3
 
-  * Fixed problem with escaping character and string literals.
+  * Extensive work testing and improving parser.
+  * Initial parse error recovery implemented.
+  * Previous workarounds were replaced.
+  * All outstanding issues resolved.
+
+More work needs to be done on developing the parser. The current implementation
+is significantly different from the way the Nim compiler handles indentation.
+Most of the Nim grammar otherwise seems to be nearly there.
 
 ## 1.2.2
 

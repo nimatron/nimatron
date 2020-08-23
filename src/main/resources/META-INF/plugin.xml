@@ -10,6 +10,21 @@
         <li>Nim routines (funcs, procs, etc) listed in Structure View.</li>
         <li>Folding of Nim statements.</li>
     </ul>
+    <p>
+        The parser used to provide Structure View and code folding is currently
+        a work in progress. Syntax highlighting is done by a dedicated lexer.
+        Errors may be shown for Nim source that is not fully recognised yet by
+        the parser but may still be valid. Please do use the issue tracker to
+        provide examples where valid Nim code is showing errors in the editor.
+    </p>
+    <p>
+        This is my first plugin for IDEA-platform IDEs. I am also new to Nim.
+        I like Nim and working with parsers. Though, this project seems quite
+        challenging I will keep working on it as I will also use it. Nim seems
+        like a very nice language to work with, though I think perhaps it's not
+        easy to define a parser for it here. Indents are particularly difficult.
+        Anyway, thank-you for your patience. I hope you find the plugin useful.
+    </p>
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
