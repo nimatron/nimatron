@@ -4854,12 +4854,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   // complexOrSimpleStmt &(';' | IND_EQ0)
   static boolean stmt3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt3")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = complexOrSimpleStmt(b, l + 1);
+    p = r; // pin = 1
     r = r && stmt3_1(b, l + 1);
-    exit_section_(b, l, m, r, false, stmtRecover_parser_);
-    return r;
+    exit_section_(b, l, m, r, p, stmtRecover_parser_);
+    return r || p;
   }
 
   // &(';' | IND_EQ0)
