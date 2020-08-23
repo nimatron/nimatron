@@ -91,6 +91,7 @@ public interface NimElementTypes {
   IElementType PREFIX_OPERATOR = new NimElementType("PREFIX_OPERATOR");
   IElementType PRIMARY = new NimElementType("PRIMARY");
   IElementType PRIMARY_SUFFIX = new NimElementType("PRIMARY_SUFFIX");
+  IElementType PROC_EXPR = new NimElementType("PROC_EXPR");
   IElementType PROC_STMT = new NimElementType("PROC_STMT");
   IElementType PROC_TYPE = new NimElementType("PROC_TYPE");
   IElementType PTR_TYPE = new NimElementType("PTR_TYPE");
@@ -405,6 +406,9 @@ public interface NimElementTypes {
       }
       else if (type == PRIMARY_SUFFIX) {
         return new NimPrimarySuffixImpl(node);
+      }
+      else if (type == PROC_EXPR) {
+        return new NimProcExprImpl(node);
       }
       else if (type == PROC_STMT) {
         return new NimProcStmtImpl(node);

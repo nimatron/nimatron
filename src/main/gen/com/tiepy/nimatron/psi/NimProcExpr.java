@@ -5,9 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimProcType extends NimElement {
+public interface NimProcExpr extends NimElement {
+
+  @Nullable
+  NimInlineStmt getInlineStmt();
 
   @NotNull
-  NimProcExpr getProcExpr();
+  NimParamsColon getParamsColon();
+
+  @Nullable
+  NimPragma getPragma();
 
 }

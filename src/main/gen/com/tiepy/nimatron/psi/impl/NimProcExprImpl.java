@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimProcTypeImpl extends NimElementImpl implements NimProcType {
+public class NimProcExprImpl extends NimElementImpl implements NimProcExpr {
 
-  public NimProcTypeImpl(@NotNull ASTNode node) {
+  public NimProcExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitProcType(this);
+    visitor.visitProcExpr(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -26,9 +26,21 @@ public class NimProcTypeImpl extends NimElementImpl implements NimProcType {
   }
 
   @Override
+  @Nullable
+  public NimInlineStmt getInlineStmt() {
+    return findChildByClass(NimInlineStmt.class);
+  }
+
+  @Override
   @NotNull
-  public NimProcExpr getProcExpr() {
-    return findNotNullChildByClass(NimProcExpr.class);
+  public NimParamsColon getParamsColon() {
+    return findNotNullChildByClass(NimParamsColon.class);
+  }
+
+  @Override
+  @Nullable
+  public NimPragma getPragma() {
+    return findChildByClass(NimPragma.class);
   }
 
 }

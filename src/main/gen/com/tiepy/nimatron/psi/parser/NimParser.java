@@ -1017,15 +1017,23 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'enum' <<optInd enum1>>
+  // 'enum' COMMENT? <<optInd enum1>>
   public static boolean enum_$(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_$")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ENUM, "<enum $>");
     r = consumeToken(b, "enum");
+    r = r && enum_1(b, l + 1);
     r = r && optInd(b, l + 1, enum1_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // COMMENT?
+  private static boolean enum_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
   }
 
   /* ********************************************************** */
@@ -4270,6 +4278,53 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // 'proc' paramsColon pragma? ('=' COMMENT? inlineStmt)?
+  public static boolean procExpr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "procExpr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, PROC_EXPR, "<proc expr>");
+    r = consumeToken(b, "proc");
+    r = r && paramsColon(b, l + 1);
+    r = r && procExpr_2(b, l + 1);
+    r = r && procExpr_3(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // pragma?
+  private static boolean procExpr_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "procExpr_2")) return false;
+    pragma(b, l + 1);
+    return true;
+  }
+
+  // ('=' COMMENT? inlineStmt)?
+  private static boolean procExpr_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "procExpr_3")) return false;
+    procExpr_3_0(b, l + 1);
+    return true;
+  }
+
+  // '=' COMMENT? inlineStmt
+  private static boolean procExpr_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "procExpr_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "=");
+    r = r && procExpr_3_0_1(b, l + 1);
+    r = r && inlineStmt(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean procExpr_3_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "procExpr_3_0_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  /* ********************************************************** */
   // 'proc' <<optInd namedRoutine>>
   public static boolean procStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "procStmt")) return false;
@@ -4283,13 +4338,23 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'proc' <<optInd typeDesc>>
+  // &'proc' procExpr
   public static boolean procType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "procType")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PROC_TYPE, "<proc type>");
+    r = procType_0(b, l + 1);
+    r = r && procExpr(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // &'proc'
+  private static boolean procType_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "procType_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_);
     r = consumeToken(b, "proc");
-    r = r && optInd(b, l + 1, typeDesc_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

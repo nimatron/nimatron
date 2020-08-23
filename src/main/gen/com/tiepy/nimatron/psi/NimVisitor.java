@@ -338,6 +338,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitProcExpr(@NotNull NimProcExpr o) {
+    visitElement(o);
+  }
+
   public void visitProcStmt(@NotNull NimProcStmt o) {
     visitElement(o);
   }

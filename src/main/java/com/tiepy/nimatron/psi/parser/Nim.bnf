@@ -280,6 +280,7 @@ paramsColon ::= params? (':' <<optInd typeDesc>>)?
 doBlock ::= 'do' paramsArrow pragma? colcom inlineStmt
 
 //procExpr = 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
+procExpr ::= 'proc' paramsColon pragma? ('=' COMMENT? inlineStmt)?
 
 //distinct = 'distinct' optInd typeDesc
 
@@ -332,7 +333,7 @@ refType ::= 'ref' <<optInd typeDesc>>
 ptrType ::= 'ptr' <<optInd typeDesc>>
 sharedType ::= 'shared' <<optInd typeDesc>>
 tupleType ::= 'tuple' <<optInd typeDesc>>
-procType ::= 'proc' <<optInd typeDesc>>
+procType ::= &'proc' procExpr
 iteratorType ::= 'iterator' <<optInd typeDesc>>
 distinctType ::= 'distinct' <<optInd typeDesc>>
 objectType ::= &'object' object {pin=1}
@@ -505,7 +506,7 @@ commentStmt ::= COMMENT
 meta section ::= COMMENT? (<<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd))
 
 //enum = 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
-enum ::= 'enum' <<optInd enum1>>
+enum ::= 'enum' COMMENT? <<optInd enum1>>
 private enum1 ::= (symbol pragma? ind_eq? enum2)+
 private enum2 ::= ('=' <<optInd (expr COMMENT?) >> )? comma? COMMENT?
 
