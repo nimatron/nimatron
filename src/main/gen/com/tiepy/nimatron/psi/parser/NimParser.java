@@ -4851,7 +4851,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // complexOrSimpleStmt &(';' | IND_EQ0)
+  // complexOrSimpleStmt &IND_EQ0
   static boolean stmt3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt3")) return false;
     boolean r, p;
@@ -4863,42 +4863,24 @@ public class NimParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // &(';' | IND_EQ0)
+  // &IND_EQ0
   private static boolean stmt3_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt3_1")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _AND_);
-    r = stmt3_1_0(b, l + 1);
+    r = consumeToken(b, IND_EQ0);
     exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ';' | IND_EQ0
-  private static boolean stmt3_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt3_1_0")) return false;
-    boolean r;
-    r = consumeToken(b, ";");
-    if (!r) r = consumeToken(b, IND_EQ0);
     return r;
   }
 
   /* ********************************************************** */
-  // !(';' | IND_EQ0)
+  // !IND_EQ0
   static boolean stmtRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmtRecover")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NOT_);
-    r = !stmtRecover_0(b, l + 1);
+    r = !consumeToken(b, IND_EQ0);
     exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ';' | IND_EQ0
-  private static boolean stmtRecover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmtRecover_0")) return false;
-    boolean r;
-    r = consumeToken(b, ";");
-    if (!r) r = consumeToken(b, IND_EQ0);
     return r;
   }
 
