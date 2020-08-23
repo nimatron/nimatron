@@ -3232,7 +3232,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9
+  // op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10 // NOTE: op10 added here.
   //            | 'from' | 'static'
   static boolean operator1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operator1")) return false;
@@ -3247,6 +3247,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     if (!r) r = op7(b, l + 1);
     if (!r) r = op8(b, l + 1);
     if (!r) r = op9(b, l + 1);
+    if (!r) r = op10(b, l + 1);
     if (!r) r = consumeToken(b, "from");
     if (!r) r = consumeToken(b, "static");
     return r;

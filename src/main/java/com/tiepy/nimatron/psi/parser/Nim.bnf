@@ -73,8 +73,8 @@ colon ::= ':' COMMENT?
 //         | 'is' | 'isnot' | 'in' | 'notin' | 'of' | 'as' | 'from' |
 //         | 'div' | 'mod' | 'shl' | 'shr' | 'not' | 'static' | '..'
 operator ::= operator1
-private operator1 ::= op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9
-           | 'from' | 'static' // NOTE: Keywords included in o1-op9 removed.
+private operator1 ::= op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10 // NOTE: op10 added here.
+           | 'from' | 'static' // NOTE: Keywords included in o1-op10 removed.
 
 private op0 ::= OP0
 private op1 ::= OP1
