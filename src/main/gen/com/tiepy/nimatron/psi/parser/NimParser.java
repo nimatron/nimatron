@@ -2714,55 +2714,74 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (INDENT objectPart (ind_eq objectPart)* termInd)
-  //              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
+  // ((INDENT objectPart (ind_eq objectPart)* termInd)
+  //              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals) COMMENT?
   public static boolean objectPart(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "objectPart")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, OBJECT_PART, "<object part>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, OBJECT_PART, "<object part>");
     r = objectPart_0(b, l + 1);
+    r = r && objectPart_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (INDENT objectPart (ind_eq objectPart)* termInd)
+  //              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
+  private static boolean objectPart_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = objectPart_0_0(b, l + 1);
     if (!r) r = objectWhen(b, l + 1);
     if (!r) r = objectCase(b, l + 1);
     if (!r) r = consumeToken(b, "nil");
     if (!r) r = consumeToken(b, "discard");
     if (!r) r = declColonEquals(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, null, r);
     return r;
   }
 
   // INDENT objectPart (ind_eq objectPart)* termInd
-  private static boolean objectPart_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "objectPart_0")) return false;
+  private static boolean objectPart_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, INDENT);
     r = r && objectPart(b, l + 1);
-    r = r && objectPart_0_2(b, l + 1);
+    r = r && objectPart_0_0_2(b, l + 1);
     r = r && termInd(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // (ind_eq objectPart)*
-  private static boolean objectPart_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "objectPart_0_2")) return false;
+  private static boolean objectPart_0_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0_0_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!objectPart_0_2_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "objectPart_0_2", c)) break;
+      if (!objectPart_0_0_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "objectPart_0_0_2", c)) break;
     }
     return true;
   }
 
   // ind_eq objectPart
-  private static boolean objectPart_0_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "objectPart_0_2_0")) return false;
+  private static boolean objectPart_0_0_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_0_0_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ind_eq(b, l + 1);
     r = r && objectPart(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // COMMENT?
+  private static boolean objectPart_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "objectPart_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
   }
 
   /* ********************************************************** */

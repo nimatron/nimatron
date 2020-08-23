@@ -531,8 +531,8 @@ objectCase ::= 'case' identWithPragma ':' typeDesc ':'? COMMENT?
 
 //objectPart = IND{>} objectPart^+IND{=} DED
 //           / objectWhen / objectCase / 'nil' / 'discard' / declColonEquals
-objectPart ::= (INDENT objectPart (ind_eq objectPart)* termInd)
-             | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
+objectPart ::= ((INDENT objectPart (ind_eq objectPart)* termInd)
+             | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals) COMMENT?
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
 object ::= 'object' pragma? ('of' typeDesc)? COMMENT? objectPart?
