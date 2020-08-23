@@ -21,8 +21,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(11,12)
             NimIndAndCommentImpl(IND_AND_COMMENT)(12,12)
               <empty list>
-    NimIndEqImpl(IND_EQ)(12,12)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(12,26)
       NimVarStmtImpl(VAR_STMT)(12,26)
         PsiElement(NimTokenType.KEYW)('var')(12,15)
@@ -44,8 +42,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(25,26)
             NimIndAndCommentImpl(IND_AND_COMMENT)(26,26)
               <empty list>
-    NimIndEqImpl(IND_EQ)(26,26)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(26,41)
       NimVarStmtImpl(VAR_STMT)(26,41)
         PsiElement(NimTokenType.KEYW)('var')(26,29)
@@ -67,8 +63,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(40,41)
             NimIndAndCommentImpl(IND_AND_COMMENT)(41,41)
               <empty list>
-    NimIndEqImpl(IND_EQ)(41,41)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(41,55)
       NimVarStmtImpl(VAR_STMT)(41,55)
         PsiElement(NimTokenType.KEYW)('var')(41,44)
@@ -90,8 +84,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(54,55)
             NimIndAndCommentImpl(IND_AND_COMMENT)(55,55)
               <empty list>
-    NimIndEqImpl(IND_EQ)(55,55)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(55,70)
       NimVarStmtImpl(VAR_STMT)(55,70)
         PsiElement(NimTokenType.KEYW)('var')(55,58)
@@ -113,8 +105,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(69,70)
             NimIndAndCommentImpl(IND_AND_COMMENT)(70,70)
               <empty list>
-    NimIndEqImpl(IND_EQ)(70,70)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(70,83)
       NimVarStmtImpl(VAR_STMT)(70,83)
         PsiElement(NimTokenType.KEYW)('var')(70,73)
@@ -136,8 +126,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(82,83)
             NimIndAndCommentImpl(IND_AND_COMMENT)(83,83)
               <empty list>
-    NimIndEqImpl(IND_EQ)(83,83)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(83,97)
       NimVarStmtImpl(VAR_STMT)(83,97)
         PsiElement(NimTokenType.KEYW)('var')(83,86)
@@ -159,8 +147,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(96,97)
             NimIndAndCommentImpl(IND_AND_COMMENT)(97,97)
               <empty list>
-    NimIndEqImpl(IND_EQ)(97,97)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(97,111)
       NimVarStmtImpl(VAR_STMT)(97,111)
         PsiElement(NimTokenType.KEYW)('var')(97,100)
@@ -182,8 +168,6 @@ Nim File(0,125)
             PsiWhiteSpace('\n')(110,111)
             NimIndAndCommentImpl(IND_AND_COMMENT)(111,111)
               <empty list>
-    NimIndEqImpl(IND_EQ)(111,111)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(111,125)
       NimVarStmtImpl(VAR_STMT)(111,125)
         PsiElement(NimTokenType.KEYW)('var')(111,114)

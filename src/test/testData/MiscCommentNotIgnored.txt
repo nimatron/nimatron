@@ -44,15 +44,11 @@ Nim File(0,73)
                   PsiElement(NimTokenType.DEDENT0)('\n')(41,42)
               NimIndAndCommentImpl(IND_AND_COMMENT)(42,42)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(42,42)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(42,51)
       NimSimpleStmtImpl(SIMPLE_STMT)(42,51)
         NimCommentStmtImpl(COMMENT_STMT)(42,51)
           PsiElement(NimTokenType.COMMENT)('# Comment')(42,51)
     PsiWhiteSpace('\n')(51,52)
-    NimIndEqImpl(IND_EQ)(52,52)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(52,73)
       NimVarStmtImpl(VAR_STMT)(52,73)
         PsiElement(NimTokenType.KEYW)('var')(52,55)

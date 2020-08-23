@@ -74,8 +74,6 @@ Nim File(0,83)
                       <empty list>
             NimDedentImpl(DEDENT)(56,56)
               <empty list>
-    NimIndEqImpl(IND_EQ)(56,56)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(56,83)
       NimSimpleStmtImpl(SIMPLE_STMT)(56,83)
         NimExprStmtImpl(EXPR_STMT)(56,83)

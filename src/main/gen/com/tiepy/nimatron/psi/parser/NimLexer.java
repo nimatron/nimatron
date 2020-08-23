@@ -700,7 +700,11 @@ private IElementType getIndenterToken() {
     Indent lastIndent = indentStack.pop();
     int diff = lastIndent.Column - indentSpaces;
 
-    dedentStack.push(NimElementTypes.IND_EQX);
+    if (indentSpaces == 0) {
+        dedentStack.push(NimElementTypes.IND_EQ0);
+    } else {
+        dedentStack.push(NimElementTypes.IND_EQX);
+    }
 
     // Add required dedents to stack to be returned.
     while (diff > lastIndent.Increment) {
@@ -709,7 +713,11 @@ private IElementType getIndenterToken() {
         lastIndent = indentStack.pop();
         diff = lastIndent.Column - indentSpaces;
 
-        dedentStack.push(NimElementTypes.DEDENTX);
+        if (indentSpaces == 0) {
+            dedentStack.push(NimElementTypes.DEDENT0);
+        } else {
+            dedentStack.push(NimElementTypes.DEDENTX);
+        }
     }
 
     lastIndentSpaces = lastIndent.Column;

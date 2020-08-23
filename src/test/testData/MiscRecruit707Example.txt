@@ -18,8 +18,7 @@ Nim File(0,3601)
         PsiWhiteSpace(' ')(14,15)
         PsiElement(NimTokenType.COMMENT)('# Should comment this line to see the error')(15,58)
     PsiWhiteSpace('\n')(58,59)
-    NimIndEqImpl(IND_EQ)(59,61)
-      PsiElement(NimTokenType.IND_EQ0)('\n\n')(59,61)
+    PsiElement(NimTokenType.IND_EQ0)('\n\n')(59,61)
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(61,164)
       NimTypeStmtImpl(TYPE_STMT)(61,164)
         PsiElement(NimTokenType.KEYW)('type')(61,65)
@@ -105,8 +104,6 @@ Nim File(0,3601)
                             PsiElement(NimTokenType.DEDENT0)('\n')(163,164)
             NimIndAndCommentImpl(IND_AND_COMMENT)(164,164)
               <empty list>
-    NimIndEqImpl(IND_EQ)(164,164)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(164,438)
       NimFuncStmtImpl(FUNC_STMT)(164,438)
         PsiElement(NimTokenType.KEYW)('func')(164,168)
@@ -567,8 +564,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(437,438)
               NimIndAndCommentImpl(IND_AND_COMMENT)(438,438)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(438,438)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(438,542)
       NimFuncStmtImpl(FUNC_STMT)(438,542)
         PsiElement(NimTokenType.KEYW)('func')(438,442)
@@ -719,15 +714,11 @@ Nim File(0,3601)
                   <empty list>
               NimIndAndCommentImpl(IND_AND_COMMENT)(542,542)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(542,542)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(542,651)
       NimSimpleStmtImpl(SIMPLE_STMT)(542,651)
         NimCommentStmtImpl(COMMENT_STMT)(542,651)
           PsiElement(NimTokenType.COMMENT)('#[\nfunc identityMatrix3*(): Matrix3 =\n  result.data[0] = 1'f\n  result.data[4] = 1'f\n  result.data[8] = 1'f\n]#')(542,651)
     PsiWhiteSpace('\n')(651,652)
-    NimIndEqImpl(IND_EQ)(652,652)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(652,667)
       NimSimpleStmtImpl(SIMPLE_STMT)(652,667)
         NimPragmaStmtImpl(PRAGMA_STMT)(652,667)
@@ -754,8 +745,6 @@ Nim File(0,3601)
               <empty list>
             PsiElement(NimTokenType.NOTATION)('.}')(665,667)
     PsiWhiteSpace('\n')(667,668)
-    NimIndEqImpl(IND_EQ)(668,668)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(668,902)
       NimFuncStmtImpl(FUNC_STMT)(668,902)
         PsiElement(NimTokenType.KEYW)('func')(668,672)
@@ -1115,8 +1104,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(901,902)
               NimIndAndCommentImpl(IND_AND_COMMENT)(902,902)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(902,902)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(902,1310)
       NimFuncStmtImpl(FUNC_STMT)(902,1310)
         PsiElement(NimTokenType.KEYW)('func')(902,906)
@@ -1945,8 +1932,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1309,1310)
               NimIndAndCommentImpl(IND_AND_COMMENT)(1310,1310)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(1310,1310)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1310,1364)
       NimFuncStmtImpl(FUNC_STMT)(1310,1364)
         PsiElement(NimTokenType.KEYW)('func')(1310,1314)
@@ -2038,8 +2023,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1363,1364)
               NimIndAndCommentImpl(IND_AND_COMMENT)(1364,1364)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(1364,1364)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1364,1772)
       NimFuncStmtImpl(FUNC_STMT)(1364,1772)
         PsiElement(NimTokenType.KEYW)('func')(1364,1368)
@@ -2868,8 +2851,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1771,1772)
               NimIndAndCommentImpl(IND_AND_COMMENT)(1772,1772)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(1772,1772)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1772,1826)
       NimFuncStmtImpl(FUNC_STMT)(1772,1826)
         PsiElement(NimTokenType.KEYW)('func')(1772,1776)
@@ -2961,8 +2942,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1825,1826)
               NimIndAndCommentImpl(IND_AND_COMMENT)(1826,1826)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(1826,1826)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1826,2666)
       NimFuncStmtImpl(FUNC_STMT)(1826,2666)
         PsiElement(NimTokenType.KEYW)('func')(1826,1830)
@@ -4763,8 +4742,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(2665,2666)
               NimIndAndCommentImpl(IND_AND_COMMENT)(2666,2666)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(2666,2666)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(2666,3011)
       NimFuncStmtImpl(FUNC_STMT)(2666,3011)
         PsiElement(NimTokenType.KEYW)('func')(2666,2670)
@@ -5432,8 +5409,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(3010,3011)
               NimIndAndCommentImpl(IND_AND_COMMENT)(3011,3011)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(3011,3011)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3011,3065)
       NimFuncStmtImpl(FUNC_STMT)(3011,3065)
         PsiElement(NimTokenType.KEYW)('func')(3011,3015)
@@ -5525,8 +5500,6 @@ Nim File(0,3601)
                   PsiElement(NimTokenType.DEDENT0)('\n')(3064,3065)
               NimIndAndCommentImpl(IND_AND_COMMENT)(3065,3065)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(3065,3065)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3065,3118)
       NimFuncStmtImpl(FUNC_STMT)(3065,3118)
         PsiElement(NimTokenType.KEYW)('func')(3065,3069)
@@ -5618,8 +5591,6 @@ Nim File(0,3601)
                   <empty list>
               NimIndAndCommentImpl(IND_AND_COMMENT)(3118,3118)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(3118,3118)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3118,3125)
       NimSimpleStmtImpl(SIMPLE_STMT)(3118,3125)
         NimPragmaStmtImpl(PRAGMA_STMT)(3118,3125)
@@ -5637,8 +5608,7 @@ Nim File(0,3601)
               <empty list>
             PsiElement(NimTokenType.NOTATION)('.}')(3123,3125)
     PsiWhiteSpace('\n')(3125,3126)
-    NimIndEqImpl(IND_EQ)(3126,3127)
-      PsiElement(NimTokenType.IND_EQ0)('\n')(3126,3127)
+    PsiElement(NimTokenType.IND_EQ0)('\n')(3126,3127)
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3127,3601)
       NimSimpleStmtImpl(SIMPLE_STMT)(3127,3601)
         NimCommentStmtImpl(COMMENT_STMT)(3127,3601)

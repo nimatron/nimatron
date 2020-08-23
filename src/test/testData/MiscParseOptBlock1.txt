@@ -31,8 +31,6 @@ Nim File(0,350)
             PsiWhiteSpace('\n')(31,32)
             NimIndAndCommentImpl(IND_AND_COMMENT)(32,32)
               <empty list>
-    NimIndEqImpl(IND_EQ)(32,32)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(32,350)
       NimWhileStmtImpl(WHILE_STMT)(32,350)
         PsiElement(NimTokenType.KEYW)('while')(32,37)

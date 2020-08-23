@@ -627,7 +627,7 @@ varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
 
 // NOTE: The following is an attempt to isolate statements by terminator, which could be useful in error recovery.
 stmt ::= (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
-private stmt1 ::= complexOrSimpleStmt (';' | ind_eq+)
+private stmt1 ::= complexOrSimpleStmt (';' | (IND_EQ0 ind_eq*))
 
 // NOTE: The following is an attempt to add recovery.
 //stmt ::= stmt1 | complexOrSimpleStmt

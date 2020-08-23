@@ -43,8 +43,6 @@ Nim File(0,232)
             PsiWhiteSpace('\n')(110,111)
             NimIndAndCommentImpl(IND_AND_COMMENT)(111,111)
               <empty list>
-    NimIndEqImpl(IND_EQ)(111,111)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(111,232)
       NimVarStmtImpl(VAR_STMT)(111,232)
         PsiElement(NimTokenType.KEYW)('let')(111,114)

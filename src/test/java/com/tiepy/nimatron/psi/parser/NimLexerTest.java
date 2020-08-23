@@ -36,14 +36,11 @@ public class NimLexerTest {
     public void testMisc() throws Exception {
         /*int tokenCount =*/
 
-        parse("c = 3\n" +
+        parse("proc getString(): string =\n" +
+                "  return \"OK\"\n" +
                 "\n" +
-                "# Compile-time error, const cannot be modified at run-time\n" +
-                "# alphabet = \"abc\"\n" +
-                "\n" +
-                "# Compile-time error, `d` and `e` are immutable\n" +
-                "# d.add(\"bar\")\n" +
-                "# e += 1");
+                "# Comment\n" +
+                "var str = getString()");
 
         // Assert.assertEquals(14, tokenCount);
     }

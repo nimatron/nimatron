@@ -91,8 +91,6 @@ Nim File(0,91)
                   <empty list>
               NimIndAndCommentImpl(IND_AND_COMMENT)(53,53)
                 <empty list>
-    NimIndEqImpl(IND_EQ)(53,53)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(53,60)
       NimSimpleStmtImpl(SIMPLE_STMT)(53,60)
         NimPragmaStmtImpl(PRAGMA_STMT)(53,60)
@@ -110,8 +108,7 @@ Nim File(0,91)
               <empty list>
             PsiElement(NimTokenType.NOTATION)('.}')(58,60)
     PsiWhiteSpace('\n')(60,61)
-    NimIndEqImpl(IND_EQ)(61,62)
-      PsiElement(NimTokenType.IND_EQ0)('\n')(61,62)
+    PsiElement(NimTokenType.IND_EQ0)('\n')(61,62)
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(62,91)
       NimSimpleStmtImpl(SIMPLE_STMT)(62,91)
         NimCommentStmtImpl(COMMENT_STMT)(62,91)

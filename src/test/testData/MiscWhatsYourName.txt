@@ -18,8 +18,6 @@ Nim File(0,198)
                           NimLiteralImpl(LITERAL)(5,24)
                             PsiElement(NimTokenType.STR_LIT)('"What's your name?"')(5,24)
     PsiWhiteSpace('\n')(24,25)
-    NimIndEqImpl(IND_EQ)(25,25)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(25,52)
       NimVarStmtImpl(VAR_STMT)(25,52)
         PsiElement(NimTokenType.KEYW)('let')(25,28)
@@ -51,8 +49,6 @@ Nim File(0,198)
             PsiWhiteSpace('\n')(51,52)
             NimIndAndCommentImpl(IND_AND_COMMENT)(52,52)
               <empty list>
-    NimIndEqImpl(IND_EQ)(52,52)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(52,198)
       NimIfStmtImpl(IF_STMT)(52,198)
         PsiElement(NimTokenType.KEYW)('if')(52,54)

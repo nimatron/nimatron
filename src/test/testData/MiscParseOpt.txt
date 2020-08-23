@@ -13,8 +13,7 @@ Nim File(0,1104)
                     NimSymbolImpl(SYMBOL)(7,15)
                       PsiElement(NimTokenType.IDENT)('parseopt')(7,15)
     PsiWhiteSpace('\n')(15,16)
-    NimIndEqImpl(IND_EQ)(16,17)
-      PsiElement(NimTokenType.IND_EQ0)('\n')(16,17)
+    PsiElement(NimTokenType.IND_EQ0)('\n')(16,17)
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(17,437)
       NimBlockStmtImpl(BLOCK_STMT)(17,437)
         PsiElement(NimTokenType.KEYW)('block')(17,22)
@@ -294,8 +293,6 @@ Nim File(0,1104)
                   <empty list>
           NimDedentImpl(DEDENT)(437,437)
             <empty list>
-    NimIndEqImpl(IND_EQ)(437,437)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(437,887)
       NimBlockStmtImpl(BLOCK_STMT)(437,887)
         PsiElement(NimTokenType.KEYW)('block')(437,442)
@@ -562,8 +559,6 @@ Nim File(0,1104)
                   <empty list>
           NimDedentImpl(DEDENT)(887,887)
             <empty list>
-    NimIndEqImpl(IND_EQ)(887,887)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(887,1104)
       NimBlockStmtImpl(BLOCK_STMT)(887,1104)
         PsiElement(NimTokenType.KEYW)('block')(887,892)

@@ -21,8 +21,6 @@ Nim File(0,25)
             PsiWhiteSpace('\n')(11,12)
             NimIndAndCommentImpl(IND_AND_COMMENT)(12,12)
               <empty list>
-    NimIndEqImpl(IND_EQ)(12,12)
-      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(12,25)
       NimVarStmtImpl(VAR_STMT)(12,25)
         PsiElement(NimTokenType.KEYW)('var')(12,15)
