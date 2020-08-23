@@ -404,128 +404,129 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 %%
 
 <YYINITIAL> {
-    {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
-    {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
-    #                           { pushState(LINE_COMMENT); }
-    discard\ \"\"\"             { pushState(DISCARD_COMMENT); }
-    {NEWLINE}                   { handleIndent(); return TokenType.WHITE_SPACE; }
-    {WHITE_SPACE}+              { return TokenType.WHITE_SPACE; }
-    {KEYW}                      { return NimElementTypes.KEYW; }
-    r\"                         { pushState(RAW_STRING_LITERAL); }
-    \"\"\"                      { pushState(TRIPLE_STRING_LITERAL); }
-    \"                          { pushState(STRING_LITERAL); }
-    '                           { pushState(CHARACTER_LITERAL); }
-    {NUM_LIT}                   { return NimElementTypes.NUM_LIT; }
-    {BOOL_LIT}                  { return NimElementTypes.BOOL_LIT; }
-    {OPR_CHARS}                 { yypushback(1); buffer.setLength(0); pushState(OPERATOR); }
-    {IDENT}\"\"\"               { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
-    {IDENT}\"                   { pushState(GENERALIZED_STRING_LITERAL); }
-    {IDENT}                     { return NimElementTypes.IDENT; }
-    {BRACKET}                   { return NimElementTypes.NOTATION; }
-    {OPEN_PARENTHESIS}          { suspendIndent = true; return NimElementTypes.NOTATION; }
-    {CLOSE_PARENTHESIS}         { suspendIndent = false; return NimElementTypes.NOTATION; }
-    {SEMICOLON}                 { return NimElementTypes.NOTATION; }
-    {COMMA}                     { return NimElementTypes.NOTATION; }
-    {GRAVE_ACCENT}              { return NimElementTypes.NOTATION; }
-    .                           { return TokenType.BAD_CHARACTER; }
+    {BLOCK_COMMENT_BEGIN}           { pushState(BLOCK_COMMENT); }
+    {BLOCK_DOC_COMMENT_BEGIN}       { pushState(BLOCK_DOC_COMMENT); }
+    #                               { pushState(LINE_COMMENT); }
+    discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
+    {NEWLINE}                       { handleIndent(); return TokenType.WHITE_SPACE; }
+    {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
+    {KEYW}                          { return NimElementTypes.KEYW; }
+    r\"                             { pushState(RAW_STRING_LITERAL); }
+    \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
+    \"                              { pushState(STRING_LITERAL); }
+    '                               { pushState(CHARACTER_LITERAL); }
+    {NUM_LIT}                       { return NimElementTypes.NUM_LIT; }
+    {BOOL_LIT}                      { return NimElementTypes.BOOL_LIT; }
+    {OPR_CHARS}                     { yypushback(1); buffer.setLength(0); pushState(OPERATOR); }
+    {IDENT}\"\"\"                   { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
+    {IDENT}\"                       { pushState(GENERALIZED_STRING_LITERAL); }
+    {IDENT}                         { return NimElementTypes.IDENT; }
+    {BRACKET}                       { return NimElementTypes.NOTATION; }
+    {OPEN_PARENTHESIS}              { suspendIndent = true; return NimElementTypes.NOTATION; }
+    {CLOSE_PARENTHESIS}             { suspendIndent = false; return NimElementTypes.NOTATION; }
+    {SEMICOLON}                     { return NimElementTypes.NOTATION; }
+    {COMMA}                         { return NimElementTypes.NOTATION; }
+    {GRAVE_ACCENT}                  { return NimElementTypes.NOTATION; }
+    .                               { return TokenType.BAD_CHARACTER; }
 }
 
 <INDENTER> {
-    {NEWLINE}                   { indentSpaces = 0; }
-    \                           { indentSpaces++; }
-    .                           { yypushback(1); return getIndenterToken(); }
+    {NEWLINE}                       { indentSpaces = 0; }
+    \                               { indentSpaces++; }
+    .                               { yypushback(1); return getIndenterToken(); }
 }
 
 <DEDENTER> {
-    .                           { yypushback(1); return getDedenterToken(); }
+    .                               { yypushback(1); return getDedenterToken(); }
 }
 
 <OPERATOR> {
-    \*:({CRLF})                 { return getOperatorToken(true, 2); }
-    \*:({CR}|{LF}|.)            { return getOperatorToken(true, 1); }
-    {OPR_EQUALS}                { buffer.append('='); }
-    {OPR_PLUS}                  { buffer.append('+'); }
-    {OPR_MINUS}                 { buffer.append('-'); }
-    {OPR_STAR}                  { buffer.append('*'); }
-    {OPR_FWD_SLASH}             { buffer.append('/'); }
-    {OPR_ANGLE_BACK}            { buffer.append('<'); }
-    {OPR_ANGLE_FWD}             { buffer.append('>'); }
-    {OPR_AT}                    { buffer.append('@'); }
-    {OPR_DOLLAR}                { buffer.append('$'); }
-    {OPR_TILDA}                 { buffer.append('~'); }
-    {OPR_AMP}                   { buffer.append('&'); }
-    {OPR_PERCENT}               { buffer.append('%'); }
-    {OPR_PIPE}                  { buffer.append('|'); }
-    {OPR_EXCLAIM}               { buffer.append('!'); }
-    {OPR_QUESTION}              { buffer.append('?'); }
-    {OPR_CARET}                 { buffer.append('^'); }
-    {OPR_DOT}                   { buffer.append('.'); }
-    {OPR_COLON}                 { buffer.append(':'); }
-    {OPR_BACK_SLASH}            { buffer.append('\\'); }
-    {CRLF}                      { return getOperatorToken(false, 2); }
-    {CR}|{LF}|.                 { return getOperatorToken(false, 1); }
+    \*:({CRLF})                     { return getOperatorToken(true, 2); }
+    \*:({CR}|{LF}|.)                { return getOperatorToken(true, 1); }
+    {OPR_EQUALS}                    { buffer.append('='); }
+    {OPR_PLUS}                      { buffer.append('+'); }
+    {OPR_MINUS}                     { buffer.append('-'); }
+    {OPR_STAR}                      { buffer.append('*'); }
+    {OPR_FWD_SLASH}                 { buffer.append('/'); }
+    {OPR_ANGLE_BACK}                { buffer.append('<'); }
+    {OPR_ANGLE_FWD}                 { buffer.append('>'); }
+    {OPR_AT}                        { buffer.append('@'); }
+    {OPR_DOLLAR}                    { buffer.append('$'); }
+    {OPR_TILDA}                     { buffer.append('~'); }
+    {OPR_AMP}                       { buffer.append('&'); }
+    {OPR_PERCENT}                   { buffer.append('%'); }
+    {OPR_PIPE}                      { buffer.append('|'); }
+    {OPR_EXCLAIM}                   { buffer.append('!'); }
+    {OPR_QUESTION}                  { buffer.append('?'); }
+    {OPR_CARET}                     { buffer.append('^'); }
+    {OPR_DOT}                       { buffer.append('.'); }
+    {OPR_COLON}                     { buffer.append(':'); }
+    {OPR_BACK_SLASH}                { buffer.append('\\'); }
+    {CRLF}                          { return getOperatorToken(false, 2); }
+    {CR}|{LF}|.                     { return getOperatorToken(false, 1); }
 }
 
 <LINE_COMMENT> {
-    {CRLF}                      { yypushback(2); popState(); return NimElementTypes.COMMENT; }
-    {CR}|{LF}                   { yypushback(1); popState(); return NimElementTypes.COMMENT; }
-    .+                          { }
+    {CRLF}                          { yypushback(2); popState(); return NimElementTypes.COMMENT; }
+    {CR}|{LF}                       { yypushback(1); popState(); return NimElementTypes.COMMENT; }
+    (.* {NEWLINE}{WHITE_SPACE}* #)  { }
+    .+                              { }
 }
 
 <BLOCK_COMMENT> {
-    {BLOCK_COMMENT_BEGIN}       { pushState(BLOCK_COMMENT); }
-    {BLOCK_COMMENT_END}         { if (popState() == 0) return NimElementTypes.COMMENT; }
-    {CR}|{LF}|.                 { }
+    {BLOCK_COMMENT_BEGIN}           { pushState(BLOCK_COMMENT); }
+    {BLOCK_COMMENT_END}             { if (popState() == 0) return NimElementTypes.COMMENT; }
+    {CR}|{LF}|.                     { }
 }
 
 <BLOCK_DOC_COMMENT> {
-    {BLOCK_DOC_COMMENT_BEGIN}   { pushState(BLOCK_DOC_COMMENT); }
-    {BLOCK_DOC_COMMENT_END}     { if (popState() == 0) return NimElementTypes.COMMENT; }
-    {CR}|{LF}|.                 { }
+    {BLOCK_DOC_COMMENT_BEGIN}       { pushState(BLOCK_DOC_COMMENT); }
+    {BLOCK_DOC_COMMENT_END}         { if (popState() == 0) return NimElementTypes.COMMENT; }
+    {CR}|{LF}|.                     { }
 }
 
 <DISCARD_COMMENT> {
-    \"\"\"                      { if (popState() == 0) return NimElementTypes.COMMENT; }
-    {CR}|{LF}|.                 { }
+    \"\"\"                          { if (popState() == 0) return NimElementTypes.COMMENT; }
+    {CR}|{LF}|.                     { }
 }
 
 <STRING_LITERAL> {
-    \\\\                        { }
-    \\\"                        { }
-    \"                          { popState(); return NimElementTypes.STR_LIT; }
-    {CR}|{LF}                   { return TokenType.BAD_CHARACTER; }
-    .                           { }
+    \\\\                            { }
+    \\\"                            { }
+    \"                              { popState(); return NimElementTypes.STR_LIT; }
+    {CR}|{LF}                       { return TokenType.BAD_CHARACTER; }
+    .                               { }
 }
 
 <TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimElementTypes.STR_LIT; }
-    {CR}|{LF}|.                 { }
+    \"\"\"                          { popState(); return NimElementTypes.STR_LIT; }
+    {CR}|{LF}|.                     { }
 }
 
 <RAW_STRING_LITERAL> {
-    \"\"                        { }
-    \"                          { popState(); return NimElementTypes.STR_LIT; }
-    {CR}|{LF}                   { return TokenType.BAD_CHARACTER; }
-    .                           { }
+    \"\"                            { }
+    \"                              { popState(); return NimElementTypes.STR_LIT; }
+    {CR}|{LF}                       { return TokenType.BAD_CHARACTER; }
+    .                               { }
 }
 
 <GENERALIZED_STRING_LITERAL> {
-    \"\"                        { }
-    \"                          { popState(); return NimElementTypes.GENERALIZED_STR_LIT; }
-    {CR}|{LF}                   { return TokenType.BAD_CHARACTER; }
-    .                           { }
+    \"\"                            { }
+    \"                              { popState(); return NimElementTypes.GENERALIZED_STR_LIT; }
+    {CR}|{LF}                       { return TokenType.BAD_CHARACTER; }
+    .                               { }
 }
 
 <GENERALIZED_TRIPLE_STRING_LITERAL> {
-    \"\"\"                      { popState(); return NimElementTypes.GENERALIZED_STR_LIT; }
-    {CR}|{LF}                   { }
-    .                           { }
+    \"\"\"                          { popState(); return NimElementTypes.GENERALIZED_STR_LIT; }
+    {CR}|{LF}                       { }
+    .                               { }
 }
 
 <CHARACTER_LITERAL> {
-    \\\\                        { }
-    \\\'                        { }
-    '                           { popState(); return NimElementTypes.CHAR_LIT; }
-    {CR}|{LF}                   { return TokenType.BAD_CHARACTER; }
-    .                           { }
+    \\\\                            { }
+    \\\'                            { }
+    '                               { popState(); return NimElementTypes.CHAR_LIT; }
+    {CR}|{LF}                       { return TokenType.BAD_CHARACTER; }
+    .                               { }
 }
