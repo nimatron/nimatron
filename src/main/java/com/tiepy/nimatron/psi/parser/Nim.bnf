@@ -337,7 +337,7 @@ procType ::= 'proc' <<optInd typeDesc>>
 iteratorType ::= 'iterator' <<optInd typeDesc>>
 distinctType ::= 'distinct' <<optInd typeDesc>>
 objectType ::= &'object' object {pin=1}
-enumType ::= 'enum' <<optInd typeDesc>>
+enumType ::= &'enum' enum {pin=1}
 
 //typeDesc = simpleExpr ('not' expr)?
 typeDesc ::= typeDesc0
@@ -504,6 +504,11 @@ commentStmt ::= COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
 meta section ::= COMMENT? (<<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd))
+
+//enum = 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
+enum ::= 'enum' <<optInd enum1>>
+private enum1 ::= (symbol pragma? ind_eq? enum2)+
+private enum2 ::= ('=' <<optInd (expr COMMENT?) >> )? comma?
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*

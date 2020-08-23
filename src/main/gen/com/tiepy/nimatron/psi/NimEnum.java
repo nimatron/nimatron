@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface NimEnumType extends NimElement {
+public interface NimEnum extends NimElement {
 
-  @Nullable
-  NimEnum getEnum();
+  @NotNull
+  NimOptInd getOptInd();
 
 }

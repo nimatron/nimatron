@@ -106,6 +106,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitEnum(@NotNull NimEnum o) {
+    visitElement(o);
+  }
+
   public void visitEnumType(@NotNull NimEnumType o) {
     visitElement(o);
   }

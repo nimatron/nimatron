@@ -33,6 +33,7 @@ public interface NimElementTypes {
   IElementType DISCARD_STMT = new NimElementType("DISCARD_STMT");
   IElementType DISTINCT_TYPE = new NimElementType("DISTINCT_TYPE");
   IElementType DO_BLOCK = new NimElementType("DO_BLOCK");
+  IElementType ENUM = new NimElementType("ENUM");
   IElementType ENUM_TYPE = new NimElementType("ENUM_TYPE");
   IElementType EXPORT_STMT = new NimElementType("EXPORT_STMT");
   IElementType EXPR = new NimElementType("EXPR");
@@ -230,6 +231,9 @@ public interface NimElementTypes {
       }
       else if (type == DO_BLOCK) {
         return new NimDoBlockImpl(node);
+      }
+      else if (type == ENUM) {
+        return new NimEnumImpl(node);
       }
       else if (type == ENUM_TYPE) {
         return new NimEnumTypeImpl(node);

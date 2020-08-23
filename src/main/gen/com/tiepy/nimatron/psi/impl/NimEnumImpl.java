@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimEnumTypeImpl extends NimElementImpl implements NimEnumType {
+public class NimEnumImpl extends NimElementImpl implements NimEnum {
 
-  public NimEnumTypeImpl(@NotNull ASTNode node) {
+  public NimEnumImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitEnumType(this);
+    visitor.visitEnum(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -26,9 +26,9 @@ public class NimEnumTypeImpl extends NimElementImpl implements NimEnumType {
   }
 
   @Override
-  @Nullable
-  public NimEnum getEnum() {
-    return findChildByClass(NimEnum.class);
+  @NotNull
+  public NimOptInd getOptInd() {
+    return findNotNullChildByClass(NimOptInd.class);
   }
 
 }

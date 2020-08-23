@@ -1017,13 +1017,134 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'enum' <<optInd typeDesc>>
+  // 'enum' <<optInd enum1>>
+  public static boolean enum_$(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_$")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ENUM, "<enum $>");
+    r = consumeToken(b, "enum");
+    r = r && optInd(b, l + 1, enum1_parser_);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // (symbol pragma? ind_eq? enum2)+
+  static boolean enum1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = enum1_0(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!enum1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "enum1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // symbol pragma? ind_eq? enum2
+  private static boolean enum1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = symbol(b, l + 1);
+    r = r && enum1_0_1(b, l + 1);
+    r = r && enum1_0_2(b, l + 1);
+    r = r && enum2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // pragma?
+  private static boolean enum1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum1_0_1")) return false;
+    pragma(b, l + 1);
+    return true;
+  }
+
+  // ind_eq?
+  private static boolean enum1_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum1_0_2")) return false;
+    ind_eq(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // ('=' <<optInd (expr COMMENT?) >> )? comma?
+  static boolean enum2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = enum2_0(b, l + 1);
+    r = r && enum2_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ('=' <<optInd (expr COMMENT?) >> )?
+  private static boolean enum2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2_0")) return false;
+    enum2_0_0(b, l + 1);
+    return true;
+  }
+
+  // '=' <<optInd (expr COMMENT?) >>
+  private static boolean enum2_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "=");
+    r = r && optInd(b, l + 1, enum2_0_0_1_0_parser_);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expr COMMENT?
+  private static boolean enum2_0_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2_0_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1);
+    r = r && enum2_0_0_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMENT?
+  private static boolean enum2_0_0_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2_0_0_1_0_1")) return false;
+    consumeToken(b, COMMENT);
+    return true;
+  }
+
+  // comma?
+  private static boolean enum2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2_1")) return false;
+    comma(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // &'enum' enum
   public static boolean enumType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enumType")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, ENUM_TYPE, "<enum type>");
+    r = enumType_0(b, l + 1);
+    p = r; // pin = 1
+    r = r && enum_$(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // &'enum'
+  private static boolean enumType_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enumType_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_);
     r = consumeToken(b, "enum");
-    r = r && optInd(b, l + 1, typeDesc_parser_);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -5699,6 +5820,16 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser dollarExpr_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return dollarExpr(b, l + 1);
+    }
+  };
+  static final Parser enum1_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return enum1(b, l + 1);
+    }
+  };
+  static final Parser enum2_0_0_1_0_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return enum2_0_0_1_0(b, l + 1);
     }
   };
   static final Parser exportStmt1_0_0_parser_ = new Parser() {

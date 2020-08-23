@@ -1,4 +1,4 @@
 type
   TCallingConvention* = enum
-    ccDefault,
+    ccDefault
     ccNoConvention
