@@ -508,7 +508,7 @@ meta section ::= COMMENT? (<<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RU
 //enum = 'enum' optInd (symbol pragma? optInd ('=' optInd expr COMMENT?)? comma?)+
 enum ::= 'enum' <<optInd enum1>>
 private enum1 ::= (symbol pragma? ind_eq? enum2)+
-private enum2 ::= ('=' <<optInd (expr COMMENT?) >> )? comma?
+private enum2 ::= ('=' <<optInd (expr COMMENT?) >> )? comma? COMMENT?
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*

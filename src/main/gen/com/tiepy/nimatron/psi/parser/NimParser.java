@@ -1072,13 +1072,14 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ('=' <<optInd (expr COMMENT?) >> )? comma?
+  // ('=' <<optInd (expr COMMENT?) >> )? comma? COMMENT?
   static boolean enum2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = enum2_0(b, l + 1);
     r = r && enum2_1(b, l + 1);
+    r = r && enum2_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -1123,6 +1124,13 @@ public class NimParser implements PsiParser, LightPsiParser {
   private static boolean enum2_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum2_1")) return false;
     comma(b, l + 1);
+    return true;
+  }
+
+  // COMMENT?
+  private static boolean enum2_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum2_2")) return false;
+    consumeToken(b, COMMENT);
     return true;
   }
 
