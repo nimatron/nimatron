@@ -36,10 +36,7 @@ public class NimLexerTest {
     public void testMisc() throws Exception {
         /*int tokenCount =*/
 
-        parse("type\n" +
-                "  TCallingConvention* = enum\n" +
-                "    ccDefault,\n" +
-                "    ccNoConvention\n");
+        parse("const a = {'a'}");
 
         // Assert.assertEquals(14, tokenCount);
     }

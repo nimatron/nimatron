@@ -147,8 +147,8 @@ exprColonEqExprs ::= exprColonEqExpr (comma exprColonEqExpr)* comma?
 qualifiedIdent ::= symbol ('.' <<optInd symbol>>)?
 
 //setOrTableConstr = '{' ((exprColonEqExpr comma)* | ':' ) '}'
-setOrTableConstr ::= '{' setOrTableConstr1 '}'
-private setOrTableConstr1 ::= ((exprColonEqExpr comma)+ | ':')?  // NOTE: Changed '*' to '+' + '?'
+setOrTableConstr ::= '{' setOrTableConstr1? '}' // NOTE: Added '?' to account for changing '*' to '+' below.
+private setOrTableConstr1 ::= (exprColonEqExpr comma?)+ | ':' // NOTE: Changed '*' to '+'. Also made comma optional.
 
 //castExpr = 'cast' '[' optInd typeDesc optPar ']' '(' optInd expr optPar ')'
 castExpr ::= 'cast' '[' <<optInd typeDesc>> optPar ']' '(' <<optInd expr>> optPar ')'
