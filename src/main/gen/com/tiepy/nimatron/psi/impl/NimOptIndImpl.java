@@ -25,4 +25,16 @@ public class NimOptIndImpl extends NimElementImpl implements NimOptInd {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public NimDedent getDedent() {
+    return findChildByClass(NimDedent.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
 }

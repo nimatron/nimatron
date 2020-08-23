@@ -33,6 +33,12 @@ public class NimCondStmtImpl extends NimElementImpl implements NimCondStmt {
 
   @Override
   @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimInlineStmt> getInlineStmtList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimInlineStmt.class);
   }

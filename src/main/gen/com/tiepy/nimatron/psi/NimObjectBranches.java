@@ -11,6 +11,9 @@ public interface NimObjectBranches extends NimElement {
   List<NimExpr> getExprList();
 
   @NotNull
+  List<NimIndEq> getIndEqList();
+
+  @NotNull
   List<NimObjectBranch> getObjectBranchList();
 
   @NotNull

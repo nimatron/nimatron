@@ -32,6 +32,18 @@ public class NimInlineStmtImpl extends NimElementImpl implements NimInlineStmt {
   }
 
   @Override
+  @Nullable
+  public NimDedent getDedent() {
+    return findChildByClass(NimDedent.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
+  @Override
   @NotNull
   public List<NimSimpleStmt> getSimpleStmtList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimSimpleStmt.class);

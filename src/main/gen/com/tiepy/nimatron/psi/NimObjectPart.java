@@ -11,6 +11,12 @@ public interface NimObjectPart extends NimElement {
   NimDeclColonEquals getDeclColonEquals();
 
   @Nullable
+  NimDedent getDedent();
+
+  @NotNull
+  List<NimIndEq> getIndEqList();
+
+  @Nullable
   NimObjectCase getObjectCase();
 
   @NotNull

@@ -25,4 +25,10 @@ public class NimOptParImpl extends NimElementImpl implements NimOptPar {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public NimIndEq getIndEq() {
+    return findChildByClass(NimIndEq.class);
+  }
+
 }

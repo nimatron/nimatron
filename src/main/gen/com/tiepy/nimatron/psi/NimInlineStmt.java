@@ -10,6 +10,12 @@ public interface NimInlineStmt extends NimElement {
   @NotNull
   List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
 
+  @Nullable
+  NimDedent getDedent();
+
+  @NotNull
+  List<NimIndEq> getIndEqList();
+
   @NotNull
   List<NimSimpleStmt> getSimpleStmtList();
 

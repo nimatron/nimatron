@@ -33,6 +33,12 @@ public class NimObjectBranchesImpl extends NimElementImpl implements NimObjectBr
 
   @Override
   @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimObjectBranch> getObjectBranchList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimObjectBranch.class);
   }

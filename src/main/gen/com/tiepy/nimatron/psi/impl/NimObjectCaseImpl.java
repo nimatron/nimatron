@@ -26,9 +26,21 @@ public class NimObjectCaseImpl extends NimElementImpl implements NimObjectCase {
   }
 
   @Override
+  @Nullable
+  public NimDedent getDedent() {
+    return findChildByClass(NimDedent.class);
+  }
+
+  @Override
   @NotNull
   public NimIdentWithPragma getIdentWithPragma() {
     return findNotNullChildByClass(NimIdentWithPragma.class);
+  }
+
+  @Override
+  @Nullable
+  public NimIndEq getIndEq() {
+    return findChildByClass(NimIndEq.class);
   }
 
   @Override

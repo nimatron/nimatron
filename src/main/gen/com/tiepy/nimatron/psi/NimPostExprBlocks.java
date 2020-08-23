@@ -17,6 +17,9 @@ public interface NimPostExprBlocks extends NimElement {
   List<NimExprs> getExprsList();
 
   @NotNull
+  List<NimIndEq> getIndEqList();
+
+  @NotNull
   List<NimInlineStmt> getInlineStmtList();
 
 }

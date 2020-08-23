@@ -86,6 +86,10 @@ Nim File(0,60)
                                   NimSymbolImpl(SYMBOL)(51,52)
                                     PsiElement(NimTokenType.IDENT)('s')(51,52)
                 PsiWhiteSpace('\n')(52,53)
+                NimDedentImpl(DEDENT)(53,53)
+                  <empty list>
+    NimIndEqImpl(IND_EQ)(53,53)
+      <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(53,60)
       NimSimpleStmtImpl(SIMPLE_STMT)(53,60)
         NimPragmaStmtImpl(PRAGMA_STMT)(53,60)

@@ -70,6 +70,10 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitDedent(@NotNull NimDedent o) {
+    visitElement(o);
+  }
+
   public void visitDeferStmt(@NotNull NimDeferStmt o) {
     visitElement(o);
   }
@@ -175,6 +179,10 @@ public class NimVisitor extends PsiElementVisitor {
   }
 
   public void visitIncludeStmt(@NotNull NimIncludeStmt o) {
+    visitElement(o);
+  }
+
+  public void visitIndEq(@NotNull NimIndEq o) {
     visitElement(o);
   }
 

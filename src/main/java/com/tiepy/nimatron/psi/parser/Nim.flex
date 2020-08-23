@@ -211,7 +211,11 @@ private IElementType getIndenterToken() {
     // Return from INDENTER state with indent at same level, when length same.
     if (indentSpaces == lastIndentSpaces) {
         popState();
-        return NimElementTypes.IND_EQ;
+        if (indentSpaces == 0) {
+            return NimElementTypes.IND_EQ0;
+        } else {
+            return NimElementTypes.IND_EQX;
+        }
     }
 
     // Return from INDENTER state with indent at higher level, when length greater.
@@ -239,7 +243,7 @@ private IElementType getIndenterToken() {
     Indent lastIndent = indentStack.pop();
     int diff = lastIndent.Column - indentSpaces;
 
-    dedentStack.push(NimElementTypes.IND_EQ);
+    dedentStack.push(NimElementTypes.IND_EQX);
 
     // Add required dedents to stack to be returned.
     while (diff > lastIndent.Increment) {
@@ -248,14 +252,19 @@ private IElementType getIndenterToken() {
         lastIndent = indentStack.pop();
         diff = lastIndent.Column - indentSpaces;
 
-        dedentStack.push(NimElementTypes.DEDENT);
+        dedentStack.push(NimElementTypes.DEDENTX);
     }
 
     lastIndentSpaces = lastIndent.Column;
 
     popState();
     pushState(DEDENTER);
-    return NimElementTypes.DEDENT;
+
+    if (indentSpaces == 0) {
+        return NimElementTypes.DEDENT0;
+    } else {
+        return NimElementTypes.DEDENTX;
+    }
 }
 
 private IElementType getDedenterToken() {

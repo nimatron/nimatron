@@ -33,6 +33,18 @@ public class NimObjectPartImpl extends NimElementImpl implements NimObjectPart {
 
   @Override
   @Nullable
+  public NimDedent getDedent() {
+    return findChildByClass(NimDedent.class);
+  }
+
+  @Override
+  @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
+  @Override
+  @Nullable
   public NimObjectCase getObjectCase() {
     return findChildByClass(NimObjectCase.class);
   }

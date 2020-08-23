@@ -31,4 +31,10 @@ public class NimStmtImpl extends NimElementImpl implements NimStmt {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimComplexOrSimpleStmt.class);
   }
 
+  @Override
+  @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
 }

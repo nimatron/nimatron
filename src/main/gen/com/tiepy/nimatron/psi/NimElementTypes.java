@@ -24,6 +24,7 @@ public interface NimElementTypes {
   IElementType CONTINUE_STMT = new NimElementType("CONTINUE_STMT");
   IElementType CONVERTER_STMT = new NimElementType("CONVERTER_STMT");
   IElementType DECL_COLON_EQUALS = new NimElementType("DECL_COLON_EQUALS");
+  IElementType DEDENT = new NimElementType("DEDENT");
   IElementType DEFER_STMT = new NimElementType("DEFER_STMT");
   IElementType DISCARD_STMT = new NimElementType("DISCARD_STMT");
   IElementType DISTINCT_TYPE = new NimElementType("DISTINCT_TYPE");
@@ -51,6 +52,7 @@ public interface NimElementTypes {
   IElementType IF_STMT = new NimElementType("IF_STMT");
   IElementType IMPORT_STMT = new NimElementType("IMPORT_STMT");
   IElementType INCLUDE_STMT = new NimElementType("INCLUDE_STMT");
+  IElementType IND_EQ = new NimElementType("IND_EQ");
   IElementType INLINE_STMT = new NimElementType("INLINE_STMT");
   IElementType ITERATOR_STMT = new NimElementType("ITERATOR_STMT");
   IElementType ITERATOR_TYPE = new NimElementType("ITERATOR_TYPE");
@@ -122,11 +124,13 @@ public interface NimElementTypes {
   IElementType CHAR_LIT = new NimTokenType("CHAR_LIT");
   IElementType COLCOM = new NimTokenType("colcom");
   IElementType COMMENT = new NimTokenType("COMMENT");
-  IElementType DEDENT = new NimTokenType("DEDENT");
+  IElementType DEDENT0 = new NimTokenType("DEDENT0");
+  IElementType DEDENTX = new NimTokenType("DEDENTX");
   IElementType GENERALIZED_STR_LIT = new NimTokenType("GENERALIZED_STR_LIT");
   IElementType IDENT = new NimTokenType("IDENT");
   IElementType INDENT = new NimTokenType("INDENT");
-  IElementType IND_EQ = new NimTokenType("IND_EQ");
+  IElementType IND_EQ0 = new NimTokenType("IND_EQ0");
+  IElementType IND_EQX = new NimTokenType("IND_EQX");
   IElementType KEYW = new NimTokenType("KEYW");
   IElementType NOTATION = new NimTokenType("NOTATION");
   IElementType NUM_LIT = new NimTokenType("NUM_LIT");
@@ -194,6 +198,9 @@ public interface NimElementTypes {
       }
       else if (type == DECL_COLON_EQUALS) {
         return new NimDeclColonEqualsImpl(node);
+      }
+      else if (type == DEDENT) {
+        return new NimDedentImpl(node);
       }
       else if (type == DEFER_STMT) {
         return new NimDeferStmtImpl(node);
@@ -275,6 +282,9 @@ public interface NimElementTypes {
       }
       else if (type == INCLUDE_STMT) {
         return new NimIncludeStmtImpl(node);
+      }
+      else if (type == IND_EQ) {
+        return new NimIndEqImpl(node);
       }
       else if (type == INLINE_STMT) {
         return new NimInlineStmtImpl(node);

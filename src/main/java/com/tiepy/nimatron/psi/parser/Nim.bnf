@@ -51,7 +51,11 @@
 }
 
 //module = stmt ^* (';' / IND{=})
-module ::= IND_EQ* (stmt ';'?)? IND_EQ*
+module ::= ind_eq* (stmt ';'?)? ind_eq*
+
+ind_eq ::= IND_EQX | IND_EQ0
+dedent ::= DEDENTX | DEDENT0
+private termInd ::= dedent | <<eof>>
 
 //comma = ',' COMMENT?
 //semicolon = ';' COMMENT?
@@ -84,11 +88,10 @@ private oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
 prefixOperator ::= operator
 
 //optInd = COMMENT? IND?
-meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
-private termInd ::= DEDENT | <<eof>>
+meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (ind_eq <<RULE>>?)* termInd)
 
 //optPar = (IND{>} | IND{=})?
-optPar ::= (INDENT | IND_EQ)?
+optPar ::= (INDENT | ind_eq)?
 
 //simpleExpr = arrowExpr (OP0 optInd arrowExpr)* pragma?
 //arrowExpr = assignExpr (OP1 optInd assignExpr)*
@@ -352,11 +355,11 @@ private postExprBlocks0 ::= postExprBlocks1
                           | postExprBlocks3
                           | postExprBlocks4
                           | postExprBlocks5
-private postExprBlocks1 ::= IND_EQ doBlock
-private postExprBlocks2 ::= IND_EQ 'of' exprs ':' inlineStmt
-private postExprBlocks3 ::= IND_EQ 'elif' expr ':' inlineStmt
-private postExprBlocks4 ::= IND_EQ 'except' exprs ':' inlineStmt
-private postExprBlocks5 ::= IND_EQ 'else' ':' inlineStmt
+private postExprBlocks1 ::= ind_eq doBlock
+private postExprBlocks2 ::= ind_eq 'of' exprs ':' inlineStmt
+private postExprBlocks3 ::= ind_eq 'elif' expr ':' inlineStmt
+private postExprBlocks4 ::= ind_eq 'except' exprs ':' inlineStmt
+private postExprBlocks5 ::= ind_eq 'else' ':' inlineStmt
 
 //exprStmt = simpleExpr
 //         (( '=' optInd expr colonBody? )
@@ -371,23 +374,23 @@ private exprStmt2 ::= expr (',' expr)* postExprBlocks
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
 importStmt ::= 'import' (importStmt1 | importStmt2)
-private importStmt1 ::= <<optInd (expr (',' IND_EQ* expr)*)>>
+private importStmt1 ::= <<optInd (expr (',' ind_eq* expr)*)>>
 private importStmt2 ::= <<optInd (expr importStmt3)>>
-private importStmt3 ::= 'except' <<optInd (expr (',' IND_EQ* expr)*)>>
+private importStmt3 ::= 'except' <<optInd (expr (',' ind_eq* expr)*)>>
 
 //exportStmt = 'export' optInd expr
 //              ((comma expr)*
 //              / 'except' optInd (expr ^+ comma))
 exportStmt ::= 'export' (exportStmt1 | exportStmt2)
-private exportStmt1 ::= <<optInd (expr (',' IND_EQ* expr)*)>>
+private exportStmt1 ::= <<optInd (expr (',' ind_eq* expr)*)>>
 private exportStmt2 ::= <<optInd (expr exportStmt3)>>
-private exportStmt3 ::= 'except' <<optInd (expr (',' IND_EQ* expr)*)>>
+private exportStmt3 ::= 'except' <<optInd (expr (',' ind_eq* expr)*)>>
 
 //includeStmt = 'include' optInd expr ^+ comma
-includeStmt ::= 'include' <<optInd (expr (',' IND_EQ* expr)*)>>
+includeStmt ::= 'include' <<optInd (expr (',' ind_eq* expr)*)>>
 
 //fromStmt = 'from' expr 'import' optInd expr (comma expr)*
-fromStmt ::= 'from' expr 'import' <<optInd (expr (',' IND_EQ* expr)*)>>
+fromStmt ::= 'from' expr 'import' <<optInd (expr (',' ind_eq* expr)*)>>
 
 //returnStmt = 'return' optInd expr?
 returnStmt ::= 'return' <<optInd expr>>?
@@ -411,8 +414,8 @@ continueStmt ::= 'continue' <<optInd expr>>?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
 condStmt ::= expr ':' inlineStmt condStmt1* condStmt2?
-private condStmt1 ::= IND_EQ 'elif' expr ':' inlineStmt
-private condStmt2 ::= IND_EQ 'else' ':' inlineStmt
+private condStmt1 ::= ind_eq 'elif' expr ':' inlineStmt
+private condStmt2 ::= ind_eq 'else' ':' inlineStmt
 
 //ifStmt = 'if' condStmt
 ifStmt ::= 'if' condStmt
@@ -429,9 +432,9 @@ ofBranch ::= 'of' exprs ':' inlineStmt
 //ofBranches = ofBranch (IND{=} ofBranch)*
 //                      (IND{=} 'elif' expr colcom stmt)*
 //                      (IND{=} 'else' colcom stmt)?
-ofBranches ::= ofBranch (IND_EQ ofBranch)* ofBranches1* ofBranches2?
-private ofBranches1 ::= IND_EQ 'elif' expr ':' inlineStmt
-private ofBranches2 ::= IND_EQ 'else' ':' inlineStmt
+ofBranches ::= ofBranch (ind_eq ofBranch)* ofBranches1* ofBranches2?
+private ofBranches1 ::= ind_eq 'elif' expr ':' inlineStmt
+private ofBranches2 ::= ind_eq 'else' ':' inlineStmt
 
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
@@ -439,14 +442,14 @@ private ofBranches2 ::= IND_EQ 'else' ':' inlineStmt
 caseStmt ::= 'case' expr ':'? caseStmt0
 private caseStmt0 ::= caseStmt1 | caseStmt2
 private caseStmt1 ::= INDENT ofBranches termInd
-private caseStmt2 ::= IND_EQ ofBranches
+private caseStmt2 ::= ind_eq ofBranches
 
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' ':' inlineStmt &(IND_EQ? 'except'|'finally') tryStmt1* tryStmt2?
-private tryStmt1 ::= IND_EQ? 'except' exprs ':' inlineStmt
-private tryStmt2 ::= IND_EQ? 'finally' ':' inlineStmt
+tryStmt ::= 'try' ':' inlineStmt &(ind_eq? 'except'|'finally') tryStmt1* tryStmt2?
+private tryStmt1 ::= ind_eq? 'except' exprs ':' inlineStmt
+private tryStmt2 ::= ind_eq? 'finally' ':' inlineStmt
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
@@ -491,7 +494,7 @@ routine ::= pattern? genericParams? paramsColon pragma? ('=' inlineStmt)?
 //commentStmt = COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-meta section ::= <<RULE>> | (INDENT <<RULE>>? (IND_EQ <<RULE>>?)* termInd)
+meta section ::= <<RULE>> | (INDENT <<RULE>>? (ind_eq <<RULE>>?)* termInd)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
@@ -506,20 +509,20 @@ objectBranch ::= 'of' exprs ':' objectPart
 //objectBranches = objectBranch (IND{=} objectBranch)*
 //                      (IND{=} 'elif' expr colcom objectPart)*
 //                      (IND{=} 'else' colcom objectPart)?
-objectBranches ::= objectBranch (IND_EQ objectBranch)*
-                        (IND_EQ 'elif' expr colcom objectPart)*
-                        (IND_EQ 'else' colcom objectPart)?
+objectBranches ::= objectBranch (ind_eq objectBranch)*
+                        (ind_eq 'elif' expr colcom objectPart)*
+                        (ind_eq 'else' colcom objectPart)?
 
 //objectCase = 'case' identWithPragma ':' typeDesc ':'? COMMENT?
 //            (IND{>} objectBranches DED
 //            | IND{=} objectBranches)
 objectCase ::= 'case' identWithPragma ':' typeDesc ':'?
             (INDENT objectBranches termInd
-            | IND_EQ objectBranches)
+            | ind_eq objectBranches)
 
 //objectPart = IND{>} objectPart^+IND{=} DED
 //           / objectWhen / objectCase / 'nil' / 'discard' / declColonEquals
-objectPart ::= (INDENT objectPart (IND_EQ objectPart)* termInd)
+objectPart ::= (INDENT objectPart (ind_eq objectPart)* termInd)
              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
@@ -597,8 +600,7 @@ private complexStmt ::= ifStmt | whenStmt | whileStmt
                       | constStmt
                       | varStmt
                       | bindStmt | mixinStmt
-                      | caseStmt
-// NOTE: Moved caseStmt to here from expr.
+                      | caseStmt // NOTE: Moved caseStmt to here from expr.
 
 procStmt ::= 'proc' <<optInd namedRoutine>>
 funcStmt ::= 'func' <<optInd namedRoutine>>
@@ -612,7 +614,7 @@ constStmt ::= 'const' <<section constant>>
 varStmt ::= ('let'|'var'|'using') <<optInd variable>>
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
-stmt ::= complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)*
+stmt ::= complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*
 inlineStmt ::= inlineComplex | inlineSimple
-private inlineComplex ::= INDENT complexOrSimpleStmt ((';' | IND_EQ+) complexOrSimpleStmt)* termInd
+private inlineComplex ::= INDENT complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)* termInd
 private inlineSimple ::= simpleStmt (';' simpleStmt)*

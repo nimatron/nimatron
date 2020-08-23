@@ -10,4 +10,7 @@ public interface NimStmt extends NimElement {
   @NotNull
   List<NimComplexOrSimpleStmt> getComplexOrSimpleStmtList();
 
+  @NotNull
+  List<NimIndEq> getIndEqList();
+
 }

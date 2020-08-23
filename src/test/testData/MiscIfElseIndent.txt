@@ -33,6 +33,10 @@ Nim File(0,43)
                                   NimLiteralImpl(LITERAL)(16,22)
                                     PsiElement(NimTokenType.STR_LIT)('"TRUE"')(16,22)
             PsiWhiteSpace('\n')(22,23)
+            NimDedentImpl(DEDENT)(23,23)
+              <empty list>
+          NimIndEqImpl(IND_EQ)(23,23)
+            <empty list>
           PsiElement(NimTokenType.KEYW)('else')(23,27)
           PsiElement(NimTokenType.NOTATION)(':')(27,28)
           PsiWhiteSpace('\n')(28,29)

@@ -7,4 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface NimSection extends NimElement {
 
+  @Nullable
+  NimDedent getDedent();
+
+  @NotNull
+  List<NimIndEq> getIndEqList();
+
 }

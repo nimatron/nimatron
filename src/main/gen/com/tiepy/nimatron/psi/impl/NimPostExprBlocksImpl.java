@@ -45,6 +45,12 @@ public class NimPostExprBlocksImpl extends NimElementImpl implements NimPostExpr
 
   @Override
   @NotNull
+  public List<NimIndEq> getIndEqList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimIndEq.class);
+  }
+
+  @Override
+  @NotNull
   public List<NimInlineStmt> getInlineStmtList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, NimInlineStmt.class);
   }
