@@ -480,6 +480,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {CR}|{LF}                       { yypushback(1); popState(); return NimElementTypes.COMMENT; }
     (.* {NEWLINE}{WHITE_SPACE}* #)  { }
     .+                              { }
+    <<EOF>>                         { popState(); return NimElementTypes.COMMENT; }
 }
 
 <BLOCK_COMMENT> {

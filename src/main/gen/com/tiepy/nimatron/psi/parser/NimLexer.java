@@ -1105,7 +1105,14 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
         zzDoEOF();
+        switch (zzLexicalState) {
+            case LINE_COMMENT: {
+              popState(); return NimElementTypes.COMMENT;
+            }  // fall though
+            case 252: break;
+            default:
         return null;
+        }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {

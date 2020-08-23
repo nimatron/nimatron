@@ -623,11 +623,11 @@ constStmt ::= 'const' <<section constant>> {pin=1}
 varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
-stmt ::= complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*
+//stmt ::= complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*
 
 // NOTE: The following is an attempt to isolate statements by terminator, which could be useful in error recovery.
-//stmt ::= (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
-//private stmt1 ::= complexOrSimpleStmt (';' | ind_eq+)
+stmt ::= (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
+private stmt1 ::= complexOrSimpleStmt (';' | ind_eq+)
 
 // NOTE: The following is an attempt to add recovery.
 //stmt ::= stmt1 | complexOrSimpleStmt

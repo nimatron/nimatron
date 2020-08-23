@@ -4625,60 +4625,76 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*
+  // (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = complexOrSimpleStmt(b, l + 1);
-    r = r && stmt_1(b, l + 1);
+    r = stmt_0(b, l + 1);
+    if (!r) r = complexOrSimpleStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // ((';' | ind_eq+) complexOrSimpleStmt)*
-  private static boolean stmt_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!stmt_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "stmt_1", c)) break;
-    }
-    return true;
-  }
-
-  // (';' | ind_eq+) complexOrSimpleStmt
-  private static boolean stmt_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt_1_0")) return false;
+  // stmt1+ complexOrSimpleStmt
+  private static boolean stmt_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = stmt_1_0_0(b, l + 1);
+    r = stmt_0_0(b, l + 1);
     r = r && complexOrSimpleStmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
+  // stmt1+
+  private static boolean stmt_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = stmt1(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!stmt1(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "stmt_0_0", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // complexOrSimpleStmt (';' | ind_eq+)
+  static boolean stmt1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = complexOrSimpleStmt(b, l + 1);
+    r = r && stmt1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // ';' | ind_eq+
-  private static boolean stmt_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt_1_0_0")) return false;
+  private static boolean stmt1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    if (!r) r = stmt_1_0_0_1(b, l + 1);
+    if (!r) r = stmt1_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ind_eq+
-  private static boolean stmt_1_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt_1_0_0_1")) return false;
+  private static boolean stmt1_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt1_1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ind_eq(b, l + 1);
     while (r) {
       int c = current_position_(b);
       if (!ind_eq(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "stmt_1_0_0_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "stmt1_1_1", c)) break;
     }
     exit_section_(b, m, null, r);
     return r;
