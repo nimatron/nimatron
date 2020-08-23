@@ -190,7 +190,8 @@ private identOrLiteral1 ::= generalizedLit | symbol | literal
 //tupleConstr = '(' optInd (exprColonEqExpr comma?)* optPar ')'
 
 //arrayConstr = '[' optInd (exprColonEqExpr comma?)* optPar ']'
-arrayConstr ::= '[' (<<optInd (exprColonEqExpr ','?)>>)* optPar ']'
+arrayConstr ::= '@'? '[' (<<optInd (exprColonEqExpr ','?)>>)* optPar ']'
+// NOTE: Added optional sequence operator.
 
 //primarySuffix = '(' (exprColonEqExpr comma?)* ')'
 //      | '.' optInd symbol generalizedLit?

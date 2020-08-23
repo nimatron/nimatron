@@ -104,49 +104,57 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '[' (<<optInd (exprColonEqExpr ','?)>>)* optPar ']'
+  // '@'? '[' (<<optInd (exprColonEqExpr ','?)>>)* optPar ']'
   public static boolean arrayConstr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arrayConstr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ARRAY_CONSTR, "<array constr>");
-    r = consumeToken(b, "[");
-    r = r && arrayConstr_1(b, l + 1);
+    r = arrayConstr_0(b, l + 1);
+    r = r && consumeToken(b, "[");
+    r = r && arrayConstr_2(b, l + 1);
     r = r && optPar(b, l + 1);
     r = r && consumeToken(b, "]");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  // '@'?
+  private static boolean arrayConstr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_0")) return false;
+    consumeToken(b, "@");
+    return true;
+  }
+
   // (<<optInd (exprColonEqExpr ','?)>>)*
-  private static boolean arrayConstr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "arrayConstr_1")) return false;
+  private static boolean arrayConstr_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!arrayConstr_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "arrayConstr_1", c)) break;
+      if (!arrayConstr_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "arrayConstr_2", c)) break;
     }
     return true;
   }
 
   // <<optInd (exprColonEqExpr ','?)>>
-  private static boolean arrayConstr_1_0(PsiBuilder b, int l) {
-    return optInd(b, l + 1, arrayConstr_1_0_0_0_parser_);
+  private static boolean arrayConstr_2_0(PsiBuilder b, int l) {
+    return optInd(b, l + 1, arrayConstr_2_0_0_0_parser_);
   }
 
   // exprColonEqExpr ','?
-  private static boolean arrayConstr_1_0_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "arrayConstr_1_0_0_0")) return false;
+  private static boolean arrayConstr_2_0_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_2_0_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = exprColonEqExpr(b, l + 1);
-    r = r && arrayConstr_1_0_0_0_1(b, l + 1);
+    r = r && arrayConstr_2_0_0_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ','?
-  private static boolean arrayConstr_1_0_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "arrayConstr_1_0_0_0_1")) return false;
+  private static boolean arrayConstr_2_0_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayConstr_2_0_0_0_1")) return false;
     consumeToken(b, ",");
     return true;
   }
@@ -5273,9 +5281,9 @@ public class NimParser implements PsiParser, LightPsiParser {
       return andExpr(b, l + 1);
     }
   };
-  static final Parser arrayConstr_1_0_0_0_parser_ = new Parser() {
+  static final Parser arrayConstr_2_0_0_0_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
-      return arrayConstr_1_0_0_0(b, l + 1);
+      return arrayConstr_2_0_0_0(b, l + 1);
     }
   };
   static final Parser arrowExpr_parser_ = new Parser() {
