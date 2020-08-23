@@ -4625,86 +4625,140 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
+  // stmt1 | complexOrSimpleStmt
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = stmt_0(b, l + 1);
+    r = stmt1(b, l + 1);
     if (!r) r = complexOrSimpleStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // stmt1+ complexOrSimpleStmt
-  private static boolean stmt_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt_0")) return false;
+  /* ********************************************************** */
+  // stmt2+ complexOrSimpleStmt
+  static boolean stmt1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = stmt_0_0(b, l + 1);
+    r = stmt1_0(b, l + 1);
     r = r && complexOrSimpleStmt(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // stmt1+
-  private static boolean stmt_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt_0_0")) return false;
+  // stmt2+
+  private static boolean stmt1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = stmt1(b, l + 1);
+    r = stmt2(b, l + 1);
     while (r) {
       int c = current_position_(b);
-      if (!stmt1(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "stmt_0_0", c)) break;
+      if (!stmt2(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "stmt1_0", c)) break;
     }
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // complexOrSimpleStmt (';' | (IND_EQ0 ind_eq*))
-  static boolean stmt1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt1")) return false;
+  // stmt3 (';' | (IND_EQ0 ind_eq*))
+  static boolean stmt2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt2")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = complexOrSimpleStmt(b, l + 1);
-    r = r && stmt1_1(b, l + 1);
+    r = stmt3(b, l + 1);
+    r = r && stmt2_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ';' | (IND_EQ0 ind_eq*)
-  private static boolean stmt1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt1_1")) return false;
+  private static boolean stmt2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt2_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ";");
-    if (!r) r = stmt1_1_1(b, l + 1);
+    if (!r) r = stmt2_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // IND_EQ0 ind_eq*
-  private static boolean stmt1_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt1_1_1")) return false;
+  private static boolean stmt2_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt2_1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IND_EQ0);
-    r = r && stmt1_1_1_1(b, l + 1);
+    r = r && stmt2_1_1_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // ind_eq*
-  private static boolean stmt1_1_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "stmt1_1_1_1")) return false;
+  private static boolean stmt2_1_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt2_1_1_1")) return false;
     while (true) {
       int c = current_position_(b);
       if (!ind_eq(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "stmt1_1_1_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "stmt2_1_1_1", c)) break;
     }
     return true;
+  }
+
+  /* ********************************************************** */
+  // complexOrSimpleStmt &(';' | (IND_EQ0))
+  static boolean stmt3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt3")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = complexOrSimpleStmt(b, l + 1);
+    r = r && stmt3_1(b, l + 1);
+    exit_section_(b, l, m, r, false, stmtRecover_parser_);
+    return r;
+  }
+
+  // &(';' | (IND_EQ0))
+  private static boolean stmt3_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt3_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_);
+    r = stmt3_1_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ';' | (IND_EQ0)
+  private static boolean stmt3_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt3_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ";");
+    if (!r) r = consumeToken(b, IND_EQ0);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !(';' | IND_EQ0)
+  static boolean stmtRecover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmtRecover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !stmtRecover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ';' | IND_EQ0
+  private static boolean stmtRecover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmtRecover_0")) return false;
+    boolean r;
+    r = consumeToken(b, ";");
+    if (!r) r = consumeToken(b, IND_EQ0);
+    return r;
   }
 
   /* ********************************************************** */
@@ -5755,6 +5809,11 @@ public class NimParser implements PsiParser, LightPsiParser {
   static final Parser sliceExpr_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return sliceExpr(b, l + 1);
+    }
+  };
+  static final Parser stmtRecover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return stmtRecover(b, l + 1);
     }
   };
   static final Parser symbol_parser_ = new Parser() {

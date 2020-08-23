@@ -626,14 +626,15 @@ varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
 //stmt ::= complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*
 
 // NOTE: The following is an attempt to isolate statements by terminator, which could be useful in error recovery.
-stmt ::= (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
-private stmt1 ::= complexOrSimpleStmt (';' | (IND_EQ0 ind_eq*))
+//stmt ::= (stmt1+ complexOrSimpleStmt) | complexOrSimpleStmt
+//private stmt1 ::= complexOrSimpleStmt (';' | (IND_EQ0 ind_eq*))
 
 // NOTE: The following is an attempt to add recovery.
-//stmt ::= stmt1 | complexOrSimpleStmt
-//private stmt1 ::= stmt2+ complexOrSimpleStmt
-//private stmt2 ::= complexOrSimpleStmt &(';' | IND_EQ0) ind_eq* {recoverWhile="stmtRecover"}
-//private stmtRecover ::= !(';' | IND_EQ0)
+stmt ::= stmt1 | complexOrSimpleStmt
+private stmt1 ::= stmt2+ complexOrSimpleStmt
+private stmt2 ::= stmt3 (';' | (IND_EQ0 ind_eq*))
+private stmt3 ::= complexOrSimpleStmt &(';' | (IND_EQ0)) {recoverWhile=stmtRecover}
+private stmtRecover ::= !(';' | IND_EQ0)
 
 inlineStmt ::= inlineComplex | inlineSimple
 private inlineComplex ::= INDENT complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)* termInd
