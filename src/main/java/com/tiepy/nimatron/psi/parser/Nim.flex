@@ -122,7 +122,6 @@ BOOL_LIT=true|false
 
 OPEN_BRACKET =\{|\[|(\[\.)|(\{\.)|(\(\.)|(\[:)
 CLOSE_BRACKET=\}|\]|(\.\])|(\.\})|(\.\))
-BRACKET={OPEN_BRACKET}|{CLOSE_BRACKET}
 
 OPEN_PARENTHESIS=\(
 CLOSE_PARENTHESIS=\)
@@ -438,7 +437,8 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {IDENT}\"\"\"                   { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {IDENT}\"                       { pushState(GENERALIZED_STRING_LITERAL); }
     {IDENT}                         { return NimElementTypes.IDENT; }
-    {BRACKET}                       { return NimElementTypes.NOTATION; }
+    {OPEN_BRACKET}                  { suspendIndent = true; return NimElementTypes.NOTATION; }
+    {CLOSE_BRACKET}                 { suspendIndent = false; return NimElementTypes.NOTATION; }
     {OPEN_PARENTHESIS}              { suspendIndent = true; return NimElementTypes.NOTATION; }
     {CLOSE_PARENTHESIS}             { suspendIndent = false; return NimElementTypes.NOTATION; }
     {SEMICOLON}                     { return NimElementTypes.NOTATION; }

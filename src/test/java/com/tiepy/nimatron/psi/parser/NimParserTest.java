@@ -57,6 +57,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscCurlyBracketIndent() {
+        doTest(true, true);
+    }
+
     public void testMiscEchoOk() {
         doTest(true, true);
     }
