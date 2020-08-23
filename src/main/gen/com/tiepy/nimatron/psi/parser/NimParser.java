@@ -2346,7 +2346,7 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'object' pragma? ('of' typeDesc)? objectPart
+  // 'object' pragma? ('of' typeDesc)? objectPart?
   public static boolean object(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "object")) return false;
     boolean r;
@@ -2354,7 +2354,7 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, "object");
     r = r && object_1(b, l + 1);
     r = r && object_2(b, l + 1);
-    r = r && objectPart(b, l + 1);
+    r = r && object_3(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -2382,6 +2382,13 @@ public class NimParser implements PsiParser, LightPsiParser {
     r = r && typeDesc(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // objectPart?
+  private static boolean object_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object_3")) return false;
+    objectPart(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */

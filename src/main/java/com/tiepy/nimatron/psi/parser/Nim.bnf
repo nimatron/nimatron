@@ -522,7 +522,7 @@ objectPart ::= (INDENT objectPart (IND_EQ objectPart)* termInd)
              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
-object ::= 'object' pragma? ('of' typeDesc)? objectPart
+object ::= 'object' pragma? ('of' typeDesc)? objectPart?
 
 //typeClassParam = ('var' | 'out')? symbol
 typeClassParam ::= ('var'|'out')? symbol
