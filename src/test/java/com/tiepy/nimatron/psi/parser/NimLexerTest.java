@@ -36,7 +36,8 @@ public class NimLexerTest {
     public void testMisc() throws Exception {
         /*int tokenCount =*/
 
-        parse("template t(x): bool = x or x");
+        parse("lexMessage(p.lex, errGenerated,\n" +
+                "  \"expected: '\" & TokTypeToStr[tokType] & \"', but got: '\" & prettyTok(p.tok) & \"'\")\n");
 
         // Assert.assertEquals(14, tokenCount);
     }

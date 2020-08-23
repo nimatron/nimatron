@@ -323,7 +323,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
         return NimElementTypes.OP1;
     }
 
-    if (len > 1) {
+    if (false && len > 1) {
         if (s.startsWith("@") || s.startsWith(":") || s.startsWith("?")) {
             return NimElementTypes.OP2;
         }
@@ -338,7 +338,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
         return NimElementTypes.OP5;
     }
 
-    if (len > 1) {
+    if (false && len > 1) {
         if (s.startsWith("=") ||
             s.startsWith("<") ||
             s.startsWith(">") ||
@@ -351,13 +351,13 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
         return NimElementTypes.OP6;
     }
 
-    if (len > 1) {
+    if (true || len > 1) {
         if (s.startsWith(".")) {
             return NimElementTypes.OP6;
         }
     }
 
-    if (len > 1) {
+    if (true || len > 1) {
         if (s.startsWith("&")) {
             return NimElementTypes.OP7;
         }
@@ -368,7 +368,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
         return NimElementTypes.OP8;
     }
 
-    if (len > 1) {
+    if (true || len > 1) {
         if (s.startsWith("+") ||
             s.startsWith("-") ||
             s.startsWith("~") ||
@@ -383,7 +383,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
         return NimElementTypes.OP9;
     }
 
-    if (len > 1) {
+    if (true || len > 1) {
         if (s.startsWith("*") ||
             s.startsWith("%") ||
             s.startsWith("\\") ||
@@ -392,7 +392,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
         }
     }
 
-    if (len > 1) {
+    if (true || len > 1) {
         if (s.startsWith("$") || s.startsWith("^")) {
             return NimElementTypes.OP10;
         }
