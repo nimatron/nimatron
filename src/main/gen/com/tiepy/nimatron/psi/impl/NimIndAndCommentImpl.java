@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.tiepy.nimatron.psi.NimElementTypes.*;
 import com.tiepy.nimatron.psi.*;
 
-public class NimVariableImpl extends NimElementImpl implements NimVariable {
+public class NimIndAndCommentImpl extends NimElementImpl implements NimIndAndComment {
 
-  public NimVariableImpl(@NotNull ASTNode node) {
+  public NimIndAndCommentImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull NimVisitor visitor) {
-    visitor.visitVariable(this);
+    visitor.visitIndAndComment(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,26 +27,8 @@ public class NimVariableImpl extends NimElementImpl implements NimVariable {
 
   @Override
   @Nullable
-  public NimColonBody getColonBody() {
-    return findChildByClass(NimColonBody.class);
-  }
-
-  @Override
-  @Nullable
-  public NimIdentColonEquals getIdentColonEquals() {
-    return findChildByClass(NimIdentColonEquals.class);
-  }
-
-  @Override
-  @NotNull
-  public NimIndAndComment getIndAndComment() {
-    return findNotNullChildByClass(NimIndAndComment.class);
-  }
-
-  @Override
-  @Nullable
-  public NimVarTuple getVarTuple() {
-    return findChildByClass(NimVarTuple.class);
+  public NimOptInd getOptInd() {
+    return findChildByClass(NimOptInd.class);
   }
 
 }

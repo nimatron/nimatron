@@ -17,6 +17,9 @@ public interface NimTypeDef extends NimElement {
   NimIdentWithPragmaDot getIdentWithPragmaDot();
 
   @NotNull
+  NimIndAndComment getIndAndComment();
+
+  @NotNull
   NimOptInd getOptInd();
 
   @Nullable

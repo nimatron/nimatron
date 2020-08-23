@@ -11,6 +11,9 @@ public interface NimSimpleStmt extends NimElement {
   NimBreakStmt getBreakStmt();
 
   @Nullable
+  NimCommentStmt getCommentStmt();
+
+  @Nullable
   NimContinueStmt getContinueStmt();
 
   @Nullable

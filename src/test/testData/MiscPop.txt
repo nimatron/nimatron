@@ -89,6 +89,8 @@ Nim File(0,91)
                 PsiWhiteSpace('\n')(52,53)
                 NimDedentImpl(DEDENT)(53,53)
                   <empty list>
+              NimIndAndCommentImpl(IND_AND_COMMENT)(53,53)
+                <empty list>
     NimIndEqImpl(IND_EQ)(53,53)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(53,60)

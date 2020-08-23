@@ -32,6 +32,12 @@ public class NimRoutineImpl extends NimElementImpl implements NimRoutine {
   }
 
   @Override
+  @NotNull
+  public NimIndAndComment getIndAndComment() {
+    return findNotNullChildByClass(NimIndAndComment.class);
+  }
+
+  @Override
   @Nullable
   public NimInlineStmt getInlineStmt() {
     return findChildByClass(NimInlineStmt.class);

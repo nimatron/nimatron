@@ -27,3 +27,5 @@ Nim File(0,14)
                               NimSymbolImpl(SYMBOL)(10,13)
                                 PsiElement(NimTokenType.IDENT)('int')(10,13)
                   PsiElement(NimTokenType.NOTATION)(')')(13,14)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(14,14)
+                <empty list>

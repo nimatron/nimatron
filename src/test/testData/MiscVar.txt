@@ -18,3 +18,5 @@ Nim File(0,17)
                       NimIdentOrLiteralImpl(IDENT_OR_LITERAL)(10,17)
                         NimLiteralImpl(LITERAL)(10,17)
                           PsiElement(NimTokenType.STR_LIT)('"Hello"')(10,17)
+            NimIndAndCommentImpl(IND_AND_COMMENT)(17,17)
+              <empty list>

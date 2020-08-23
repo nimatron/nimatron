@@ -45,6 +45,12 @@ public class NimTypeDefImpl extends NimElementImpl implements NimTypeDef {
 
   @Override
   @NotNull
+  public NimIndAndComment getIndAndComment() {
+    return findNotNullChildByClass(NimIndAndComment.class);
+  }
+
+  @Override
+  @NotNull
   public NimOptInd getOptInd() {
     return findNotNullChildByClass(NimOptInd.class);
   }

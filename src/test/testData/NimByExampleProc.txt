@@ -163,3 +163,5 @@ Nim File(0,114)
                                           NimOptIndImpl(OPT_IND)(105,114)
                                             NimSymbolImpl(SYMBOL)(105,114)
                                               PsiElement(NimTokenType.IDENT)('fibonacci')(105,114)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(114,114)
+                <empty list>

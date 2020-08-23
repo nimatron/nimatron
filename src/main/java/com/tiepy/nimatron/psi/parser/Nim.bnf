@@ -95,7 +95,7 @@ private oprCombo ::= OP0|OP1|OP2|OP3|OP4|OP5|OP6|OP7|OP8|OP9|OP10|OPR
 prefixOperator ::= operator
 
 //optInd = COMMENT? IND?
-meta optInd ::= <<RULE>> | (INDENT <<RULE>>? (ind_eq <<RULE>>?)* termInd)
+meta optInd ::= <<RULE>> | (INDENT COMMENT? <<RULE>>? (ind_eq <<RULE>>?)* termInd)
 
 //optPar = (IND{>} | IND{=})?
 optPar ::= (INDENT | ind_eq)?
@@ -420,7 +420,7 @@ continueStmt ::= 'continue' <<optInd expr>>? {pin=1}
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
-condStmt ::= expr colcom inlineStmt condStmt1* condStmt2?
+condStmt ::= expr colcom inlineStmt COMMENT? condStmt1* condStmt2?
 private condStmt1 ::= ind_eq 'elif' expr colcom inlineStmt
 private condStmt2 ::= ind_eq 'else' colcom inlineStmt
 
@@ -446,7 +446,7 @@ private ofBranches2 ::= ind_eq 'else' colcom inlineStmt
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
 //            | IND{=} ofBranches)
-caseStmt ::= 'case' expr ':'? caseStmt0 {pin=1}
+caseStmt ::= 'case' expr ':'? COMMENT? caseStmt0 {pin=1}
 private caseStmt0 ::= caseStmt1 | caseStmt2
 private caseStmt1 ::= INDENT ofBranches termInd
 private caseStmt2 ::= ind_eq ofBranches
@@ -492,23 +492,25 @@ genericParams ::= '[' <<optInd ((genericParam ((comma|semicolon) genericParam)*)
 pattern ::= '{' inlineStmt '}'
 
 //indAndComment = (IND{>} COMMENT)? | COMMENT?
+indAndComment ::= <<optInd COMMENT>>?
 
 //routine = optInd identVis pattern? genericParamList?
 //  paramListColon pragma? ('=' COMMENT? stmt)? indAndComment
 namedRoutine ::= symbol oprCombo? routine {methods=[nameIdentifier="symbol"]}
-routine ::= pattern? genericParams? paramsColon pragma? ('=' inlineStmt)?
+routine ::= pattern? genericParams? paramsColon pragma? ('=' COMMENT? inlineStmt)? indAndComment
 
 //commentStmt = COMMENT
+commentStmt ::= COMMENT
 
 //section(RULE) = COMMENT? RULE / (IND{>} (RULE / COMMENT)^+IND{=} DED)
-meta section ::= <<RULE>> | (INDENT <<RULE>>? (ind_eq <<RULE>>?)* termInd)
+meta section ::= COMMENT? <<RULE>> | (INDENT (<<RULE>> | COMMENT) (ind_eq (<<RULE>> | COMMENT))* termInd)
 
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
 //            ('else' colcom objectPart COMMENT?)?
-objectWhen ::= 'when' expr colcom objectPart
-              ('elif' expr colcom objectPart)*
-              ('else' colcom objectPart)?
+objectWhen ::= 'when' expr colcom objectPart COMMENT?
+              ('elif' expr colcom objectPart COMMENT?)*
+              ('else' colcom objectPart COMMENT?)?
 
 //objectBranch = 'of' exprList colcom objectPart
 objectBranch ::= 'of' exprs colcom objectPart
@@ -523,7 +525,7 @@ objectBranches ::= objectBranch (ind_eq objectBranch)*
 //objectCase = 'case' identWithPragma ':' typeDesc ':'? COMMENT?
 //            (IND{>} objectBranches DED
 //            | IND{=} objectBranches)
-objectCase ::= 'case' identWithPragma ':' typeDesc ':'?
+objectCase ::= 'case' identWithPragma ':' typeDesc ':'? COMMENT?
             (INDENT objectBranches termInd
             | ind_eq objectBranches)
 
@@ -533,7 +535,7 @@ objectPart ::= (INDENT objectPart (ind_eq objectPart)* termInd)
              | objectWhen | objectCase | 'nil' | 'discard' | declColonEquals
 
 //object = 'object' pragma? ('of' typeDesc)? COMMENT? objectPart
-object ::= 'object' pragma? ('of' typeDesc)? objectPart?
+object ::= 'object' pragma? ('of' typeDesc)? COMMENT? objectPart?
 
 //typeClassParam = ('var' | 'out')? symbol
 typeClassParam ::= ('var'|'out')? symbol
@@ -545,8 +547,8 @@ typeClass ::= (typeClassParam (',' typeClassParam)*)? pragma? ('of' (typeDesc ('
 //            indAndComment? / identVisDot genericParamList? pragma '=' optInd typeDefAux
 //            indAndComment?
 typeDef ::= typeDef1 | typeDef2
-private typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>>
-private typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
+private typeDef1 ::= identWithPragmaDot genericParams? '=' <<optInd typeDefAux>> indAndComment
+private typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>> indAndComment
 
 //varTuple = '(' optInd identWithPragma ^+ comma optPar ')' '=' optInd expr
 varTuple ::= '(' <<optInd (identWithPragma (comma identWithPragma)*)>> optPar ')' '=' <<optInd expr>>
@@ -555,10 +557,10 @@ varTuple ::= '(' <<optInd (identWithPragma (comma identWithPragma)*)>> optPar ')
 colonBody ::= colcom inlineStmt postExprBlocks?
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
-variable ::= (varTuple | identColonEquals) colonBody?
+variable ::= (varTuple | identColonEquals) colonBody? indAndComment
 
 //constant = (varTuple / identWithPragma) (colon typeDesc)? '=' optInd expr indAndComment
-constant ::= (varTuple | identWithPragma) (colon typeDesc)? '=' <<optInd expr>>
+constant ::= (varTuple | identWithPragma) (colon typeDesc)? '=' <<optInd expr>> indAndComment
 
 //bindStmt = 'bind' optInd qualifiedIdent ^+ comma
 bindStmt ::= 'bind' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>> {pin=1}
@@ -567,15 +569,15 @@ bindStmt ::= 'bind' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>> {pin=1}
 mixinStmt ::= 'mixin' <<optInd (qualifiedIdent (comma qualifiedIdent)*)>> {pin=1}
 
 //pragmaStmt = pragma (colon COMMENT? stmt)?
-pragmaStmt ::= pragma (colon inlineStmt)?
+pragmaStmt ::= pragma (colon COMMENT? inlineStmt)?
 
 //simpleStmt = ((returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
 //           | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
 //           | includeStmt | commentStmt) / exprStmt) COMMENT?
-simpleStmt ::= simpleStmt1 | exprStmt
+simpleStmt ::= (simpleStmt1 | exprStmt) COMMENT?
 private simpleStmt1 ::= returnStmt | raiseStmt | yieldStmt | discardStmt | breakStmt
                       | continueStmt | pragmaStmt | importStmt | exportStmt | fromStmt
-                      | includeStmt
+                      | includeStmt | commentStmt
 
 //complexOrSimpleStmt = (ifStmt | whenStmt | whileStmt
 //                    | tryStmt | forStmt

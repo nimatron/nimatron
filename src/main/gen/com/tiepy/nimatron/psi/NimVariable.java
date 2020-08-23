@@ -13,6 +13,9 @@ public interface NimVariable extends NimElement {
   @Nullable
   NimIdentColonEquals getIdentColonEquals();
 
+  @NotNull
+  NimIndAndComment getIndAndComment();
+
   @Nullable
   NimVarTuple getVarTuple();
 

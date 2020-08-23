@@ -103,6 +103,8 @@ Nim File(0,3601)
                           PsiWhiteSpace('\n')(162,163)
                           NimDedentImpl(DEDENT)(163,164)
                             PsiElement(NimTokenType.DEDENT0)('\n')(163,164)
+            NimIndAndCommentImpl(IND_AND_COMMENT)(164,164)
+              <empty list>
     NimIndEqImpl(IND_EQ)(164,164)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(164,438)
@@ -563,6 +565,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(436,437)
                 NimDedentImpl(DEDENT)(437,438)
                   PsiElement(NimTokenType.DEDENT0)('\n')(437,438)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(438,438)
+                <empty list>
     NimIndEqImpl(IND_EQ)(438,438)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(438,542)
@@ -713,6 +717,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(541,542)
                 NimDedentImpl(DEDENT)(542,542)
                   <empty list>
+              NimIndAndCommentImpl(IND_AND_COMMENT)(542,542)
+                <empty list>
     NimIndEqImpl(IND_EQ)(542,542)
       <empty list>
     PsiComment(NimTokenType.COMMENT)('#[\nfunc identityMatrix3*(): Matrix3 =\n  result.data[0] = 1'f\n  result.data[4] = 1'f\n  result.data[8] = 1'f\n]#')(542,651)
@@ -1104,6 +1110,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(900,901)
                 NimDedentImpl(DEDENT)(901,902)
                   PsiElement(NimTokenType.DEDENT0)('\n')(901,902)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(902,902)
+                <empty list>
     NimIndEqImpl(IND_EQ)(902,902)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(902,1310)
@@ -1932,6 +1940,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(1308,1309)
                 NimDedentImpl(DEDENT)(1309,1310)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1309,1310)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(1310,1310)
+                <empty list>
     NimIndEqImpl(IND_EQ)(1310,1310)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1310,1364)
@@ -2023,6 +2033,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(1362,1363)
                 NimDedentImpl(DEDENT)(1363,1364)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1363,1364)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(1364,1364)
+                <empty list>
     NimIndEqImpl(IND_EQ)(1364,1364)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1364,1772)
@@ -2851,6 +2863,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(1770,1771)
                 NimDedentImpl(DEDENT)(1771,1772)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1771,1772)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(1772,1772)
+                <empty list>
     NimIndEqImpl(IND_EQ)(1772,1772)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1772,1826)
@@ -2942,6 +2956,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(1824,1825)
                 NimDedentImpl(DEDENT)(1825,1826)
                   PsiElement(NimTokenType.DEDENT0)('\n')(1825,1826)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(1826,1826)
+                <empty list>
     NimIndEqImpl(IND_EQ)(1826,1826)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(1826,2666)
@@ -4742,6 +4758,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(2664,2665)
                 NimDedentImpl(DEDENT)(2665,2666)
                   PsiElement(NimTokenType.DEDENT0)('\n')(2665,2666)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(2666,2666)
+                <empty list>
     NimIndEqImpl(IND_EQ)(2666,2666)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(2666,3011)
@@ -5409,6 +5427,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(3009,3010)
                 NimDedentImpl(DEDENT)(3010,3011)
                   PsiElement(NimTokenType.DEDENT0)('\n')(3010,3011)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(3011,3011)
+                <empty list>
     NimIndEqImpl(IND_EQ)(3011,3011)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3011,3065)
@@ -5500,6 +5520,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(3063,3064)
                 NimDedentImpl(DEDENT)(3064,3065)
                   PsiElement(NimTokenType.DEDENT0)('\n')(3064,3065)
+              NimIndAndCommentImpl(IND_AND_COMMENT)(3065,3065)
+                <empty list>
     NimIndEqImpl(IND_EQ)(3065,3065)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3065,3118)
@@ -5591,6 +5613,8 @@ Nim File(0,3601)
                 PsiWhiteSpace('\n')(3117,3118)
                 NimDedentImpl(DEDENT)(3118,3118)
                   <empty list>
+              NimIndAndCommentImpl(IND_AND_COMMENT)(3118,3118)
+                <empty list>
     NimIndEqImpl(IND_EQ)(3118,3118)
       <empty list>
     NimComplexOrSimpleStmtImpl(COMPLEX_OR_SIMPLE_STMT)(3118,3125)

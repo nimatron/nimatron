@@ -33,6 +33,12 @@ public class NimSimpleStmtImpl extends NimElementImpl implements NimSimpleStmt {
 
   @Override
   @Nullable
+  public NimCommentStmt getCommentStmt() {
+    return findChildByClass(NimCommentStmt.class);
+  }
+
+  @Override
+  @Nullable
   public NimContinueStmt getContinueStmt() {
     return findChildByClass(NimContinueStmt.class);
   }

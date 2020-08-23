@@ -14,6 +14,9 @@ public interface NimConstant extends NimElement {
   NimIdentWithPragma getIdentWithPragma();
 
   @NotNull
+  NimIndAndComment getIndAndComment();
+
+  @NotNull
   NimOptInd getOptInd();
 
   @Nullable
