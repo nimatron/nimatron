@@ -5402,14 +5402,14 @@ public class NimParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ('let'|'var'|'using') <<optInd variable>>
+  // ('let'|'var'|'using') <<section variable>>
   public static boolean varStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "varStmt")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, VAR_STMT, "<var stmt>");
     r = varStmt_0(b, l + 1);
     p = r; // pin = 1
-    r = r && optInd(b, l + 1, variable_parser_);
+    r = r && section(b, l + 1, variable_parser_);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }

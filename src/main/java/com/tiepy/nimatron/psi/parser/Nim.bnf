@@ -620,7 +620,7 @@ templateStmt ::= 'template' <<optInd namedRoutine>> {pin=1}
 converterStmt ::= 'converter' <<optInd namedRoutine>> {pin=1}
 typeStmt ::= 'type' <<section typeDef>> {pin=1}
 constStmt ::= 'const' <<section constant>> {pin=1}
-varStmt ::= ('let'|'var'|'using') <<optInd variable>> {pin=1}
+varStmt ::= ('let'|'var'|'using') <<section variable>> {pin=1}
 
 //stmt = (IND{>} complexOrSimpleStmt^+(IND{=} / ';') DED) / simpleStmt ^+ ';'
 stmt ::= complexOrSimpleStmt ((';' | ind_eq+) complexOrSimpleStmt)*

@@ -27,8 +27,8 @@ public class NimVarStmtImpl extends NimElementImpl implements NimVarStmt {
 
   @Override
   @Nullable
-  public NimOptInd getOptInd() {
-    return findChildByClass(NimOptInd.class);
+  public NimSection getSection() {
+    return findChildByClass(NimSection.class);
   }
 
 }
