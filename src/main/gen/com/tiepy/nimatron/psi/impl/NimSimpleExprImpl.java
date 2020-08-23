@@ -32,12 +32,6 @@ public class NimSimpleExprImpl extends NimElementImpl implements NimSimpleExpr {
   }
 
   @Override
-  @Nullable
-  public NimPragma getPragma() {
-    return findChildByClass(NimPragma.class);
-  }
-
-  @Override
   @NotNull
   public NimPrimary getPrimary() {
     return findNotNullChildByClass(NimPrimary.class);

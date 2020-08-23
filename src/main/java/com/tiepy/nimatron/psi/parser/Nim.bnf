@@ -101,8 +101,17 @@ optPar ::= (INDENT | IND_EQ)?
 //plusExpr = mulExpr (OP8 optInd mulExpr)*
 //mulExpr = dollarExpr (OP9 optInd dollarExpr)*
 //dollarExpr = primary (OP10 optInd primary)*
-simpleExpr ::= primary (op <<optInd primary>>)* pragma?
-private op ::= op0|op1|op2|op3|op4|op5|op6|op7|op8|op9|op10
+simpleExpr ::= arrowExpr (OP0 <<optInd arrowExpr>>)* /*pragma?*/
+private arrowExpr ::= assignExpr (OP1 <<optInd assignExpr>>)*
+private assignExpr ::= orExpr (OP2 <<optInd orExpr>>)*
+private orExpr ::= andExpr (OP3 <<optInd andExpr>>)*
+private andExpr ::= cmpExpr (OP4 <<optInd cmpExpr>>)*
+private cmpExpr ::= sliceExpr (OP5 <<optInd sliceExpr>>)*
+private sliceExpr ::= ampExpr (OP6 <<optInd ampExpr>>)*
+private ampExpr ::= plusExpr (OP7 <<optInd plusExpr>>)*
+private plusExpr ::= mulExpr (OP8 <<optInd mulExpr>>)*
+private mulExpr ::= dollarExpr (OP9 <<optInd dollarExpr>>)*
+private dollarExpr ::= primary (OP10 <<optInd primary>>)*
 
 //symbol = '`' (KEYW|IDENT|literal|(operator|'('|')'|'['|']'|'{'|'}'|'=')+)+ '`'|IDENT|KEYW
 symbol ::= symbol1

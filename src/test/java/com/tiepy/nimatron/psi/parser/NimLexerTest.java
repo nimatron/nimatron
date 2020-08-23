@@ -34,8 +34,9 @@ public class NimLexerTest {
 
     @Test
     public void testMisc() throws Exception {
-        int tokenCount = parse("case cmd_p.kind\n" +
-                "of cmdEnd: break\n");
+        int tokenCount = parse("func `*=`*(a: var Matrix3, s: float32) =\n" +
+                "  a = a * s\n" +
+                "{.pop.}\n");
         Assert.assertEquals(14, tokenCount);
     }
 
