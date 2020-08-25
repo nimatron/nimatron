@@ -431,7 +431,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
-    if|elif|in|while|when           { suspendIndent = true; return NimElementTypes.KEYW; }
+    if|elif|while|when              { suspendIndent = true; return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
@@ -461,7 +461,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { /*handleIndent();*/ return TokenType.WHITE_SPACE; } // NOTE: Don't handle indent.
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
-    if|elif|in|while|when           { suspendIndent = true; return NimElementTypes.KEYW; }
+    if|elif|while|when              { suspendIndent = true; return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
