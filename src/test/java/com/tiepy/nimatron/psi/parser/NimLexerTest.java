@@ -36,13 +36,8 @@ public class NimLexerTest {
     public void testMisc() throws Exception {
         /*int tokenCount =*/
 
-        parse("proc newProcNode*(kind: TNodeKind, info: TLineInfo, body: PNode,\n" +
-                "                 params,\n" +
-                "                 name, pattern, genericParams,\n" +
-                "                 pragmas, exceptions: PNode): PNode =\n" +
-                "  result = newNodeI(kind, info)\n" +
-                "  result.sons = @[name, pattern, genericParams, params,\n" +
-                "                  pragmas, exceptions, body]\n");
+        parse("type Animal = ref object of RootObj\n" +
+                "  name: string\n");
 
         // Assert.assertEquals(14, tokenCount);
     }

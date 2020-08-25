@@ -411,6 +411,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 %state DEDENTER
 %state OPERATOR
 %state BRACKETED
+%state OBJECT_OF
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
@@ -431,7 +432,8 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
-    if|elif|while|when              { suspendIndent = true; return NimElementTypes.KEYW; }
+    object                          { pushState(OBJECT_OF); return NimElementTypes.KEYW; }
+    if|elif|of|while|when           { suspendIndent = true; return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
@@ -461,7 +463,8 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { /*handleIndent();*/ return TokenType.WHITE_SPACE; } // NOTE: Don't handle indent.
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
-    if|elif|while|when              { suspendIndent = true; return NimElementTypes.KEYW; }
+    object                          { pushState(OBJECT_OF); return NimElementTypes.KEYW; }
+    if|elif|of|while|when           { suspendIndent = true; return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
@@ -481,6 +484,13 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {COMMA}                         { return NimElementTypes.NOTATION; }
     {GRAVE_ACCENT}                  { return NimElementTypes.NOTATION; }
     .                               { return TokenType.BAD_CHARACTER; }
+}
+
+<OBJECT_OF> {
+    of                              { popState(); return NimElementTypes.KEYW; }
+    {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
+    {CRLF}                          { yypushback(2); popState(); }
+    {CR}|{LF}|.                     { yypushback(1); popState(); }
 }
 
 <INDENTER> {
