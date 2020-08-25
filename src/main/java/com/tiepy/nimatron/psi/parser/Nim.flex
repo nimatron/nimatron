@@ -172,17 +172,25 @@ private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
 
 // NOTE: Indent handler is suspended within parenthesis.
-private boolean suspendIndent = false;
+private boolean isIndentSuspended = false;
 
 /**
  * Records last indent spaces and pushes the INDENTER state onto stack.
  */
 private void handleIndent() {
-    if (!suspendIndent) {
+    if (!isIndentSuspended) {
         lastIndentSpaces = indentSpaces;
         indentSpaces = 0;
         pushState(INDENTER);
     }
+}
+
+private void suspendIndent() {
+    isIndentSuspended = true;
+}
+
+private void resumeIndent() {
+    isIndentSuspended = false;
 }
 
 // -----------------------------------------------------------------------------
@@ -311,7 +319,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     // NOTE: The following from the Nim Manual, section on Operators.
     // . =, :, :: are not available as general operators; they are used for other notational purposes.
     if (s.equals(":")) {
-        suspendIndent = false;
+        isIndentSuspended = false;
         return NimElementTypes.NOTATION;
     }
 
@@ -431,7 +439,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
-    if                              { suspendIndent = true; return NimElementTypes.KEYW; }
+    if                              { suspendIndent(); return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
@@ -443,10 +451,10 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {IDENT}\"\"\"                   { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {IDENT}\"                       { pushState(GENERALIZED_STRING_LITERAL); }
     {IDENT}                         { return NimElementTypes.IDENT; }
-    {OPEN_BRACKET}                  { suspendIndent = true; return NimElementTypes.NOTATION; }
-    {CLOSE_BRACKET}                 { suspendIndent = false; return NimElementTypes.NOTATION; }
-    {OPEN_PARENTHESIS}              { suspendIndent = true; return NimElementTypes.NOTATION; }
-    {CLOSE_PARENTHESIS}             { suspendIndent = false; return NimElementTypes.NOTATION; }
+    {OPEN_BRACKET}                  { suspendIndent(); return NimElementTypes.NOTATION; }
+    {CLOSE_BRACKET}                 { resumeIndent(); return NimElementTypes.NOTATION; }
+    {OPEN_PARENTHESIS}              { suspendIndent(); return NimElementTypes.NOTATION; }
+    {CLOSE_PARENTHESIS}             { resumeIndent(); return NimElementTypes.NOTATION; }
     {SEMICOLON}                     { return NimElementTypes.NOTATION; }
     {COMMA}                         { return NimElementTypes.NOTATION; }
     {GRAVE_ACCENT}                  { return NimElementTypes.NOTATION; }
