@@ -310,7 +310,12 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 
     // NOTE: The following from the Nim Manual, section on Operators.
     // . =, :, :: are not available as general operators; they are used for other notational purposes.
-    if (s.equals(".") || s.equals("=") || s.equals(":") || s.equals("::")) {
+    if (s.equals(":")) {
+        suspendIndent = false;
+        return NimElementTypes.NOTATION;
+    }
+
+    if (s.equals(".") || s.equals("=") || s.equals("::")) {
         return NimElementTypes.NOTATION;
     }
 
@@ -426,6 +431,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
+    if                              { suspendIndent = true; return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }

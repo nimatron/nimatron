@@ -113,6 +113,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscIfSplit() {
+        doTest(true, true);
+    }
+
     public void testMiscIfTrueEchoOk() {
         doTest(true, true);
     }
@@ -198,10 +202,6 @@ public class NimParserTest extends ParsingTestCase {
     }
 
     public void testMiscRecruit707Example() {
-        doTest(true, true);
-    }
-
-    public void testMiscRecovery() {
         doTest(true, true);
     }
 

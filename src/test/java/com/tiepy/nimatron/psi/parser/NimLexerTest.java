@@ -36,9 +36,14 @@ public class NimLexerTest {
     public void testMisc() throws Exception {
         /*int tokenCount =*/
 
-        parse("proc prettyTok*(tok: TToken): string =\n" +
-                "  if isKeyword(tok.tokType): result = \"keyword \" & tok.ident.s\n" +
-                "  else: result = $tok");
+        parse("proc a() =\n" +
+                "  if true and\n" +
+                "     false:\n" +
+                "    echo \"condition across new line\"\n" +
+                "  return\n" +
+                "\n" +
+                "proc b() =\n" +
+                "  echo \"this statement at least should be ok\"\n");
 
         // Assert.assertEquals(14, tokenCount);
     }
