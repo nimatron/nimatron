@@ -168,21 +168,7 @@ private int popState() {
 // Indent spaces handler
 // -----------------------------------------------------------------------------
 
-private int indentSuspendLevel = 0;
-
-private boolean isIndentSuspended() {
-    return indentSuspendLevel > 0;
-}
-
-private void suspendIndent() {
-    indentSuspendLevel++;
-}
-
-private void resumeIndent() {
-    if (indentSuspendLevel > 0) {
-        indentSuspendLevel--;
-    }
-}
+private boolean suspendIndent = false;
 
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
@@ -191,7 +177,7 @@ private int indentSpaces = 0;
  * Records last indent spaces and pushes the INDENTER state onto stack.
  */
 private void handleIndent() {
-    if (!isIndentSuspended()) {
+    if (!suspendIndent) {
         lastIndentSpaces = indentSpaces;
         indentSpaces = 0;
         pushState(INDENTER);
@@ -324,7 +310,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     // NOTE: The following from the Nim Manual, section on Operators.
     // . =, :, :: are not available as general operators; they are used for other notational purposes.
     if (s.equals(":")) {
-        resumeIndent();
+        suspendIndent = false;
         return NimElementTypes.NOTATION;
     }
 
@@ -424,6 +410,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 %state INDENTER
 %state DEDENTER
 %state OPERATOR
+%state BRACKETED
 %state LINE_COMMENT
 %state BLOCK_COMMENT
 %state BLOCK_DOC_COMMENT
@@ -444,7 +431,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
     {NEWLINE}                       { handleIndent(); return TokenType.WHITE_SPACE; }
     {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
-    if                              { suspendIndent(); return NimElementTypes.KEYW; }
+    if                              { suspendIndent = true; return NimElementTypes.KEYW; }
     {KEYW}                          { return NimElementTypes.KEYW; }
     r\"                             { pushState(RAW_STRING_LITERAL); }
     \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
@@ -456,10 +443,40 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     {IDENT}\"\"\"                   { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
     {IDENT}\"                       { pushState(GENERALIZED_STRING_LITERAL); }
     {IDENT}                         { return NimElementTypes.IDENT; }
-    {OPEN_BRACKET}                  { suspendIndent(); return NimElementTypes.NOTATION; }
-    {CLOSE_BRACKET}                 { resumeIndent(); return NimElementTypes.NOTATION; }
-    {OPEN_PARENTHESIS}              { suspendIndent(); return NimElementTypes.NOTATION; }
-    {CLOSE_PARENTHESIS}             { resumeIndent(); return NimElementTypes.NOTATION; }
+    {OPEN_BRACKET}                  { pushState(BRACKETED); return NimElementTypes.NOTATION; }
+    {OPEN_PARENTHESIS}              { pushState(BRACKETED); return NimElementTypes.NOTATION; }
+//  {CLOSE_BRACKET}                 { popState(); return NimElementTypes.NOTATION; }
+//  {CLOSE_PARENTHESIS}             { popState(); return NimElementTypes.NOTATION; }
+    {SEMICOLON}                     { return NimElementTypes.NOTATION; }
+    {COMMA}                         { return NimElementTypes.NOTATION; }
+    {GRAVE_ACCENT}                  { return NimElementTypes.NOTATION; }
+    .                               { return TokenType.BAD_CHARACTER; }
+}
+
+// NOTE: BRACKETED is a near copy of YYINITIAL. Its purpose is to disable indent tracking within nested brackets.
+<BRACKETED> {
+    {BLOCK_COMMENT_BEGIN}           { pushState(BLOCK_COMMENT); }
+    {BLOCK_DOC_COMMENT_BEGIN}       { pushState(BLOCK_DOC_COMMENT); }
+    #                               { pushState(LINE_COMMENT); }
+    discard\ \"\"\"                 { pushState(DISCARD_COMMENT); }
+    {NEWLINE}                       { /*handleIndent();*/ return TokenType.WHITE_SPACE; } // NOTE: Don't handle indent.
+    {WHITE_SPACE}+                  { return TokenType.WHITE_SPACE; }
+    if                              { suspendIndent = true; return NimElementTypes.KEYW; }
+    {KEYW}                          { return NimElementTypes.KEYW; }
+    r\"                             { pushState(RAW_STRING_LITERAL); }
+    \"\"\"                          { pushState(TRIPLE_STRING_LITERAL); }
+    \"                              { pushState(STRING_LITERAL); }
+    '                               { pushState(CHARACTER_LITERAL); }
+    {NUM_LIT}                       { return NimElementTypes.NUM_LIT; }
+    {BOOL_LIT}                      { return NimElementTypes.BOOL_LIT; }
+    {OPR_CHARS}                     { yypushback(1); buffer.setLength(0); pushState(OPERATOR); }
+    {IDENT}\"\"\"                   { pushState(GENERALIZED_TRIPLE_STRING_LITERAL); }
+    {IDENT}\"                       { pushState(GENERALIZED_STRING_LITERAL); }
+    {IDENT}                         { return NimElementTypes.IDENT; }
+    {OPEN_BRACKET}                  { pushState(BRACKETED); return NimElementTypes.NOTATION; }
+    {OPEN_PARENTHESIS}              { pushState(BRACKETED); return NimElementTypes.NOTATION; }
+    {CLOSE_BRACKET}                 { popState(); return NimElementTypes.NOTATION; }
+    {CLOSE_PARENTHESIS}             { popState(); return NimElementTypes.NOTATION; }
     {SEMICOLON}                     { return NimElementTypes.NOTATION; }
     {COMMA}                         { return NimElementTypes.NOTATION; }
     {GRAVE_ACCENT}                  { return NimElementTypes.NOTATION; }
