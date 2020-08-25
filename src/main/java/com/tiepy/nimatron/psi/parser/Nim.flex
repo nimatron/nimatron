@@ -168,11 +168,18 @@ private int popState() {
 // Indent spaces handler
 // -----------------------------------------------------------------------------
 
+private boolean isIndentSuspended = false;
+
+private void suspendIndent() {
+    isIndentSuspended = true;
+}
+
+private void resumeIndent() {
+    isIndentSuspended = false;
+}
+
 private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
-
-// NOTE: Indent handler is suspended within parenthesis.
-private boolean isIndentSuspended = false;
 
 /**
  * Records last indent spaces and pushes the INDENTER state onto stack.
@@ -183,14 +190,6 @@ private void handleIndent() {
         indentSpaces = 0;
         pushState(INDENTER);
     }
-}
-
-private void suspendIndent() {
-    isIndentSuspended = true;
-}
-
-private void resumeIndent() {
-    isIndentSuspended = false;
 }
 
 // -----------------------------------------------------------------------------
