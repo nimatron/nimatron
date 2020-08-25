@@ -27,8 +27,8 @@ public class NimForStmtImpl extends NimElementImpl implements NimForStmt {
 
   @Override
   @Nullable
-  public NimColcom getColcom() {
-    return findChildByClass(NimColcom.class);
+  public NimColon getColon() {
+    return findChildByClass(NimColon.class);
   }
 
   @Override

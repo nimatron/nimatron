@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimObjectBranches extends NimElement {
 
   @NotNull
-  List<NimColcom> getColcomList();
+  List<NimColon> getColonList();
 
   @NotNull
   List<NimExpr> getExprList();

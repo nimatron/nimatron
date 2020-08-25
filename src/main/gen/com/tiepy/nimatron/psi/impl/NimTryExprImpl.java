@@ -27,8 +27,8 @@ public class NimTryExprImpl extends NimElementImpl implements NimTryExpr {
 
   @Override
   @NotNull
-  public NimColcom getColcom() {
-    return findNotNullChildByClass(NimColcom.class);
+  public NimColon getColon() {
+    return findNotNullChildByClass(NimColon.class);
   }
 
   @Override

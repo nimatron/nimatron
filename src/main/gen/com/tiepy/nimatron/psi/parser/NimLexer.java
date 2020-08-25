@@ -629,17 +629,25 @@ private int lastIndentSpaces = 0;
 private int indentSpaces = 0;
 
 // NOTE: Indent handler is suspended within parenthesis.
-private boolean suspendIndent = false;
+private boolean isIndentSuspended = false;
 
 /**
  * Records last indent spaces and pushes the INDENTER state onto stack.
  */
 private void handleIndent() {
-    if (!suspendIndent) {
+    if (!isIndentSuspended) {
         lastIndentSpaces = indentSpaces;
         indentSpaces = 0;
         pushState(INDENTER);
     }
+}
+
+private void suspendIndent() {
+    isIndentSuspended = true;
+}
+
+private void resumeIndent() {
+    isIndentSuspended = false;
 }
 
 // -----------------------------------------------------------------------------
@@ -768,7 +776,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     // NOTE: The following from the Nim Manual, section on Operators.
     // . =, :, :: are not available as general operators; they are used for other notational purposes.
     if (s.equals(":")) {
-        suspendIndent = false;
+        isIndentSuspended = false;
         return NimElementTypes.NOTATION;
     }
 
@@ -1154,12 +1162,12 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
             // fall through
           case 61: break;
           case 6: 
-            { suspendIndent = true; return NimElementTypes.NOTATION;
+            { suspendIndent(); return NimElementTypes.NOTATION;
             } 
             // fall through
           case 62: break;
           case 7: 
-            { suspendIndent = false; return NimElementTypes.NOTATION;
+            { resumeIndent(); return NimElementTypes.NOTATION;
             } 
             // fall through
           case 63: break;
@@ -1349,7 +1357,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
             // fall through
           case 100: break;
           case 45: 
-            { suspendIndent = true; return NimElementTypes.KEYW;
+            { suspendIndent(); return NimElementTypes.KEYW;
             } 
             // fall through
           case 101: break;

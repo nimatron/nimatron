@@ -15,7 +15,6 @@ public interface NimElementTypes {
   IElementType BREAK_STMT = new NimElementType("BREAK_STMT");
   IElementType CASE_STMT = new NimElementType("CASE_STMT");
   IElementType CAST_EXPR = new NimElementType("CAST_EXPR");
-  IElementType COLCOM = new NimElementType("COLCOM");
   IElementType COLON = new NimElementType("COLON");
   IElementType COLON_BODY = new NimElementType("COLON_BODY");
   IElementType COMMA = new NimElementType("COMMA");
@@ -178,9 +177,6 @@ public interface NimElementTypes {
       }
       else if (type == CAST_EXPR) {
         return new NimCastExprImpl(node);
-      }
-      else if (type == COLCOM) {
-        return new NimColcomImpl(node);
       }
       else if (type == COLON) {
         return new NimColonImpl(node);

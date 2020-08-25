@@ -27,8 +27,8 @@ public class NimCondStmtImpl extends NimElementImpl implements NimCondStmt {
 
   @Override
   @NotNull
-  public List<NimColcom> getColcomList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimColcom.class);
+  public List<NimColon> getColonList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, NimColon.class);
   }
 
   @Override

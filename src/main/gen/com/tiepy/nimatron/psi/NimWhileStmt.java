@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface NimWhileStmt extends NimElement {
 
   @Nullable
-  NimColcom getColcom();
+  NimColon getColon();
 
   @Nullable
   NimExpr getExpr();

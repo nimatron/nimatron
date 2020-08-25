@@ -34,10 +34,6 @@ public class NimVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
-  public void visitColcom(@NotNull NimColcom o) {
-    visitElement(o);
-  }
-
   public void visitColon(@NotNull NimColon o) {
     visitElement(o);
   }
