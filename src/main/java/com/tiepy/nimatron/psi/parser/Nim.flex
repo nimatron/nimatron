@@ -477,7 +477,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
 }
 
 <OPERATOR> {
-    \*:({CRLF})                     { return getOperatorToken(true, 2); }
+    \*:{CRLF}                       { return getOperatorToken(true, 2); }
     \*:({CR}|{LF}|.)                { return getOperatorToken(true, 1); }
     {OPR_EQUALS}                    { buffer.append('='); }
     {OPR_PLUS}                      { buffer.append('+'); }
