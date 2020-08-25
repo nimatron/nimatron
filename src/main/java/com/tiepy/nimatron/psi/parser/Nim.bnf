@@ -63,8 +63,6 @@ comma ::= ',' COMMENT?
 semicolon ::= ';' COMMENT?
 
 //colcom = ':' COMMENT?
-colcom ::= ':' COMMENT?
-
 //colon = ':' COMMENT?
 colon ::= ':' COMMENT?
 
@@ -223,9 +221,9 @@ private primarySuffix5 ::= &('`'|IDENT|literal|'cast'|'addr'|'type') exprs // co
 //        ('elif' expr colcom expr optInd)*
 //         'else' colcom expr
 // TODO: Consider how to apply optInd in this rule.
-condExpr ::= expr colcom expr condExpr1* condExpr2
-private condExpr1 ::= 'elif' expr colcom expr
-private condExpr2 ::= 'else' colcom expr
+condExpr ::= expr colon expr condExpr1* condExpr2
+private condExpr1 ::= 'elif' expr colon expr
+private condExpr2 ::= 'else' colon expr
 
 //ifExpr = 'if' condExpr
 ifExpr ::= 'if' condExpr
@@ -277,7 +275,7 @@ paramsArrow ::= params? ('->' <<optInd typeDesc>>)?
 paramsColon ::= params? (':' <<optInd typeDesc>>)?
 
 //doBlock = 'do' paramListArrow pragma? colcom stmt
-doBlock ::= 'do' paramsArrow pragma? colcom inlineStmt
+doBlock ::= 'do' paramsArrow pragma? colon inlineStmt
 
 //procExpr = 'proc' paramListColon pragma? ('=' COMMENT? stmt)?
 procExpr ::= 'proc' paramsColon pragma? ('=' COMMENT? inlineStmt)?
@@ -285,7 +283,7 @@ procExpr ::= 'proc' paramsColon pragma? ('=' COMMENT? inlineStmt)?
 //distinct = 'distinct' optInd typeDesc
 
 //forStmt = 'for' (identWithPragma ^+ comma) 'in' expr colcom stmt
-forStmt ::= 'for' (identWithPragma (comma identWithPragma)*) 'in' expr colcom inlineStmt {pin=1}
+forStmt ::= 'for' (identWithPragma (comma identWithPragma)*) 'in' expr colon inlineStmt {pin=1}
 
 //forExpr = forStmt
 
@@ -420,9 +418,9 @@ continueStmt ::= 'continue' <<optInd expr>>? {pin=1}
 //condStmt = expr colcom stmt COMMENT?
 //           (IND{=} 'elif' expr colcom stmt)*
 //           (IND{=} 'else' colcom stmt)?
-condStmt ::= expr colcom inlineStmt COMMENT? condStmt1* condStmt2?
-private condStmt1 ::= ind_eq 'elif' expr colcom inlineStmt
-private condStmt2 ::= ind_eq 'else' colcom inlineStmt
+condStmt ::= expr colon inlineStmt COMMENT? condStmt1* condStmt2?
+private condStmt1 ::= ind_eq 'elif' expr colon inlineStmt
+private condStmt2 ::= ind_eq 'else' colon inlineStmt
 
 //ifStmt = 'if' condStmt
 ifStmt ::= 'if' condStmt {pin=1}
@@ -431,17 +429,17 @@ ifStmt ::= 'if' condStmt {pin=1}
 whenStmt ::= 'when' condStmt {pin=1}
 
 //whileStmt = 'while' expr colcom stmt
-whileStmt ::= 'while' expr colcom inlineStmt {pin=1}
+whileStmt ::= 'while' expr colon inlineStmt {pin=1}
 
 //ofBranch = 'of' exprList colcom stmt
-ofBranch ::= 'of' exprs colcom inlineStmt
+ofBranch ::= 'of' exprs colon inlineStmt
 
 //ofBranches = ofBranch (IND{=} ofBranch)*
 //                      (IND{=} 'elif' expr colcom stmt)*
 //                      (IND{=} 'else' colcom stmt)?
 ofBranches ::= ofBranch (ind_eq ofBranch)* ofBranches1* ofBranches2?
-private ofBranches1 ::= ind_eq 'elif' expr colcom inlineStmt
-private ofBranches2 ::= ind_eq 'else' colcom inlineStmt
+private ofBranches1 ::= ind_eq 'elif' expr colon inlineStmt
+private ofBranches2 ::= ind_eq 'else' colon inlineStmt
 
 //caseStmt = 'case' expr ':'? COMMENT?
 //            (IND{>} ofBranches DED
@@ -454,28 +452,28 @@ private caseStmt2 ::= ind_eq ofBranches
 //tryStmt = 'try' colcom stmt &(IND{=}? 'except'|'finally')
 //           (IND{=}? 'except' exprList colcom stmt)*
 //           (IND{=}? 'finally' colcom stmt)?
-tryStmt ::= 'try' colcom inlineStmt &(ind_eq? 'except'|'finally') tryStmt1* tryStmt2? {pin=1}
-private tryStmt1 ::= ind_eq? 'except' exprs colcom inlineStmt {pin=2}
-private tryStmt2 ::= ind_eq? 'finally' colcom inlineStmt {pin=2}
+tryStmt ::= 'try' colon inlineStmt &(ind_eq? 'except'|'finally') tryStmt1* tryStmt2? {pin=1}
+private tryStmt1 ::= ind_eq? 'except' exprs colon inlineStmt {pin=2}
+private tryStmt2 ::= ind_eq? 'finally' colon inlineStmt {pin=2}
 
 //tryExpr = 'try' colcom stmt &(optInd 'except'|'finally')
 //           (optInd 'except' exprList colcom stmt)*
 //           (optInd 'finally' colcom stmt)?
-tryExpr ::= 'try' colcom inlineStmt &(<<optInd ('except'|'finally')>>) tryExpr1* tryExpr2?
-private tryExpr1 ::= <<optInd ('except' exprs colcom inlineStmt)>>
-private tryExpr2 ::= <<optInd ('finally' colcom inlineStmt)>>
+tryExpr ::= 'try' colon inlineStmt &(<<optInd ('except'|'finally')>>) tryExpr1* tryExpr2?
+private tryExpr1 ::= <<optInd ('except' exprs colon inlineStmt)>>
+private tryExpr2 ::= <<optInd ('finally' colon inlineStmt)>>
 
 //exceptBlock = 'except' colcom stmt
 
 //blockStmt = 'block' symbol? colcom stmt
 //blockExpr = 'block' symbol? colcom stmt
-blockStmt ::= 'block' symbol? colcom inlineStmt {pin=1}
+blockStmt ::= 'block' symbol? colon inlineStmt {pin=1}
 
 //staticStmt = 'static' colcom stmt
-staticStmt ::= 'static' colcom inlineStmt {pin=1}
+staticStmt ::= 'static' colon inlineStmt {pin=1}
 
 //deferStmt = 'defer' colcom stmt
-deferStmt ::= 'defer' colcom inlineStmt {pin=1}
+deferStmt ::= 'defer' colon inlineStmt {pin=1}
 
 //asmStmt = 'asm' pragma? (STR_LIT|RSTR_LIT|TRIPLESTR_LIT)
 asmStmt ::= 'asm' pragma? asmStmt1 {pin=1}
@@ -513,19 +511,19 @@ private enum2 ::= ('=' <<optInd (expr COMMENT?) >> )? comma? COMMENT?
 //objectWhen = 'when' expr colcom objectPart COMMENT?
 //            ('elif' expr colcom objectPart COMMENT?)*
 //            ('else' colcom objectPart COMMENT?)?
-objectWhen ::= 'when' expr colcom objectPart COMMENT?
-              ('elif' expr colcom objectPart COMMENT?)*
-              ('else' colcom objectPart COMMENT?)?
+objectWhen ::= 'when' expr colon objectPart COMMENT?
+              ('elif' expr colon objectPart COMMENT?)*
+              ('else' colon objectPart COMMENT?)?
 
 //objectBranch = 'of' exprList colcom objectPart
-objectBranch ::= 'of' exprs colcom objectPart
+objectBranch ::= 'of' exprs colon objectPart
 
 //objectBranches = objectBranch (IND{=} objectBranch)*
 //                      (IND{=} 'elif' expr colcom objectPart)*
 //                      (IND{=} 'else' colcom objectPart)?
 objectBranches ::= objectBranch (ind_eq objectBranch)*
-                        (ind_eq 'elif' expr colcom objectPart)*
-                        (ind_eq 'else' colcom objectPart)?
+                        (ind_eq 'elif' expr colon objectPart)*
+                        (ind_eq 'else' colon objectPart)?
 
 //objectCase = 'case' identWithPragma ':' typeDesc ':'? COMMENT?
 //            (IND{>} objectBranches DED
@@ -559,7 +557,7 @@ private typeDef2 ::= identVisDot genericParams? pragma '=' <<optInd typeDefAux>>
 varTuple ::= '(' <<optInd (identWithPragma (comma identWithPragma)*)>> optPar ')' '=' <<optInd expr>>
 
 //colonBody = colcom stmt postExprBlocks?
-colonBody ::= colcom inlineStmt postExprBlocks?
+colonBody ::= colon inlineStmt postExprBlocks?
 
 //variable = (varTuple / identColonEquals) colonBody? indAndComment
 variable ::= (varTuple | identColonEquals) colonBody? indAndComment
