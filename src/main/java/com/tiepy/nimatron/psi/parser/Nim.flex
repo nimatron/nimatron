@@ -168,14 +168,20 @@ private int popState() {
 // Indent spaces handler
 // -----------------------------------------------------------------------------
 
-private boolean isIndentSuspended = false;
+private int indentSuspendLevel = 0;
+
+private boolean isIndentSuspended() {
+    return indentSuspendLevel > 0;
+}
 
 private void suspendIndent() {
-    isIndentSuspended = true;
+    indentSuspendLevel++;
 }
 
 private void resumeIndent() {
-    isIndentSuspended = false;
+    if (indentSuspendLevel > 0) {
+        indentSuspendLevel--;
+    }
 }
 
 private int lastIndentSpaces = 0;
@@ -185,7 +191,7 @@ private int indentSpaces = 0;
  * Records last indent spaces and pushes the INDENTER state onto stack.
  */
 private void handleIndent() {
-    if (!isIndentSuspended) {
+    if (!isIndentSuspended()) {
         lastIndentSpaces = indentSpaces;
         indentSpaces = 0;
         pushState(INDENTER);
@@ -318,7 +324,7 @@ private IElementType getOperatorToken(boolean isSpecialCase, int pushbackLength)
     // NOTE: The following from the Nim Manual, section on Operators.
     // . =, :, :: are not available as general operators; they are used for other notational purposes.
     if (s.equals(":")) {
-        isIndentSuspended = false;
+        resumeIndent();
         return NimElementTypes.NOTATION;
     }
 
