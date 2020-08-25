@@ -1,5 +1,10 @@
 # Release notes
 
+## 1.3.1
+
+  * Lexer modified to suspend indents in bracketed content.
+  * Lexer modified to suspend indents within conditional expressions.
+
 ## 1.3.0
 
   * Extensive work testing and improving parser.
