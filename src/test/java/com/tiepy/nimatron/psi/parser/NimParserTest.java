@@ -53,6 +53,10 @@ public class NimParserTest extends ParsingTestCase {
         doTest(true, true);
     }
 
+    public void testMiscConcept() {
+        doTest(true, true);
+    }
+
     public void testMiscCommentNotIgnored() {
         doTest(true, true);
     }
