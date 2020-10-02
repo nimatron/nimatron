@@ -1,5 +1,13 @@
 # Release notes
 
+## 1.3.2
+
+  * Updating plugin info.
+
+Nimatron is currently obsolete since a JetBrains supported plugin for Nim has
+just been released. These plugins do not work together. It is recommended here
+that Nimatron be replaced with the JetBrains Nim plugin.
+
 ## 1.3.1
 
   * Lexer modified to suspend indents in bracketed content.

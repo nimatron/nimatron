@@ -5,7 +5,7 @@
     <description><![CDATA[
     <p>Language plugin for the Nim programming language.</p>
     <br/>
-    <p>Currently provides the following features:</p>
+    <p>Provides the following features:</p>
     <br/>
     <ul>
         <li>Syntax-highlighting.</li>
@@ -14,20 +14,18 @@
     </ul>
     <br/>
     <p>
-        The parser used to provide Structure View and code folding is currently
-        a work in progress. Syntax highlighting is done by a dedicated lexer.
-        Errors may be shown for Nim source that is not fully recognised yet by
-        the parser but may still be valid. <b>Please use the issue tracker to
-        provide examples where valid Nim code is showing errors in the editor.</b>
+        There is now a JetBrains supported plugin for Nim which is better than
+        this plugin in its current form. The JetBrains plugin is recommended.
     </p>
     <br/>
     <p>
-        This is my first plugin for IDEA-platform IDEs. I am also new to Nim.
-        I like Nim and working with parsers. Though, this project seems quite
-        challenging I will keep working on it. I will also use it. Nim seems
-        like a very nice language to work with, though I think perhaps it's not
-        easy to define a parser for it here. Indents are particularly difficult.
-        Anyway, thank-you for your patience. I hope you find the plugin useful.
+        This is my first plugin for IDEA-platform IDEs.
+    </p>
+    <br/>
+    <p>
+        Nimatron will not likely be updated now. The two plugins do not work
+        together and it is advised that Nimatron be removed, with preference
+        instead for the JetBrains supported Nim plugin.
     </p>
     ]]></description>
 
